@@ -1,0 +1,5 @@
+c:\users\abel\documents\visual studio 2010\Projects\Torneos\Torneos\bin\Torneos.dll
+c:\users\abel\documents\visual studio 2010\Projects\Torneos\Torneos\bin\Torneos.pdb
+c:\users\abel\documents\visual studio 2010\Projects\Torneos\Torneos\obj\Debug\ResolveAssemblyReference.cache
+c:\users\abel\documents\visual studio 2010\Projects\Torneos\Torneos\obj\Debug\Torneos.dll
+c:\users\abel\documents\visual studio 2010\Projects\Torneos\Torneos\obj\Debug\Torneos.pdb
