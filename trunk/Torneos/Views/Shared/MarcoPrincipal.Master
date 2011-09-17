@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link rel="Stylesheet" type="text/css" href="/Content/Site.css">
+    <asp:ContentPlaceHolder ID="Head" runat="server" />
+</head>
+<body>
+    <div id="Documento">
+        <div id="EncabezadoDocumento">
+            <asp:ContentPlaceHolder ID="Encabezado" runat="server" />
+        </div>
+        <div id="ContenidoDocumento" class="EsquinasInferioresRedondas EsquinasSuperioresRedondas">
+            <asp:ContentPlaceHolder ID="Contenido" runat="server" />
+        </div>
+        <div id="PieDocumento">
+            <center>
+                Todos los derechos recervados <%= DateTime.Now.Year %>
+            </center>
+        </div>
+    </div>
+</body>
+</html>
