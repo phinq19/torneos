@@ -79,9 +79,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\imagenes\acaf.jpg" />
-    <Content Include="Content\imagenes\face.png" />
-    <Content Include="Content\imagenes\twit.png" />
+    <Content Include="Content\Slider\Slider.css" />
+    <Content Include="Imagenes\1.jpg" />
+    <Content Include="Imagenes\2.jpg" />
+    <Content Include="Imagenes\3.jpg" />
+    <Content Include="Imagenes\acaf.jpg" />
+    <Content Include="Imagenes\face.png" />
+    <Content Include="Imagenes\twit.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\jquery-ui.css" />
@@ -98,6 +102,9 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\modulos\Login.js" />
+    <Content Include="Scripts\s3Slider.js" />
+    <Content Include="Scripts\s3SliderPacked.js" />
     <Content Include="Views\Shared\Login.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -159,7 +166,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56501</DevelopmentServerPort>
+          <DevelopmentServerPort>65275</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
