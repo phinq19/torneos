@@ -1,9 +1,11 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/MarcoPrincipal.Master" AutoEventWireup="true" CodeBehind="MarcoLogeado.master.cs" Inherits="Torneos.Views.Shared.MarcoLogeado" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/MarcoPrincipal.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
-
+    <asp:ContentPlaceHolder ID="Head" runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Encabezado" runat="server">
+<asp:ContentPlaceHolder ID="Encabezado" runat="server" />
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Contenido" runat="server">
+<asp:ContentPlaceHolder ID="Contenido" runat="server" />
 </asp:Content>
 

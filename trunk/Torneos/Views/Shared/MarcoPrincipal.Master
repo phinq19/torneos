@@ -15,6 +15,7 @@
     <script language="javascript" type="text/javascript" src="/Scripts/lib/grid/i18n/grid.locale-es.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/lib/general/RealizarPeticiones.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/lib/blockUI.js"></script>
+    <script language="javascript" type="text/javascript" src="/Scripts/jquery.validate.min.js"></script>    
     
     <asp:ContentPlaceHolder ID="Head" runat="server" />
 </head>

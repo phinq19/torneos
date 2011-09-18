@@ -72,13 +72,6 @@
       <DependentUpon>Torneos.edmx</DependentUpon>
     </Compile>
     <Compile Include="Utilidades.cs" />
-    <Compile Include="Views\Shared\MarcoLogeado.master.cs">
-      <DependentUpon>MarcoLogeado.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Shared\MarcoLogeado.master.designer.cs">
-      <DependentUpon>MarcoLogeado.master</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\lib\grid\ui.jqgrid.css" />
@@ -167,6 +160,7 @@
     <Content Include="Scripts\modulos\Login.js" />
     <Content Include="Scripts\lib\s3Slider.js" />
     <Content Include="Scripts\lib\s3SliderPacked.js" />
+    <Content Include="Views\Shared\Inicio.aspx" />
     <Content Include="Views\Shared\Login.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
