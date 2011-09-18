@@ -107,6 +107,8 @@ body
     bottom:0px;
     position:relative;
     font-size:12px;
+    vertical-align:bottom;
+    
 }
 
 #EncabezadoContenido
@@ -147,11 +149,13 @@ body
 .fila
 {
     display:table-row;
+    
 }
 
 .columna {
     display:table-cell;
     font-size: 12px;
+    padding:2px;
 }
 
 .columnaCentrada
@@ -209,7 +213,7 @@ body
 
 .ContenidoSeccionContenidoLogin
 {
-    padding:5px;    
+    padding:15px;    
     color: #111111;
 }
 
@@ -233,3 +237,7 @@ a
     width:300px;
 }
 
+p
+{
+    text-align:justify;
+}

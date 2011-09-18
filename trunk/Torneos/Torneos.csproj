@@ -65,11 +65,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TiposUsuario.cs" />
     <Compile Include="Torneos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Torneos.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Utilidades.cs" />
     <Compile Include="Views\Shared\MarcoLogeado.master.cs">
       <DependentUpon>MarcoLogeado.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -79,10 +81,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\lib\grid\ui.jqgrid.css" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Content\lib\jqueryui\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Content\lib\jqueryui\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\Slider\Slider.css" />
     <Content Include="Imagenes\1.jpg" />
     <Content Include="Imagenes\2.jpg" />
     <Content Include="Imagenes\3.jpg" />
+    <Content Include="Imagenes\40 años.bmp" />
     <Content Include="Imagenes\acaf.jpg" />
     <Content Include="Imagenes\face.png" />
     <Content Include="Imagenes\twit.png" />
@@ -102,9 +123,49 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\lib\general\RealizarPeticiones.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-ar.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-da.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-gl.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-hu.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-ja.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-lt.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-mne.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-sk.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-sr.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-th.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\lib\grid\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\lib\grid\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\lib\grid\jquery.jqGrid.src.js" />
+    <Content Include="Scripts\lib\jquery-1.5.2.min.js" />
+    <Content Include="Scripts\lib\jqueryui\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Scripts\modulos\Login.js" />
-    <Content Include="Scripts\s3Slider.js" />
-    <Content Include="Scripts\s3SliderPacked.js" />
+    <Content Include="Scripts\lib\s3Slider.js" />
+    <Content Include="Scripts\lib\s3SliderPacked.js" />
     <Content Include="Views\Shared\Login.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

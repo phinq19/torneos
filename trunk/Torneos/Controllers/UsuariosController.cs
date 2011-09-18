@@ -10,13 +10,22 @@ namespace Torneos.Controllers
     {
         //
         // GET: /Usuarios/
-
+        List<Usuarios> oUsuarios;
         public ActionResult Index()
         {
+            /*
             TorneosEntities bdTorneos = new TorneosEntities();
-            var torneos = from t in bdTorneos.Torneos
-                            where t.nombre == "Santa Ana"
+            IQueryable<Usuarios> usuarios = from t in bdTorneos.Usuarios
+                            where t.codigo == "usuario" && t.contrasena == "123456"
                             select t;
+            oUsuarios= usuarios.ToList();
+
+            Usuarios oUsuarioNuevo = Usuarios.CreateUsuarios(0, "arahi2", "Abel", Utilidades.CalcularMD5("123456"), "arahi2@hotmail.com", "123456", 1, 1);
+            bdTorneos.AddToUsuarios(oUsuarioNuevo);
+            bdTorneos.SaveChanges();
+            */
+            
+
             return View("Login");
         }
 
