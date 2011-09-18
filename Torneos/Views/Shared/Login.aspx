@@ -11,10 +11,10 @@
                 <li class="slider1Image"><a href="">
                     <img src="/Imagenes/2.jpg" alt="2" /></a> <span class="right"><strong>Anuncio 2</strong><br />
                         Detalle del anuncio 2</span></li>
-                <li class="slider1Image">
-                    <img src="/Imagenes/3.jpg" alt="3" />
-                    <span class="left"><strong>Anuncio 3</strong><br />
-                        NDetalle del anuncio 3</span></li>
+                <li class="slider1Image"><a href="">
+                    <img src="/Imagenes/3.jpg" alt="3" /></a> <span class="left"><strong>Anuncio 3</strong><br />
+                        Detalle del anuncio 3</span></li>
+                <div class="clear slider1Image"></div>
             </ul>
         </div>
     </div>
