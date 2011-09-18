@@ -6,17 +6,15 @@
 <head runat="server">
     
     <link rel="Stylesheet" type="text/css" href="/Content/Site.css" />
-    <link rel="Stylesheet" type="text/css" href="/Content/Slider/Slider.css" />
     <link rel="Stylesheet" type="text/css" href="/Content/lib/grid/ui.jqgrid.css" />
     <link rel="Stylesheet" type="text/css" href="/Content/lib/jqueryui/jquery-ui-1.8.16.custom.css" />
 
     <script language="javascript" type="text/javascript" src="/Scripts/lib/jquery-1.5.2.min.js"></script>
-    <script language="javascript" type="text/javascript" src="/Scripts/lib/s3Slider.js"></script>
-    <script language="javascript" type="text/javascript" src="/Scripts/modulos/Login.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/lib/jqueryui/jquery-ui-1.8.16.custom.min.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/lib/grid/jquery.jqGrid.min.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/lib/grid/i18n/grid.locale-es.js"></script>
-    <script language="javascript" type="text/javascript" src="/Scripts/general/RealizarPeticiones.js"></script>
+    <script language="javascript" type="text/javascript" src="/Scripts/lib/general/RealizarPeticiones.js"></script>
+    <script language="javascript" type="text/javascript" src="/Scripts/lib/blockUI.js"></script>
     
     <asp:ContentPlaceHolder ID="Head" runat="server" />
 </head>
@@ -43,7 +41,7 @@
                                     Teléfonos:
                                 </div>
                                 <div class="columna">
-                                    8888-88-88 2222-22-22
+                                    8888-88-88 / 2222-22-22
                                 </div>
                             </div>
                             <div class="fila">
@@ -58,10 +56,10 @@
                                 <div class="celdaLabel">
                                 </div>
                                 <div class="columna">
-                                    <a href="/" target="_blank">
-                                        <img alt="" src="/Imagenes/face.png" />
+                                    <a href="/" target="_blank" >
+                                        <img alt="" src="/Imagenes/face.png" class="redSocial"/>
                                     </a><a href="/" target="_blank">
-                                        <img alt="" src="/Imagenes/twit.png" />
+                                        <img alt="" src="/Imagenes/twit.png" class="redSocial"/>
                                     </a>
                                 </div>
                             </div>

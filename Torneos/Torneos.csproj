@@ -123,6 +123,7 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\lib\blockUI.js" />
     <Content Include="Scripts\lib\general\RealizarPeticiones.js" />
     <Content Include="Scripts\lib\grid\i18n\grid.locale-ar.js" />
     <Content Include="Scripts\lib\grid\i18n\grid.locale-bg.js" />
