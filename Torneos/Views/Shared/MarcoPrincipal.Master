@@ -4,22 +4,63 @@
 
 <html>
 <head runat="server">
-    <link rel="Stylesheet" type="text/css" href="/Content/Site.css">
+    
+    <link rel="Stylesheet" type="text/css" href="/Content/Site.css" />
+    <link rel="Stylesheet" type="text/css" href="/Content/Slider/Slider.css" />
+
+    <script language="javascript" type="text/javascript" src="/Scripts/jquery-1.4.4.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/Scripts/s3Slider.js"></script>
+    <script language="javascript" type="text/javascript" src="/Scripts/modulos/Login.js"></script>
+    
     <asp:ContentPlaceHolder ID="Head" runat="server" />
 </head>
 <body>
     <div id="Documento">
         <div id="EncabezadoDocumento">
-            <asp:ContentPlaceHolder ID="Encabezado" runat="server" />
+  
+                    <div class="columnaIzquierda">
+                        <img alt="" src="/Imagenes/acaf.jpg" />
+                    </div>
+                    <div class="columnaDerecha">
+                        <asp:ContentPlaceHolder ID="Encabezado" runat="server" />
+                        <div class="ContenidoOrdenado">
+                            <div class="fila">
+                                <div class="celdaLabel">
+                                    Horario:
+                                </div>
+                                <div class="columna">
+                                    Lunes a viernes de 8:00am 5:00pm
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="celdaLabel">
+                                    Teléfonos:
+                                </div>
+                                <div class="columna">
+                                    8888-88-88 2222-22-22
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="celdaLabel">
+                                    Correo:
+                                </div>
+                                <div class="columna">
+                                    atencionalcliente@acaf.co.cr
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
         </div>
         <div id="ContenidoDocumento" class="EsquinasInferioresRedondas EsquinasSuperioresRedondas">
             <div id="EncabezadoContenido" class="EsquinasSuperioresRedondas">
-                
+                <a href="/">Inicio</a> <a href="/">ACAF</a> <a href="/">Contacto</a>
             </div>
             <asp:ContentPlaceHolder ID="Contenido" runat="server" />
         </div>
         <div id="PieDocumento">
-            Todos los derechos recervados <%= DateTime.Now.Year %>
+            Todos los derechos reservados
+            <%= DateTime.Now.Year %>
         </div>
     </div>
 </body>
