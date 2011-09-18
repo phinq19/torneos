@@ -13,12 +13,13 @@
             <asp:ContentPlaceHolder ID="Encabezado" runat="server" />
         </div>
         <div id="ContenidoDocumento" class="EsquinasInferioresRedondas EsquinasSuperioresRedondas">
+            <div id="EncabezadoContenido" class="EsquinasSuperioresRedondas">
+                
+            </div>
             <asp:ContentPlaceHolder ID="Contenido" runat="server" />
         </div>
         <div id="PieDocumento">
-            <center>
-                Todos los derechos recervados <%= DateTime.Now.Year %>
-            </center>
+            Todos los derechos recervados <%= DateTime.Now.Year %>
         </div>
     </div>
 </body>

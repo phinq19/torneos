@@ -79,7 +79,8 @@ body
 }
 
 
-#Documento {
+#Documento 
+{
      margin-left: auto;
      margin-right: auto;
      width: 892px;
@@ -93,9 +94,10 @@ body
 
 #ContenidoDocumento
 {
+    border: 1px solid #E3E4E3;
     background-color:#314397;
     min-height:300px;
-    
+    /*padding:15px;*/
 }
 
 #PieDocumento
@@ -103,4 +105,12 @@ body
     margin-top: 0;
     text-align: center;
     bottom:0px;
+    position:relative;
+}
+
+#EncabezadoContenido
+{
+    border-bottom: 5px solid #FFFFFF;
+    height:50px;
+    background-color:#0C1F2D;    
 }
