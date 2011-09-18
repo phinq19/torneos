@@ -1,8 +1,16 @@
 ﻿<%@ Page Title="ACAF Login" Language="C#" MasterPageFile="~/Views/Shared/MarcoPrincipal.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
+<div id="sliderInicio">
+</div>
+<div id="ContenidoInicio">
+    <div id="ContenidoInformacion">
 
-<h2>Login</h2>
+    </div>
+    <div id="ContenidoLogin">
+
+    </div>
+</div>
 
 </asp:Content>
 
