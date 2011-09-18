@@ -241,3 +241,9 @@ p
 {
     text-align:justify;
 }
+
+.redSocial:hover
+{
+    height:30px;
+    width:28px;    
+}

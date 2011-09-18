@@ -116,6 +116,12 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Head" runat="server">
+
+    <link rel="Stylesheet" type="text/css" href="/Content/Slider/Slider.css" />
+    
+    <script language="javascript" type="text/javascript" src="/Scripts/lib/s3Slider.js"></script>
+    <script language="javascript" type="text/javascript" src="/Scripts/modulos/Login.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
