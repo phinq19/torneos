@@ -1,0 +1,10 @@
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\bin\Prueba.dll
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\bin\Prueba.pdb
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\bin\Prueba.xml
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\obj\Debug\Prueba.Resources.resources
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\obj\Debug\Prueba.dll
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\obj\Debug\Prueba.xml
+C:\Users\L505ING\Desktop\torneos\Torneos\Prueba\Prueba\obj\Debug\Prueba.pdb
