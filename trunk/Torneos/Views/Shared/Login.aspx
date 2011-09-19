@@ -2,31 +2,31 @@
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
-    <div id="sliderInicio">
+    <div id="sliderInicio" class="EsquinasInferioresRedondas">
         <div id="slider1">
             <ul id="slider1Content">
                 <li class="slider1Image"><a href="">
-                    <img src="/Imagenes/1.jpg" alt="1" /></a> <span class="left"><strong>Anuncio 1</strong><br />
+                    <img class="EsquinasInferioresRedondas" src="/Imagenes/1.jpg" alt="1" /></a> <span class="left EsquinaInferiorIzqRedonda"><strong>Anuncio 1</strong><br />
                         Detalle del anuncio 1</span></li>
                 <li class="slider1Image"><a href="">
-                    <img src="/Imagenes/2.jpg" alt="2" /></a> <span class="right"><strong>Anuncio 2</strong><br />
+                    <img class="EsquinasInferioresRedondas" src="/Imagenes/2.jpg" alt="2" /></a> <span class="right EsquinaInferiorDerRedonda"><strong>Anuncio 2</strong><br />
                         Detalle del anuncio 2</span></li>
                 <li class="slider1Image"><a href="">
-                    <img src="/Imagenes/3.jpg" alt="3" /></a> <span class="left"><strong>Anuncio 3</strong><br />
+                    <img class="EsquinasInferioresRedondas" src="/Imagenes/3.jpg" alt="3" /></a> <span class="left EsquinaInferiorIzqRedonda"><strong>Anuncio 3</strong><br />
                         Detalle del anuncio 3</span></li>
                 <div class="clear slider1Image">
                 </div>
             </ul>
         </div>
     </div>
-    <div class="ContenidoOrdenado ContenidoCompleto">
+    <div class="ContenidoOrdenado ContenidoCompleto EsquinasSuperioresRedondas EsquinasInferioresRedondas">
         <div class="fila">
             <div class="columna">
                 <div class="SeccionContenidoLogin EsquinasInferioresRedondas">
-                    <div class="EncabezadoSeccionContenidoLogin">
+                    <div class="EncabezadoSeccionContenidoLogin EsquinasSuperioresRedondas">
                         <h1>HAZTE ÁRBITRO</h1>
                     </div>
-                    <div class="ContenidoSeccionContenidoLogin">
+                    <div class="ContenidoSeccionContenidoLogin EsquinasInferioresRedondas">
                         <p> 
                             ¿Quién ve el Fútbol más cerca? ... ahora, puedes se TÚ.
                             &nbsp;</p><br />
@@ -70,12 +70,12 @@
             </div>
             <div class="columna FormularioLogin">
                 <div class="SeccionContenidoLogin EsquinasInferioresRedondas">
-                    <div class="EncabezadoSeccionContenidoLogin">
-                        <h1>
-                            Inicio de Sesión</h1>
+                    <div class="EncabezadoSeccionContenidoLogin EsquinasSuperioresRedondas">
+                        <h1>Inicio de Sesión</h1>
                     </div>
-                    <div class="ContenidoSeccionContenidoLogin">
+                    <div class="ContenidoSeccionContenidoLogin EsquinasInferioresRedondas">
                         <form id="frmLogin" action="">
+                        <div id="mensajeAutenticacio" class="error"></div>
                         <div class="ContenidoOrdenado">
                             <div class="fila">
                                 <div class="celdaLabel">
@@ -104,7 +104,7 @@
                                 <div class="celdaLabel">
                                 </div>
                                 <div class="celdaCampo">
-                                    <a id="LkRecuperar" href="">Recuperar contraseña</a>
+                                    <a id="LnkRecuperar" href="">Recuperar contraseña</a>
                                 </div>
                             </div>
                         </div>

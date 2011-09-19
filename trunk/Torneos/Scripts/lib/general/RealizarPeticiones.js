@@ -116,6 +116,7 @@ function ManejarErrorServidor(data, status, xhr) {
     switch (status) {
         case "timeout":
             //MostrarDialogoError(Mensajes.formMantenimiento.general.error.timeout);
+            window.location = "/";
             break;
         case "error":
             break;

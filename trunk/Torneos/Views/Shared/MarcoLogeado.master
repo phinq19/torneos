@@ -3,9 +3,23 @@
     <asp:ContentPlaceHolder ID="Head" runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Encabezado" runat="server">
-<asp:ContentPlaceHolder ID="Encabezado" runat="server" />
+    <div class="columnaDerecha">
+        <div class="ElementoEncabezado">
+            <%= Page.User.Identity.Name.ToUpper() %></div>
+        <div class="ElementoEncabezado">
+            <a href="#" id="LnkSalir">Salir</a></div>
+    </div>
+    <asp:ContentPlaceHolder ID="Encabezado" runat="server" />
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Contenido" runat="server">
-<asp:ContentPlaceHolder ID="Contenido" runat="server" />
+    <div class="SeccionContenidoLogin">
+        <div class="EncabezadoSeccionContenidoLogin EsquinasSuperioresRedondas">
+            <asp:ContentPlaceHolder ID="ContenidoEncabezado" runat="server" />
+        </div>
+        <div class="ContenidoSeccionContenidoLogin EsquinasInferioresRedondas">
+            <asp:ContentPlaceHolder ID="Contenido" runat="server" />
+        </div>
+    </div>
 </asp:Content>
+
 
