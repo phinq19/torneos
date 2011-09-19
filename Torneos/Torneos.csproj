@@ -60,6 +60,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AsignacionesController.cs" />
+    <Compile Include="Controllers\InformesController.cs" />
+    <Compile Include="Controllers\SolicitudesController.cs" />
+    <Compile Include="Controllers\TesoreriaController.cs" />
+    <Compile Include="Controllers\TorneosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -117,6 +122,7 @@
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Scripts\lib\blockUI.js" />
+    <Content Include="Scripts\lib\general\General.js" />
     <Content Include="Scripts\lib\general\RealizarPeticiones.js" />
     <Content Include="Scripts\lib\grid\i18n\grid.locale-ar.js" />
     <Content Include="Scripts\lib\grid\i18n\grid.locale-bg.js" />
@@ -160,8 +166,15 @@
     <Content Include="Scripts\modulos\Login.js" />
     <Content Include="Scripts\lib\s3Slider.js" />
     <Content Include="Scripts\lib\s3SliderPacked.js" />
+    <Content Include="Scripts\lib\toJson.js" />
+    <Content Include="Views\Shared\Asignaciones.aspx" />
+    <Content Include="Views\Shared\Informes.aspx" />
     <Content Include="Views\Shared\Inicio.aspx" />
     <Content Include="Views\Shared\Login.aspx" />
+    <Content Include="Views\Shared\Tesoreria.aspx" />
+    <Content Include="Views\Shared\Torneos.aspx" />
+    <Content Include="Views\Shared\Usuarios.aspx" />
+    <Content Include="Views\Shared\Solicitudes.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

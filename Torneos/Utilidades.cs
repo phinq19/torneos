@@ -26,5 +26,11 @@ namespace Torneos
             return sb.ToString();
         }
 
+        public static String CrearOpcinesMenu(){
+            StringBuilder oMenu = new StringBuilder();
+            oMenu.AppendLine("<a href=\"/Usuarios/MantenimientoUsuarios\">Mantenimiento Usuarios<a>");
+            return oMenu.ToString();
+        }
+
     }
 }

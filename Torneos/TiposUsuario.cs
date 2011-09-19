@@ -9,6 +9,7 @@ namespace Torneos
     public enum TipoUsuario
     {
         Administrador,
+        Arbitro,
         EncargadoTorneo,
         EncargadoAsociacion,
         Tesorero
