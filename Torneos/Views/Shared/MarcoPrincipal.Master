@@ -13,8 +13,10 @@
     <!--<script language="javascript" type="text/javascript" src="/Scripts/lib/jquery-1.5.2.min.js"></script>-->
     <script language="javascript" type="text/javascript" src="/Scripts/jquery-1.4.4.min.js"></script>    
     <script language="javascript" type="text/javascript" src="/Scripts/lib/jqueryui/jquery-ui-1.8.16.custom.min.js"></script>
-    <script language="javascript" type="text/javascript" src="/Scripts/lib/grid/jquery.jqGrid.min.js"></script>
+    
     <script language="javascript" type="text/javascript" src="/Scripts/lib/grid/i18n/grid.locale-es.js"></script>
+    <script language="javascript" type="text/javascript" src="/Scripts/lib/grid/jquery.jqGrid.min.js"></script>
+    
     <script language="javascript" type="text/javascript" src="/Scripts/lib/general/RealizarPeticiones.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/lib/blockUI.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/jquery.validate.min.js"></script> 
@@ -28,7 +30,8 @@
 
     <asp:ContentPlaceHolder ID="Head" runat="server" />
 </head>
-    <body style="display: none;">
+<!--style="display: none;"-->
+    <body>
         <div id="Documento">
             <div id="EncabezadoDocumento">
   
@@ -120,7 +123,7 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function () {
-                document.body.style.display = "";
+                //document.body.style.display = "";
                 $('#menu').dcMegaMenu({
                     rowItems: '3',
                     speed: 'fast',
