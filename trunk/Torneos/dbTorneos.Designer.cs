@@ -18,21 +18,21 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Cancha_Torneo", "Torneos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Torneos), "Canchas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Canchas), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Partidos_Canchas", "Canchas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Canchas), "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Partidos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Arbitros", "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Usuarios), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartidos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Partidos", "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Partidos), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartidos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Partidos_Programaciones", "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Programaciones), "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Partidos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Progamacion_Usuarios", "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Usuarios), "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Programaciones), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Programaciones_Torneos", "Torneos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Torneos), "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Programaciones), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_UsuariosTorneos_Torneos", "Torneos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Torneos), "UsuariosTorneos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.UsuariosTorneos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_UsuariosTorneos_Usuarios", "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Usuarios), "UsuariosTorneos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.UsuariosTorneos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Canchas_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociaciones), "Canchas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Canchas), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociaciones), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartidos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Partidos_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociaciones), "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Partidos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Programaciones_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociaciones), "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Programaciones), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Torneos_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociaciones), "Torneos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Torneos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Usuarios_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociaciones), "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Usuarios), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Canchas_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociacione), "Canchas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Cancha), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociacione), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartido), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Partidos_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociacione), "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Partido), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Programaciones_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociacione), "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Programacione), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Torneos_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociacione), "Torneos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Torneo), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Usuarios_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociacione), "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Usuario), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Cancha_Torneo", "Torneos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Torneo), "Canchas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Cancha), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Partidos_Canchas", "Canchas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Cancha), "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Partido), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Arbitros", "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Usuario), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartido), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Partidos", "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Partido), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartido), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Partidos_Programaciones", "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Programacione), "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Partido), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Progamacion_Usuarios", "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Usuario), "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Programacione), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Programaciones_Torneos", "Torneos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Torneo), "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Programacione), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_UsuariosTorneos_Torneos", "Torneos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Torneo), "UsuariosTorneos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.UsuariosTorneo), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_UsuariosTorneos_Usuarios", "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Usuario), "UsuariosTorneos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.UsuariosTorneo), true)]
 
 #endregion
 
@@ -43,32 +43,32 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class TorneosEntities : ObjectContext
+    public partial class dbTorneos : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new TorneosEntities object using the connection string found in the 'TorneosEntities' section of the application configuration file.
+        /// Initializes a new dbTorneos object using the connection string found in the 'dbTorneos' section of the application configuration file.
         /// </summary>
-        public TorneosEntities() : base("name=TorneosEntities", "TorneosEntities")
+        public dbTorneos() : base("name=dbTorneos", "dbTorneos")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new TorneosEntities object.
+        /// Initialize a new dbTorneos object.
         /// </summary>
-        public TorneosEntities(string connectionString) : base(connectionString, "TorneosEntities")
+        public dbTorneos(string connectionString) : base(connectionString, "dbTorneos")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new TorneosEntities object.
+        /// Initialize a new dbTorneos object.
         /// </summary>
-        public TorneosEntities(EntityConnection connection) : base(connection, "TorneosEntities")
+        public dbTorneos(EntityConnection connection) : base(connection, "dbTorneos")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -87,220 +87,220 @@ namespace Torneos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Canchas> Canchas
-        {
-            get
-            {
-                if ((_Canchas == null))
-                {
-                    _Canchas = base.CreateObjectSet<Canchas>("Canchas");
-                }
-                return _Canchas;
-            }
-        }
-        private ObjectSet<Canchas> _Canchas;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<DetallePartidos> DetallePartidos
-        {
-            get
-            {
-                if ((_DetallePartidos == null))
-                {
-                    _DetallePartidos = base.CreateObjectSet<DetallePartidos>("DetallePartidos");
-                }
-                return _DetallePartidos;
-            }
-        }
-        private ObjectSet<DetallePartidos> _DetallePartidos;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Partidos> Partidos
-        {
-            get
-            {
-                if ((_Partidos == null))
-                {
-                    _Partidos = base.CreateObjectSet<Partidos>("Partidos");
-                }
-                return _Partidos;
-            }
-        }
-        private ObjectSet<Partidos> _Partidos;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Programaciones> Programaciones
-        {
-            get
-            {
-                if ((_Programaciones == null))
-                {
-                    _Programaciones = base.CreateObjectSet<Programaciones>("Programaciones");
-                }
-                return _Programaciones;
-            }
-        }
-        private ObjectSet<Programaciones> _Programaciones;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<sysdiagrams> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagrams>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagrams> _sysdiagrams;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Torneos> Torneos
-        {
-            get
-            {
-                if ((_Torneos == null))
-                {
-                    _Torneos = base.CreateObjectSet<Torneos>("Torneos");
-                }
-                return _Torneos;
-            }
-        }
-        private ObjectSet<Torneos> _Torneos;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Usuarios> Usuarios
-        {
-            get
-            {
-                if ((_Usuarios == null))
-                {
-                    _Usuarios = base.CreateObjectSet<Usuarios>("Usuarios");
-                }
-                return _Usuarios;
-            }
-        }
-        private ObjectSet<Usuarios> _Usuarios;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<UsuariosTorneos> UsuariosTorneos
-        {
-            get
-            {
-                if ((_UsuariosTorneos == null))
-                {
-                    _UsuariosTorneos = base.CreateObjectSet<UsuariosTorneos>("UsuariosTorneos");
-                }
-                return _UsuariosTorneos;
-            }
-        }
-        private ObjectSet<UsuariosTorneos> _UsuariosTorneos;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Asociaciones> Asociaciones
+        public ObjectSet<Asociacione> Asociaciones
         {
             get
             {
                 if ((_Asociaciones == null))
                 {
-                    _Asociaciones = base.CreateObjectSet<Asociaciones>("Asociaciones");
+                    _Asociaciones = base.CreateObjectSet<Asociacione>("Asociaciones");
                 }
                 return _Asociaciones;
             }
         }
-        private ObjectSet<Asociaciones> _Asociaciones;
+        private ObjectSet<Asociacione> _Asociaciones;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Cancha> Canchas
+        {
+            get
+            {
+                if ((_Canchas == null))
+                {
+                    _Canchas = base.CreateObjectSet<Cancha>("Canchas");
+                }
+                return _Canchas;
+            }
+        }
+        private ObjectSet<Cancha> _Canchas;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DetallePartido> DetallePartidos
+        {
+            get
+            {
+                if ((_DetallePartidos == null))
+                {
+                    _DetallePartidos = base.CreateObjectSet<DetallePartido>("DetallePartidos");
+                }
+                return _DetallePartidos;
+            }
+        }
+        private ObjectSet<DetallePartido> _DetallePartidos;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Partido> Partidos
+        {
+            get
+            {
+                if ((_Partidos == null))
+                {
+                    _Partidos = base.CreateObjectSet<Partido>("Partidos");
+                }
+                return _Partidos;
+            }
+        }
+        private ObjectSet<Partido> _Partidos;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Programacione> Programaciones
+        {
+            get
+            {
+                if ((_Programaciones == null))
+                {
+                    _Programaciones = base.CreateObjectSet<Programacione>("Programaciones");
+                }
+                return _Programaciones;
+            }
+        }
+        private ObjectSet<Programacione> _Programaciones;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<sysdiagram> sysdiagrams
+        {
+            get
+            {
+                if ((_sysdiagrams == null))
+                {
+                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
+                }
+                return _sysdiagrams;
+            }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Torneo> Torneos
+        {
+            get
+            {
+                if ((_Torneos == null))
+                {
+                    _Torneos = base.CreateObjectSet<Torneo>("Torneos");
+                }
+                return _Torneos;
+            }
+        }
+        private ObjectSet<Torneo> _Torneos;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Usuario> Usuarios
+        {
+            get
+            {
+                if ((_Usuarios == null))
+                {
+                    _Usuarios = base.CreateObjectSet<Usuario>("Usuarios");
+                }
+                return _Usuarios;
+            }
+        }
+        private ObjectSet<Usuario> _Usuarios;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UsuariosTorneo> UsuariosTorneos
+        {
+            get
+            {
+                if ((_UsuariosTorneos == null))
+                {
+                    _UsuariosTorneos = base.CreateObjectSet<UsuariosTorneo>("UsuariosTorneos");
+                }
+                return _UsuariosTorneos;
+            }
+        }
+        private ObjectSet<UsuariosTorneo> _UsuariosTorneos;
 
         #endregion
         #region AddTo Methods
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Asociaciones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAsociaciones(Asociacione asociacione)
+        {
+            base.AddObject("Asociaciones", asociacione);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Canchas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToCanchas(Canchas canchas)
+        public void AddToCanchas(Cancha cancha)
         {
-            base.AddObject("Canchas", canchas);
+            base.AddObject("Canchas", cancha);
         }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the DetallePartidos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToDetallePartidos(DetallePartidos detallePartidos)
+        public void AddToDetallePartidos(DetallePartido detallePartido)
         {
-            base.AddObject("DetallePartidos", detallePartidos);
+            base.AddObject("DetallePartidos", detallePartido);
         }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Partidos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToPartidos(Partidos partidos)
+        public void AddToPartidos(Partido partido)
         {
-            base.AddObject("Partidos", partidos);
+            base.AddObject("Partidos", partido);
         }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Programaciones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToProgramaciones(Programaciones programaciones)
+        public void AddToProgramaciones(Programacione programacione)
         {
-            base.AddObject("Programaciones", programaciones);
+            base.AddObject("Programaciones", programacione);
         }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddTosysdiagrams(sysdiagrams sysdiagrams)
+        public void AddTosysdiagrams(sysdiagram sysdiagram)
         {
-            base.AddObject("sysdiagrams", sysdiagrams);
+            base.AddObject("sysdiagrams", sysdiagram);
         }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Torneos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToTorneos(Torneos torneos)
+        public void AddToTorneos(Torneo torneo)
         {
-            base.AddObject("Torneos", torneos);
+            base.AddObject("Torneos", torneo);
         }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Usuarios EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToUsuarios(Usuarios usuarios)
+        public void AddToUsuarios(Usuario usuario)
         {
-            base.AddObject("Usuarios", usuarios);
+            base.AddObject("Usuarios", usuario);
         }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the UsuariosTorneos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToUsuariosTorneos(UsuariosTorneos usuariosTorneos)
+        public void AddToUsuariosTorneos(UsuariosTorneo usuariosTorneo)
         {
-            base.AddObject("UsuariosTorneos", usuariosTorneos);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Asociaciones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAsociaciones(Asociaciones asociaciones)
-        {
-            base.AddObject("Asociaciones", asociaciones);
+            base.AddObject("UsuariosTorneos", usuariosTorneo);
         }
 
         #endregion
@@ -314,24 +314,24 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Asociaciones")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Asociacione")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Asociaciones : EntityObject
+    public partial class Asociacione : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Asociaciones object.
+        /// Create a new Asociacione object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
         /// <param name="nombre">Initial value of the nombre property.</param>
-        public static Asociaciones CreateAsociaciones(global::System.Int32 id, global::System.String nombre)
+        public static Asociacione CreateAsociacione(global::System.Int32 id, global::System.String nombre)
         {
-            Asociaciones asociaciones = new Asociaciones();
-            asociaciones.id = id;
-            asociaciones.nombre = nombre;
-            return asociaciones;
+            Asociacione asociacione = new Asociacione();
+            asociacione.id = id;
+            asociacione.nombre = nombre;
+            return asociacione;
         }
 
         #endregion
@@ -399,17 +399,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Canchas_Asociacion", "Canchas")]
-        public EntityCollection<Canchas> Canchas
+        public EntityCollection<Cancha> Canchas
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Canchas>("TorneosModel.FK_Canchas_Asociacion", "Canchas");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Cancha>("TorneosModel.FK_Canchas_Asociacion", "Canchas");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Canchas>("TorneosModel.FK_Canchas_Asociacion", "Canchas", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Cancha>("TorneosModel.FK_Canchas_Asociacion", "Canchas", value);
                 }
             }
         }
@@ -421,17 +421,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Asociacion", "DetallePartidos")]
-        public EntityCollection<DetallePartidos> DetallePartidos
+        public EntityCollection<DetallePartido> DetallePartidos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetallePartidos>("TorneosModel.FK_DetallePartidos_Asociacion", "DetallePartidos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetallePartido>("TorneosModel.FK_DetallePartidos_Asociacion", "DetallePartidos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetallePartidos>("TorneosModel.FK_DetallePartidos_Asociacion", "DetallePartidos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetallePartido>("TorneosModel.FK_DetallePartidos_Asociacion", "DetallePartidos", value);
                 }
             }
         }
@@ -443,17 +443,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Asociacion", "Partidos")]
-        public EntityCollection<Partidos> Partidos
+        public EntityCollection<Partido> Partidos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Partidos>("TorneosModel.FK_Partidos_Asociacion", "Partidos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Partido>("TorneosModel.FK_Partidos_Asociacion", "Partidos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Partidos>("TorneosModel.FK_Partidos_Asociacion", "Partidos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Partido>("TorneosModel.FK_Partidos_Asociacion", "Partidos", value);
                 }
             }
         }
@@ -465,17 +465,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Programaciones_Asociacion", "Programaciones")]
-        public EntityCollection<Programaciones> Programaciones
+        public EntityCollection<Programacione> Programaciones
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Programaciones>("TorneosModel.FK_Programaciones_Asociacion", "Programaciones");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Programacione>("TorneosModel.FK_Programaciones_Asociacion", "Programaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Programaciones>("TorneosModel.FK_Programaciones_Asociacion", "Programaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Programacione>("TorneosModel.FK_Programaciones_Asociacion", "Programaciones", value);
                 }
             }
         }
@@ -487,17 +487,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Torneos_Asociacion", "Torneos")]
-        public EntityCollection<Torneos> Torneos
+        public EntityCollection<Torneo> Torneos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Torneos>("TorneosModel.FK_Torneos_Asociacion", "Torneos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Torneo>("TorneosModel.FK_Torneos_Asociacion", "Torneos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Torneos>("TorneosModel.FK_Torneos_Asociacion", "Torneos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Torneo>("TorneosModel.FK_Torneos_Asociacion", "Torneos", value);
                 }
             }
         }
@@ -509,17 +509,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Usuarios_Asociacion", "Usuarios")]
-        public EntityCollection<Usuarios> Usuarios
+        public EntityCollection<Usuario> Usuarios
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Usuarios>("TorneosModel.FK_Usuarios_Asociacion", "Usuarios");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Usuario>("TorneosModel.FK_Usuarios_Asociacion", "Usuarios");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Usuarios>("TorneosModel.FK_Usuarios_Asociacion", "Usuarios", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Usuario>("TorneosModel.FK_Usuarios_Asociacion", "Usuarios", value);
                 }
             }
         }
@@ -530,32 +530,32 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Canchas")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Cancha")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Canchas : EntityObject
+    public partial class Cancha : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Canchas object.
+        /// Create a new Cancha object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
+        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
         /// <param name="idTorneo">Initial value of the idTorneo property.</param>
         /// <param name="nombre">Initial value of the nombre property.</param>
         /// <param name="ubicacion">Initial value of the ubicacion property.</param>
         /// <param name="viaticos">Initial value of the viaticos property.</param>
-        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
-        public static Canchas CreateCanchas(global::System.Int32 id, global::System.Int32 idTorneo, global::System.String nombre, global::System.String ubicacion, global::System.Decimal viaticos, global::System.Int32 idAsociacion)
+        public static Cancha CreateCancha(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.Int32 idTorneo, global::System.String nombre, global::System.String ubicacion, global::System.Decimal viaticos)
         {
-            Canchas canchas = new Canchas();
-            canchas.id = id;
-            canchas.idTorneo = idTorneo;
-            canchas.nombre = nombre;
-            canchas.ubicacion = ubicacion;
-            canchas.viaticos = viaticos;
-            canchas.idAsociacion = idAsociacion;
-            return canchas;
+            Cancha cancha = new Cancha();
+            cancha.id = id;
+            cancha.idAsociacion = idAsociacion;
+            cancha.idTorneo = idTorneo;
+            cancha.nombre = nombre;
+            cancha.ubicacion = ubicacion;
+            cancha.viaticos = viaticos;
+            return cancha;
         }
 
         #endregion
@@ -587,6 +587,30 @@ namespace Torneos
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 idAsociacion
+        {
+            get
+            {
+                return _idAsociacion;
+            }
+            set
+            {
+                OnidAsociacionChanging(value);
+                ReportPropertyChanging("idAsociacion");
+                _idAsociacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idAsociacion");
+                OnidAsociacionChanged();
+            }
+        }
+        private global::System.Int32 _idAsociacion;
+        partial void OnidAsociacionChanging(global::System.Int32 value);
+        partial void OnidAsociacionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -707,30 +731,6 @@ namespace Torneos
         private global::System.Decimal _viaticos;
         partial void OnviaticosChanging(global::System.Decimal value);
         partial void OnviaticosChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 idAsociacion
-        {
-            get
-            {
-                return _idAsociacion;
-            }
-            set
-            {
-                OnidAsociacionChanging(value);
-                ReportPropertyChanging("idAsociacion");
-                _idAsociacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("idAsociacion");
-                OnidAsociacionChanged();
-            }
-        }
-        private global::System.Int32 _idAsociacion;
-        partial void OnidAsociacionChanging(global::System.Int32 value);
-        partial void OnidAsociacionChanged();
 
         #endregion
     
@@ -742,16 +742,16 @@ namespace Torneos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Cancha_Torneo", "Torneos")]
-        public Torneos Torneos
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Canchas_Asociacion", "Asociaciones")]
+        public Asociacione Asociacione
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_Cancha_Torneo", "Torneos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Canchas_Asociacion", "Asociaciones").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_Cancha_Torneo", "Torneos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Canchas_Asociacion", "Asociaciones").Value = value;
             }
         }
         /// <summary>
@@ -759,17 +759,55 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Torneos> TorneosReference
+        public EntityReference<Asociacione> AsociacioneReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_Cancha_Torneo", "Torneos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Canchas_Asociacion", "Asociaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Torneos>("TorneosModel.FK_Cancha_Torneo", "Torneos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociacione>("TorneosModel.FK_Canchas_Asociacion", "Asociaciones", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Cancha_Torneo", "Torneos")]
+        public Torneo Torneo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_Cancha_Torneo", "Torneos").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_Cancha_Torneo", "Torneos").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Torneo> TorneoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_Cancha_Torneo", "Torneos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Torneo>("TorneosModel.FK_Cancha_Torneo", "Torneos", value);
                 }
             }
         }
@@ -781,55 +819,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Canchas", "Partidos")]
-        public EntityCollection<Partidos> Partidos
+        public EntityCollection<Partido> Partidos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Partidos>("TorneosModel.FK_Partidos_Canchas", "Partidos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Partido>("TorneosModel.FK_Partidos_Canchas", "Partidos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Partidos>("TorneosModel.FK_Partidos_Canchas", "Partidos", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Canchas_Asociacion", "Asociaciones")]
-        public Asociaciones Asociaciones
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Canchas_Asociacion", "Asociaciones").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Canchas_Asociacion", "Asociaciones").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Asociaciones> AsociacionesReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Canchas_Asociacion", "Asociaciones");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociaciones>("TorneosModel.FK_Canchas_Asociacion", "Asociaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Partido>("TorneosModel.FK_Partidos_Canchas", "Partidos", value);
                 }
             }
         }
@@ -840,30 +840,30 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="DetallePartidos")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="DetallePartido")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class DetallePartidos : EntityObject
+    public partial class DetallePartido : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new DetallePartidos object.
+        /// Create a new DetallePartido object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
+        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
         /// <param name="idPartido">Initial value of the idPartido property.</param>
         /// <param name="idArbitro">Initial value of the idArbitro property.</param>
         /// <param name="puesto">Initial value of the puesto property.</param>
-        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
-        public static DetallePartidos CreateDetallePartidos(global::System.Int32 id, global::System.Int32 idPartido, global::System.Int32 idArbitro, global::System.Int32 puesto, global::System.Int32 idAsociacion)
+        public static DetallePartido CreateDetallePartido(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.Int32 idPartido, global::System.Int32 idArbitro, global::System.Int32 puesto)
         {
-            DetallePartidos detallePartidos = new DetallePartidos();
-            detallePartidos.id = id;
-            detallePartidos.idPartido = idPartido;
-            detallePartidos.idArbitro = idArbitro;
-            detallePartidos.puesto = puesto;
-            detallePartidos.idAsociacion = idAsociacion;
-            return detallePartidos;
+            DetallePartido detallePartido = new DetallePartido();
+            detallePartido.id = id;
+            detallePartido.idAsociacion = idAsociacion;
+            detallePartido.idPartido = idPartido;
+            detallePartido.idArbitro = idArbitro;
+            detallePartido.puesto = puesto;
+            return detallePartido;
         }
 
         #endregion
@@ -895,6 +895,30 @@ namespace Torneos
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 idAsociacion
+        {
+            get
+            {
+                return _idAsociacion;
+            }
+            set
+            {
+                OnidAsociacionChanging(value);
+                ReportPropertyChanging("idAsociacion");
+                _idAsociacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idAsociacion");
+                OnidAsociacionChanged();
+            }
+        }
+        private global::System.Int32 _idAsociacion;
+        partial void OnidAsociacionChanging(global::System.Int32 value);
+        partial void OnidAsociacionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1231,30 +1255,6 @@ namespace Torneos
         private global::System.String _deposito;
         partial void OndepositoChanging(global::System.String value);
         partial void OndepositoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 idAsociacion
-        {
-            get
-            {
-                return _idAsociacion;
-            }
-            set
-            {
-                OnidAsociacionChanging(value);
-                ReportPropertyChanging("idAsociacion");
-                _idAsociacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("idAsociacion");
-                OnidAsociacionChanged();
-            }
-        }
-        private global::System.Int32 _idAsociacion;
-        partial void OnidAsociacionChanging(global::System.Int32 value);
-        partial void OnidAsociacionChanged();
 
         #endregion
     
@@ -1266,16 +1266,16 @@ namespace Torneos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Arbitros", "Usuarios")]
-        public Usuarios Usuarios
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Asociacion", "Asociaciones")]
+        public Asociacione Asociacione
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_DetallePartidos_Arbitros", "Usuarios").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_DetallePartidos_Asociacion", "Asociaciones").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_DetallePartidos_Arbitros", "Usuarios").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_DetallePartidos_Asociacion", "Asociaciones").Value = value;
             }
         }
         /// <summary>
@@ -1283,17 +1283,55 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Usuarios> UsuariosReference
+        public EntityReference<Asociacione> AsociacioneReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_DetallePartidos_Arbitros", "Usuarios");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_DetallePartidos_Asociacion", "Asociaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Usuarios>("TorneosModel.FK_DetallePartidos_Arbitros", "Usuarios", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociacione>("TorneosModel.FK_DetallePartidos_Asociacion", "Asociaciones", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Arbitros", "Usuarios")]
+        public Usuario Usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_DetallePartidos_Arbitros", "Usuarios").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_DetallePartidos_Arbitros", "Usuarios").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Usuario> UsuarioReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_DetallePartidos_Arbitros", "Usuarios");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Usuario>("TorneosModel.FK_DetallePartidos_Arbitros", "Usuarios", value);
                 }
             }
         }
@@ -1305,15 +1343,15 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Partidos", "Partidos")]
-        public Partidos Partidos
+        public Partido Partido
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partidos>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partido>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partidos>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partido>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos").Value = value;
             }
         }
         /// <summary>
@@ -1321,55 +1359,17 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Partidos> PartidosReference
+        public EntityReference<Partido> PartidoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partidos>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partido>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Partidos>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Asociacion", "Asociaciones")]
-        public Asociaciones Asociaciones
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_DetallePartidos_Asociacion", "Asociaciones").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_DetallePartidos_Asociacion", "Asociaciones").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Asociaciones> AsociacionesReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_DetallePartidos_Asociacion", "Asociaciones");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociaciones>("TorneosModel.FK_DetallePartidos_Asociacion", "Asociaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Partido>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos", value);
                 }
             }
         }
@@ -1380,34 +1380,34 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Partidos")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Partido")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Partidos : EntityObject
+    public partial class Partido : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Partidos object.
+        /// Create a new Partido object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
+        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
         /// <param name="idProgramacion">Initial value of the idProgramacion property.</param>
         /// <param name="idCancha">Initial value of the idCancha property.</param>
         /// <param name="fecha_hora">Initial value of the fecha_hora property.</param>
         /// <param name="coordinador">Initial value of the coordinador property.</param>
         /// <param name="estado">Initial value of the estado property.</param>
-        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
-        public static Partidos CreatePartidos(global::System.Int32 id, global::System.Int32 idProgramacion, global::System.Int32 idCancha, global::System.DateTime fecha_hora, global::System.String coordinador, global::System.Int32 estado, global::System.Int32 idAsociacion)
+        public static Partido CreatePartido(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.Int32 idProgramacion, global::System.Int32 idCancha, global::System.DateTime fecha_hora, global::System.String coordinador, global::System.Int32 estado)
         {
-            Partidos partidos = new Partidos();
-            partidos.id = id;
-            partidos.idProgramacion = idProgramacion;
-            partidos.idCancha = idCancha;
-            partidos.fecha_hora = fecha_hora;
-            partidos.coordinador = coordinador;
-            partidos.estado = estado;
-            partidos.idAsociacion = idAsociacion;
-            return partidos;
+            Partido partido = new Partido();
+            partido.id = id;
+            partido.idAsociacion = idAsociacion;
+            partido.idProgramacion = idProgramacion;
+            partido.idCancha = idCancha;
+            partido.fecha_hora = fecha_hora;
+            partido.coordinador = coordinador;
+            partido.estado = estado;
+            return partido;
         }
 
         #endregion
@@ -1439,6 +1439,30 @@ namespace Torneos
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 idAsociacion
+        {
+            get
+            {
+                return _idAsociacion;
+            }
+            set
+            {
+                OnidAsociacionChanging(value);
+                ReportPropertyChanging("idAsociacion");
+                _idAsociacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idAsociacion");
+                OnidAsociacionChanged();
+            }
+        }
+        private global::System.Int32 _idAsociacion;
+        partial void OnidAsociacionChanging(global::System.Int32 value);
+        partial void OnidAsociacionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1631,30 +1655,6 @@ namespace Torneos
         private global::System.Int32 _estado;
         partial void OnestadoChanging(global::System.Int32 value);
         partial void OnestadoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 idAsociacion
-        {
-            get
-            {
-                return _idAsociacion;
-            }
-            set
-            {
-                OnidAsociacionChanging(value);
-                ReportPropertyChanging("idAsociacion");
-                _idAsociacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("idAsociacion");
-                OnidAsociacionChanged();
-            }
-        }
-        private global::System.Int32 _idAsociacion;
-        partial void OnidAsociacionChanging(global::System.Int32 value);
-        partial void OnidAsociacionChanged();
 
         #endregion
     
@@ -1666,16 +1666,16 @@ namespace Torneos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Canchas", "Canchas")]
-        public Canchas Canchas
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Asociacion", "Asociaciones")]
+        public Asociacione Asociacione
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Canchas>("TorneosModel.FK_Partidos_Canchas", "Canchas").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Partidos_Asociacion", "Asociaciones").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Canchas>("TorneosModel.FK_Partidos_Canchas", "Canchas").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Partidos_Asociacion", "Asociaciones").Value = value;
             }
         }
         /// <summary>
@@ -1683,17 +1683,55 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Canchas> CanchasReference
+        public EntityReference<Asociacione> AsociacioneReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Canchas>("TorneosModel.FK_Partidos_Canchas", "Canchas");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Partidos_Asociacion", "Asociaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Canchas>("TorneosModel.FK_Partidos_Canchas", "Canchas", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociacione>("TorneosModel.FK_Partidos_Asociacion", "Asociaciones", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Canchas", "Canchas")]
+        public Cancha Cancha
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Cancha>("TorneosModel.FK_Partidos_Canchas", "Canchas").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Cancha>("TorneosModel.FK_Partidos_Canchas", "Canchas").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Cancha> CanchaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Cancha>("TorneosModel.FK_Partidos_Canchas", "Canchas");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Cancha>("TorneosModel.FK_Partidos_Canchas", "Canchas", value);
                 }
             }
         }
@@ -1705,17 +1743,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Partidos", "DetallePartidos")]
-        public EntityCollection<DetallePartidos> DetallePartidos
+        public EntityCollection<DetallePartido> DetallePartidos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetallePartidos>("TorneosModel.FK_DetallePartidos_Partidos", "DetallePartidos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetallePartido>("TorneosModel.FK_DetallePartidos_Partidos", "DetallePartidos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetallePartidos>("TorneosModel.FK_DetallePartidos_Partidos", "DetallePartidos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetallePartido>("TorneosModel.FK_DetallePartidos_Partidos", "DetallePartidos", value);
                 }
             }
         }
@@ -1727,15 +1765,15 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Programaciones", "Programaciones")]
-        public Programaciones Programaciones
+        public Programacione Programacione
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Programaciones>("TorneosModel.FK_Partidos_Programaciones", "Programaciones").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Programacione>("TorneosModel.FK_Partidos_Programaciones", "Programaciones").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Programaciones>("TorneosModel.FK_Partidos_Programaciones", "Programaciones").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Programacione>("TorneosModel.FK_Partidos_Programaciones", "Programaciones").Value = value;
             }
         }
         /// <summary>
@@ -1743,55 +1781,17 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Programaciones> ProgramacionesReference
+        public EntityReference<Programacione> ProgramacioneReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Programaciones>("TorneosModel.FK_Partidos_Programaciones", "Programaciones");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Programacione>("TorneosModel.FK_Partidos_Programaciones", "Programaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Programaciones>("TorneosModel.FK_Partidos_Programaciones", "Programaciones", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Asociacion", "Asociaciones")]
-        public Asociaciones Asociaciones
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Partidos_Asociacion", "Asociaciones").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Partidos_Asociacion", "Asociaciones").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Asociaciones> AsociacionesReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Partidos_Asociacion", "Asociaciones");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociaciones>("TorneosModel.FK_Partidos_Asociacion", "Asociaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Programacione>("TorneosModel.FK_Partidos_Programaciones", "Programaciones", value);
                 }
             }
         }
@@ -1802,30 +1802,30 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Programaciones")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Programacione")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Programaciones : EntityObject
+    public partial class Programacione : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Programaciones object.
+        /// Create a new Programacione object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
+        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
         /// <param name="idUsuario">Initial value of the idUsuario property.</param>
         /// <param name="idTorneo">Initial value of the idTorneo property.</param>
         /// <param name="estado">Initial value of the estado property.</param>
-        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
-        public static Programaciones CreateProgramaciones(global::System.Int32 id, global::System.Int32 idUsuario, global::System.Int32 idTorneo, global::System.Int32 estado, global::System.Int32 idAsociacion)
+        public static Programacione CreateProgramacione(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.Int32 idUsuario, global::System.Int32 idTorneo, global::System.Int32 estado)
         {
-            Programaciones programaciones = new Programaciones();
-            programaciones.id = id;
-            programaciones.idUsuario = idUsuario;
-            programaciones.idTorneo = idTorneo;
-            programaciones.estado = estado;
-            programaciones.idAsociacion = idAsociacion;
-            return programaciones;
+            Programacione programacione = new Programacione();
+            programacione.id = id;
+            programacione.idAsociacion = idAsociacion;
+            programacione.idUsuario = idUsuario;
+            programacione.idTorneo = idTorneo;
+            programacione.estado = estado;
+            return programacione;
         }
 
         #endregion
@@ -1857,6 +1857,30 @@ namespace Torneos
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 idAsociacion
+        {
+            get
+            {
+                return _idAsociacion;
+            }
+            set
+            {
+                OnidAsociacionChanging(value);
+                ReportPropertyChanging("idAsociacion");
+                _idAsociacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idAsociacion");
+                OnidAsociacionChanged();
+            }
+        }
+        private global::System.Int32 _idAsociacion;
+        partial void OnidAsociacionChanging(global::System.Int32 value);
+        partial void OnidAsociacionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2001,30 +2025,6 @@ namespace Torneos
         private global::System.Int32 _estado;
         partial void OnestadoChanging(global::System.Int32 value);
         partial void OnestadoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 idAsociacion
-        {
-            get
-            {
-                return _idAsociacion;
-            }
-            set
-            {
-                OnidAsociacionChanging(value);
-                ReportPropertyChanging("idAsociacion");
-                _idAsociacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("idAsociacion");
-                OnidAsociacionChanged();
-            }
-        }
-        private global::System.Int32 _idAsociacion;
-        partial void OnidAsociacionChanging(global::System.Int32 value);
-        partial void OnidAsociacionChanged();
 
         #endregion
     
@@ -2036,18 +2036,56 @@ namespace Torneos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Programaciones", "Partidos")]
-        public EntityCollection<Partidos> Partidos
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Programaciones_Asociacion", "Asociaciones")]
+        public Asociacione Asociacione
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Partidos>("TorneosModel.FK_Partidos_Programaciones", "Partidos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Programaciones_Asociacion", "Asociaciones").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Programaciones_Asociacion", "Asociaciones").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Asociacione> AsociacioneReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Programaciones_Asociacion", "Asociaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Partidos>("TorneosModel.FK_Partidos_Programaciones", "Partidos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociacione>("TorneosModel.FK_Programaciones_Asociacion", "Asociaciones", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Partidos_Programaciones", "Partidos")]
+        public EntityCollection<Partido> Partidos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Partido>("TorneosModel.FK_Partidos_Programaciones", "Partidos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Partido>("TorneosModel.FK_Partidos_Programaciones", "Partidos", value);
                 }
             }
         }
@@ -2059,15 +2097,15 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Progamacion_Usuarios", "Usuarios")]
-        public Usuarios Usuarios
+        public Usuario Usuario
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_Progamacion_Usuarios", "Usuarios").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_Progamacion_Usuarios", "Usuarios").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_Progamacion_Usuarios", "Usuarios").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_Progamacion_Usuarios", "Usuarios").Value = value;
             }
         }
         /// <summary>
@@ -2075,17 +2113,17 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Usuarios> UsuariosReference
+        public EntityReference<Usuario> UsuarioReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_Progamacion_Usuarios", "Usuarios");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_Progamacion_Usuarios", "Usuarios");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Usuarios>("TorneosModel.FK_Progamacion_Usuarios", "Usuarios", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Usuario>("TorneosModel.FK_Progamacion_Usuarios", "Usuarios", value);
                 }
             }
         }
@@ -2097,15 +2135,15 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Programaciones_Torneos", "Torneos")]
-        public Torneos Torneos
+        public Torneo Torneo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_Programaciones_Torneos", "Torneos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_Programaciones_Torneos", "Torneos").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_Programaciones_Torneos", "Torneos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_Programaciones_Torneos", "Torneos").Value = value;
             }
         }
         /// <summary>
@@ -2113,55 +2151,17 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Torneos> TorneosReference
+        public EntityReference<Torneo> TorneoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_Programaciones_Torneos", "Torneos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_Programaciones_Torneos", "Torneos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Torneos>("TorneosModel.FK_Programaciones_Torneos", "Torneos", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Programaciones_Asociacion", "Asociaciones")]
-        public Asociaciones Asociaciones
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Programaciones_Asociacion", "Asociaciones").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Programaciones_Asociacion", "Asociaciones").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Asociaciones> AsociacionesReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Programaciones_Asociacion", "Asociaciones");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociaciones>("TorneosModel.FK_Programaciones_Asociacion", "Asociaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Torneo>("TorneosModel.FK_Programaciones_Torneos", "Torneos", value);
                 }
             }
         }
@@ -2172,26 +2172,26 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="sysdiagrams")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="sysdiagram")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagrams : EntityObject
+    public partial class sysdiagram : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new sysdiagrams object.
+        /// Create a new sysdiagram object.
         /// </summary>
         /// <param name="name">Initial value of the name property.</param>
         /// <param name="principal_id">Initial value of the principal_id property.</param>
         /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagrams Createsysdiagrams(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
         {
-            sysdiagrams sysdiagrams = new sysdiagrams();
-            sysdiagrams.name = name;
-            sysdiagrams.principal_id = principal_id;
-            sysdiagrams.diagram_id = diagram_id;
-            return sysdiagrams;
+            sysdiagram sysdiagram = new sysdiagram();
+            sysdiagram.name = name;
+            sysdiagram.principal_id = principal_id;
+            sysdiagram.diagram_id = diagram_id;
+            return sysdiagram;
         }
 
         #endregion
@@ -2327,34 +2327,34 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Torneos")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Torneo")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Torneos : EntityObject
+    public partial class Torneo : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Torneos object.
+        /// Create a new Torneo object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
+        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
         /// <param name="nombre">Initial value of the nombre property.</param>
         /// <param name="categoria">Initial value of the categoria property.</param>
         /// <param name="telefono1">Initial value of the telefono1 property.</param>
         /// <param name="ubicacion">Initial value of the ubicacion property.</param>
         /// <param name="dieta">Initial value of the dieta property.</param>
-        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
-        public static Torneos CreateTorneos(global::System.Int32 id, global::System.String nombre, global::System.Int32 categoria, global::System.String telefono1, global::System.String ubicacion, global::System.Decimal dieta, global::System.Int32 idAsociacion)
+        public static Torneo CreateTorneo(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.String nombre, global::System.Int32 categoria, global::System.String telefono1, global::System.String ubicacion, global::System.Decimal dieta)
         {
-            Torneos torneos = new Torneos();
-            torneos.id = id;
-            torneos.nombre = nombre;
-            torneos.categoria = categoria;
-            torneos.telefono1 = telefono1;
-            torneos.ubicacion = ubicacion;
-            torneos.dieta = dieta;
-            torneos.idAsociacion = idAsociacion;
-            return torneos;
+            Torneo torneo = new Torneo();
+            torneo.id = id;
+            torneo.idAsociacion = idAsociacion;
+            torneo.nombre = nombre;
+            torneo.categoria = categoria;
+            torneo.telefono1 = telefono1;
+            torneo.ubicacion = ubicacion;
+            torneo.dieta = dieta;
+            return torneo;
         }
 
         #endregion
@@ -2386,6 +2386,30 @@ namespace Torneos
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 idAsociacion
+        {
+            get
+            {
+                return _idAsociacion;
+            }
+            set
+            {
+                OnidAsociacionChanging(value);
+                ReportPropertyChanging("idAsociacion");
+                _idAsociacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idAsociacion");
+                OnidAsociacionChanged();
+            }
+        }
+        private global::System.Int32 _idAsociacion;
+        partial void OnidAsociacionChanging(global::System.Int32 value);
+        partial void OnidAsociacionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2578,30 +2602,6 @@ namespace Torneos
         private global::System.Decimal _dieta;
         partial void OndietaChanging(global::System.Decimal value);
         partial void OndietaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 idAsociacion
-        {
-            get
-            {
-                return _idAsociacion;
-            }
-            set
-            {
-                OnidAsociacionChanging(value);
-                ReportPropertyChanging("idAsociacion");
-                _idAsociacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("idAsociacion");
-                OnidAsociacionChanged();
-            }
-        }
-        private global::System.Int32 _idAsociacion;
-        partial void OnidAsociacionChanging(global::System.Int32 value);
-        partial void OnidAsociacionChanged();
 
         #endregion
     
@@ -2613,18 +2613,56 @@ namespace Torneos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Cancha_Torneo", "Canchas")]
-        public EntityCollection<Canchas> Canchas
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Torneos_Asociacion", "Asociaciones")]
+        public Asociacione Asociacione
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Canchas>("TorneosModel.FK_Cancha_Torneo", "Canchas");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Torneos_Asociacion", "Asociaciones").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Torneos_Asociacion", "Asociaciones").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Asociacione> AsociacioneReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Torneos_Asociacion", "Asociaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Canchas>("TorneosModel.FK_Cancha_Torneo", "Canchas", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociacione>("TorneosModel.FK_Torneos_Asociacion", "Asociaciones", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Cancha_Torneo", "Canchas")]
+        public EntityCollection<Cancha> Canchas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Cancha>("TorneosModel.FK_Cancha_Torneo", "Canchas");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Cancha>("TorneosModel.FK_Cancha_Torneo", "Canchas", value);
                 }
             }
         }
@@ -2636,17 +2674,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Programaciones_Torneos", "Programaciones")]
-        public EntityCollection<Programaciones> Programaciones
+        public EntityCollection<Programacione> Programaciones
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Programaciones>("TorneosModel.FK_Programaciones_Torneos", "Programaciones");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Programacione>("TorneosModel.FK_Programaciones_Torneos", "Programaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Programaciones>("TorneosModel.FK_Programaciones_Torneos", "Programaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Programacione>("TorneosModel.FK_Programaciones_Torneos", "Programaciones", value);
                 }
             }
         }
@@ -2658,55 +2696,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_UsuariosTorneos_Torneos", "UsuariosTorneos")]
-        public EntityCollection<UsuariosTorneos> UsuariosTorneos
+        public EntityCollection<UsuariosTorneo> UsuariosTorneos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UsuariosTorneos>("TorneosModel.FK_UsuariosTorneos_Torneos", "UsuariosTorneos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UsuariosTorneo>("TorneosModel.FK_UsuariosTorneos_Torneos", "UsuariosTorneos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UsuariosTorneos>("TorneosModel.FK_UsuariosTorneos_Torneos", "UsuariosTorneos", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Torneos_Asociacion", "Asociaciones")]
-        public Asociaciones Asociaciones
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Torneos_Asociacion", "Asociaciones").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Torneos_Asociacion", "Asociaciones").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Asociaciones> AsociacionesReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Torneos_Asociacion", "Asociaciones");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociaciones>("TorneosModel.FK_Torneos_Asociacion", "Asociaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UsuariosTorneo>("TorneosModel.FK_UsuariosTorneos_Torneos", "UsuariosTorneos", value);
                 }
             }
         }
@@ -2717,36 +2717,36 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Usuarios")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="Usuario")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Usuarios : EntityObject
+    public partial class Usuario : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Usuarios object.
+        /// Create a new Usuario object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
+        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
         /// <param name="codigo">Initial value of the codigo property.</param>
         /// <param name="nombre">Initial value of the nombre property.</param>
         /// <param name="contrasena">Initial value of the contrasena property.</param>
         /// <param name="correo">Initial value of the correo property.</param>
         /// <param name="telefono1">Initial value of the telefono1 property.</param>
         /// <param name="tipo">Initial value of the tipo property.</param>
-        /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
-        public static Usuarios CreateUsuarios(global::System.Int32 id, global::System.String codigo, global::System.String nombre, global::System.String contrasena, global::System.String correo, global::System.String telefono1, global::System.Int32 tipo, global::System.Int32 idAsociacion)
+        public static Usuario CreateUsuario(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.String codigo, global::System.String nombre, global::System.String contrasena, global::System.String correo, global::System.String telefono1, global::System.Int32 tipo)
         {
-            Usuarios usuarios = new Usuarios();
-            usuarios.id = id;
-            usuarios.codigo = codigo;
-            usuarios.nombre = nombre;
-            usuarios.contrasena = contrasena;
-            usuarios.correo = correo;
-            usuarios.telefono1 = telefono1;
-            usuarios.tipo = tipo;
-            usuarios.idAsociacion = idAsociacion;
-            return usuarios;
+            Usuario usuario = new Usuario();
+            usuario.id = id;
+            usuario.idAsociacion = idAsociacion;
+            usuario.codigo = codigo;
+            usuario.nombre = nombre;
+            usuario.contrasena = contrasena;
+            usuario.correo = correo;
+            usuario.telefono1 = telefono1;
+            usuario.tipo = tipo;
+            return usuario;
         }
 
         #endregion
@@ -2778,6 +2778,30 @@ namespace Torneos
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 idAsociacion
+        {
+            get
+            {
+                return _idAsociacion;
+            }
+            set
+            {
+                OnidAsociacionChanging(value);
+                ReportPropertyChanging("idAsociacion");
+                _idAsociacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idAsociacion");
+                OnidAsociacionChanged();
+            }
+        }
+        private global::System.Int32 _idAsociacion;
+        partial void OnidAsociacionChanging(global::System.Int32 value);
+        partial void OnidAsociacionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2994,30 +3018,6 @@ namespace Torneos
         private global::System.String _observaciones;
         partial void OnobservacionesChanging(global::System.String value);
         partial void OnobservacionesChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 idAsociacion
-        {
-            get
-            {
-                return _idAsociacion;
-            }
-            set
-            {
-                OnidAsociacionChanging(value);
-                ReportPropertyChanging("idAsociacion");
-                _idAsociacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("idAsociacion");
-                OnidAsociacionChanged();
-            }
-        }
-        private global::System.Int32 _idAsociacion;
-        partial void OnidAsociacionChanging(global::System.Int32 value);
-        partial void OnidAsociacionChanged();
 
         #endregion
     
@@ -3029,18 +3029,56 @@ namespace Torneos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Arbitros", "DetallePartidos")]
-        public EntityCollection<DetallePartidos> DetallePartidos
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Usuarios_Asociacion", "Asociaciones")]
+        public Asociacione Asociacione
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetallePartidos>("TorneosModel.FK_DetallePartidos_Arbitros", "DetallePartidos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Usuarios_Asociacion", "Asociaciones").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Usuarios_Asociacion", "Asociaciones").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Asociacione> AsociacioneReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociacione>("TorneosModel.FK_Usuarios_Asociacion", "Asociaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetallePartidos>("TorneosModel.FK_DetallePartidos_Arbitros", "DetallePartidos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociacione>("TorneosModel.FK_Usuarios_Asociacion", "Asociaciones", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Arbitros", "DetallePartidos")]
+        public EntityCollection<DetallePartido> DetallePartidos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetallePartido>("TorneosModel.FK_DetallePartidos_Arbitros", "DetallePartidos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetallePartido>("TorneosModel.FK_DetallePartidos_Arbitros", "DetallePartidos", value);
                 }
             }
         }
@@ -3052,17 +3090,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Progamacion_Usuarios", "Programaciones")]
-        public EntityCollection<Programaciones> Programaciones
+        public EntityCollection<Programacione> Programaciones
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Programaciones>("TorneosModel.FK_Progamacion_Usuarios", "Programaciones");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Programacione>("TorneosModel.FK_Progamacion_Usuarios", "Programaciones");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Programaciones>("TorneosModel.FK_Progamacion_Usuarios", "Programaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Programacione>("TorneosModel.FK_Progamacion_Usuarios", "Programaciones", value);
                 }
             }
         }
@@ -3074,55 +3112,17 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_UsuariosTorneos_Usuarios", "UsuariosTorneos")]
-        public EntityCollection<UsuariosTorneos> UsuariosTorneos
+        public EntityCollection<UsuariosTorneo> UsuariosTorneos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UsuariosTorneos>("TorneosModel.FK_UsuariosTorneos_Usuarios", "UsuariosTorneos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UsuariosTorneo>("TorneosModel.FK_UsuariosTorneos_Usuarios", "UsuariosTorneos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UsuariosTorneos>("TorneosModel.FK_UsuariosTorneos_Usuarios", "UsuariosTorneos", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Usuarios_Asociacion", "Asociaciones")]
-        public Asociaciones Asociaciones
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Usuarios_Asociacion", "Asociaciones").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Usuarios_Asociacion", "Asociaciones").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Asociaciones> AsociacionesReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asociaciones>("TorneosModel.FK_Usuarios_Asociacion", "Asociaciones");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asociaciones>("TorneosModel.FK_Usuarios_Asociacion", "Asociaciones", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UsuariosTorneo>("TorneosModel.FK_UsuariosTorneos_Usuarios", "UsuariosTorneos", value);
                 }
             }
         }
@@ -3133,26 +3133,26 @@ namespace Torneos
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="UsuariosTorneos")]
+    [EdmEntityTypeAttribute(NamespaceName="TorneosModel", Name="UsuariosTorneo")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class UsuariosTorneos : EntityObject
+    public partial class UsuariosTorneo : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new UsuariosTorneos object.
+        /// Create a new UsuariosTorneo object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
         /// <param name="idTorneo">Initial value of the idTorneo property.</param>
         /// <param name="idUsuario">Initial value of the idUsuario property.</param>
-        public static UsuariosTorneos CreateUsuariosTorneos(global::System.Int32 id, global::System.Int32 idTorneo, global::System.Int32 idUsuario)
+        public static UsuariosTorneo CreateUsuariosTorneo(global::System.Int32 id, global::System.Int32 idTorneo, global::System.Int32 idUsuario)
         {
-            UsuariosTorneos usuariosTorneos = new UsuariosTorneos();
-            usuariosTorneos.id = id;
-            usuariosTorneos.idTorneo = idTorneo;
-            usuariosTorneos.idUsuario = idUsuario;
-            return usuariosTorneos;
+            UsuariosTorneo usuariosTorneo = new UsuariosTorneo();
+            usuariosTorneo.id = id;
+            usuariosTorneo.idTorneo = idTorneo;
+            usuariosTorneo.idUsuario = idUsuario;
+            return usuariosTorneo;
         }
 
         #endregion
@@ -3244,15 +3244,15 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_UsuariosTorneos_Torneos", "Torneos")]
-        public Torneos Torneos
+        public Torneo Torneo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_UsuariosTorneos_Torneos", "Torneos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_UsuariosTorneos_Torneos", "Torneos").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_UsuariosTorneos_Torneos", "Torneos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_UsuariosTorneos_Torneos", "Torneos").Value = value;
             }
         }
         /// <summary>
@@ -3260,17 +3260,17 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Torneos> TorneosReference
+        public EntityReference<Torneo> TorneoReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneos>("TorneosModel.FK_UsuariosTorneos_Torneos", "Torneos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Torneo>("TorneosModel.FK_UsuariosTorneos_Torneos", "Torneos");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Torneos>("TorneosModel.FK_UsuariosTorneos_Torneos", "Torneos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Torneo>("TorneosModel.FK_UsuariosTorneos_Torneos", "Torneos", value);
                 }
             }
         }
@@ -3282,15 +3282,15 @@ namespace Torneos
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_UsuariosTorneos_Usuarios", "Usuarios")]
-        public Usuarios Usuarios
+        public Usuario Usuario
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_UsuariosTorneos_Usuarios", "Usuarios").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_UsuariosTorneos_Usuarios", "Usuarios").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_UsuariosTorneos_Usuarios", "Usuarios").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_UsuariosTorneos_Usuarios", "Usuarios").Value = value;
             }
         }
         /// <summary>
@@ -3298,17 +3298,17 @@ namespace Torneos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Usuarios> UsuariosReference
+        public EntityReference<Usuario> UsuarioReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuarios>("TorneosModel.FK_UsuariosTorneos_Usuarios", "Usuarios");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Usuario>("TorneosModel.FK_UsuariosTorneos_Usuarios", "Usuarios");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Usuarios>("TorneosModel.FK_UsuariosTorneos_Usuarios", "Usuarios", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Usuario>("TorneosModel.FK_UsuariosTorneos_Usuarios", "Usuarios", value);
                 }
             }
         }

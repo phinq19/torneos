@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TorneosModelStoreContainer" CdmEntityContainer="dbTorneos">
+    <EntitySetMapping Name="Asociaciones">
+      <EntityTypeMapping TypeName="TorneosModel.Asociacione">
+        <MappingFragment StoreEntitySet="Asociaciones">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Canchas">
+      <EntityTypeMapping TypeName="TorneosModel.Cancha">
+        <MappingFragment StoreEntitySet="Canchas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
+          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+          <ScalarProperty Name="viaticos" ColumnName="viaticos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallePartidos">
+      <EntityTypeMapping TypeName="TorneosModel.DetallePartido">
+        <MappingFragment StoreEntitySet="DetallePartidos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
+          <ScalarProperty Name="idPartido" ColumnName="idPartido" />
+          <ScalarProperty Name="idArbitro" ColumnName="idArbitro" />
+          <ScalarProperty Name="puesto" ColumnName="puesto" />
+          <ScalarProperty Name="porcetaje_asociacion" ColumnName="porcetaje_asociacion" />
+          <ScalarProperty Name="total_pagar" ColumnName="total_pagar" />
+          <ScalarProperty Name="mensualidad" ColumnName="mensualidad" />
+          <ScalarProperty Name="tienda" ColumnName="tienda" />
+          <ScalarProperty Name="soda" ColumnName="soda" />
+          <ScalarProperty Name="socorro_mutuo" ColumnName="socorro_mutuo" />
+          <ScalarProperty Name="total_rebajos" ColumnName="total_rebajos" />
+          <ScalarProperty Name="dieta" ColumnName="dieta" />
+          <ScalarProperty Name="viaticos" ColumnName="viaticos" />
+          <ScalarProperty Name="otros_rebajos" ColumnName="otros_rebajos" />
+          <ScalarProperty Name="deposito" ColumnName="deposito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Partidos">
+      <EntityTypeMapping TypeName="TorneosModel.Partido">
+        <MappingFragment StoreEntitySet="Partidos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
+          <ScalarProperty Name="idProgramacion" ColumnName="idProgramacion" />
+          <ScalarProperty Name="idCancha" ColumnName="idCancha" />
+          <ScalarProperty Name="fecha_hora" ColumnName="fecha_hora" />
+          <ScalarProperty Name="coordinador" ColumnName="coordinador" />
+          <ScalarProperty Name="telefono_coordinador" ColumnName="telefono_coordinador" />
+          <ScalarProperty Name="informe" ColumnName="informe" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Programaciones">
+      <EntityTypeMapping TypeName="TorneosModel.Programacione">
+        <MappingFragment StoreEntitySet="Programaciones">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+          <ScalarProperty Name="deposito" ColumnName="deposito" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TorneosModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Torneos">
+      <EntityTypeMapping TypeName="TorneosModel.Torneo">
+        <MappingFragment StoreEntitySet="Torneos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="telefono1" ColumnName="telefono1" />
+          <ScalarProperty Name="telefono2" ColumnName="telefono2" />
+          <ScalarProperty Name="telefono3" ColumnName="telefono3" />
+          <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="dieta" ColumnName="dieta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="TorneosModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="telefono1" ColumnName="telefono1" />
+          <ScalarProperty Name="telefono2" ColumnName="telefono2" />
+          <ScalarProperty Name="cuenta" ColumnName="cuenta" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsuariosTorneos">
+      <EntityTypeMapping TypeName="TorneosModel.UsuariosTorneo">
+        <MappingFragment StoreEntitySet="UsuariosTorneos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
