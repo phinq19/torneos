@@ -8,7 +8,9 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
-    <%= Torneos.Utilidades.CrearOpcinesMenu() %>
+    <div id="opcionesMenu">
+        <%= Torneos.Utilidades.CrearOpcionesMenu() %>
+    </div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">

@@ -26,9 +26,33 @@ namespace Torneos
             return sb.ToString();
         }
 
-        public static String CrearOpcinesMenu(){
+        public static String CrearOpcionesMenu()
+        {
             StringBuilder oMenu = new StringBuilder();
-            oMenu.AppendLine("<a href=\"/Usuarios/MantenimientoUsuarios\">Mantenimiento Usuarios<a>");
+            oMenu.AppendLine("<table>");
+            oMenu.AppendLine("  <tr>");
+            oMenu.AppendLine("      <td>");
+            oMenu.AppendLine("          <a href=\"/Usuarios/\" class=\"itemMenu\">Usuarios<a>");
+            oMenu.AppendLine("      </td>");
+            oMenu.AppendLine("      <td>");
+            oMenu.AppendLine("          <a href=\"/Torneos/\" class=\"itemMenu\">Torneos<a>");
+            oMenu.AppendLine("      </td>");
+            oMenu.AppendLine("      <td>");
+            oMenu.AppendLine("          <a href=\"/Solicitudes/\" class=\"itemMenu\">Programaciones<a>");
+            oMenu.AppendLine("      </td>");
+            oMenu.AppendLine("      <td>");
+            oMenu.AppendLine("          <a href=\"/Asignaciones/\" class=\"itemMenu\">Asignaciones<a>");
+            oMenu.AppendLine("      </td>");
+            oMenu.AppendLine("  </tr>");
+            oMenu.AppendLine("  <tr>");
+            oMenu.AppendLine("      <td>");
+            oMenu.AppendLine("          <a href=\"/Informes/\" class=\"itemMenu\">Informes<a>");
+            oMenu.AppendLine("      </td>");
+            oMenu.AppendLine("      <td>");
+            oMenu.AppendLine("          <a href=\"/Tesoreria/\" class=\"itemMenu\">Tesoreria<a>");
+            oMenu.AppendLine("      </td>");
+            oMenu.AppendLine("  </tr>");
+            oMenu.AppendLine("</table>");
             return oMenu.ToString();
         }
 

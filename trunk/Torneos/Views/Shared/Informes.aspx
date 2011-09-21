@@ -2,8 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
 
-<h1>Informes</h1>
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
@@ -13,4 +11,5 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContenidoEncabezado" runat="server">
+<h1>Informes</h1>
 </asp:Content>

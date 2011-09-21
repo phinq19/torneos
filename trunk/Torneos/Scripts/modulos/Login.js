@@ -41,7 +41,7 @@ function Autenticar() {
         var cURL = ObtenerValorQueryString("ReturnUrl");
 
         if (cURL == "") {
-            cURL = "/Usuarios/";
+            cURL = "/Home/";
         }
         else {
             cURL = replaceAll(cURL, "%2f", "/");
@@ -71,5 +71,5 @@ function Autenticar() {
         DesbloquearPaginaCompleta();
     }
 
-    RealizarPeticionAjax("Autenticar", "/Usuarios/Autenticar", oParametrosAjax, true, true, null, funcionProcesamientoCliente, funcionTerminadoCorrectamente);
+    RealizarPeticionAjax("Autenticar", "/Home/Autenticar", oParametrosAjax, true, true, null, funcionProcesamientoCliente, funcionTerminadoCorrectamente);
 }

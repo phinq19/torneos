@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AsignacionesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformesController.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
     <Compile Include="Controllers\TesoreriaController.cs" />
@@ -104,6 +105,8 @@
     <Content Include="Imagenes\40 años.bmp" />
     <Content Include="Imagenes\acaf.jpg" />
     <Content Include="Imagenes\face.png" />
+    <Content Include="Imagenes\Menu-Pequeno.png" />
+    <Content Include="Imagenes\Menu.png" />
     <Content Include="Imagenes\twit.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
