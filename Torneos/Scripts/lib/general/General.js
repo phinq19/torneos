@@ -29,11 +29,11 @@ $(document).ready(function () {
 function CerrarSesion() {
     BloquearPaginaCompleta(false);
     var funcionProcesamientoCliente = function (oRespuesta) {
-        window.location = "/Usuarios/";
+        window.location = "/Home/";
     }
 
     var funcionPrecoseamientoCompleto = function () {
         DesbloquearPaginaCompleta();
     }
-    RealizarPeticionAjax("CerrarSession", "/Usuarios/CerrarSesion", {}, true, true, null, funcionProcesamientoCliente, funcionPrecoseamientoCompleto);
+    RealizarPeticionAjax("CerrarSession", "/Home/CerrarSesion", {}, true, true, null, funcionProcesamientoCliente, funcionPrecoseamientoCompleto);
 }
