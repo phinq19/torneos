@@ -8,7 +8,7 @@ namespace Torneos
 {
     public enum TipoUsuario
     {
-        SuperAdministrado,
+        SuperAdministrado = 0,
         Administrador,
         Arbitro,
         EncargadoTorneo,

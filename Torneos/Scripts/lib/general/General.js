@@ -37,3 +37,7 @@ function CerrarSesion() {
     }
     RealizarPeticionAjax("CerrarSession", "/Home/CerrarSesion", {}, true, true, null, funcionProcesamientoCliente, funcionPrecoseamientoCompleto);
 }
+
+function replaceAll(txt, replace, with_this) {
+    return txt.replace(new RegExp(replace, 'g'), with_this);
+}
