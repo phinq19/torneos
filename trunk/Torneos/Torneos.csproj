@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AsignacionesController.cs" />
+    <Compile Include="Controllers\CanchasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformesController.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
@@ -171,6 +172,7 @@
     <Content Include="Scripts\lib\s3SliderPacked.js" />
     <Content Include="Scripts\lib\toJson.js" />
     <Content Include="Views\Shared\Asignaciones.aspx" />
+    <Content Include="Views\Shared\Canchas.aspx" />
     <Content Include="Views\Shared\Informes.aspx" />
     <Content Include="Views\Shared\Inicio.aspx" />
     <Content Include="Views\Shared\Login.aspx" />

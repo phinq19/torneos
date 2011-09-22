@@ -53,7 +53,8 @@ namespace Torneos.Controllers
                             observaciones =   u.observaciones,
                             codigo =   u.codigo,
                             contrasena =   u.contrasena,
-                            cuenta =  u.cuenta
+                            cuenta =  u.cuenta,
+                            tipo = u.tipo
                         }
                         ).ToList().Skip((page - 1) * filas).Take(filas)
                 });
@@ -70,59 +71,72 @@ namespace Torneos.Controllers
         public JsonResult EditarUsuarios(Usuario oUsuario, String oper)
         {
             JsonResult jsonData = null;
-            try
+            if (HttpContext.Request.IsAuthenticated)
             {
-                dbTorneos bdTorneos = new dbTorneos();
-                switch (oper)
+                try
                 {
-                    case "add":
-                        //Usuario oUsuarioNuevo = Usuario.CreateUsuario(0, 1, oUsuario.codigo, oUsuario.nombre, Utilidades.CalcularMD5("123456"), oUsuario.correo, oUsuario.telefono1, 1);
-                        Usuario oUsuarioNuevo = new Usuario();
-                        oUsuarioNuevo.codigo = oUsuario.codigo;
-                        oUsuarioNuevo.contrasena = Utilidades.CalcularMD5("123456");
-                        oUsuarioNuevo.correo = oUsuario.correo;
-                        oUsuarioNuevo.cuenta  = oUsuario.cuenta;
-                        oUsuarioNuevo.nombre = oUsuario.nombre;
-                        oUsuarioNuevo.observaciones = oUsuario.observaciones;
-                        oUsuarioNuevo.telefono1 = oUsuario.telefono1;
-                        oUsuarioNuevo.telefono2 = oUsuario.telefono2;
-                        oUsuarioNuevo.tipo = 1; 
-                        oUsuarioNuevo.idAsociacion = 1;
-                        oUsuarioNuevo.id = 0;
+                    dbTorneos bdTorneos = new dbTorneos();
+                    switch (oper)
+                    {
+                        case "add":
+                            Usuario oUsuarioNuevo = new Usuario();
+                            oUsuarioNuevo.codigo = oUsuario.codigo;
+                            oUsuarioNuevo.contrasena = Utilidades.CalcularMD5("123456");
+                            oUsuarioNuevo.correo = oUsuario.correo;
+                            oUsuarioNuevo.cuenta = oUsuario.cuenta;
+                            oUsuarioNuevo.nombre = oUsuario.nombre;
+                            oUsuarioNuevo.observaciones = oUsuario.observaciones;
+                            oUsuarioNuevo.telefono1 = oUsuario.telefono1;
+                            oUsuarioNuevo.telefono2 = oUsuario.telefono2;
+                            oUsuarioNuevo.tipo = 1;
+                            oUsuarioNuevo.idAsociacion = 1;
+                            oUsuarioNuevo.id = 0;
 
-                        bdTorneos.AddToUsuarios(oUsuarioNuevo);
-                        bdTorneos.SaveChanges();
-                        break;
-                    case "delete":
-                        break;
-                    case "edit":
-                        var oUsuarioEditado = (from u in bdTorneos.Usuarios
-                                                      where u.id == oUsuario.id 
-                                                      select u).Single();
-                        
-                        //Usuario oUsuarioEditado = new Usuario();
-                        oUsuarioEditado.codigo = oUsuario.codigo;
-                        //oUsuarioEditado.contrasena = Utilidades.CalcularMD5("123456");
-                        oUsuarioEditado.correo = oUsuario.correo;
-                        oUsuarioEditado.cuenta  = oUsuario.cuenta;
-                        oUsuarioEditado.nombre = oUsuario.nombre;
-                        oUsuarioEditado.observaciones = oUsuario.observaciones;
-                        oUsuarioEditado.telefono1 = oUsuario.telefono1;
-                        oUsuarioEditado.telefono2 = oUsuario.telefono2;
-                        oUsuarioEditado.tipo = 1; 
-                        //oUsuarioEditado.idAsociacion = 1;
-                        //oUsuarioEditado.id = oUsuario.id;
+                            bdTorneos.AddToUsuarios(oUsuarioNuevo);
+                            bdTorneos.SaveChanges();
+                            bdTorneos.Detach(oUsuarioNuevo);
 
-                        bdTorneos.Usuarios.Attach(oUsuarioEditado);
-                        bdTorneos.SaveChanges();
-                        
-                        
-                        break;
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuarioNuevo, estadoValidacion = "exito" });
+
+                            break;
+                        case "del":
+                            Usuario oUsuarioEliminado = (from u in bdTorneos.Usuarios
+                                                   where u.id == oUsuario.id
+                                                   select u).Single();
+
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuarioEliminado, estadoValidacion = "exito" });
+
+                            bdTorneos.DeleteObject(oUsuarioEliminado);
+                            bdTorneos.SaveChanges();
+                            break;
+                        case "edit":
+                            Usuario oUsuarioEditado = (from u in bdTorneos.Usuarios
+                                                   where u.id == oUsuario.id
+                                                   select u).Single();
+
+                            oUsuarioEditado.codigo = oUsuario.codigo;
+                            oUsuarioEditado.correo = oUsuario.correo;
+                            oUsuarioEditado.cuenta = oUsuario.cuenta;
+                            oUsuarioEditado.nombre = oUsuario.nombre;
+                            oUsuarioEditado.observaciones = oUsuario.observaciones;
+                            oUsuarioEditado.telefono1 = oUsuario.telefono1;
+                            oUsuarioEditado.telefono2 = oUsuario.telefono2;
+                            oUsuarioEditado.tipo = 1;
+
+                            bdTorneos.SaveChanges();
+                            bdTorneos.Detach(oUsuarioEditado);
+
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuario, estadoValidacion = "exito" });
+                            break;
+                    }
+                }
+                catch
+                {
+                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
                 }
             }
-            catch
-            {
-                jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
+            else {
+                jsonData = Json(new { estado = "exito", mensaje = "", estadoValidacion = "sinAutenticar" });
             }
             return jsonData;
         }

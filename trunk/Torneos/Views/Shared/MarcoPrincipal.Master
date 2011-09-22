@@ -32,7 +32,8 @@
 </head>
 <!--style="display: none;"-->
     <body>
-        <div id="Documento">
+        <div id="Pagina">
+            <div id="Documento">
             <div id="EncabezadoDocumento">
   
                                 <div class="columnaIzquierda">
@@ -117,19 +118,20 @@
                 <asp:ContentPlaceHolder ID="Contenido" runat="server" />
             </div>
         </div>
-        <div id="PieDocumento">
+            <div id="PieDocumento">
             Todos los derechos reservados
             <%= DateTime.Now.Year %>
         </div>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                //document.body.style.display = "";
-                $('#menu').dcMegaMenu({
-                    rowItems: '3',
-                    speed: 'fast',
-                    effect: 'fade'
-                });
-            })
+        </div>
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 //document.body.style.display = "";
+                 $('#menu').dcMegaMenu({
+                     rowItems: '3',
+                     speed: 'fast',
+                     effect: 'fade'
+                 });
+             })
         </script>
     </body>
 
