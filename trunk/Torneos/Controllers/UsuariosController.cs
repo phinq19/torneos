@@ -24,9 +24,9 @@ namespace Torneos.Controllers
             JsonResult jsonData = null;
             try
             {
-                List<Usuario> oUsuarios;
-                dbTorneos bdTorneos = new dbTorneos();
-                IQueryable<Usuario> usuarios = from t in bdTorneos.Usuarios
+                List<Usuarios> oUsuarios;
+                BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                IQueryable<Usuarios> usuarios = from t in bdTorneos.Usuarios
                                                 select t;
                 oUsuarios = usuarios.ToList();
                 
@@ -68,18 +68,18 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
-        public JsonResult EditarUsuarios(Usuario oUsuario, String oper)
+        public JsonResult EditarUsuarios(Usuarios oUsuario, String oper)
         {
             JsonResult jsonData = null;
             if (HttpContext.Request.IsAuthenticated)
             {
                 try
                 {
-                    dbTorneos bdTorneos = new dbTorneos();
+                    BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                     switch (oper)
                     {
                         case "add":
-                            Usuario oUsuarioNuevo = new Usuario();
+                            Usuarios oUsuarioNuevo = new Usuarios();
                             oUsuarioNuevo.codigo = oUsuario.codigo;
                             oUsuarioNuevo.contrasena = Utilidades.CalcularMD5("123456");
                             oUsuarioNuevo.correo = oUsuario.correo;
@@ -100,7 +100,7 @@ namespace Torneos.Controllers
 
                             break;
                         case "del":
-                            Usuario oUsuarioEliminado = (from u in bdTorneos.Usuarios
+                            Usuarios oUsuarioEliminado = (from u in bdTorneos.Usuarios
                                                    where u.id == oUsuario.id
                                                    select u).Single();
 
@@ -110,7 +110,7 @@ namespace Torneos.Controllers
                             bdTorneos.SaveChanges();
                             break;
                         case "edit":
-                            Usuario oUsuarioEditado = (from u in bdTorneos.Usuarios
+                            Usuarios oUsuarioEditado = (from u in bdTorneos.Usuarios
                                                    where u.id == oUsuario.id
                                                    select u).Single();
 
