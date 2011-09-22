@@ -88,7 +88,7 @@ namespace Torneos.Controllers
                             oUsuarioNuevo.observaciones = oUsuario.observaciones;
                             oUsuarioNuevo.telefono1 = oUsuario.telefono1;
                             oUsuarioNuevo.telefono2 = oUsuario.telefono2;
-                            oUsuarioNuevo.tipo = 1;
+                            oUsuarioNuevo.tipo = oUsuario.tipo;
                             oUsuarioNuevo.idAsociacion = 1;
                             oUsuarioNuevo.id = 0;
 
@@ -121,12 +121,12 @@ namespace Torneos.Controllers
                             oUsuarioEditado.observaciones = oUsuario.observaciones;
                             oUsuarioEditado.telefono1 = oUsuario.telefono1;
                             oUsuarioEditado.telefono2 = oUsuario.telefono2;
-                            oUsuarioEditado.tipo = 1;
+                            oUsuarioEditado.tipo = oUsuario.tipo;
 
                             bdTorneos.SaveChanges();
                             bdTorneos.Detach(oUsuarioEditado);
 
-                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuario, estadoValidacion = "exito" });
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuarioEditado, estadoValidacion = "exito" });
                             break;
                     }
                 }
