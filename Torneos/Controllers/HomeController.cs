@@ -41,8 +41,8 @@ namespace Torneos.Controllers
             try
             {
                 String cContrasenaMD5 = Utilidades.CalcularMD5(cContrasena);
-                dbTorneos bdTorneos = new dbTorneos();
-                IQueryable<Usuario> usuarios = from u in bdTorneos.Usuarios
+                BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                IQueryable<Usuarios> usuarios = from u in bdTorneos.Usuarios
                                                where u.codigo == cCodigoUsuario && u.contrasena == cContrasenaMD5
                                                select u;
                 if (usuarios.Count() == 1)

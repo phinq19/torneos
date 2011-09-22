@@ -10,10 +10,6 @@
     <EntitySet Name="Torneos" EntityType="TorneosModel.Store.Torneos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Usuarios" EntityType="TorneosModel.Store.Usuarios" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuariosTorneos" EntityType="TorneosModel.Store.UsuariosTorneos" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Cancha_Torneo" Association="TorneosModel.Store.FK_Cancha_Torneo">
-      <End Role="Torneos" EntitySet="Torneos" />
-      <End Role="Canchas" EntitySet="Canchas" />
-    </AssociationSet>
     <AssociationSet Name="FK_Canchas_Asociacion" Association="TorneosModel.Store.FK_Canchas_Asociacion">
       <End Role="Asociaciones" EntitySet="Asociaciones" />
       <End Role="Canchas" EntitySet="Canchas" />
@@ -82,9 +78,8 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="idAsociacion" Type="int" Nullable="false" />
-    <Property Name="idTorneo" Type="int" Nullable="false" />
     <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="512" />
     <Property Name="observaciones" Type="varchar" MaxLength="512" />
     <Property Name="ubicacion" Type="varchar" Nullable="false" MaxLength="1024" />
@@ -188,20 +183,6 @@
     <Property Name="idTorneo" Type="int" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Cancha_Torneo">
-    <End Role="Torneos" Type="TorneosModel.Store.Torneos" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Canchas" Type="TorneosModel.Store.Canchas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Torneos">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Canchas">
-        <PropertyRef Name="idTorneo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Canchas_Asociacion">
     <End Role="Asociaciones" Type="TorneosModel.Store.Asociaciones" Multiplicity="1" />
     <End Role="Canchas" Type="TorneosModel.Store.Canchas" Multiplicity="*" />
@@ -370,35 +351,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
 </Schema>
