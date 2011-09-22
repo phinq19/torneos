@@ -44,7 +44,7 @@ namespace Torneos.Controllers
                             id = u.id,
                             nombre = u.nombre,
                             observaciones = u.observaciones,
-                            correo = u.ubicacion
+                            ubicacion = u.ubicacion
                         }
                         ).ToList().Skip((page - 1) * filas).Take(filas)
                 });
@@ -58,7 +58,7 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
-        public JsonResult EditarCanchas(Usuarios oUsuario, String oper)
+        public JsonResult EditarCanchas(Canchas oCanchas, String oper)
         {
             JsonResult jsonData = null;
             if (HttpContext.Request.IsAuthenticated)
@@ -69,54 +69,43 @@ namespace Torneos.Controllers
                     switch (oper)
                     {
                         case "add":
-                            Usuarios oUsuarioNuevo = new Usuarios();
-                            oUsuarioNuevo.codigo = oUsuario.codigo;
-                            oUsuarioNuevo.contrasena = Utilidades.CalcularMD5("123456");
-                            oUsuarioNuevo.correo = oUsuario.correo;
-                            oUsuarioNuevo.cuenta = oUsuario.cuenta;
-                            oUsuarioNuevo.nombre = oUsuario.nombre;
-                            oUsuarioNuevo.observaciones = oUsuario.observaciones;
-                            oUsuarioNuevo.telefono1 = oUsuario.telefono1;
-                            oUsuarioNuevo.telefono2 = oUsuario.telefono2;
-                            oUsuarioNuevo.tipo = 1;
-                            oUsuarioNuevo.idAsociacion = 1;
-                            oUsuarioNuevo.id = 0;
+                            Canchas oCanchasNuevo = new Canchas();
+                            oCanchasNuevo.nombre = oCanchas.nombre;
+                            oCanchasNuevo.observaciones = oCanchas.observaciones;
+                            oCanchasNuevo.ubicacion = oCanchas.ubicacion;
+                            oCanchasNuevo.idAsociacion = 1;
+                            oCanchasNuevo.id = 0;
 
-                            bdTorneos.AddToUsuarios(oUsuarioNuevo);
+                            bdTorneos.AddToCanchas(oCanchasNuevo);
                             bdTorneos.SaveChanges();
-                            bdTorneos.Detach(oUsuarioNuevo);
+                            bdTorneos.Detach(oCanchasNuevo);
 
-                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuarioNuevo, estadoValidacion = "exito" });
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCanchasNuevo, estadoValidacion = "exito" });
 
                             break;
                         case "del":
-                            Usuarios oUsuarioEliminado = (from u in bdTorneos.Usuarios
-                                                         where u.id == oUsuario.id
+                            Canchas oCanchasEliminado = (from u in bdTorneos.Canchas
+                                                         where u.id == oCanchas.id
                                                          select u).Single();
 
-                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuarioEliminado, estadoValidacion = "exito" });
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCanchasEliminado, estadoValidacion = "exito" });
 
-                            bdTorneos.DeleteObject(oUsuarioEliminado);
+                            bdTorneos.DeleteObject(oCanchasEliminado);
                             bdTorneos.SaveChanges();
                             break;
                         case "edit":
-                            Usuarios oUsuarioEditado = (from u in bdTorneos.Usuarios
-                                                       where u.id == oUsuario.id
+                            Canchas oCanchasEditado = (from u in bdTorneos.Canchas
+                                                       where u.id == oCanchas.id
                                                        select u).Single();
 
-                            oUsuarioEditado.codigo = oUsuario.codigo;
-                            oUsuarioEditado.correo = oUsuario.correo;
-                            oUsuarioEditado.cuenta = oUsuario.cuenta;
-                            oUsuarioEditado.nombre = oUsuario.nombre;
-                            oUsuarioEditado.observaciones = oUsuario.observaciones;
-                            oUsuarioEditado.telefono1 = oUsuario.telefono1;
-                            oUsuarioEditado.telefono2 = oUsuario.telefono2;
-                            oUsuarioEditado.tipo = 1;
+                            oCanchasEditado.nombre = oCanchas.nombre;
+                            oCanchasEditado.ubicacion = oCanchas.ubicacion;
+                            oCanchasEditado.observaciones = oCanchas.observaciones;
 
                             bdTorneos.SaveChanges();
-                            bdTorneos.Detach(oUsuarioEditado);
+                            bdTorneos.Detach(oCanchasEditado);
 
-                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuario, estadoValidacion = "exito" });
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCanchas, estadoValidacion = "exito" });
                             break;
                     }
                 }

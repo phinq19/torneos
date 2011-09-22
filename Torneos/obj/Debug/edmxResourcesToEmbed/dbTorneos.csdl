@@ -89,7 +89,6 @@
     <Property Type="String" Name="nombre" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="observaciones" MaxLength="512" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ubicacion" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
-    <Property Type="Decimal" Name="viaticos" Nullable="false" Precision="16" Scale="6" />
     <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Canchas_Asociacion" FromRole="Canchas" ToRole="Asociaciones" />
     <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Canchas" FromRole="Canchas" ToRole="Partidos" />
   </EntityType>

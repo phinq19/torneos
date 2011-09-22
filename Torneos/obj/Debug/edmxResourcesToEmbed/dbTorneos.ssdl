@@ -83,7 +83,6 @@
     <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="512" />
     <Property Name="observaciones" Type="varchar" MaxLength="512" />
     <Property Name="ubicacion" Type="varchar" Nullable="false" MaxLength="1024" />
-    <Property Name="viaticos" Type="numeric" Nullable="false" Precision="16" Scale="6" />
   </EntityType>
   <EntityType Name="DetallePartidos">
     <Key>
