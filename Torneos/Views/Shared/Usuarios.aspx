@@ -5,9 +5,11 @@
     </table>
     <div id="barraGridUsuarios">
     </div>
-    <script type='text/javascript'>
-        $(document).ready(function () {
 
+    <script type='text/javascript'>
+        
+        
+        $(document).ready(function () {
             function validarCodigo(value, colname) {
                 if (value.indexOf(" ") != -1) {
                     return [false, "Por favor ingrese un valor para el código sin espacios en blanco"];
@@ -32,6 +34,8 @@
                 ignoreCase: true,
                 height: 250,
                 width: 830,
+                sortorder: "desc",
+                sortname: 'nombre',
                 shrinkToFit: false,
                 colNames: ['id', 'Nombre', 'Código', 'Cuenta', 'Teléfono 1', 'Teléfono 2', 'Correo', 'Tipo', 'Observaciones'],
                 colModel: [
@@ -42,21 +46,20 @@
                     { name: 'telefono1', index: 'telefono1', width: 80, align: "right", editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
                     { name: 'telefono2', index: 'telefono2', width: 80, align: "right", editable: true, sortable: false, editoptions: { size: 20} },
                     { name: 'correo', index: 'correo', width: 120, align: "right", editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true, email: true} },
-                    { name: 'tipo', index: 'tipo', width: 120, align: "right", editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { /*value: "Administrador:1;2:Árbitro;:Encargado Torneo;4:Encargado Asociación;5:Tesorero"*/value: { 1: 'Administrador', 2: 'Árbitro', 3: 'Encargado Torneo;', 4: 'Encargado Asociación', 5: 'Tesorero'} }, formatter: 'select' },
+                    { name: 'tipo', index: 'tipo', width: 120, align: "right", editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: { 3: 'Encargado Torneo', 2: 'Árbitro', 4: 'Encargado Asociación', 5: 'Tesorero', 1: 'Administrador'} }, formatter: 'select' },
                     { name: 'observaciones', index: 'observaciones', width: 200, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
             });
-
 
             var ProcesarAgregar_gvUsuarios = {
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
-                reloadAfterSubmit: true,
+                //reloadAfterSubmit: true,
                 modal: false,
                 width: "500",
-                savekey: [true, 13],
-                navkeys: [true, 38, 40],
+                //savekey: [true, 13],
+                //navkeys: [true, 38, 40],
                 afterShowForm: function (formId) {
 
                 },
@@ -71,7 +74,7 @@
                                     return [true, '', datos.ObjetoDetalle.id];
                                     break;
                                 case "error":
-                                    return [false, datos.mensaje, '-1']
+                                    return [false, datos.mensaje, '-1'];
                                     break;
                                 case "sinAutenticar":
                                     window.location = "/";
@@ -79,21 +82,21 @@
                             }
                             break;
                         case "error":
-                            return [false, datos.mensaje, '-1']
+                            return [false, datos.mensaje, '-1'];
                             break;
                     }
                 }
-            }
+            };
 
             var ProcesarEditar_gvUsuarios = {
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
-                reloadAfterSubmit: true,
+                //reloadAfterSubmit: true,
                 modal: false,
                 width: "500",
-                savekey: [true, 13],
-                navkeys: [true, 38, 40],
+                //savekey: [true, 13],
+                //navkeys: [true, 38, 40],
                 afterShowForm: function (formId) {
 
                 },
@@ -108,7 +111,7 @@
                                     return [true, '', datos.ObjetoDetalle.id];
                                     break;
                                 case "error":
-                                    return [false, datos.mensaje, '-1']
+                                    return [false, datos.mensaje, '-1'];
                                     break;
                                 case "sinAutenticar":
                                     window.location = "/";
@@ -116,21 +119,21 @@
                             }
                             break;
                         case "error":
-                            return [false, datos.mensaje, '-1']
+                            return [false, datos.mensaje, '-1'];
                             break;
                     }
                 }
-            }
+            };
 
             var Procesar_Eliminar_gvUsuarios = {
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
-                reloadAfterSubmit: true,
+                //reloadAfterSubmit: true,
                 modal: false,
                 width: "500",
-                savekey: [true, 13],
-                navkeys: [true, 38, 40],
+                //savekey: [true, 13],
+                //navkeys: [true, 38, 40],
                 afterShowForm: function (formId) {
                 },
                 onclickSubmit: function (params, registroCliente) {
@@ -144,7 +147,7 @@
                                     return [true, '', datos.ObjetoDetalle.id];
                                     break;
                                 case "error":
-                                    return [false, datos.mensaje, '-1']
+                                    return [false, datos.mensaje, '-1'];
                                     break;
                                 case "sinAutenticar":
                                     window.location = "/";
@@ -152,35 +155,30 @@
                             }
                             break;
                         case "error":
-                            return [false, datos.mensaje, '-1']
+                            return [false, datos.mensaje, '-1'];
                             break;
                     }
                 }
-            }
+            };
 
             $("#gridUsuarios").jqGrid('navGrid', '#barraGridUsuarios',
-                 {
-                     afterRefresh: function () {
-                         //$("#gridUsuarios").setGridParam({ loadonce: false }).trigger('reloadGrid');
-                         //$("#gridUsuarios").setGridParam({ loadonce: true })
-                     },
-                     edit: true,
-                     add: true,
-                     del: true,
-                     refresh: true,
-                     search: true,
-                     view: true
-                 }, //options 
-                 ProcesarEditar_gvUsuarios, // edit options 
-                 ProcesarAgregar_gvUsuarios, // add options 
-                 Procesar_Eliminar_gvUsuarios, // del options
-                 {}, // search options 
-                 {width: "500" }
+            {
+                edit: true,
+                add: true,
+                del: true,
+                refresh: true,
+                search: true,
+                view: true
+            }, //options 
+            ProcesarEditar_gvUsuarios, // edit options 
+            ProcesarAgregar_gvUsuarios, // add options 
+            Procesar_Eliminar_gvUsuarios, // del options
+            {}, // search options 
+            {width: "500" }
             );
         });
     </script>
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 

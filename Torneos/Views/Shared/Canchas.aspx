@@ -23,10 +23,10 @@
             rowNum: 10,
             rowList: [10, 20, 30],
             mtype: "post",
-            pager: '#barraGridUsuarios',
+            pager: '#barraGridCanchas',
             loadonce: true,
             viewrecords: true,
-            caption: "Mantenimiento de Usuarios",
+            caption: "Mantenimiento de Canchas",
             editurl: '<%= Url.Action("EditarCanchas","Canchas") %>',
             jsonReader: { repeatitems: false },
             ignoreCase: true,
@@ -43,7 +43,7 @@
         });
 
 
-        var ProcesarAgregar_gvUsuarios = {
+        var ProcesarAgregar_gvCanchas = {
             closeAfterAdd: true,
             closeAfterEdit: true,
             closeOnEscape: true,
@@ -80,7 +80,7 @@
             }
         }
 
-        var ProcesarEditar_gvUsuarios = {
+        var ProcesarEditar_gvCanchas = {
             closeAfterAdd: true,
             closeAfterEdit: true,
             closeOnEscape: true,
@@ -117,7 +117,7 @@
             }
         }
 
-        var Procesar_Eliminar_gvUsuarios = {
+        var Procesar_Eliminar_gvCanchas = {
             closeAfterAdd: true,
             closeAfterEdit: true,
             closeOnEscape: true,
@@ -153,11 +153,11 @@
             }
         }
 
-        $("#gridUsuarios").jqGrid('navGrid', '#barraGridUsuarios',
+        $("#gridCanchas").jqGrid('navGrid', '#barraGridCanchas',
                  {
                      afterRefresh: function () {
-                         //$("#gridUsuarios").setGridParam({ loadonce: false }).trigger('reloadGrid');
-                         //$("#gridUsuarios").setGridParam({ loadonce: true })
+                         //$("#gridCanchas").setGridParam({ loadonce: false }).trigger('reloadGrid');
+                         //$("#gridCanchas").setGridParam({ loadonce: true })
                      },
                      edit: true,
                      add: true,
@@ -166,9 +166,9 @@
                      search: true,
                      view: true
                  }, //options 
-                 ProcesarEditar_gvUsuarios, // edit options 
-                 ProcesarAgregar_gvUsuarios, // add options 
-                 Procesar_Eliminar_gvUsuarios, // del options
+                 ProcesarEditar_gvCanchas, // edit options 
+                 ProcesarAgregar_gvCanchas, // add options 
+                 Procesar_Eliminar_gvCanchas, // del options
                  {}, // search options 
                  {width: "500" }
             );
