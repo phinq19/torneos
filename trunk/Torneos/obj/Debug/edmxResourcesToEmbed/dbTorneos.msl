@@ -12,7 +12,6 @@
     <EntitySetMapping Name="Canchas">
       <EntityTypeMapping TypeName="TorneosModel.Canchas">
         <MappingFragment StoreEntitySet="Canchas">
-          <ScalarProperty Name="viaticos" ColumnName="viaticos" />
           <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />

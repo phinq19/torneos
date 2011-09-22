@@ -543,15 +543,13 @@ namespace Torneos
         /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
         /// <param name="nombre">Initial value of the nombre property.</param>
         /// <param name="ubicacion">Initial value of the ubicacion property.</param>
-        /// <param name="viaticos">Initial value of the viaticos property.</param>
-        public static Canchas CreateCanchas(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.String nombre, global::System.String ubicacion, global::System.Decimal viaticos)
+        public static Canchas CreateCanchas(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.String nombre, global::System.String ubicacion)
         {
             Canchas canchas = new Canchas();
             canchas.id = id;
             canchas.idAsociacion = idAsociacion;
             canchas.nombre = nombre;
             canchas.ubicacion = ubicacion;
-            canchas.viaticos = viaticos;
             return canchas;
         }
 
@@ -680,30 +678,6 @@ namespace Torneos
         private global::System.String _ubicacion;
         partial void OnubicacionChanging(global::System.String value);
         partial void OnubicacionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal viaticos
-        {
-            get
-            {
-                return _viaticos;
-            }
-            set
-            {
-                OnviaticosChanging(value);
-                ReportPropertyChanging("viaticos");
-                _viaticos = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("viaticos");
-                OnviaticosChanged();
-            }
-        }
-        private global::System.Decimal _viaticos;
-        partial void OnviaticosChanging(global::System.Decimal value);
-        partial void OnviaticosChanged();
 
         #endregion
     

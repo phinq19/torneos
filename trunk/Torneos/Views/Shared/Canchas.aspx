@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MarcoLogeado.master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="ACAF Canchas" Language="C#" MasterPageFile="~/Views/Shared/MarcoLogeado.master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <table id="gridCanchas">
@@ -37,7 +37,7 @@
             colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'ubicacion', index: 'ubicacion', width: 80, align: "right", editable: true, sortable: false, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
+                    { name: 'ubicacion', index: 'ubicacion', width: 200, align: "right", editable: true, sortable: false, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'observaciones', index: 'observaciones', width: 200, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
         });
