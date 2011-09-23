@@ -8,6 +8,7 @@ namespace Torneos.Controllers
 {
     public class CanchasController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View("Canchas");
