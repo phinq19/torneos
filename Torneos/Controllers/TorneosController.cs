@@ -9,7 +9,7 @@ namespace Torneos.Controllers
     public class TorneosController : Controller
     {
         [AcceptVerbs(HttpVerbs.Get)]
-        [Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
             return View("Torneos");
