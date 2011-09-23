@@ -1,14 +1,13 @@
 ﻿<%@ Page Title="ACAF Usuarios" Language="C#" MasterPageFile="~/Views/Shared/MarcoLogeado.master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
+    <div id="gridUsuarios_DIV">
     <table id="gridUsuarios">
     </table>
     <div id="barraGridUsuarios">
     </div>
-
+    </div>
     <script type='text/javascript'>
-        
-        
         $(document).ready(function () {
             function validarCodigo(value, colname) {
                 if (value.indexOf(" ") != -1) {
@@ -25,7 +24,7 @@
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 mtype: "post",
-                pager: '#barraGridUsuarios',
+                pager: "#barraGridUsuarios",
                 loadonce: true,
                 viewrecords: true,
                 caption: "Mantenimiento de Usuarios",
@@ -34,15 +33,15 @@
                 ignoreCase: true,
                 height: 250,
                 width: 830,
-                sortorder: "desc",
-                sortname: 'nombre',
+                //sortorder: "desc",
+                //sortname: 'nombre',
                 shrinkToFit: false,
-                colNames: ['id', 'Nombre', 'Código', 'Cuenta', 'Teléfono 1', 'Teléfono 2', 'Correo', 'Tipo', 'Observaciones'],
+                colNames: ['id', 'Nombre', 'Código', 'Cuenta Bancaria', 'Teléfono 1', 'Teléfono 2', 'Correo', 'Tipo', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'codigo', index: 'codigo', width: 80, editable: true, editoptions: { size: 20 }, editrules: { required: true, custom: true, custom_func: validarCodigo} },
-                    { name: 'cuenta', index: 'cuenta', width: 80, align: "right", editable: true, sortable: false, editoptions: { size: 20} },
+                    { name: 'cuenta', index: 'cuenta', width: 120, align: "right", editable: true, sortable: false, editoptions: { size: 20} },
                     { name: 'telefono1', index: 'telefono1', width: 80, align: "right", editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
                     { name: 'telefono2', index: 'telefono2', width: 80, align: "right", editable: true, sortable: false, editoptions: { size: 20} },
                     { name: 'correo', index: 'correo', width: 120, align: "right", editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true, email: true} },
@@ -55,11 +54,11 @@
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
-                //reloadAfterSubmit: true,
+                reloadAfterSubmit: false,
                 modal: false,
                 width: "500",
-                //savekey: [true, 13],
-                //navkeys: [true, 38, 40],
+                savekey: [true, 13],
+                navkeys: [true, 38, 40],
                 afterShowForm: function (formId) {
 
                 },
@@ -92,11 +91,11 @@
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
-                //reloadAfterSubmit: true,
+                reloadAfterSubmit: false,
                 modal: false,
                 width: "500",
-                //savekey: [true, 13],
-                //navkeys: [true, 38, 40],
+                savekey: [true, 13],
+                navkeys: [true, 38, 40],
                 afterShowForm: function (formId) {
 
                 },
@@ -130,10 +129,11 @@
                 closeAfterEdit: true,
                 closeOnEscape: true,
                 //reloadAfterSubmit: true,
+                reloadAfterSubmit: false,
                 modal: false,
                 width: "500",
-                //savekey: [true, 13],
-                //navkeys: [true, 38, 40],
+                savekey: [true, 13],
+                navkeys: [true, 38, 40],
                 afterShowForm: function (formId) {
                 },
                 onclickSubmit: function (params, registroCliente) {
@@ -166,7 +166,7 @@
                 edit: true,
                 add: true,
                 del: true,
-                refresh: true,
+                refresh: false,
                 search: true,
                 view: true
             }, //options 
@@ -176,7 +176,18 @@
             {}, // search options 
             {width: "500" }
             );
+
+            //CargarDatos();
+
         });
+
+        /*function CargarDatos() {
+            var funcionProcesamientoCliente = function (oRespuesta) {
+                $("#gridUsuarios").setGridParam({ data: oRespuesta.rows }).trigger('reloadGrid');
+            }
+
+            RealizarPeticionAjax("gridUsuarios", '<%= Url.Action("ObtenerUsuarios","Usuarios") %>', {}, true, true, "gridUsuarios_DIV", funcionProcesamientoCliente);
+        }*/
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">

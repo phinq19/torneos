@@ -68,6 +68,7 @@
     <Compile Include="Controllers\TesoreriaController.cs" />
     <Compile Include="Controllers\TorneosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VerificacionesController.cs" />
     <Compile Include="dbTorneos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,6 +181,7 @@
     <Content Include="Views\Shared\Torneos.aspx" />
     <Content Include="Views\Shared\Usuarios.aspx" />
     <Content Include="Views\Shared\Solicitudes.aspx" />
+    <Content Include="Views\Shared\Verificaciones.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -240,7 +242,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>65275</DevelopmentServerPort>
+          <DevelopmentServerPort>49512</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

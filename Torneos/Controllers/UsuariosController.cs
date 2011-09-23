@@ -19,33 +19,19 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
-        public JsonResult ObtenerUsuarios(string sidx, string sord, int page, int rows)
+        public JsonResult ObtenerUsuarios()
         {
             JsonResult jsonData = null;
             try
             {
-                List<Usuarios> oUsuarios;
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-                IQueryable<Usuarios> usuarios = from t in bdTorneos.Usuarios
-                                                select t;
-                oUsuarios = usuarios.ToList();
-                
-                string orderBytext = "";
-                orderBytext = string.Format("it.{0} {1}", sidx, sord);
-                var pageIndex = Convert.ToInt32(page) - 1;
-                var filas = rows;
-                var totalFilas = oUsuarios.Count();
-                var totalPaginas = (int)Math.Ceiling((float)totalFilas / (float)filas);
                 jsonData = Json(new{ 
-                    total = totalPaginas,
-                    page = page,
-                    records = totalFilas,
+                    estado = "exito", 
+                    mensaje = "",
                     rows = (
-                        from u in oUsuarios
+                        from u in bdTorneos.Usuarios
                         select new
                         {
-                            //id = u.id,
-                            //cell = new []{
                             id =  u.id,
                             nombre =  u.nombre,
                             telefono1 =  u.telefono1,
@@ -56,7 +42,7 @@ namespace Torneos.Controllers
                             cuenta =  u.cuenta,
                             tipo = u.tipo
                         }
-                        ).ToList().Skip((page - 1) * filas).Take(filas)
+                    )
                 });
             }
             catch

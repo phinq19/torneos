@@ -19,6 +19,26 @@ function DesbloquearPaginaCompleta() {
     $.unblockUI();
 }
 
+function BloquearDIV(cID, bMostrarMensaje) {
+    // Bloquear div
+    var oParametros = {};
+    if (typeof (bMostrarMensaje) == "undefined" || bMostrarMensaje == true) {
+        oParametros = {
+            message: "Cargando",
+            theme: true
+        };
+    }
+    else {
+        oParametros = {
+            message: null
+        };
+    }
+    $("#" + cID).block(oParametros);
+}
+
+function DesbloquearDIV(cID) {
+    $("#" + cID).unblock();
+}
 
 $(document).ready(function () {
     $("#LnkSalir").click(function (event) {
