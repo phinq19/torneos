@@ -41,11 +41,11 @@
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'codigo', index: 'codigo', width: 80, editable: true, editoptions: { size: 20 }, editrules: { required: true, custom: true, custom_func: validarCodigo} },
-                    { name: 'cuenta', index: 'cuenta', width: 120, align: "right", editable: true, sortable: false, editoptions: { size: 20} },
-                    { name: 'telefono1', index: 'telefono1', width: 80, align: "right", editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
-                    { name: 'telefono2', index: 'telefono2', width: 80, align: "right", editable: true, sortable: false, editoptions: { size: 20} },
-                    { name: 'correo', index: 'correo', width: 120, align: "right", editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true, email: true} },
-                    { name: 'tipo', index: 'tipo', width: 120, align: "right", editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: { 3: 'Encargado Torneo', 2: 'Árbitro', 4: 'Encargado Asociación', 5: 'Tesorero', 1: 'Administrador'} }, formatter: 'select' },
+                    { name: 'cuenta', index: 'cuenta', width: 120, editable: true, sortable: false, editoptions: { size: 20} },
+                    { name: 'telefono1', index: 'telefono1', width: 80, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
+                    { name: 'telefono2', index: 'telefono2', width: 80, editable: true, sortable: false, editoptions: { size: 20} },
+                    { name: 'correo', index: 'correo', width: 120, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true, email: true} },
+                    { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "3:Encargado Torneo;2:Árbitro;4:Encargado Asociación;5:Tesorero;1:Administrador" }, formatter: 'select' },
                     { name: 'observaciones', index: 'observaciones', width: 200, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
             });
