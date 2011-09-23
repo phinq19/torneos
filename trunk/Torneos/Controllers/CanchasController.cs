@@ -20,33 +20,22 @@ namespace Torneos.Controllers
             JsonResult jsonData = null;
             try
             {
-                List<Canchas> oCanchas;
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-                IQueryable<Canchas> canchas = from t in bdTorneos.Canchas
-                                               select t;
-                oCanchas = canchas.ToList();
 
-                string orderBytext = "";
-                orderBytext = string.Format("it.{0} {1}", sidx, sord);
-                var pageIndex = Convert.ToInt32(page) - 1;
-                var filas = rows;
-                var totalFilas = oCanchas.Count();
-                var totalPaginas = (int)Math.Ceiling((float)totalFilas / (float)filas);
                 jsonData = Json(new
                 {
-                    total = totalPaginas,
-                    page = page,
-                    records = totalFilas,
+                    estado = "exito",
+                    mensaje = "",
                     rows = (
-                        from u in oCanchas
+                        from c in bdTorneos.Canchas
                         select new
                         {
-                            id = u.id,
-                            nombre = u.nombre,
-                            observaciones = u.observaciones,
-                            ubicacion = u.ubicacion
+                            id = c.id,
+                            nombre = c.nombre,
+                            observaciones = c.observaciones,
+                            ubicacion = c.ubicacion
                         }
-                        ).ToList().Skip((page - 1) * filas).Take(filas)
+                    )
                 });
             }
             catch
@@ -105,7 +94,7 @@ namespace Torneos.Controllers
                             bdTorneos.SaveChanges();
                             bdTorneos.Detach(oCanchasEditado);
 
-                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCanchas, estadoValidacion = "exito" });
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCanchasEditado, estadoValidacion = "exito" });
                             break;
                     }
                 }

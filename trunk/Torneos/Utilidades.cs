@@ -46,6 +46,9 @@ namespace Torneos
             oMenu.AppendLine("  </tr>");
             oMenu.AppendLine("  <tr>");
             oMenu.AppendLine("      <td>");
+            oMenu.AppendLine("          <a href=\"/Verificaciones/\" class=\"itemMenu\">Verificaciones<a>");
+            oMenu.AppendLine("      </td>");
+            oMenu.AppendLine("      <td>");
             oMenu.AppendLine("          <a href=\"/Asignaciones/\" class=\"itemMenu\">Asignaciones<a>");
             oMenu.AppendLine("      </td>");
             oMenu.AppendLine("      <td>");

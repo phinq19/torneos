@@ -7,15 +7,6 @@
     </div>
 <script type='text/javascript'>
     $(document).ready(function () {
-        /*
-        function validarCodigo(value, colname) {
-            if (value.indexOf(" ") != -1) {
-                return [false, "Por favor ingrese un valor para el código sin espacios en blanco"];
-            }
-            else {
-                return [true, ""];
-            }
-        }*/
 
         $("#gridCanchas").jqGrid({
             url: '<%= Url.Action("ObtenerCanchas","Canchas") %>',
@@ -31,14 +22,14 @@
             jsonReader: { repeatitems: false },
             ignoreCase: true,
             height: 250,
-            width: 830,
+            width: 850,
             shrinkToFit: false,
             colNames: ['id', 'Nombre', 'Ubicacion', 'Observaciones'],
             colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'ubicacion', index: 'ubicacion', width: 200, align: "right", editable: true, sortable: false, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
-                    { name: 'observaciones', index: 'observaciones', width: 200, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
+                    { name: 'ubicacion', index: 'ubicacion', width: 300, editable: true, sortable: false, edittype: "textarea", editoptions: { rows: "2", cols: "50" }, editrules: { required: true} },
+                    { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
         });
 
@@ -47,7 +38,7 @@
             closeAfterAdd: true,
             closeAfterEdit: true,
             closeOnEscape: true,
-            reloadAfterSubmit: true,
+            reloadAfterSubmit: false,
             modal: false,
             width: "500",
             savekey: [true, 13],
@@ -84,7 +75,7 @@
             closeAfterAdd: true,
             closeAfterEdit: true,
             closeOnEscape: true,
-            reloadAfterSubmit: true,
+            reloadAfterSubmit: false,
             modal: false,
             width: "500",
             savekey: [true, 13],
@@ -121,7 +112,7 @@
             closeAfterAdd: true,
             closeAfterEdit: true,
             closeOnEscape: true,
-            reloadAfterSubmit: true,
+            reloadAfterSubmit: false,
             modal: false,
             width: "500",
             savekey: [true, 13],
@@ -155,14 +146,10 @@
 
         $("#gridCanchas").jqGrid('navGrid', '#barraGridCanchas',
                  {
-                     afterRefresh: function () {
-                         //$("#gridCanchas").setGridParam({ loadonce: false }).trigger('reloadGrid');
-                         //$("#gridCanchas").setGridParam({ loadonce: true })
-                     },
                      edit: true,
                      add: true,
                      del: true,
-                     refresh: true,
+                     refresh: false,
                      search: true,
                      view: true
                  }, //options 
