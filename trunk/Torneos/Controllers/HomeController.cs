@@ -12,18 +12,6 @@ namespace Torneos.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Index()
         {
-            /*
-            List<Usuarios> oUsuarios;
-            dbTorneos bdTorneos = new dbTorneos();
-            IQueryable<Usuarios> usuarios = from t in bdTorneos.Usuarios
-                            where t.codigo == "usuario" && t.contrasena == "123456"
-                            select t;
-            oUsuarios= usuarios.ToList();
-
-            Usuarios oUsuarioNuevo = Usuarios.CreateUsuarios(0, "arahi2", "Abel", Utilidades.CalcularMD5("123456"), "arahi2@hotmail.com", "123456", 1, 1);
-            bdTorneos.AddToUsuarios(oUsuarioNuevo);
-            bdTorneos.SaveChanges();
-            */
             if (HttpContext.Request.IsAuthenticated)
             {
                 return View("Inicio");

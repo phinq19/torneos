@@ -158,7 +158,6 @@
           <Property Name="categoria" Type="int" Nullable="false" />
           <Property Name="telefono1" Type="varchar" Nullable="false" MaxLength="64" />
           <Property Name="telefono2" Type="varchar" MaxLength="64" />
-          <Property Name="telefono3" Type="varchar" MaxLength="64" />
           <Property Name="ubicacion" Type="varchar" Nullable="false" MaxLength="1024" />
           <Property Name="observaciones" Type="varchar" MaxLength="512" />
           <Property Name="dieta" Type="numeric" Nullable="false" Precision="16" Scale="6" />
@@ -531,7 +530,6 @@
           <Property Type="Int32" Name="categoria" Nullable="false" />
           <Property Type="String" Name="telefono1" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="telefono2" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="telefono3" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ubicacion" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="observaciones" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="Decimal" Name="dieta" Nullable="false" Precision="16" Scale="6" />
@@ -831,7 +829,6 @@
                 <ScalarProperty Name="dieta" ColumnName="dieta" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
                 <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
-                <ScalarProperty Name="telefono3" ColumnName="telefono3" />
                 <ScalarProperty Name="telefono2" ColumnName="telefono2" />
                 <ScalarProperty Name="telefono1" ColumnName="telefono1" />
                 <ScalarProperty Name="categoria" ColumnName="categoria" />
@@ -894,7 +891,7 @@
         <EntityTypeShape EntityType="TorneosModel.Partidos" Width="1.5" PointX="5.25" PointY="6.5" Height="3.7109993489583317" />
         <EntityTypeShape EntityType="TorneosModel.Programaciones" Width="1.5" PointX="5.25" PointY="13.125" Height="3.3263964843750014" />
         <EntityTypeShape EntityType="TorneosModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333326" />
-        <EntityTypeShape EntityType="TorneosModel.Torneos" Width="1.5" PointX="3" PointY="12.25" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="TorneosModel.Torneos" Width="1.5" PointX="3" PointY="12.25" Height="3.3263964843749996" />
         <EntityTypeShape EntityType="TorneosModel.Usuarios" Width="1.5" PointX="3" PointY="16.5" Height="3.903300781249996" />
         <EntityTypeShape EntityType="TorneosModel.UsuariosTorneos" Width="1.5" PointX="5.25" PointY="17.25" Height="1.9802864583333317" />
         <AssociationConnector Association="TorneosModel.FK_Canchas_Asociacion" >
@@ -915,13 +912,13 @@
           <ConnectorPoint PointX="5.25" PointY="9.7304996744791659" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Programaciones_Asociacion" >
-          <ConnectorPoint PointX="1.5" PointY="11.807190755208332" />
-          <ConnectorPoint PointX="1.5" PointY="16.141297200520835" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="16.141297200520835" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="16.141297200520835" />
-          <ConnectorPoint PointX="4.8515746428285267" PointY="16.141297200520835" />
-          <ConnectorPoint PointX="5.0182413094951928" PointY="16.141297200520835" />
-          <ConnectorPoint PointX="5.25" PointY="16.141297200520835" />
+          <ConnectorPoint PointX="1.29687375" PointY="11.807190755208332" />
+          <ConnectorPoint PointX="1.29687375" PointY="16.045146484375003" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="16.045146484375003" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="16.045146484375003" />
+          <ConnectorPoint PointX="4.854166666666667" PointY="16.045146484375003" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="16.045146484375003" />
+          <ConnectorPoint PointX="5.25" PointY="16.045146484375003" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Torneos_Asociacion" >
           <ConnectorPoint PointX="2.25" PointY="10.598297526041666" />
@@ -955,24 +952,24 @@
           <ConnectorPoint PointX="4.5" PointY="16.501152846153843" />
           <ConnectorPoint PointX="4.875" PointY="16.126152846153843" />
           <ConnectorPoint PointX="4.875" PointY="16.82754933052885" />
-          <ConnectorPoint PointX="5.0035744349011209" PointY="16.698974895627728" />
-          <ConnectorPoint PointX="5.1214255650988791" PointY="16.581123765429972" />
+          <ConnectorPoint PointX="4.8785744349011209" PointY="16.823974895627728" />
+          <ConnectorPoint PointX="4.9964255650988791" PointY="16.706123765429972" />
           <ConnectorPoint PointX="5.2511528461538477" PointY="16.451396484375003" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Programaciones_Torneos" >
-          <ConnectorPoint PointX="4.5" PointY="14.446848958333334" />
-          <ConnectorPoint PointX="5.25" PointY="14.446848958333334" />
+          <ConnectorPoint PointX="4.5" PointY="14.350698242187502" />
+          <ConnectorPoint PointX="5.25" PointY="14.350698242187502" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_UsuariosTorneos_Torneos" >
-          <ConnectorPoint PointX="4.5" PointY="15.706389224358976" />
-          <ConnectorPoint PointX="5.0625" PointY="16.268889224358976" />
-          <ConnectorPoint PointX="5.0625" PointY="18.240143229166666" />
+          <ConnectorPoint PointX="4.5" PointY="15.514087792067308" />
+          <ConnectorPoint PointX="4.9375" PointY="15.951587792067308" />
+          <ConnectorPoint PointX="4.9375" PointY="18.240143229166666" />
           <ConnectorPoint PointX="5.25" PointY="18.240143229166666" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_UsuariosTorneos_Usuarios" >
           <ConnectorPoint PointX="4.5" PointY="17.682571614583331" />
-          <ConnectorPoint PointX="4.979166666666667" PointY="17.682571614583331" />
-          <ConnectorPoint PointX="5.145833333333333" PointY="17.682571614583331" />
+          <ConnectorPoint PointX="4.854166666666667" PointY="17.682571614583331" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="17.682571614583331" />
           <ConnectorPoint PointX="5.25" PointY="17.682571614583331" />
         </AssociationConnector>
       </Diagram>
