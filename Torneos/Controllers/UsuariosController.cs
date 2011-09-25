@@ -40,7 +40,8 @@ namespace Torneos.Controllers
                             codigo =   u.codigo,
                             contrasena =   u.contrasena,
                             cuenta =  u.cuenta,
-                            tipo = u.tipo
+                            tipo = u.tipo,
+                            idTorneo = u.idTorneo
                         }
                     )
                 });
@@ -73,7 +74,6 @@ namespace Torneos.Controllers
                             oUsuarioNuevo.nombre = oUsuario.nombre;
                             oUsuarioNuevo.observaciones = oUsuario.observaciones;
                             oUsuarioNuevo.telefono1 = oUsuario.telefono1;
-                            oUsuarioNuevo.telefono2 = oUsuario.telefono2;
                             oUsuarioNuevo.tipo = oUsuario.tipo;
                             oUsuarioNuevo.idAsociacion = 1;
                             oUsuarioNuevo.id = 0;
@@ -106,7 +106,6 @@ namespace Torneos.Controllers
                             oUsuarioEditado.nombre = oUsuario.nombre;
                             oUsuarioEditado.observaciones = oUsuario.observaciones;
                             oUsuarioEditado.telefono1 = oUsuario.telefono1;
-                            oUsuarioEditado.telefono2 = oUsuario.telefono2;
                             oUsuarioEditado.tipo = oUsuario.tipo;
 
                             bdTorneos.SaveChanges();
