@@ -10,7 +10,7 @@ namespace Torneos
 {
     public class Utilidades 
     {
-        public static string CalcularMD5(string input)
+        public static String CalcularMD5(string input)
         {
             // step 1, calculate MD5 hash from input
             MD5 md5 = System.Security.Cryptography.MD5.Create();
@@ -60,6 +60,40 @@ namespace Torneos
             oMenu.AppendLine("  </tr>");
             oMenu.AppendLine("</table>");
             return oMenu.ToString();
+        }
+
+        public static String CrearSelectorCategorias() {
+            StringBuilder selCategoria = new StringBuilder();
+            String[] oNombresCategoria = Enum.GetNames(typeof(Categorias));
+
+            selCategoria.AppendLine("<select id=\"selCategoria\">");
+            for (int indice = 0; indice < oNombresCategoria.Length; indice++ )
+            {
+                selCategoria.AppendLine("   <option value=\"" + indice + "\">" + oNombresCategoria[indice] + "</option>");
+            }
+            selCategoria.AppendLine("</select>");
+
+            return selCategoria.ToString();
+        }
+
+        public static String CrearSelectorCanchas() {
+            StringBuilder selCanchas = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            List<Canchas> oCanchas = (from c in bdTorneos.Canchas
+                                          select new
+                                          {
+                                              id = c.id,
+                                              nombre = c.nombre,
+                                              observaciones = c.observaciones,
+                                              ubicacion = c.ubicacion
+                                          });
+
+            //oCanchas.ToList<Canchas>();
+            List<Canchas> oListaCanchas = oCanchas.ToList<Canchas>();
+
+            return selCanchas.ToString();
+            
         }
 
     }

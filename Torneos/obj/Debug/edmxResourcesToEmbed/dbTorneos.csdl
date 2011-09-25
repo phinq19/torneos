@@ -172,7 +172,6 @@
     <Property Type="Int32" Name="categoria" Nullable="false" />
     <Property Type="String" Name="telefono1" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="telefono2" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="telefono3" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ubicacion" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="observaciones" MaxLength="512" FixedLength="false" Unicode="false" />
     <Property Type="Decimal" Name="dieta" Nullable="false" Precision="16" Scale="6" />

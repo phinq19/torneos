@@ -2419,30 +2419,6 @@ namespace Torneos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String telefono3
-        {
-            get
-            {
-                return _telefono3;
-            }
-            set
-            {
-                Ontelefono3Changing(value);
-                ReportPropertyChanging("telefono3");
-                _telefono3 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("telefono3");
-                Ontelefono3Changed();
-            }
-        }
-        private global::System.String _telefono3;
-        partial void Ontelefono3Changing(global::System.String value);
-        partial void Ontelefono3Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String ubicacion
