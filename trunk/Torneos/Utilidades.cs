@@ -62,11 +62,12 @@ namespace Torneos
             return oMenu.ToString();
         }
 
-        public static String CrearSelectorCategorias() {
+        public static String CrearSelectorCategorias(String idSelector)
+        {
             StringBuilder selCategoria = new StringBuilder();
             String[] oNombresCategoria = Enum.GetNames(typeof(Categorias));
 
-            selCategoria.AppendLine("<select id=\"selCategoria\">");
+            selCategoria.Append("<select id=\"" + idSelector + "\">");
             for (int indice = 0; indice < oNombresCategoria.Length; indice++ )
             {
                 selCategoria.AppendLine("   <option value=\"" + indice + "\">" + oNombresCategoria[indice] + "</option>");
@@ -76,25 +77,40 @@ namespace Torneos
             return selCategoria.ToString();
         }
 
-        public static String CrearSelectorCanchas() {
+        public static String CrearSelectorCanchas(String idSelector) {
             StringBuilder selCanchas = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
-            List<Canchas> oCanchas = (from c in bdTorneos.Canchas
-                                          select new
-                                          {
-                                              id = c.id,
-                                              nombre = c.nombre,
-                                              observaciones = c.observaciones,
-                                              ubicacion = c.ubicacion
-                                          });
-
-            //oCanchas.ToList<Canchas>();
-            List<Canchas> oListaCanchas = oCanchas.ToList<Canchas>();
+            List<Canchas> oListaCanchas = (from c in bdTorneos.Canchas
+                                           select c).ToList<Canchas>();
+            selCanchas.AppendLine("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oListaCanchas.Count; indice++)
+            {
+                selCanchas.AppendLine("   <option value=\"" + oListaCanchas[indice].id + "\">" + oListaCanchas[indice].nombre + "</option>");
+            }
+            selCanchas.AppendLine("</select>");
 
             return selCanchas.ToString();
             
         }
 
+        public static String CrearSelectorTorneos(String idSelector)
+        {
+            StringBuilder selTorneos = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            List<Torneos> oListaTorneos = (from t in bdTorneos.Torneos
+                                           select t).ToList<Torneos>();
+
+            selTorneos.AppendLine("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oListaTorneos.Count; indice++)
+            {
+                selTorneos.AppendLine("   <option value=\"" + oListaTorneos[indice].id + "\">" + oListaTorneos[indice].nombre + "</option>");
+            }
+            selTorneos.AppendLine("</select>");
+
+            return selTorneos.ToString();
+
+        }
     }
 }
