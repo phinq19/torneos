@@ -15,7 +15,7 @@
                 title: "Torneos",
                 closeOnEscape: true,
                 height: 570,
-                width: 750
+                width: 800
             });
 
             $("#gridCanchas").jqGrid({
@@ -24,7 +24,7 @@
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 mtype: "post",
-                //pager: '#barraGridTorneos',
+                pager: '#barraGridCanchas',
                 loadonce: true,
                 viewrecords: true,
                 caption: "Canchas en las que se juega el torneo",
@@ -32,7 +32,7 @@
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 150,
-                width: 700,
+                width: 776,
                 shrinkToFit: false,
                 colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones'],
                 colModel: [
@@ -43,10 +43,20 @@
             ]
             });
 
+            $("#gridCanchas").jqGrid('navGrid', '#barraGridCanchas',
+            {
+                edit: true,
+                add: true,
+                del: true,
+                refresh: false,
+                search: false,
+                view: false
+            });
+
 
             $("#gridTorneos").jqGrid({
                 url: '<%= Url.Action("ObtenerTorneos","Torneos") %>',
-                datatype: "local",
+                datatype: "json",
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 mtype: "post",
@@ -65,7 +75,7 @@
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'ubicacion', index: 'ubicacion', width: 300, editable: true, sortable: false, edittype: "textarea", editoptions: { rows: "2", cols: "50" }, editrules: { required: true} },
-                    { name: 'categoria', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "3:Encargado Torneo;2:Árbitro;4:Encargado Asociación;5:Tesorero;1:Administrador" }, formatter: 'select' },
+                    { name: 'categoria', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCategoriasParaGrid() %>" }, formatter: 'select' },
                     { name: 'telefono1', index: 'telefono1', width: 80, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
                     { name: 'telefono2', index: 'telefono2', width: 80, editable: true, sortable: false, editoptions: { size: 20} },
                     { name: 'dieta', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
@@ -175,7 +185,7 @@
                         Categoría
                     </div>
                     <div class="celdaCampo">
-                        <%= Torneos.Utilidades.CrearSelectorCategorias() %>
+                        <%= Torneos.Utilidades.CrearSelectorCategorias("selCategoria") %>
                     </div>
                 </div>
                 <div class="fila">
@@ -200,21 +210,19 @@
                         <input id="TxtDieta" type="text" />
                     </div>
                 </div>
-            </div>
-            <div class="fila">
-                <div class="celdaLabel">
-                    Ubicación
-                </div>
-                <div class="">
-                    <textarea id="TxtUbicacion" rows="2" cols="80"></textarea>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="celdaLabel">
-                    Observaciones
-                </div>
-                <div class="">
-                    <textarea id="TxtObservaciones" rows="2" cols="80"></textarea>
+                <div class="fila">
+                    <div class="celdaLabel">
+                        Ubicación
+                    </div>
+                    <div class="">
+                        <textarea id="TxtUbicacion" rows="2" cols="40"></textarea>
+                    </div>
+                    <div class="celdaLabel">
+                        Observaciones
+                    </div>
+                    <div class="">
+                        <textarea id="TxtObservaciones" rows="2" cols="40"></textarea>
+                    </div>
                 </div>
             </div>
         </fieldset>

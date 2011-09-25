@@ -101,10 +101,10 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="TorneosModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="tipo" ColumnName="tipo" />
           <ScalarProperty Name="cuenta" ColumnName="cuenta" />
-          <ScalarProperty Name="telefono2" ColumnName="telefono2" />
           <ScalarProperty Name="telefono1" ColumnName="telefono1" />
           <ScalarProperty Name="correo" ColumnName="correo" />
           <ScalarProperty Name="contrasena" ColumnName="contrasena" />
@@ -119,6 +119,16 @@
       <EntityTypeMapping TypeName="TorneosModel.UsuariosTorneos">
         <MappingFragment StoreEntitySet="UsuariosTorneos">
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Torneos_Canchas">
+      <EntityTypeMapping TypeName="TorneosModel.Torneos_Canchas">
+        <MappingFragment StoreEntitySet="Torneos_Canchas">
+          <ScalarProperty Name="viaticos" ColumnName="viaticos" />
+          <ScalarProperty Name="idCancha" ColumnName="idCancha" />
           <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>

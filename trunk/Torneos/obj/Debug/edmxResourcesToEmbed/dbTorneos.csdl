@@ -66,6 +66,19 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="UsuariosTorneos" EntitySet="UsuariosTorneos" />
     </AssociationSet>
+    <EntitySet Name="Torneos_Canchas" EntityType="TorneosModel.Torneos_Canchas" />
+    <AssociationSet Name="FK_Torneos_Canchas_Canchas" Association="TorneosModel.FK_Torneos_Canchas_Canchas">
+      <End Role="Canchas" EntitySet="Canchas" />
+      <End Role="Torneos_Canchas" EntitySet="Torneos_Canchas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Torneos_Canchas_Torneos" Association="TorneosModel.FK_Torneos_Canchas_Torneos">
+      <End Role="Torneos" EntitySet="Torneos" />
+      <End Role="Torneos_Canchas" EntitySet="Torneos_Canchas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Torneos" Association="TorneosModel.FK_Usuarios_Torneos">
+      <End Role="Torneos" EntitySet="Torneos" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Asociaciones">
     <Key>
@@ -91,6 +104,7 @@
     <Property Type="String" Name="ubicacion" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Canchas_Asociacion" FromRole="Canchas" ToRole="Asociaciones" />
     <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Canchas" FromRole="Canchas" ToRole="Partidos" />
+    <NavigationProperty Name="Torneos_Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Canchas" ToRole="Torneos_Canchas" />
   </EntityType>
   <EntityType Name="DetallePartidos">
     <Key>
@@ -178,6 +192,8 @@
     <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Torneos_Asociacion" FromRole="Torneos" ToRole="Asociaciones" />
     <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Programaciones_Torneos" FromRole="Torneos" ToRole="Programaciones" />
     <NavigationProperty Name="UsuariosTorneos" Relationship="TorneosModel.FK_UsuariosTorneos_Torneos" FromRole="Torneos" ToRole="UsuariosTorneos" />
+    <NavigationProperty Name="Torneos_Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos" ToRole="Torneos_Canchas" />
+    <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Usuarios_Torneos" FromRole="Torneos" ToRole="Usuarios" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
@@ -190,7 +206,6 @@
     <Property Type="String" Name="contrasena" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="correo" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="telefono1" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="telefono2" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="cuenta" MaxLength="128" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="tipo" Nullable="false" />
     <Property Type="String" Name="observaciones" MaxLength="1024" FixedLength="false" Unicode="false" />
@@ -198,6 +213,8 @@
     <NavigationProperty Name="DetallePartidos" Relationship="TorneosModel.FK_DetallePartidos_Arbitros" FromRole="Usuarios" ToRole="DetallePartidos" />
     <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Progamacion_Usuarios" FromRole="Usuarios" ToRole="Programaciones" />
     <NavigationProperty Name="UsuariosTorneos" Relationship="TorneosModel.FK_UsuariosTorneos_Usuarios" FromRole="Usuarios" ToRole="UsuariosTorneos" />
+    <Property Type="Int32" Name="idTorneo" />
+    <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Usuarios_Torneos" FromRole="Usuarios" ToRole="Torneos" />
   </EntityType>
   <EntityType Name="UsuariosTorneos">
     <Key>
@@ -374,6 +391,53 @@
       </Principal>
       <Dependent Role="UsuariosTorneos">
         <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Torneos_Canchas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="idTorneo" Nullable="false" />
+    <Property Type="Int32" Name="idCancha" Nullable="false" />
+    <Property Type="Decimal" Name="viaticos" Nullable="false" Precision="16" Scale="6" />
+    <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Torneos_Canchas" ToRole="Canchas" />
+    <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos_Canchas" ToRole="Torneos" />
+  </EntityType>
+  <Association Name="FK_Torneos_Canchas_Canchas">
+    <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="1" />
+    <End Type="TorneosModel.Torneos_Canchas" Role="Torneos_Canchas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Canchas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Torneos_Canchas">
+        <PropertyRef Name="idCancha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Torneos_Canchas_Torneos">
+    <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="1" />
+    <End Type="TorneosModel.Torneos_Canchas" Role="Torneos_Canchas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Torneos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Torneos_Canchas">
+        <PropertyRef Name="idTorneo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Torneos">
+    <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="0..1" />
+    <End Type="TorneosModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Torneos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="idTorneo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

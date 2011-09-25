@@ -103,6 +103,7 @@ namespace Torneos
                                            select t).ToList<Torneos>();
 
             selTorneos.AppendLine("<select id=\"" + idSelector + "\">");
+            selTorneos.AppendLine("   <option value=\"0\">Ninguno</option>");
             for (int indice = 0; indice < oListaTorneos.Count; indice++)
             {
                 selTorneos.AppendLine("   <option value=\"" + oListaTorneos[indice].id + "\">" + oListaTorneos[indice].nombre + "</option>");
@@ -111,6 +112,59 @@ namespace Torneos
 
             return selTorneos.ToString();
 
+        }
+
+        public static String CrearSelectorTorneosParaGrid()
+        {
+            StringBuilder selTorneos = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            List<Torneos> oListaTorneos = (from t in bdTorneos.Torneos
+                                           select t).ToList<Torneos>();
+
+            selTorneos.Append("null:**Ninguno**");
+
+            for (int indice = 0; indice < oListaTorneos.Count; indice++)
+            {
+                selTorneos.Append(";" + oListaTorneos[indice].id + ":" + oListaTorneos[indice].nombre);
+            }
+
+            return selTorneos.ToString();
+
+        }
+
+        public static String CrearSelectorCategoriasParaGrid()
+        {
+            StringBuilder selCategoria = new StringBuilder();
+            String[] oNombresCategoria = Enum.GetNames(typeof(Categorias));
+
+            for (int indice = 0; indice < oNombresCategoria.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selCategoria.ToString()))
+                {
+                    selCategoria.Append(";");
+                }
+                selCategoria.Append(indice + ":" + oNombresCategoria[indice]);
+            }
+
+            return selCategoria.ToString();
+        }
+
+        public static String CrearSelectorTiposUsuarioParaGrid()
+        {
+            StringBuilder selTiposUsuario = new StringBuilder();
+            String[] oNombresTiposUsuarios = Enum.GetNames(typeof(TipoUsuario));
+
+            for (int indice = 1; indice < oNombresTiposUsuarios.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selTiposUsuario.ToString()))
+                {
+                    selTiposUsuario.Append(";");
+                }
+                selTiposUsuario.Append(indice + ":" + oNombresTiposUsuarios[indice]);
+            }
+
+            return selTiposUsuario.ToString();
         }
     }
 }

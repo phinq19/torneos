@@ -36,16 +36,16 @@
                 //sortorder: "desc",
                 //sortname: 'nombre',
                 shrinkToFit: false,
-                colNames: ['id', 'Nombre', 'Código', 'Cuenta Bancaria', 'Teléfono 1', 'Teléfono 2', 'Correo', 'Tipo', 'Observaciones'],
+                colNames: ['id', 'Nombre', 'Código', 'Tipo', 'Torneo', 'Correo', 'Teléfono', 'Cuenta Bancaria', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'codigo', index: 'codigo', width: 80, editable: true, editoptions: { size: 20 }, editrules: { required: true, custom: true, custom_func: validarCodigo} },
-                    { name: 'cuenta', index: 'cuenta', width: 120, editable: true, sortable: false, editoptions: { size: 20} },
-                    { name: 'telefono1', index: 'telefono1', width: 80, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
-                    { name: 'telefono2', index: 'telefono2', width: 80, editable: true, sortable: false, editoptions: { size: 20} },
+                    { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorTiposUsuarioParaGrid() %>" }, formatter: 'select' },
+                    { name: 'idTorneo', index: 'idTorneo', width: 200, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorTorneosParaGrid() %>" }, formatter: 'select' },
                     { name: 'correo', index: 'correo', width: 120, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true, email: true} },
-                    { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "3:Encargado Torneo;2:Árbitro;4:Encargado Asociación;5:Tesorero;1:Administrador" }, formatter: 'select' },
+                    { name: 'telefono1', index: 'telefono1', width: 80, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
+                    { name: 'cuenta', index: 'cuenta', width: 120, editable: true, sortable: false, editoptions: { size: 20} },
                     { name: 'observaciones', index: 'observaciones', width: 200, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
             });
