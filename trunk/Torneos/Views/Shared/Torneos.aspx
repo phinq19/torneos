@@ -14,7 +14,7 @@
                 modal: true,
                 title: "Torneos",
                 closeOnEscape: true,
-                height: 550,
+                height: 500,
                 width: 800
             });
 
@@ -31,8 +31,8 @@
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
-                height: 150,
-                width: 776,
+                height: 120,
+                width: 775,
                 shrinkToFit: false,
                 colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones'],
                 colModel: [
@@ -90,7 +90,7 @@
                 MostrarVentana("add");
             },
             editfunc: function (id) {
-                MostrarVentana("edit");
+                MostrarVentana("edit", id);
             },
             edit: true,
             add: true,
@@ -109,7 +109,13 @@
             title: "Ver detalle",
             buttonicon: "ui-icon ui-icon-document",
             onClickButton: function () {
-                MostrarVentana("view");
+                var cIdView = jQuery('#gridTorneos').getGridParam("selrow");
+                if (cIdView == null) {
+                    alert("Seleccione una fila");
+                }
+                else {
+                    MostrarVentana("view", cIdView);
+                }
             },
             position: 'last'
         });
@@ -133,21 +139,17 @@
                         "Aceptar": function () { $(this).dialog("close"); },
                         "Cancelar": function () { $(this).dialog("close"); }
                     });
+                    ObtenerTorneo(id);
                     HabilitarCampos(true);
                     $("#ventanaEditar").dialog('open');
                     break;
                 case "view":
                     Limpiar();
-                    var cIdView = jQuery('#gridTorneos').getGridParam("selrow");
-                    if (cIdView == null) {
-                        alert("Seleccione una fila");
-                    }
-                    else {
-                        ObtenerTorneo(cIdView);
-                        HabilitarCampos(false);
-                        $("#ventanaEditar").dialog("option", "buttons", { "Cerrar": function () { $(this).dialog("close"); } });
-                        $("#ventanaEditar").dialog('open');
-                    }
+                    ObtenerTorneo(id);
+                    HabilitarCampos(false);
+                    $("#ventanaEditar").dialog("option", "buttons", { "Cerrar": function () { $(this).dialog("close"); } });
+                    $("#ventanaEditar").dialog('open');
+                    
                     break;
             }
             
