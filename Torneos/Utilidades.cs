@@ -145,7 +145,11 @@ namespace Torneos
 
             for (int indice = 0; indice < oListaCanchas.Count; indice++)
             {
-                selCanchas.Append(";" + oListaCanchas[indice].id + ":" + oListaCanchas[indice].nombre);
+                if (!String.IsNullOrEmpty(selCanchas.ToString()))
+                {
+                    selCanchas.Append(";");
+                }
+                selCanchas.Append( oListaCanchas[indice].id + ":" + oListaCanchas[indice].nombre);
             }
 
             return selCanchas.ToString();
