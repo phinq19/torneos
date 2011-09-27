@@ -127,6 +127,7 @@
     <EntitySetMapping Name="Torneos_Canchas">
       <EntityTypeMapping TypeName="TorneosModel.Torneos_Canchas">
         <MappingFragment StoreEntitySet="Torneos_Canchas">
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="viaticos" ColumnName="viaticos" />
           <ScalarProperty Name="idCancha" ColumnName="idCancha" />
           <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />

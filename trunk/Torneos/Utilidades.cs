@@ -133,6 +133,25 @@ namespace Torneos
 
         }
 
+        public static String CrearSelectorCanchasParaGrid()
+        {
+            StringBuilder selCanchas = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            List<Canchas> oListaCanchas = (from c in bdTorneos.Canchas
+                                           select c).ToList<Canchas>();
+
+            //selCanchas.Append("null:**Ninguno**");
+
+            for (int indice = 0; indice < oListaCanchas.Count; indice++)
+            {
+                selCanchas.Append(";" + oListaCanchas[indice].id + ":" + oListaCanchas[indice].nombre);
+            }
+
+            return selCanchas.ToString();
+
+        }
+
         public static String CrearSelectorCategoriasParaGrid()
         {
             StringBuilder selCategoria = new StringBuilder();

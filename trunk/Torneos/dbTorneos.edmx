@@ -183,6 +183,7 @@
           <Property Name="idTorneo" Type="int" Nullable="false" />
           <Property Name="idCancha" Type="int" Nullable="false" />
           <Property Name="viaticos" Type="numeric" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="observaciones" Type="varchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -822,6 +823,7 @@
           <Property Type="Decimal" Name="viaticos" Nullable="false" Precision="16" Scale="6" />
           <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Torneos_Canchas" ToRole="Canchas" />
           <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos_Canchas" ToRole="Torneos" />
+          <Property Type="String" Name="observaciones" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Torneos_Canchas_Canchas">
           <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="1" />
@@ -991,6 +993,7 @@
           <EntitySetMapping Name="Torneos_Canchas">
             <EntityTypeMapping TypeName="TorneosModel.Torneos_Canchas">
               <MappingFragment StoreEntitySet="Torneos_Canchas">
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
                 <ScalarProperty Name="viaticos" ColumnName="viaticos" />
                 <ScalarProperty Name="idCancha" ColumnName="idCancha" />
                 <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />

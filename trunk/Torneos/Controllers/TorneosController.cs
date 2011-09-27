@@ -24,32 +24,81 @@ namespace Torneos.Controllers
             try
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
-                    rows = (
-                        from t in bdTorneos.Torneos
-                        select new
-                        {
-                            id = t.id,
-                            nombre = t.nombre,
-                            categoria = t.categoria,
-                            telefono1 = t.telefono1,
-                            ubicacion = t.ubicacion,
-                            telefono2 = t.telefono2,
-                            dieta = t.dieta,
-                            observaciones = t.observaciones,
-                            
-                        }
-                    )
+                    rows = (from oTorneo in bdTorneos.Torneos
+                            select new
+                            {
+                                id = oTorneo.id,
+                                nombre = oTorneo.nombre,
+                                categoria = oTorneo.categoria,
+                                telefono1 = oTorneo.telefono1,
+                                ubicacion = oTorneo.ubicacion,
+                                telefono2 = oTorneo.telefono2,
+                                dieta = oTorneo.dieta,
+                                observaciones = oTorneo.observaciones,
+                                Torneos_Canchas = from c in oTorneo.Torneos_Canchas
+                                                  select new
+                                                  {
+                                                      id = c.id,
+                                                      idCancha = c.idCancha,
+                                                      viaticos = c.viaticos,
+                                                      observaciones = c.observaciones
+                                                  }
+                            })
                 });
             }
             catch
             {
                 jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
             }
-            return jsonData;
+            return jsonData;   
+        }
+
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Authorize]
+        public JsonResult ObtenerTorneoPorID(int cID) {
+            JsonResult jsonData = null;
+            try
+            {
+                BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                Torneos oTorneo = (from t in bdTorneos.Torneos
+                              where t.id == cID
+                              select t).Single();
+
+                jsonData = Json(new
+                {
+                    estado = "exito",
+                    mensaje = "",
+                    oTorneo = new {
+                                id = oTorneo.id,
+                                nombre = oTorneo.nombre,
+                                categoria = oTorneo.categoria,
+                                telefono1 = oTorneo.telefono1,
+                                ubicacion = oTorneo.ubicacion,
+                                telefono2 = oTorneo.telefono2,
+                                dieta = oTorneo.dieta,
+                                observaciones = oTorneo.observaciones,
+                                Torneos_Canchas = from c in oTorneo.Torneos_Canchas
+                                                  select new
+                                                  {
+                                                      id = c.id,
+                                                      idCancha = c.idCancha,
+                                                      viaticos = c.viaticos,
+                                                      observaciones = c.observaciones
+                                                  }
+                            }
+                });
+            }
+            catch
+            {
+                jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
+            }
+            return jsonData;   
         }
     }
 }
