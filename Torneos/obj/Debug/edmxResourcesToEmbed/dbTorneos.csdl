@@ -404,6 +404,7 @@
     <Property Type="Decimal" Name="viaticos" Nullable="false" Precision="16" Scale="6" />
     <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Torneos_Canchas" ToRole="Canchas" />
     <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos_Canchas" ToRole="Torneos" />
+    <Property Type="String" Name="observaciones" MaxLength="256" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Torneos_Canchas_Canchas">
     <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="1" />

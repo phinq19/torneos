@@ -14,7 +14,7 @@
                 modal: true,
                 title: "Torneos",
                 closeOnEscape: true,
-                height: 570,
+                height: 550,
                 width: 800
             });
 
@@ -37,7 +37,7 @@
                 colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'cancha', index: 'cancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "3:Encargado Torneo;2:Árbitro;4:Encargado Asociación;5:Tesorero;1:Administrador" }, formatter: 'select' },
+                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCanchasParaGrid() %>>" }, formatter: 'select' },
                     { name: 'viaticos', index: 'viaticos', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
             ]
@@ -78,7 +78,7 @@
                     { name: 'categoria', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCategoriasParaGrid() %>" }, formatter: 'select' },
                     { name: 'telefono1', index: 'telefono1', width: 80, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
                     { name: 'telefono2', index: 'telefono2', width: 80, editable: true, sortable: false, editoptions: { size: 20} },
-                    { name: 'dieta', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'dieta', index: 'nombre', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
             });
@@ -119,46 +119,111 @@
         function MostrarVentana(accion, id) {
             switch (accion) {
                 case "add":
+                    Limpiar();
                     $("#ventanaEditar").dialog("option", "buttons", {
                         "Aceptar": function () { $(this).dialog("close"); },
                         "Cancelar": function () { $(this).dialog("close"); }
                     });
                     HabilitarCampos(true);
+                    $("#ventanaEditar").dialog('open');
                     break;
                 case "edit":
+                    Limpiar();
                     $("#ventanaEditar").dialog("option", "buttons", {
                         "Aceptar": function () { $(this).dialog("close"); },
                         "Cancelar": function () { $(this).dialog("close"); }
                     });
                     HabilitarCampos(true);
+                    $("#ventanaEditar").dialog('open');
                     break;
                 case "view":
-                    $("#ventanaEditar").dialog("option", "buttons", { "Cerrar": function () { $(this).dialog("close"); } });
-                    HabilitarCampos(false);
+                    Limpiar();
+                    var cIdView = jQuery('#gridTorneos').getGridParam("selrow");
+                    if (cIdView == null) {
+                        alert("Seleccione una fila");
+                    }
+                    else {
+                        ObtenerTorneo(cIdView);
+                        HabilitarCampos(false);
+                        $("#ventanaEditar").dialog("option", "buttons", { "Cerrar": function () { $(this).dialog("close"); } });
+                        $("#ventanaEditar").dialog('open');
+                    }
                     break;
             }
-            $("#ventanaEditar").dialog('open');
+            
         }
 
-        function MostrarTorneo() {
+        function MostrarTorneo(oTorneo) {
+            $("#TxtNombre").val(oTorneo.nombre);
+            $("#selCategoria").val(oTorneo.categoria);
+            $("#TxtTelefono1").val(oTorneo.telefono1);
+            $("#TxtTelefono2").val(oTorneo.telefono2);
+            $("#TxtDieta").val(oTorneo.dieta);
+            $("#TxtUbicacion").val(oTorneo.ubicacion);
+            $("#TxtObservaciones").val(oTorneo.observaciones);
 
+            $('#gridCanchas').clearGridData();
+            $('#gridCanchas').setGridParam({ data: oTorneo.Torneos_Canchas }).trigger('reloadGrid');
         }
 
         function CargarTorneo() {
 
         }
 
-        function ObtenerTorneo() {
+        function Limpiar() {
+            $("#TxtNombre").val("");
+            $("#selCategoria").val("");
+            $("#TxtTelefono1").val("");
+            $("#TxtTelefono2").val("");
+            $("#TxtDieta").val("");
+            $("#TxtUbicacion").val("");
+            $("#TxtObservaciones").val("");
 
+            $('#gridCanchas').clearGridData();
         }
 
-        function ValidarCampos() {
+        function ObtenerTorneo(idTorneo) {
+            var oParametrosAjax = { cID: idTorneo };
 
+            var funcionProcesamientoCliente = function (oRespuesta) {
+                MostrarTorneo(oRespuesta.oTorneo);
+            }
+
+            RealizarPeticionAjax("ObtenerTorneo", "/Torneos/ObtenerTorneoPorID", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
+        }
+
+        function ValidarCampos(bHabilitar) {
+            
         }
 
 
-        function HabilitarCampos(bHabilitados) {
+        function HabilitarCampos(bHabilitar) {
+            if (bHabilitar) {
+                $("#TxtNombre").removeAttr("disabled");
+                $("#selCategoria").removeAttr("disabled");
+                $("#TxtTelefono1").removeAttr("disabled");
+                $("#TxtTelefono2").removeAttr("disabled");
+                $("#TxtDieta").removeAttr("disabled");
+                $("#TxtUbicacion").removeAttr("disabled");
+                $("#TxtObservaciones").removeAttr("disabled");
 
+                $("#add_gridCanchas").show();
+                $("#edit_gridCanchas").show();
+                $("#del_gridCanchas").show();
+
+            } else {
+                $("#TxtNombre").attr("disabled", "disabled");
+                $("#selCategoria").attr("disabled", "disabled");
+                $("#TxtTelefono1").attr("disabled", "disabled");
+                $("#TxtTelefono2").attr("disabled", "disabled");
+                $("#TxtDieta").attr("disabled", "disabled");
+                $("#TxtUbicacion").attr("disabled", "disabled");
+                $("#TxtObservaciones").attr("disabled", "disabled");
+
+                $("#add_gridCanchas").hide();
+                $("#edit_gridCanchas").hide();
+                $("#del_gridCanchas").hide();
+            }
         }
 
         function GuardarEditar() {

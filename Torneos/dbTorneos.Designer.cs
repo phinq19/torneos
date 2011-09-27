@@ -2798,6 +2798,30 @@ namespace Torneos
         private global::System.Decimal _viaticos;
         partial void OnviaticosChanging(global::System.Decimal value);
         partial void OnviaticosChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String observaciones
+        {
+            get
+            {
+                return _observaciones;
+            }
+            set
+            {
+                OnobservacionesChanging(value);
+                ReportPropertyChanging("observaciones");
+                _observaciones = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("observaciones");
+                OnobservacionesChanged();
+            }
+        }
+        private global::System.String _observaciones;
+        partial void OnobservacionesChanging(global::System.String value);
+        partial void OnobservacionesChanged();
 
         #endregion
     

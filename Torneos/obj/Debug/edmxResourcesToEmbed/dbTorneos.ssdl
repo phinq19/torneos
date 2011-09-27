@@ -178,6 +178,7 @@
     <Property Name="idTorneo" Type="int" Nullable="false" />
     <Property Name="idCancha" Type="int" Nullable="false" />
     <Property Name="viaticos" Type="numeric" Nullable="false" Precision="16" Scale="6" />
+    <Property Name="observaciones" Type="varchar" MaxLength="256" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
