@@ -61,7 +61,7 @@
                 rowList: [10, 20, 30],
                 mtype: "post",
                 pager: '#barraGridTorneos',
-                loadonce: true,
+                //loadonce: true,
                 viewrecords: true,
                 caption: "Mantenimiento de Torneos",
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
@@ -127,7 +127,7 @@
                 case "add":
                     Limpiar();
                     $("#ventanaEditar").dialog("option", "buttons", {
-                        "Aceptar": function () { $(this).dialog("close"); },
+                        "Aceptar": function () { GuardarAgregar(); },
                         "Cancelar": function () { $(this).dialog("close"); }
                     });
                     HabilitarCampos(true);
@@ -136,7 +136,7 @@
                 case "edit":
                     Limpiar();
                     $("#ventanaEditar").dialog("option", "buttons", {
-                        "Aceptar": function () { $(this).dialog("close"); },
+                        "Aceptar": function () { GuardarEditar(); },
                         "Cancelar": function () { $(this).dialog("close"); }
                     });
                     ObtenerTorneo(id);
@@ -155,7 +155,13 @@
             
         }
 
+        var _Torneo = {
+            Torneos_Canchas: []
+        };
+
         function MostrarTorneo(oTorneo) {
+            _Torneo = oTorneo;
+
             $("#TxtNombre").val(oTorneo.nombre);
             $("#selCategoria").val(oTorneo.categoria);
             $("#TxtTelefono1").val(oTorneo.telefono1);
@@ -168,8 +174,14 @@
             $('#gridCanchas').setGridParam({ data: oTorneo.Torneos_Canchas }).trigger('reloadGrid');
         }
 
-        function CargarTorneo() {
-
+        function CargarCampos() {
+            _Torneo.nombre = $("#TxtNombre").val();
+            _Torneo.categoria = $("#selCategoria").val();
+            _Torneo.telefono1 = $("#TxtTelefono1").val();
+            _Torneo.telefono2 = $("#TxtTelefono2").val();
+            _Torneo.dieta = $("#TxtDieta").val();
+            _Torneo.ubicacion = $("#TxtUbicacion").val();
+            _Torneo.observaciones = $("#TxtObservaciones").val();
         }
 
         function Limpiar() {
@@ -194,8 +206,8 @@
             RealizarPeticionAjax("ObtenerTorneo", "/Torneos/ObtenerTorneoPorID", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
         }
 
-        function ValidarCampos(bHabilitar) {
-            
+        function ValidarCampos() {
+            return true;   
         }
 
 
@@ -229,11 +241,31 @@
         }
 
         function GuardarEditar() {
+            if (ValidarCampos()) {
+                CargarCampos();
+                var oParametrosAjax = { oTorneo: _Torneo, oper: "edit" };
 
+                var funcionProcesamientoCliente = function (oRespuesta) {
+                    $("#gridTorneos").trigger('reloadGrid');
+                    $("#ventanaEditar").dialog("close");
+                }
+                
+                RealizarPeticionAjax("GuardarTorneo", "/Torneos/EditarTorneos", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
+            }
         }
 
         function GuardarAgregar() {
+            if (ValidarCampos()) {
+                CargarCampos();
+                var oParametrosAjax = { oTorneo: _Torneo, oper: "add" };
 
+                var funcionProcesamientoCliente = function (oRespuesta) {
+                    $("#gridTorneos").trigger('reloadGrid');
+                    $("#ventanaEditar").dialog("close");
+                }
+
+                RealizarPeticionAjax("GuardarTorneo", "/Torneos/EditarTorneos", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
+            }
         }
 
     </script>

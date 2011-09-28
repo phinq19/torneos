@@ -70,6 +70,7 @@
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\VerificacionesController.cs" />
     <Compile Include="CategoriasTorneos.cs" />
+    <Compile Include="AccionRegistro.cs" />
     <Compile Include="dbTorneos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
