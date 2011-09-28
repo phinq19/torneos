@@ -2822,6 +2822,30 @@ namespace Torneos
         private global::System.String _observaciones;
         partial void OnobservacionesChanging(global::System.String value);
         partial void OnobservacionesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> accionregistro
+        {
+            get
+            {
+                return _accionregistro;
+            }
+            set
+            {
+                OnaccionregistroChanging(value);
+                ReportPropertyChanging("accionregistro");
+                _accionregistro = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("accionregistro");
+                OnaccionregistroChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _accionregistro;
+        partial void OnaccionregistroChanging(Nullable<global::System.Int32> value);
+        partial void OnaccionregistroChanged();
 
         #endregion
     
