@@ -13,3 +13,8 @@ C:\Documents and Settings\Abel\Desktop\torneos\Torneos\bin\Torneos.pdb
 C:\Documents and Settings\Abel\Desktop\torneos\Torneos\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\Abel\Desktop\torneos\Torneos\obj\Debug\Torneos.dll
 C:\Documents and Settings\Abel\Desktop\torneos\Torneos\obj\Debug\Torneos.pdb
+C:\Users\L505ING\Desktop\torneos\Torneos\bin\Torneos.dll
+C:\Users\L505ING\Desktop\torneos\Torneos\bin\Torneos.pdb
+C:\Users\L505ING\Desktop\torneos\Torneos\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\L505ING\Desktop\torneos\Torneos\obj\Debug\Torneos.dll
+C:\Users\L505ING\Desktop\torneos\Torneos\obj\Debug\Torneos.pdb

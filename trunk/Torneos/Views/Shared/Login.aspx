@@ -22,7 +22,7 @@
     <div class="ContenidoOrdenado ContenidoCompleto EsquinasSuperioresRedondas EsquinasInferioresRedondas">
         <div class="fila">
             <div class="columna">
-                <div class="SeccionContenidoLogin EsquinasInferioresRedondas">
+                <div class="SeccionContenidoLogin1 EsquinasInferioresRedondas">
                     <div class="EncabezadoSeccionContenidoLogin EsquinasSuperioresRedondas">
                         <h1>HAZTE ÁRBITRO</h1>
                     </div>
@@ -82,7 +82,7 @@
                                     <label>Código Usuario:</label>
                                 </div>
                                 <div class="">
-                                    <input id="TxtCodigo" type="text" />
+                                    <input id="TxtCodigo" type="text" class="required"/>
                                 </div>
                             </div>
                             <div class="fila">
@@ -90,7 +90,7 @@
                                     <label>Contraseña:</label>
                                 </div>
                                 <div class="celdaCampo">
-                                    <input id="TxtContrasena" type="password" />
+                                    <input id="TxtContrasena" type="password" class="required"/>
                                 </div>
                             </div>
                             <div class="fila">

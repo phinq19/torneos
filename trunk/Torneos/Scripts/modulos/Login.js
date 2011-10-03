@@ -17,6 +17,17 @@
     });
 
     $("#TxtCodigo").focus();
+
+    $("#frmLogin").validate({
+        rules: {
+            TxtCodigo: "required",
+            TxtContrasena: "required"
+        },
+        messages: {
+            TxtCodigo: "Debe ingresar un código de usuario",
+            TxtContrasena: "Debe ingresar una contraseña"
+        }
+    });
 });
 
 
