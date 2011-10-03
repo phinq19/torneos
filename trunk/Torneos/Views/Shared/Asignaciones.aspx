@@ -14,4 +14,5 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContenidoEncabezado" runat="server">
 <h1>Asignaciones</h1>
+<h1><a href="/">Volver al menú principal</a></h1> 
 </asp:Content>

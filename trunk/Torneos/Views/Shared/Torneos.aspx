@@ -11,6 +11,8 @@
 
             $("#ventanaEditar").dialog({
                 autoOpen: false,
+                zIndex: 500,
+                resizable: false,
                 modal: true,
                 title: "Torneos",
                 closeOnEscape: true,
@@ -28,20 +30,102 @@
                 loadonce: true,
                 viewrecords: true,
                 caption: "Canchas en las que se juega el torneo",
-                //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
+                editurl: '<%= Url.Action("EditarTorneoCanchas","Torneos") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 120,
                 width: 775,
                 shrinkToFit: false,
-                colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones'],
+                colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCanchasParaGrid() %>>" }, formatter: 'select' },
-                    { name: 'viaticos', index: 'viaticos', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
+                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCanchasParaGrid() %>" }, formatter: 'select' },
+                    { name: 'viaticos', index: 'viaticos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
+                    { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
             });
+
+
+
+            var ProcesarEditar_gvCanchas = {
+                closeAfterAdd: true,
+                closeAfterEdit: true,
+                closeOnEscape: true,
+                reloadAfterSubmit: false,
+                modal: false,
+                width: "500",
+                savekey: [true, 13],
+                navkeys: [true, 38, 40],
+                afterShowForm: function (formId) {
+
+                },
+                onclickSubmit: function (params, registroCliente) {
+                },
+                afterSubmit: function (datosRespuesta, registroCliente, formid) {
+                    var datos = JSON.parse(datosRespuesta.responseText);
+                    switch (datos.estado) {
+                        case "exito":
+                            switch (datos.estadoValidacion) {
+                                case "exito":
+                                    //registroCliente = datos.ObjetoDetalle;
+                                    $.each(datos.ObjetoDetall, function (att, value) {
+                                        registroCliente[att] = value;
+                                    });
+                                    ActualizarEntidad(registroCliente)
+                                    return [true, '', datos.ObjetoDetalle.id];
+                                    break;
+                                case "error":
+                                    return [false, datos.mensaje, '-1']
+                                    break;
+                                case "sinAutenticar":
+                                    window.location = "/";
+                                    break;
+                            }
+                            break;
+                        case "error":
+                            return [false, datos.mensaje, '-1']
+                            break;
+                    }
+                }
+            }
+
+            var Procesar_Eliminar_gvCanchas = {
+                closeAfterAdd: true,
+                closeAfterEdit: true,
+                closeOnEscape: true,
+                reloadAfterSubmit: false,
+                modal: false,
+                width: "500",
+                savekey: [true, 13],
+                navkeys: [true, 38, 40],
+                afterShowForm: function (formId) {
+                },
+                onclickSubmit: function (params, registroCliente) {
+                },
+                afterSubmit: function (datosRespuesta, registroCliente, formid) {
+                    var datos = JSON.parse(datosRespuesta.responseText);
+                    switch (datos.estado) {
+                        case "exito":
+                            switch (datos.estadoValidacion) {
+                                case "exito":
+                                    return [true, '', datos.ObjetoDetalle.id];
+                                    break;
+                                case "error":
+                                    return [false, datos.mensaje, '-1']
+                                    break;
+                                case "sinAutenticar":
+                                    window.location = "/";
+                                    break;
+                            }
+                            break;
+                        case "error":
+                            return [false, datos.mensaje, '-1']
+                            break;
+                    }
+                }
+            }
+
 
             $("#gridCanchas").jqGrid('navGrid', '#barraGridCanchas',
             {
@@ -49,9 +133,15 @@
                 add: true,
                 del: true,
                 refresh: false,
-                search: false,
-                view: false
-            });
+                search: true,
+                view: true
+            }, //options 
+                 ProcesarEditar_gvCanchas, // edit options 
+                 ProcesarEditar_gvCanchas, // add options 
+                 Procesar_Eliminar_gvCanchas, // del options
+                 {}, // search options 
+                 {width: "500" }
+            );
 
 
             $("#gridTorneos").jqGrid({
@@ -126,30 +216,30 @@
             switch (accion) {
                 case "add":
                     Limpiar();
+                    $("#ventanaEditar").dialog('open');
                     $("#ventanaEditar").dialog("option", "buttons", {
                         "Aceptar": function () { GuardarAgregar(); },
                         "Cancelar": function () { $(this).dialog("close"); }
                     });
                     HabilitarCampos(true);
-                    $("#ventanaEditar").dialog('open');
                     break;
                 case "edit":
                     Limpiar();
+                    $("#ventanaEditar").dialog('open');
                     $("#ventanaEditar").dialog("option", "buttons", {
                         "Aceptar": function () { GuardarEditar(); },
                         "Cancelar": function () { $(this).dialog("close"); }
                     });
                     ObtenerTorneo(id);
                     HabilitarCampos(true);
-                    $("#ventanaEditar").dialog('open');
+                    
                     break;
                 case "view":
                     Limpiar();
+                    $("#ventanaEditar").dialog('open');
                     ObtenerTorneo(id);
                     HabilitarCampos(false);
                     $("#ventanaEditar").dialog("option", "buttons", { "Cerrar": function () { $(this).dialog("close"); } });
-                    $("#ventanaEditar").dialog('open');
-                    
                     break;
             }
             
@@ -158,6 +248,27 @@
         var _Torneo = {
             Torneos_Canchas: []
         };
+
+        function ActualizarEntidad(oRegistro) {
+            var indiceRegistro = -1;
+            for (var i = 0; i < oRegistros.length; i++) {
+                if (_Torneo.Torneos_Canchas[i].id == oRegistro.id) {
+                    indiceRegistro = i;
+                }
+            }
+            switch (oRegistro.accionregistro) {
+                case 0:
+                    oRegistros.splice(indiceRegistro, 1);
+                break;
+                case 1:
+                    _Torneo.Torneos_Canchas.push(datos.ObjetoDetalle);
+                break;
+                case 2:
+                case 3:
+                    _Torneo.Torneos_Canchas[indiceRegistro] = indiceRegistro;
+                    break;
+            }
+        }
 
         function MostrarTorneo(oTorneo) {
             _Torneo = oTorneo;
@@ -185,6 +296,10 @@
         }
 
         function Limpiar() {
+            _Torneo = {
+                Torneos_Canchas: []
+            };
+            
             $("#TxtNombre").val("");
             $("#selCategoria").val("");
             $("#TxtTelefono1").val("");
@@ -338,4 +453,5 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContenidoEncabezado" runat="server">
     <h1>Torneos</h1>
+    <h1><a href="/">Volver al menú principal</a></h1>
 </asp:Content>

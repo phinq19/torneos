@@ -89,27 +89,29 @@
                                                                                                                             <div class="blue">  
 		        <ul id="menu" class="mega-menu">
                     <li><a href="/">Inicio</a></li>
-                    <li><a href="/">ACAF</a>
+                    <li><a href="#" onclick="return false;">Asociaciones</a>
                         <ul>
-					        <li><a href="#">Mobile Phones &#038; Accessories</a>
+					        <li><a href="#">ACAF</a>
 						        <ul>
-							        <li><a href="#">Product 1</a></li>
-							        <li><a href="#">Product 2</a></li>
-							        <li><a href="#">Product 3</a></li>
+							        <li><a href="#">Página Principal</a></li>
+                                    <li><a href="#">Galería de Fotos</a></li>
+							        <li><a href="#">Noticias</a></li>
 						        </ul>
 					        </li>
-					        <li><a href="#">Accessories</a>
+					        <li><a href="#">Otras Asociaciones</a>
 						        <ul>
-							        <li><a href="#">Product 14</a></li>
-							        <li><a href="#">Product 15</a></li>
+							        <li><a href="#">Guanacaste</a></li>
+							        <li><a href="#">Limón</a></li>
+                                    <li><a href="#">Zona Norte</a></li>
+                                    <li><a href="#">Zona Sur</a></li>
 						        </ul>
 					        </li>
 				        </ul>
                     </li>
-                    <li><a href="/">Contacto</a>
+                    <li><a href="#" onclick="return false;">Contacto</a>
                         <ul>
-			                <li><a href="#">About Page 1</a></li>
-			                <li><a href="#">About Page 2</a></li>
+			                <li><a href="#">Acerca de ACAF</a></li>
+			                <li><a href="#">Acerca del sitio</a></li>
 
 		                </ul>
                     </li>

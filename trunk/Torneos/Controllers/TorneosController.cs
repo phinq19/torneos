@@ -39,7 +39,7 @@ namespace Torneos.Controllers
                                 ubicacion = oTorneo.ubicacion,
                                 telefono2 = oTorneo.telefono2,
                                 dieta = oTorneo.dieta,
-                                observaciones = oTorneo.observaciones,
+                                observaciones = oTorneo.observaciones/*,
                                 Torneos_Canchas = from c in oTorneo.Torneos_Canchas
                                                   select new
                                                   {
@@ -47,7 +47,7 @@ namespace Torneos.Controllers
                                                       idCancha = c.idCancha,
                                                       viaticos = c.viaticos,
                                                       observaciones = c.observaciones
-                                                  }
+                                                  }*/
                             })
                 });
             }
@@ -104,9 +104,44 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
-        public JsonResult ValidarTorneoCanchas(Torneos_Canchas oCancha, String oper)
+        public JsonResult EditarTorneoCanchas(Torneos_Canchas oCancha, String oper)
         {
-            return new JsonResult();
+            JsonResult jsonData = null;
+            if (HttpContext.Request.IsAuthenticated)
+            {
+                try
+                {
+                    switch(oper){
+                        case"edit": 
+                            if(oCancha.accionregistro == 0){
+                                oCancha.accionregistro = 2;
+                            }
+                            break;
+                        case "add":
+                            oCancha.accionregistro = 1;
+                            oCancha.id = Math.Abs(Guid.NewGuid().GetHashCode());
+                            break;
+                        case "del":
+                            if (oCancha.accionregistro == 1)
+                            {
+                                oCancha.accionregistro = 0;
+                            }
+                            else {
+                                oCancha.accionregistro = 3;
+                            }
+                            break;
+                    }
+                }
+                catch
+                {
+                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
+                }
+            }
+            else
+            {
+                jsonData = Json(new { estado = "exito", mensaje = "", estadoValidacion = "sinAutenticar" });
+            }
+            return jsonData;
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

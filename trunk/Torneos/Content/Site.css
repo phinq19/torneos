@@ -378,7 +378,7 @@ input[type='text'],input[type='password']
     -moz-border-radius-bottomright: 5px;
     -moz-border-radius-bottomleft: 5px;
     border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px; 
+    border-bottom-left-radius: 5px;
 }
 
 .Fieldset
@@ -399,6 +399,13 @@ input[type='text'],input[type='password']
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px; 
 }
+
+.EncabezadoSeccionContenidoLogin a 
+{
+    color:#FFF;
+    text-decoration:underline;     
+}
+
 /*
 #SeccionContenidoLogin h1
 {
