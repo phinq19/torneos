@@ -30,7 +30,7 @@
                 loadonce: true,
                 viewrecords: true,
                 caption: "Canchas en las que se juega el torneo",
-                editurl: '<%= Url.Action("EditarTorneoCanchas","Torneos") %>',
+                editurl: '<%= Url.Action("ValidarTorneoCanchas","Torneos") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 120,
