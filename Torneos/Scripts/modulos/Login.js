@@ -15,6 +15,8 @@
         Autenticar();
         return false;
     });
+
+    $("#TxtCodigo").focus();
 });
 
 
