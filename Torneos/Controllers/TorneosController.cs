@@ -104,7 +104,7 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
-        public JsonResult EditarTorneoCanchas(Torneos_Canchas oCancha, String oper)
+        public JsonResult ValidarTorneoCanchas(Torneos_Canchas oCancha, String oper)
         {
             JsonResult jsonData = null;
             if (HttpContext.Request.IsAuthenticated)
@@ -131,6 +131,7 @@ namespace Torneos.Controllers
                             }
                             break;
                     }
+                    jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCancha, estadoValidacion = "exito" });
                 }
                 catch
                 {
@@ -148,6 +149,7 @@ namespace Torneos.Controllers
         [Authorize]
         public JsonResult EditarTorneos(Torneos oTorneo, String oper)
         {
+            int nIDTorneos = 0;
             JsonResult jsonData = null;
             if (HttpContext.Request.IsAuthenticated)
             {
@@ -171,6 +173,7 @@ namespace Torneos.Controllers
                             bdTorneos.AddToTorneos(oTorneosNuevo);
                             bdTorneos.SaveChanges();
                             bdTorneos.Detach(oTorneosNuevo);
+                            nIDTorneos = oTorneosNuevo.id;
 
                             jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosNuevo, estadoValidacion = "exito" });
 
@@ -184,6 +187,7 @@ namespace Torneos.Controllers
 
                             bdTorneos.DeleteObject(oTorneosEliminado);
                             bdTorneos.SaveChanges();
+                            nIDTorneos = oTorneosEliminado.id;
                             break;
                         case "edit":
                             Torneos oTorneosEditado = (from t in bdTorneos.Torneos
@@ -200,9 +204,13 @@ namespace Torneos.Controllers
 
                             bdTorneos.SaveChanges();
                             bdTorneos.Detach(oTorneosEditado);
+                            nIDTorneos = oTorneosEditado.id;
 
                             jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosEditado, estadoValidacion = "exito" });
                             break;
+                    }
+                    foreach (Torneos_Canchas oCancha in oTorneo.Torneos_Canchas) {
+                        EditarTorneosCanchas(oCancha, nIDTorneos);
                     }
                 }
                 catch
@@ -217,5 +225,46 @@ namespace Torneos.Controllers
             return jsonData;
         }
 
+        //[AcceptVerbs(HttpVerbs.Post)]
+        //[Authorize]
+        public void EditarTorneosCanchas(Torneos_Canchas oCancha, int nIDTorneo)
+        {
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+            switch (oCancha.accionregistro)
+            {
+                case 1:
+                    Torneos_Canchas oCanchaNuevo = new Torneos_Canchas();
+                    oCanchaNuevo.viaticos = oCancha.viaticos;
+                    oCanchaNuevo.idCancha = oCancha.idCancha;
+                    oCanchaNuevo.observaciones = oCancha.observaciones;
+                    oCanchaNuevo.idTorneo = nIDTorneo;
+                    oCanchaNuevo.id = 0;
+
+                    bdTorneos.AddToTorneos_Canchas(oCanchaNuevo);
+                    bdTorneos.SaveChanges();
+
+                    break;
+                case 3:
+                    Torneos_Canchas oCanchaEliminado = (from t in bdTorneos.Torneos_Canchas
+                                                    where t.id == oCancha.id
+                                                    select t).Single();
+
+                    bdTorneos.DeleteObject(oCanchaEliminado);
+                    bdTorneos.SaveChanges();
+                    break;
+                case 2:
+                    Torneos_Canchas oCanchaEditado = (from t in bdTorneos.Torneos_Canchas
+                                                where t.id == oCancha.id
+                                                select t).Single();
+
+                                                oCanchaEditado.idCancha = oCanchaEditado.idCancha;
+                    oCanchaEditado.viaticos = oCanchaEditado.viaticos;
+                    oCanchaEditado.observaciones = oCanchaEditado.observaciones;
+
+                    bdTorneos.SaveChanges();
+                           
+                    break;
+            }
+        }
     }
 }
