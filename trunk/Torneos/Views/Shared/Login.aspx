@@ -74,15 +74,15 @@
                         <h1>Inicio de Sesión</h1>
                     </div>
                     <div class="ContenidoSeccionContenidoLogin EsquinasInferioresRedondas">
-                        <form id="frmLogin" action="">
+                        <form id="frmLogin" class="cmxform" action="">
                         <div id="mensajeAutenticacio" class="error"></div>
                         <div class="ContenidoOrdenado">
                             <div class="fila">
                                 <div class="celdaLabel">
-                                    <label>Código Usuario:</label>
+                                    <label>Usuario:</label>
                                 </div>
                                 <div class="">
-                                    <input id="TxtCodigo" type="text" class="required"/>
+                                    <input id="TxtCodigo" name="TxtCodigo" type="text" class="required"/>
                                 </div>
                             </div>
                             <div class="fila">
@@ -90,7 +90,7 @@
                                     <label>Contraseña:</label>
                                 </div>
                                 <div class="celdaCampo">
-                                    <input id="TxtContrasena" type="password" class="required"/>
+                                    <input id="TxtContrasena" name="TxtContrasena" type="password" class="required"/>
                                 </div>
                             </div>
                             <div class="fila">
