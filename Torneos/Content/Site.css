@@ -22,7 +22,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	/*vertical-align: baseline;*/
+	vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -205,12 +205,14 @@ body
 
 .celdaCampo
 {
-    display:table-cell; 
+    display:table-cell;
+    /*display:inline-block;*/
     text-align:left; 
     min-width:180px;
-    padding-top:7px;
+    /*padding-top:7px;*/
     padding-bottom:7px;
     margin-top:15px;
+    vertical-align:top;
 }
 
 .celdaCampoDerecha
@@ -227,6 +229,7 @@ body
     display:table-cell; 
     text-align:right; 
     padding-right: 10px;
+    vertical-align:top;
 }
 
 #sliderInicio
@@ -378,7 +381,7 @@ input[type='text'],input[type='password']
     /*
     width:150px;
     */
-    height:15px;
+    height:16px;
     
     -webkit-border-top-right-radius: 5px;
     -webkit-border-top-left-radius: 5px;
@@ -433,4 +436,9 @@ label.error {
 	color: red; 
 	padding-left: .5em; 
 	vertical-align: top; 
+}
+
+.error
+{
+    display:block;
 }

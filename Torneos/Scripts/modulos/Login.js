@@ -6,19 +6,23 @@
     $("#frmLogin input").keypress(function (event) {
         var code = (event.keyCode ? event.keyCode : event.which);
         if (code == 13) {
-            Autenticar();
+            if ($("#frmLogin").valid()) {
+                Autenticar();
+            }
             return false;
         }
     });
 
     $("#BtnIngresar").click(function (event) {
-        Autenticar();
+        if ($("#frmLogin").valid()) {
+            Autenticar();
+        }
         return false;
     });
 
     $("#TxtCodigo").focus();
 
-    $("#frmLogin").validate({
+    $("#frmLogin").validate(/*{
         rules: {
             TxtCodigo: "required",
             TxtContrasena: "required"
@@ -27,7 +31,7 @@
             TxtCodigo: "Debe ingresar un código de usuario",
             TxtContrasena: "Debe ingresar una contraseña"
         }
-    });
+    }*/);
 });
 
 
