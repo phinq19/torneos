@@ -9,7 +9,7 @@
     <script type='text/javascript'>
         $(document).ready(function () {
 
-            $("#frmTorneos").validate(); 
+            $("#frmTorneos").validate();
 
             $("#ventanaEditar").dialog({
                 autoOpen: false,
@@ -70,11 +70,11 @@
                         case "exito":
                             switch (datos.estadoValidacion) {
                                 case "exito":
-                                    //registroCliente = datos.ObjetoDetalle;
+                                    //var registroCliente = datos.ObjetoDetalle;
                                     $.each(datos.ObjetoDetalle, function (att, value) {
                                         registroCliente[att] = value;
                                     });
-                                    ActualizarEntidad(registroCliente)
+                                    ActualizarEntidad(registroCliente);
                                     return [true, '', datos.ObjetoDetalle.id];
                                     break;
                                 case "error":
@@ -111,6 +111,10 @@
                         case "exito":
                             switch (datos.estadoValidacion) {
                                 case "exito":
+                                    $.each(datos.ObjetoDetalle, function (att, value) {
+                                        registroCliente[att] = value;
+                                    });
+                                    ActualizarEntidad(registroCliente);
                                     return [true, '', datos.ObjetoDetalle.id];
                                     break;
                                 case "error":
