@@ -116,6 +116,18 @@ namespace Torneos.Controllers
                             if(oCancha.accionregistro == 0){
                                 oCancha.accionregistro = 2;
                             }
+                            /*
+                            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                            Torneos_Canchas oCanchaEditado = (from t in bdTorneos.Torneos_Canchas
+                                                where t.id == oCancha.id
+                                                select t).Single();
+
+                            oCanchaEditado.idCancha = oCancha.idCancha;
+                            oCanchaEditado.viaticos = oCancha.viaticos;
+                            oCanchaEditado.observaciones = oCancha.observaciones;
+                            bdTorneos.SaveChanges();
+                            bdTorneos.Detach(oCanchaEditado);
+                            */
                             break;
                         case "add":
                             oCancha.accionregistro = 1;
@@ -147,7 +159,7 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
-        public JsonResult EditarTorneos(Torneos oTorneo, String oper)
+        public JsonResult EditarTorneos(Torneos oTorneo, Torneos_Canchas[] oCanchas, String oper)
         {
             int nIDTorneos = 0;
             JsonResult jsonData = null;
@@ -209,7 +221,8 @@ namespace Torneos.Controllers
                             jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosEditado, estadoValidacion = "exito" });
                             break;
                     }
-                    foreach (Torneos_Canchas oCancha in oTorneo.Torneos_Canchas) {
+                    //foreach (Torneos_Canchas oCancha in oTorneo.Torneos_Canchas) {oCanchas
+                    foreach (Torneos_Canchas oCancha in oCanchas) {
                         EditarTorneosCanchas(oCancha, nIDTorneos);
                     }
                 }
@@ -240,6 +253,7 @@ namespace Torneos.Controllers
                     oCanchaNuevo.idTorneo = nIDTorneo;
                     oCanchaNuevo.id = 0;
 
+
                     bdTorneos.AddToTorneos_Canchas(oCanchaNuevo);
                     bdTorneos.SaveChanges();
 
@@ -257,9 +271,9 @@ namespace Torneos.Controllers
                                                 where t.id == oCancha.id
                                                 select t).Single();
 
-                                                oCanchaEditado.idCancha = oCanchaEditado.idCancha;
-                    oCanchaEditado.viaticos = oCanchaEditado.viaticos;
-                    oCanchaEditado.observaciones = oCanchaEditado.observaciones;
+                    oCanchaEditado.idCancha = oCancha.idCancha;
+                    oCanchaEditado.viaticos = oCancha.viaticos;
+                    oCanchaEditado.observaciones = oCancha.observaciones;
 
                     bdTorneos.SaveChanges();
                            
