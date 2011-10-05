@@ -9,6 +9,8 @@
     <script type='text/javascript'>
         $(document).ready(function () {
 
+            $("#frmTorneos").validate(); 
+
             $("#ventanaEditar").dialog({
                 autoOpen: false,
                 zIndex: 500,
@@ -16,7 +18,7 @@
                 modal: true,
                 title: "Torneos",
                 closeOnEscape: true,
-                height: 500,
+                height: 550,
                 width: 800
             });
 
@@ -69,7 +71,7 @@
                             switch (datos.estadoValidacion) {
                                 case "exito":
                                     //registroCliente = datos.ObjetoDetalle;
-                                    $.each(datos.ObjetoDetall, function (att, value) {
+                                    $.each(datos.ObjetoDetalle, function (att, value) {
                                         registroCliente[att] = value;
                                     });
                                     ActualizarEntidad(registroCliente)
@@ -133,8 +135,8 @@
                 add: true,
                 del: true,
                 refresh: false,
-                search: true,
-                view: true
+                search: false,
+                view: false
             }, //options 
                  ProcesarEditar_gvCanchas, // edit options 
                  ProcesarEditar_gvCanchas, // add options 
@@ -251,21 +253,21 @@
 
         function ActualizarEntidad(oRegistro) {
             var indiceRegistro = -1;
-            for (var i = 0; i < oRegistros.length; i++) {
+            for (var i = 0; i < _Torneo.Torneos_Canchas.length; i++) {
                 if (_Torneo.Torneos_Canchas[i].id == oRegistro.id) {
                     indiceRegistro = i;
                 }
             }
             switch (oRegistro.accionregistro) {
                 case 0:
-                    oRegistros.splice(indiceRegistro, 1);
+                    oRegistros.splice(_Torneo.Torneos_Canchas[indiceRegistro], 1);
                 break;
                 case 1:
-                    _Torneo.Torneos_Canchas.push(datos.ObjetoDetalle);
+                    _Torneo.Torneos_Canchas.push(oRegistro);
                 break;
                 case 2:
                 case 3:
-                    _Torneo.Torneos_Canchas[indiceRegistro] = indiceRegistro;
+                    _Torneo.Torneos_Canchas[indiceRegistro] = oRegistro;
                     break;
             }
         }
@@ -286,6 +288,10 @@
         }
 
         function CargarCampos() {
+            var Entidad = {};
+            var oTorneo = {};
+            var oCanchas = [];
+            /*
             _Torneo.nombre = $("#TxtNombre").val();
             _Torneo.categoria = $("#selCategoria").val();
             _Torneo.telefono1 = $("#TxtTelefono1").val();
@@ -293,6 +299,32 @@
             _Torneo.dieta = $("#TxtDieta").val();
             _Torneo.ubicacion = $("#TxtUbicacion").val();
             _Torneo.observaciones = $("#TxtObservaciones").val();
+            */
+            oTorneo.nombre = $("#TxtNombre").val();
+            oTorneo.categoria = $("#selCategoria").val();
+            oTorneo.telefono1 = $("#TxtTelefono1").val();
+            oTorneo.telefono2 = $("#TxtTelefono2").val();
+            oTorneo.dieta = $("#TxtDieta").val();
+            oTorneo.ubicacion = $("#TxtUbicacion").val();
+            oTorneo.observaciones = $("#TxtObservaciones").val();
+            oTorneo.idAsociacion = _Torneo.idAsociacion;
+            oTorneo.id = _Torneo.id;
+            for (var i = 0; i < _Torneo.Torneos_Canchas.length; i++) {
+                var oCancha = {};
+                oCancha.id = _Torneo.Torneos_Canchas[i].id;
+                oCancha.viaticos = _Torneo.Torneos_Canchas[i].viaticos.toString();
+                oCancha.idCancha = _Torneo.Torneos_Canchas[i].idCancha;
+                oCancha.observaciones = _Torneo.Torneos_Canchas[i].observaciones;
+                oCancha.idTorneo = _Torneo.Torneos_Canchas[i].idTorneo;
+                oCancha.accionregistro = _Torneo.Torneos_Canchas[i].accionregistro;
+                
+                oCanchas.push(oCancha);
+
+            }
+            Entidad["oTorneo"] = oTorneo;
+            Entidad["oCanchas"] = oCanchas;
+            return Entidad;
+            
         }
 
         function Limpiar() {
@@ -322,7 +354,15 @@
         }
 
         function ValidarCampos() {
-            return true;   
+            var bCampos = $("#frmTorneos").valid();
+            var bCanchas = $('#gridCanchas').getGridParam("data").length > 0;
+            if(bCanchas == false){
+                alert("Debe de asignar al menos una cancha al torneos");
+            }
+            if (bCanchas == false || bCampos == false) {
+                return false;
+            }
+            return true;
         }
 
 
@@ -357,8 +397,9 @@
 
         function GuardarEditar() {
             if (ValidarCampos()) {
-                CargarCampos();
-                var oParametrosAjax = { oTorneo: _Torneo, oper: "edit" };
+                var oParametrosAjax = CargarCampos();
+                oParametrosAjax["oper"] = "edit";
+                //var oParametrosAjax = { oTorneo: _Torneo, oCanchas: _Torneo.Torneos_Canchas, oper: "edit" };
 
                 var funcionProcesamientoCliente = function (oRespuesta) {
                     $("#gridTorneos").trigger('reloadGrid');
@@ -385,7 +426,8 @@
 
     </script>
     <div id="ventanaEditar">
-        <fieldset class="Fieldset">
+        <form id="frmTorneos" action="">
+            <fieldset class="Fieldset">
             <legend>Identificación</legend>
             <div class="ContenidoOrdenado">
                 <div class="fila">
@@ -393,7 +435,7 @@
                         Nombre
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtNombre" type="text" />
+                        <input id="TxtNombre" class="required" type="text" />
                     </div>
                     <div class="celdaLabel">
                         Categoría
@@ -406,8 +448,8 @@
                     <div class="celdaLabel">
                         Teléfono 1
                     </div>
-                    <div class="">
-                        <input id="TxtTelefono1" type="text" />
+                    <div class="celdaCampo">
+                        <input id="TxtTelefono1" class="required" type="text" />
                     </div>
                     <div class="celdaLabel">
                         Teléfono 2
@@ -421,7 +463,7 @@
                         Dieta
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtDieta" type="text" />
+                        <input id="TxtDieta" class="required" type="text" />
                     </div>
                 </div>
                 <div class="fila">
@@ -429,7 +471,7 @@
                         Ubicación
                     </div>
                     <div class="">
-                        <textarea id="TxtUbicacion" rows="2" cols="40"></textarea>
+                        <textarea id="TxtUbicacion" class="required" rows="2" cols="40"></textarea>
                     </div>
                     <div class="celdaLabel">
                         Observaciones
@@ -440,11 +482,12 @@
                 </div>
             </div>
         </fieldset>
-        <br />
-        <table id="gridCanchas">
-        </table>
-        <div id="barraGridCanchas">
-        </div>
+    </form>
+    <br />
+    <table id="gridCanchas">
+    </table>
+    <div id="barraGridCanchas">
+    </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">

@@ -170,6 +170,11 @@
     <Content Include="Scripts\lib\grid\jquery.jqGrid.src.js" />
     <Content Include="Scripts\lib\jquery-1.5.2.min.js" />
     <Content Include="Scripts\lib\jqueryui\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Scripts\lib\Validate\additional-methods.js" />
+    <Content Include="Scripts\lib\Validate\additional-methods.min.js" />
+    <Content Include="Scripts\lib\Validate\jquery.validate.js" />
+    <Content Include="Scripts\lib\Validate\jquery.validate.min.js" />
+    <Content Include="Scripts\lib\Validate\messages_es.js" />
     <Content Include="Scripts\modulos\Login.js" />
     <Content Include="Scripts\lib\s3Slider.js" />
     <Content Include="Scripts\lib\s3SliderPacked.js" />
