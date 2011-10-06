@@ -5,7 +5,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Encabezado" runat="server">
     <div class="columnaDerecha">
         <div class="ElementoEncabezado">
-            <%= Page.User.Identity.Name.ToUpper() %></div>
+            Torneo: <%= Torneos.Utilidades.ObtenerNombreTorneoUsuario(Convert.ToInt32(Session["idTorneo"]))%></div>
+        <div class="ElementoEncabezado">
+            Usuario: <%= Page.User.Identity.Name.ToUpper() %></div>
         <div class="ElementoEncabezado">
             <a href="#" id="LnkSalir">Salir</a></div>
     </div>

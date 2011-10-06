@@ -1355,7 +1355,8 @@ namespace Torneos
         /// <param name="fecha_hora">Initial value of the fecha_hora property.</param>
         /// <param name="coordinador">Initial value of the coordinador property.</param>
         /// <param name="estado">Initial value of the estado property.</param>
-        public static Partidos CreatePartidos(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.Int32 idProgramacion, global::System.Int32 idCancha, global::System.DateTime fecha_hora, global::System.String coordinador, global::System.Int32 estado)
+        /// <param name="equipos">Initial value of the equipos property.</param>
+        public static Partidos CreatePartidos(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.Int32 idProgramacion, global::System.Int32 idCancha, global::System.DateTime fecha_hora, global::System.String coordinador, global::System.Int32 estado, global::System.String equipos)
         {
             Partidos partidos = new Partidos();
             partidos.id = id;
@@ -1365,6 +1366,7 @@ namespace Torneos
             partidos.fecha_hora = fecha_hora;
             partidos.coordinador = coordinador;
             partidos.estado = estado;
+            partidos.equipos = equipos;
             return partidos;
         }
 
@@ -1613,6 +1615,54 @@ namespace Torneos
         private global::System.Int32 _estado;
         partial void OnestadoChanging(global::System.Int32 value);
         partial void OnestadoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> accionregistro
+        {
+            get
+            {
+                return _accionregistro;
+            }
+            set
+            {
+                OnaccionregistroChanging(value);
+                ReportPropertyChanging("accionregistro");
+                _accionregistro = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("accionregistro");
+                OnaccionregistroChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _accionregistro;
+        partial void OnaccionregistroChanging(Nullable<global::System.Int32> value);
+        partial void OnaccionregistroChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String equipos
+        {
+            get
+            {
+                return _equipos;
+            }
+            set
+            {
+                OnequiposChanging(value);
+                ReportPropertyChanging("equipos");
+                _equipos = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("equipos");
+                OnequiposChanged();
+            }
+        }
+        private global::System.String _equipos;
+        partial void OnequiposChanging(global::System.String value);
+        partial void OnequiposChanged();
 
         #endregion
     

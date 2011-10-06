@@ -35,8 +35,10 @@ namespace Torneos.Controllers
                                                select u;
                 if (usuarios.Count() == 1)
                 {
+                    Usuarios oUsuario = usuarios.Single<Usuarios>();
                     FormsAuthentication.SetAuthCookie(cCodigoUsuario, false);
-                    Session.Add("tipo", usuarios.First().tipo);
+                    Session.Add("tipo", oUsuario.tipo);
+                    Session.Add("idTorneo", oUsuario.idTorneo);
                     jsonData = Json(new { mensaje = "", estadoAutenticacion = "autenticado", estado = "exito" });
                 }
                 else

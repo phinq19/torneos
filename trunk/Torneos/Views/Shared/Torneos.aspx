@@ -417,8 +417,9 @@
         function GuardarAgregar() {
             if (ValidarCampos()) {
                 CargarCampos();
-                var oParametrosAjax = { oTorneo: _Torneo, oper: "add" };
-
+                //var oParametrosAjax = { oTorneo: _Torneo, oper: "add" };
+                var oParametrosAjax = CargarCampos();
+                oParametrosAjax["oper"] = "add";
                 var funcionProcesamientoCliente = function (oRespuesta) {
                     $("#gridTorneos").trigger('reloadGrid');
                     $("#ventanaEditar").dialog("close");

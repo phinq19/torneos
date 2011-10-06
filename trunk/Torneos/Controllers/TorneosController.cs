@@ -15,7 +15,6 @@ namespace Torneos.Controllers
             return View("Torneos");
         }
 
-
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
         public JsonResult ObtenerTorneos()
@@ -57,7 +56,6 @@ namespace Torneos.Controllers
             }
             return jsonData;   
         }
-
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]

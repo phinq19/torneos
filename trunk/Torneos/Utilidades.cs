@@ -41,7 +41,7 @@ namespace Torneos
             oMenu.AppendLine("          <a href=\"/Torneos/\" class=\"itemMenu\">Torneos<a>");
             oMenu.AppendLine("      </td>");
             oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Solicitudes/\" class=\"itemMenu\">Programaciones<a>");
+            oMenu.AppendLine("          <a href=\"/Programaciones/\" class=\"itemMenu\">Programaciones<a>");
             oMenu.AppendLine("      </td>");
             oMenu.AppendLine("  </tr>");
             oMenu.AppendLine("  <tr>");
@@ -156,6 +156,30 @@ namespace Torneos
 
         }
 
+        public static String CrearSelectorTorneosCanchasParaGrid(int idTorneo)
+        {
+            StringBuilder selCanchas = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+           
+            List<Canchas> oListaCanchas  = (from tc in bdTorneos.Torneos_Canchas
+                                            join t in bdTorneos.Torneos on idTorneo equals t.id
+                                            join c in bdTorneos.Canchas on tc.idCancha equals c.id
+                                            select c).ToList<Canchas>();
+
+            for (int indice = 0; indice < oListaCanchas.Count; indice++)
+            {
+                if (!String.IsNullOrEmpty(selCanchas.ToString()))
+                {
+                    selCanchas.Append(";");
+                }
+                selCanchas.Append(oListaCanchas[indice].id + ":" + oListaCanchas[indice].nombre);
+            }
+
+            return selCanchas.ToString();
+
+        }
+
         public static String CrearSelectorCategoriasParaGrid()
         {
             StringBuilder selCategoria = new StringBuilder();
@@ -189,5 +213,20 @@ namespace Torneos
 
             return selTiposUsuario.ToString();
         }
+
+        public static String ObtenerNombreTorneoUsuario(int idTorneo){
+            String cNombreTorneo = "No tiene asignado";
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            IQueryable<Torneos> Torneo = from t in bdTorneos.Torneos
+                                         where t.id == idTorneo
+                                         select t;
+            if (Torneo.Count() == 1)
+            {
+                Torneos oTorneo = Torneo.Single<Torneos>();
+                cNombreTorneo = oTorneo.nombre;
+            }
+            return cNombreTorneo;
+        } 
     }
 }
