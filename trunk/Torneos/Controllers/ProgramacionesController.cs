@@ -81,6 +81,7 @@ namespace Torneos.Controllers
                                                       oPartidos.fecha_hora,
                                                       oPartidos.idCancha,
                                                       oPartidos.telefono_coordinador,
+                                                      oPartidos.equipos,
                                                       accionregistro = 0
                                                   }
                             }

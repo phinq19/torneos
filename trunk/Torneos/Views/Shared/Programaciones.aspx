@@ -41,7 +41,7 @@
                 colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>" }, formatter: 'select' },
+                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Convert.ToInt32(Session["idTorneo"])) %>' }, formatter: 'select' },
                     { name: 'viaticos', index: 'viaticos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
@@ -164,15 +164,13 @@
                 height: 250,
                 width: 850,
                 shrinkToFit: false,
-                colNames: ['id', 'Nombre', 'Ubicacion', 'Categoría', 'Teléfono 1', 'Teléfono 2', 'Dieta', 'Observaciones'],
+                colNames: ['id', 'Torneo', 'Estado', 'Depósito', 'Monto', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'ubicacion', index: 'ubicacion', width: 300, editable: true, sortable: false, edittype: "textarea", editoptions: { rows: "2", cols: "50" }, editrules: { required: true} },
-                    { name: 'categoria', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCategoriasParaGrid() %>" }, formatter: 'select' },
-                    { name: 'telefono1', index: 'telefono1', width: 80, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
-                    { name: 'telefono2', index: 'telefono2', width: 80, editable: true, sortable: false, editoptions: { size: 20} },
-                    { name: 'dieta', index: 'nombre', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'idTorneo', index: 'idTorneo', width: 250, editable: true, editoptions: { size: 40 }, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosParaGrid() %>' }, formatter: 'select' },
+                    { name: 'estado', index: 'estado', width: 100, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoProgramacionesParaGrid() %>' }, formatter: 'select' },
+                    { name: 'deposito', index: 'deposito', width: 300, editable: true, sortable: false, editrules: { required: true} },
+                    { name: 'monto', index: 'monto', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
             });
@@ -277,12 +275,10 @@
         function MostrarTorneo(oTorneo) {
             _Programacion = oTorneo;
 
-            $("#TxtNombre").val(oTorneo.nombre);
-            $("#selCategoria").val(oTorneo.categoria);
-            $("#TxtTelefono1").val(oTorneo.telefono1);
-            $("#TxtTelefono2").val(oTorneo.telefono2);
-            $("#TxtDieta").val(oTorneo.dieta);
-            $("#TxtUbicacion").val(oTorneo.ubicacion);
+            $("#selEstado").val(oTorneo.estado);
+            $("#TxtDeposito").val(oTorneo.deposito);
+            $("#TxtMonto").val(oTorneo.monto);
+            $("#selTorneosTorneo").val(oTorneo.idTorneo);
             $("#TxtObservaciones").val(oTorneo.observaciones);
 
             $('#gridPartidos').clearGridData();
@@ -293,24 +289,13 @@
             var Entidad = {};
             var oProgramacion = {};
             var oPartidos = [];
-            /*
-            _Programacion.nombre = $("#TxtNombre").val();
-            _Programacion.categoria = $("#selCategoria").val();
-            _Programacion.telefono1 = $("#TxtTelefono1").val();
-            _Programacion.telefono2 = $("#TxtTelefono2").val();
-            _Programacion.dieta = $("#TxtDieta").val();
-            _Programacion.ubicacion = $("#TxtUbicacion").val();
-            _Programacion.observaciones = $("#TxtObservaciones").val();
-            */
-            oProgramacion.nombre = $("#TxtNombre").val();
-            oProgramacion.categoria = $("#selCategoria").val();
-            oProgramacion.telefono1 = $("#TxtTelefono1").val();
-            oProgramacion.telefono2 = $("#TxtTelefono2").val();
-            oProgramacion.dieta = $("#TxtDieta").val();
-            oProgramacion.ubicacion = $("#TxtUbicacion").val();
+
+            oProgramacion.deposito = $("#TxtDeposito").val();
+            oProgramacion.monto = $("#TxtMonto").val();
+            oProgramacion.idTorneo = $("#selTorneosTorneo").val();
             oProgramacion.observaciones = $("#TxtObservaciones").val();
-            oProgramacion.idAsociacion = _Programacion.idAsociacion;
             oProgramacion.id = _Programacion.id;
+
             for (var i = 0; i < _Programacion.Partidos.length; i++) {
                 var oPartido = {};
                 oPartido.id = _Programacion.Partidos[i].id;

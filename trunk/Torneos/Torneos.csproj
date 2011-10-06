@@ -71,7 +71,8 @@
     <Compile Include="Controllers\VerificacionesController.cs" />
     <Compile Include="CategoriasTorneos.cs" />
     <Compile Include="AccionRegistro.cs" />
-    <Compile Include="Copy of TiposUsuario.cs" />
+    <Compile Include="EstadoPartidos.cs" />
+    <Compile Include="TiposUsuario.cs" />
     <Compile Include="dbTorneos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
