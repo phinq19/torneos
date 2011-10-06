@@ -136,7 +136,9 @@
           <Property Name="telefono_coordinador" Type="varchar" MaxLength="64" />
           <Property Name="informe" Type="varchar" MaxLength="3072" />
           <Property Name="observaciones" Type="varchar" MaxLength="1024" />
+          <Property Name="equipos" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="accionregistro" Type="int" />
         </EntityType>
         <EntityType Name="Programaciones">
           <Key>
@@ -568,6 +570,8 @@
           <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Partidos_Canchas" FromRole="Partidos" ToRole="Canchas" />
           <NavigationProperty Name="DetallePartidos" Relationship="TorneosModel.FK_DetallePartidos_Partidos" FromRole="Partidos" ToRole="DetallePartidos" />
           <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Partidos" ToRole="Programaciones" />
+          <Property Type="Int32" Name="accionregistro" />
+          <Property Type="String" Name="equipos" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Programaciones">
           <Key>
@@ -913,6 +917,8 @@
           <EntitySetMapping Name="Partidos">
             <EntityTypeMapping TypeName="TorneosModel.Partidos">
               <MappingFragment StoreEntitySet="Partidos">
+                <ScalarProperty Name="equipos" ColumnName="equipos" />
+                <ScalarProperty Name="accionregistro" ColumnName="accionregistro" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
                 <ScalarProperty Name="informe" ColumnName="informe" />

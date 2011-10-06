@@ -1,38 +1,38 @@
-﻿<%@ Page Title="ACAF Torneos" Language="C#" MasterPageFile="~/Views/Shared/MarcoLogeado.master"
+﻿<%@ Page Title="ACAF Programaciones" Language="C#" MasterPageFile="~/Views/Shared/MarcoLogeado.master"
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
-    <table id="gridTorneos">
+    <table id="gridProgramaciones">
     </table>
-    <div id="barraGridTorneos">
+    <div id="barraGridProgramaciones">
     </div>
     <script type='text/javascript'>
         $(document).ready(function () {
 
-            $("#frmTorneos").validate();
+            $("#frmProgramaciones").validate();
 
             $("#ventanaEditar").dialog({
                 autoOpen: false,
                 zIndex: 500,
                 resizable: false,
                 modal: true,
-                title: "Torneos",
+                title: "Programaciones",
                 //closeOnEscape: true,
                 height: 550,
                 width: 800
             });
 
-            $("#gridCanchas").jqGrid({
+            $("#gridPartidos").jqGrid({
                 //url: '<%= Url.Action("ObtenerTorneos","Torneos") %>',
                 datatype: "local",
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 mtype: "post",
-                pager: '#barraGridCanchas',
+                pager: '#barraGridPartidos',
                 loadonce: true,
                 viewrecords: true,
-                caption: "Canchas en las que se juega el torneo",
-                editurl: '<%= Url.Action("ValidarTorneoCanchas","Torneos") %>',
+                caption: "Partidos de la jornada",
+                editurl: '<%= Url.Action("ValidarPartidos","Programaciones") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 120,
@@ -41,16 +41,14 @@
                 colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCanchasParaGrid() %>" }, formatter: 'select' },
+                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>" }, formatter: 'select' },
                     { name: 'viaticos', index: 'viaticos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
             });
 
-
-
-            var ProcesarEditar_gvCanchas = {
+            var ProcesarEditar_gvPartidos = {
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
@@ -92,7 +90,7 @@
                 }
             }
 
-            var Procesar_Eliminar_gvCanchas = {
+            var Procesar_Eliminar_gvPartidos = {
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
@@ -133,7 +131,7 @@
             }
 
 
-            $("#gridCanchas").jqGrid('navGrid', '#barraGridCanchas',
+            $("#gridPartidos").jqGrid('navGrid', '#barraGridPartidos',
             {
                 edit: true,
                 add: true,
@@ -142,24 +140,24 @@
                 search: false,
                 view: true
             }, //options 
-                 ProcesarEditar_gvCanchas, // edit options 
-                 ProcesarEditar_gvCanchas, // add options 
-                 Procesar_Eliminar_gvCanchas, // del options
+                 ProcesarEditar_gvPartidos, // edit options 
+                 ProcesarEditar_gvPartidos, // add options 
+                 Procesar_Eliminar_gvPartidos, // del options
                  {}, // search options 
                  {width: "600" }
             );
 
 
-            $("#gridTorneos").jqGrid({
-                url: '<%= Url.Action("ObtenerTorneos","Torneos") %>',
+            $("#gridProgramaciones").jqGrid({
+                url: '<%= Url.Action("ObtenerProgramaciones","Programaciones") %>',
                 datatype: "json",
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 mtype: "post",
-                pager: '#barraGridTorneos',
+                pager: '#barraGridProgramaciones',
                 //loadonce: true,
                 viewrecords: true,
-                caption: "Mantenimiento de Torneos",
+                caption: "Programación de partidos",
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
@@ -180,7 +178,7 @@
             });
 
 
-            $("#gridTorneos").jqGrid("navGrid", "#barraGridTorneos",
+        $("#gridProgramaciones").jqGrid("navGrid", "#barraGridProgramaciones",
         {
             addfunc: function () {
                 MostrarVentana("add");
@@ -198,14 +196,14 @@
         { multipleSearch: true }
         );
 
-            jQuery("#gridTorneos").jqGrid('navButtonAdd', '#barraGridTorneos',
+            jQuery("#gridProgramaciones").jqGrid('navButtonAdd', '#barraGridProgramaciones',
         {
             id: "VerRegistrogvComponentes",
             caption: "",
             title: "Ver detalle",
             buttonicon: "ui-icon ui-icon-document",
             onClickButton: function () {
-                var cIdView = jQuery('#gridTorneos').getGridParam("selrow");
+                var cIdView = jQuery('#gridProgramaciones').getGridParam("selrow");
                 if (cIdView == null) {
                     alert("Seleccione una fila");
                 }
@@ -251,33 +249,33 @@
             
         }
 
-        var _Torneo = {
-            Torneos_Canchas: []
+        var _Programacion = {
+            Partidos: []
         };
 
         function ActualizarEntidad(oRegistro) {
             var indiceRegistro = -1;
-            for (var i = 0; i < _Torneo.Torneos_Canchas.length; i++) {
-                if (_Torneo.Torneos_Canchas[i].id == oRegistro.id) {
+            for (var i = 0; i < _Programacion.Partidos.length; i++) {
+                if (_Programacion.Partidos[i].id == oRegistro.id) {
                     indiceRegistro = i;
                 }
             }
             switch (oRegistro.accionregistro) {
                 case 0:
-                    oRegistros.splice(_Torneo.Torneos_Canchas[indiceRegistro], 1);
+                    oRegistros.splice(_Programacion.Partidos[indiceRegistro], 1);
                 break;
                 case 1:
-                    _Torneo.Torneos_Canchas.push(oRegistro);
+                    _Programacion.Partidos.push(oRegistro);
                 break;
                 case 2:
                 case 3:
-                    _Torneo.Torneos_Canchas[indiceRegistro] = oRegistro;
+                    _Programacion.Partidos[indiceRegistro] = oRegistro;
                     break;
             }
         }
 
         function MostrarTorneo(oTorneo) {
-            _Torneo = oTorneo;
+            _Programacion = oTorneo;
 
             $("#TxtNombre").val(oTorneo.nombre);
             $("#selCategoria").val(oTorneo.categoria);
@@ -287,53 +285,53 @@
             $("#TxtUbicacion").val(oTorneo.ubicacion);
             $("#TxtObservaciones").val(oTorneo.observaciones);
 
-            $('#gridCanchas').clearGridData();
-            $('#gridCanchas').setGridParam({ data: oTorneo.Torneos_Canchas }).trigger('reloadGrid');
+            $('#gridPartidos').clearGridData();
+            $('#gridPartidos').setGridParam({ data: oTorneo.Partidos }).trigger('reloadGrid');
         }
 
         function CargarCampos() {
             var Entidad = {};
-            var oTorneo = {};
-            var oCanchas = [];
+            var oProgramacion = {};
+            var oPartidos = [];
             /*
-            _Torneo.nombre = $("#TxtNombre").val();
-            _Torneo.categoria = $("#selCategoria").val();
-            _Torneo.telefono1 = $("#TxtTelefono1").val();
-            _Torneo.telefono2 = $("#TxtTelefono2").val();
-            _Torneo.dieta = $("#TxtDieta").val();
-            _Torneo.ubicacion = $("#TxtUbicacion").val();
-            _Torneo.observaciones = $("#TxtObservaciones").val();
+            _Programacion.nombre = $("#TxtNombre").val();
+            _Programacion.categoria = $("#selCategoria").val();
+            _Programacion.telefono1 = $("#TxtTelefono1").val();
+            _Programacion.telefono2 = $("#TxtTelefono2").val();
+            _Programacion.dieta = $("#TxtDieta").val();
+            _Programacion.ubicacion = $("#TxtUbicacion").val();
+            _Programacion.observaciones = $("#TxtObservaciones").val();
             */
-            oTorneo.nombre = $("#TxtNombre").val();
-            oTorneo.categoria = $("#selCategoria").val();
-            oTorneo.telefono1 = $("#TxtTelefono1").val();
-            oTorneo.telefono2 = $("#TxtTelefono2").val();
-            oTorneo.dieta = $("#TxtDieta").val();
-            oTorneo.ubicacion = $("#TxtUbicacion").val();
-            oTorneo.observaciones = $("#TxtObservaciones").val();
-            oTorneo.idAsociacion = _Torneo.idAsociacion;
-            oTorneo.id = _Torneo.id;
-            for (var i = 0; i < _Torneo.Torneos_Canchas.length; i++) {
-                var oCancha = {};
-                oCancha.id = _Torneo.Torneos_Canchas[i].id;
-                oCancha.viaticos = _Torneo.Torneos_Canchas[i].viaticos.toString();
-                oCancha.idCancha = _Torneo.Torneos_Canchas[i].idCancha;
-                oCancha.observaciones = _Torneo.Torneos_Canchas[i].observaciones;
-                oCancha.idTorneo = _Torneo.Torneos_Canchas[i].idTorneo;
-                oCancha.accionregistro = _Torneo.Torneos_Canchas[i].accionregistro;
-                
-                oCanchas.push(oCancha);
+            oProgramacion.nombre = $("#TxtNombre").val();
+            oProgramacion.categoria = $("#selCategoria").val();
+            oProgramacion.telefono1 = $("#TxtTelefono1").val();
+            oProgramacion.telefono2 = $("#TxtTelefono2").val();
+            oProgramacion.dieta = $("#TxtDieta").val();
+            oProgramacion.ubicacion = $("#TxtUbicacion").val();
+            oProgramacion.observaciones = $("#TxtObservaciones").val();
+            oProgramacion.idAsociacion = _Programacion.idAsociacion;
+            oProgramacion.id = _Programacion.id;
+            for (var i = 0; i < _Programacion.Partidos.length; i++) {
+                var oPartido = {};
+                oPartido.id = _Programacion.Partidos[i].id;
+                oPartido.viaticos = _Programacion.Partidos[i].viaticos.toString();
+                oPartido.idCancha = _Programacion.Partidos[i].idCancha;
+                oPartido.observaciones = _Programacion.Partidos[i].observaciones;
+                oPartido.idTorneo = _Programacion.Partidos[i].idTorneo;
+                oPartido.accionregistro = _Programacion.Partidos[i].accionregistro;
+
+                Partidos.push(oCancha);
 
             }
-            Entidad["oTorneo"] = oTorneo;
-            Entidad["oCanchas"] = oCanchas;
+            Entidad["oProgramacion"] = oTorneo;
+            Entidad["oPartidos"] = oCanchas;
             return Entidad;
             
         }
 
         function Limpiar() {
-            _Torneo = {
-                Torneos_Canchas: []
+            _Programacion = {
+                Partidos: []
             };
             
             $("#TxtNombre").val("");
@@ -344,24 +342,24 @@
             $("#TxtUbicacion").val("");
             $("#TxtObservaciones").val("");
 
-            $('#gridCanchas').clearGridData();
+            $('#gridPartidos').clearGridData();
         }
 
-        function ObtenerTorneo(idTorneo) {
+        function ObtenerProgramacion(idTorneo) {
             var oParametrosAjax = { cID: idTorneo };
 
             var funcionProcesamientoCliente = function (oRespuesta) {
                 MostrarTorneo(oRespuesta.oTorneo);
             }
 
-            RealizarPeticionAjax("ObtenerTorneo", "/Torneos/ObtenerTorneoPorID", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
+            RealizarPeticionAjax("ObtenerTorneo", "/Torneos/ObtenerProgramacionPorID", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
         }
 
         function ValidarCampos() {
-            var bCampos = $("#frmTorneos").valid();
-            var bCanchas = $('#gridCanchas').getGridParam("data").length > 0;
+            var bCampos = $("#frmProgramaciones").valid();
+            var bCanchas = $('#gridPartidos').getGridParam("data").length > 0;
             if(bCanchas == false){
-                alert("Debe de asignar al menos una cancha al torneos");
+                alert("Debe de agregar al menos un partidos a la jornada");
             }
             if (bCanchas == false || bCampos == false) {
                 return false;
@@ -403,34 +401,36 @@
             if (ValidarCampos()) {
                 var oParametrosAjax = CargarCampos();
                 oParametrosAjax["oper"] = "edit";
-                //var oParametrosAjax = { oTorneo: _Torneo, oCanchas: _Torneo.Torneos_Canchas, oper: "edit" };
+                //var oParametrosAjax = { oTorneo: _Programacion, oCanchas: _Programacion.Partidos, oper: "edit" };
 
                 var funcionProcesamientoCliente = function (oRespuesta) {
-                    $("#gridTorneos").trigger('reloadGrid');
+                    $("#gridProgramaciones").trigger('reloadGrid');
                     $("#ventanaEditar").dialog("close");
                 }
-                
-                RealizarPeticionAjax("GuardarTorneo", "/Torneos/EditarTorneos", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
+
+                RealizarPeticionAjax("GuardarProgramaciones", "/Programaciones/EditarProgramacioness", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
             }
         }
 
         function GuardarAgregar() {
             if (ValidarCampos()) {
                 CargarCampos();
-                var oParametrosAjax = { oTorneo: _Torneo, oper: "add" };
+                //var oParametrosAjax = { oTorneo: _Programacion, oper: "add" };
+                var oParametrosAjax = CargarCampos();
+                oParametrosAjax["oper"] = "add";
 
                 var funcionProcesamientoCliente = function (oRespuesta) {
-                    $("#gridTorneos").trigger('reloadGrid');
+                    $("#gridProgramaciones").trigger('reloadGrid');
                     $("#ventanaEditar").dialog("close");
                 }
 
-                RealizarPeticionAjax("GuardarTorneo", "/Torneos/EditarTorneos", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
+                RealizarPeticionAjax("GuardarProgramaciones", "/Programaciones/EditarProgramaciones", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
             }
         }
 
     </script>
     <div id="ventanaEditar">
-        <form id="frmTorneos" action="">
+        <form id="frmProgramaciones" action="">
             <fieldset class="Fieldset">
             <legend>Identificación</legend>
             <div class="ContenidoOrdenado">
@@ -488,9 +488,9 @@
         </fieldset>
     </form>
     <br />
-    <table id="gridCanchas">
+    <table id="gridPartidos">
     </table>
-    <div id="barraGridCanchas">
+    <div id="barraGridPartidos">
     </div>
     </div>
 </asp:Content>
@@ -499,6 +499,6 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContenidoEncabezado" runat="server">
-    <h1>Torneos</h1>
+    <h1>Programación de Partidos</h1>
     <h1><a href="/">Volver al menú principal</a></h1>
 </asp:Content>

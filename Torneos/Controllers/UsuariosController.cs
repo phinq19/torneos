@@ -75,6 +75,7 @@ namespace Torneos.Controllers
                             oUsuarioNuevo.observaciones = oUsuario.observaciones;
                             oUsuarioNuevo.telefono1 = oUsuario.telefono1;
                             oUsuarioNuevo.tipo = oUsuario.tipo;
+                            oUsuarioNuevo.idTorneo = oUsuario.idTorneo;
                             oUsuarioNuevo.idAsociacion = 1;
                             oUsuarioNuevo.id = 0;
 
@@ -107,6 +108,7 @@ namespace Torneos.Controllers
                             oUsuarioEditado.observaciones = oUsuario.observaciones;
                             oUsuarioEditado.telefono1 = oUsuario.telefono1;
                             oUsuarioEditado.tipo = oUsuario.tipo;
+                            oUsuarioEditado.idTorneo = oUsuario.idTorneo;
 
                             bdTorneos.SaveChanges();
                             bdTorneos.Detach(oUsuarioEditado);

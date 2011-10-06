@@ -148,6 +148,8 @@
     <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Partidos_Canchas" FromRole="Partidos" ToRole="Canchas" />
     <NavigationProperty Name="DetallePartidos" Relationship="TorneosModel.FK_DetallePartidos_Partidos" FromRole="Partidos" ToRole="DetallePartidos" />
     <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Partidos" ToRole="Programaciones" />
+    <Property Type="Int32" Name="accionregistro" />
+    <Property Type="String" Name="equipos" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Programaciones">
     <Key>

@@ -131,7 +131,9 @@
     <Property Name="telefono_coordinador" Type="varchar" MaxLength="64" />
     <Property Name="informe" Type="varchar" MaxLength="3072" />
     <Property Name="observaciones" Type="varchar" MaxLength="1024" />
+    <Property Name="equipos" Type="varchar" Nullable="false" MaxLength="128" />
     <Property Name="estado" Type="int" Nullable="false" />
+    <Property Name="accionregistro" Type="int" />
   </EntityType>
   <EntityType Name="Programaciones">
     <Key>
