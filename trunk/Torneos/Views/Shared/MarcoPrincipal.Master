@@ -37,7 +37,7 @@
     <asp:ContentPlaceHolder ID="Head" runat="server" />
 </head>
 <!--style="display: none;"-->
-    <body>
+    <body style="display: none;">
         <div id="Pagina">
             <div id="Documento">
             <div id="EncabezadoDocumento">
@@ -132,7 +132,7 @@
         </div>
          <script type="text/javascript">
              $(document).ready(function () {
-                 //document.body.style.display = "";
+                 document.body.style.display = "";
                  $('#menu').dcMegaMenu({
                      rowItems: '3',
                      speed: 'fast',

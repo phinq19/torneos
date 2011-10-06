@@ -18,12 +18,12 @@
                 modal: true,
                 title: "Programaciones",
                 //closeOnEscape: true,
-                height: 550,
-                width: 800
+                height: 500,
+                width: 810
             });
 
             $("#gridPartidos").jqGrid({
-                //url: '<%= Url.Action("ObtenerTorneos","Torneos") %>',
+                //url: '<%= Url.Action("ObtenerProgramacions","Programacions") %>',
                 datatype: "local",
                 rowNum: 10,
                 rowList: [10, 20, 30],
@@ -38,11 +38,14 @@
                 height: 120,
                 width: 775,
                 shrinkToFit: false,
-                colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Cancha', 'Equipos', 'Fecha', 'Coordinador', 'Teléfono Coord.', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Convert.ToInt32(Session["idTorneo"])) %>' }, formatter: 'select' },
-                    { name: 'viaticos', index: 'viaticos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'equipos', index: 'equipos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'fecha_hora', index: 'fecha_hora', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true}, formatter:"date"},
+                    { name: 'coordinador', index: 'coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
@@ -158,13 +161,13 @@
                 //loadonce: true,
                 viewrecords: true,
                 caption: "Programación de partidos",
-                //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
+                //editurl: '<%= Url.Action("EditarProgramacions","Programacions") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 250,
                 width: 850,
                 shrinkToFit: false,
-                colNames: ['id', 'Torneo', 'Estado', 'Depósito', 'Monto', 'Observaciones'],
+                colNames: ['id', 'Torneo', 'Estado', 'Depósitos', 'Monto', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'idTorneo', index: 'idTorneo', width: 250, editable: true, editoptions: { size: 40 }, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosParaGrid() %>' }, formatter: 'select' },
@@ -232,14 +235,14 @@
                         "Aceptar": function () { GuardarEditar(); },
                         "Cancelar": function () { $(this).dialog("close"); }
                     });
-                    ObtenerTorneo(id);
+                    ObtenerProgramacion(id);
                     HabilitarCampos(true);
                     
                     break;
                 case "view":
                     Limpiar();
                     $("#ventanaEditar").dialog('open');
-                    ObtenerTorneo(id);
+                    ObtenerProgramacion (id);
                     HabilitarCampos(false);
                     $("#ventanaEditar").dialog("option", "buttons", { "Cerrar": function () { $(this).dialog("close"); } });
                     break;
@@ -272,17 +275,17 @@
             }
         }
 
-        function MostrarTorneo(oTorneo) {
-            _Programacion = oTorneo;
+        function MostrarProgramacion(oProgramacion) {
+            _Programacion = oProgramacion;
 
-            $("#selEstado").val(oTorneo.estado);
-            $("#TxtDeposito").val(oTorneo.deposito);
-            $("#TxtMonto").val(oTorneo.monto);
-            $("#selTorneosTorneo").val(oTorneo.idTorneo);
-            $("#TxtObservaciones").val(oTorneo.observaciones);
+            $("#selEstado").val(oProgramacion.estado);
+            $("#TxtDeposito").val(oProgramacion.deposito);
+            $("#TxtMonto").val(oProgramacion.monto);
+            $("#selTorneo").val(oProgramacion.idTorneo);
+            $("#TxtObservaciones").val(oProgramacion.observaciones);
 
             $('#gridPartidos').clearGridData();
-            $('#gridPartidos').setGridParam({ data: oTorneo.Partidos }).trigger('reloadGrid');
+            $('#gridPartidos').setGridParam({ data: oProgramacion.Partidos }).trigger('reloadGrid');
         }
 
         function CargarCampos() {
@@ -308,7 +311,7 @@
                 Partidos.push(oCancha);
 
             }
-            Entidad["oProgramacion"] = oTorneo;
+            Entidad["oProgramacion"] = oProgramacion;
             Entidad["oPartidos"] = oCanchas;
             return Entidad;
             
@@ -319,25 +322,24 @@
                 Partidos: []
             };
             
-            $("#TxtNombre").val("");
-            $("#selCategoria").val("");
-            $("#TxtTelefono1").val("");
-            $("#TxtTelefono2").val("");
-            $("#TxtDieta").val("");
-            $("#TxtUbicacion").val("");
+            $("#selTorneo").val("");
+            $("#selEstado").val("");
+            $("#TxtMonto").val("");
+            $("#TxtDeposito").val("");
             $("#TxtObservaciones").val("");
+            $("#TxtObservacionesAsociacion").val("");
 
             $('#gridPartidos').clearGridData();
         }
 
-        function ObtenerProgramacion(idTorneo) {
-            var oParametrosAjax = { cID: idTorneo };
+        function ObtenerProgramacion(idProgramacion) {
+            var oParametrosAjax = { cID: idProgramacion };
 
             var funcionProcesamientoCliente = function (oRespuesta) {
-                MostrarTorneo(oRespuesta.oTorneo);
+                MostrarProgramacion(oRespuesta.oProgramacion);
             }
 
-            RealizarPeticionAjax("ObtenerTorneo", "/Torneos/ObtenerProgramacionPorID", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
+            RealizarPeticionAjax("ObtenerProgramacion", "/Programaciones/ObtenerProgramacionPorID", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
         }
 
         function ValidarCampos() {
@@ -355,26 +357,24 @@
 
         function HabilitarCampos(bHabilitar) {
             if (bHabilitar) {
-                $("#TxtNombre").removeAttr("disabled");
-                $("#selCategoria").removeAttr("disabled");
-                $("#TxtTelefono1").removeAttr("disabled");
-                $("#TxtTelefono2").removeAttr("disabled");
-                $("#TxtDieta").removeAttr("disabled");
-                $("#TxtUbicacion").removeAttr("disabled");
+                //$("#selTorneo").removeAttr("disabled");
+                //$("#selEstado").removeAttr("disabled");
+                $("#TxtMonto").removeAttr("disabled");
+                $("#TxtDeposito").removeAttr("disabled");
                 $("#TxtObservaciones").removeAttr("disabled");
+                $("#TxtObservacionesAsociacion").removeAttr("disabled");
 
                 $("#add_gridCanchas").show();
                 $("#edit_gridCanchas").show();
                 $("#del_gridCanchas").show();
 
             } else {
-                $("#TxtNombre").attr("disabled", "disabled");
-                $("#selCategoria").attr("disabled", "disabled");
-                $("#TxtTelefono1").attr("disabled", "disabled");
-                $("#TxtTelefono2").attr("disabled", "disabled");
-                $("#TxtDieta").attr("disabled", "disabled");
-                $("#TxtUbicacion").attr("disabled", "disabled");
+                $("#selTorneo").attr("disabled", "disabled");
+                $("#selEstado").attr("disabled", "disabled");
+                $("#TxtMonto").attr("disabled", "disabled");
+                $("#TxtDeposito").attr("disabled", "disabled");
                 $("#TxtObservaciones").attr("disabled", "disabled");
+                $("#TxtObservacionesAsociacion").attr("disabled", "disabled");
 
                 $("#add_gridCanchas").hide();
                 $("#edit_gridCanchas").hide();
@@ -386,7 +386,7 @@
             if (ValidarCampos()) {
                 var oParametrosAjax = CargarCampos();
                 oParametrosAjax["oper"] = "edit";
-                //var oParametrosAjax = { oTorneo: _Programacion, oCanchas: _Programacion.Partidos, oper: "edit" };
+                //var oParametrosAjax = { oProgramacion: _Programacion, oCanchas: _Programacion.Partidos, oper: "edit" };
 
                 var funcionProcesamientoCliente = function (oRespuesta) {
                     $("#gridProgramaciones").trigger('reloadGrid');
@@ -400,7 +400,7 @@
         function GuardarAgregar() {
             if (ValidarCampos()) {
                 CargarCampos();
-                //var oParametrosAjax = { oTorneo: _Programacion, oper: "add" };
+                //var oParametrosAjax = { oProgramacion: _Programacion, oper: "add" };
                 var oParametrosAjax = CargarCampos();
                 oParametrosAjax["oper"] = "add";
 
@@ -421,52 +421,44 @@
             <div class="ContenidoOrdenado">
                 <div class="fila">
                     <div class="celdaLabel">
-                        Nombre
+                        Torneos
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtNombre" class="required" type="text" />
+                        <%= Torneos.Utilidades.CrearSelectorTorneos("selTorneo")%>
                     </div>
                     <div class="celdaLabel">
-                        Categoría
+                        Estado
                     </div>
                     <div class="celdaCampo">
-                        <%= Torneos.Utilidades.CrearSelectorCategorias("selCategoria") %>
+                        <%= Torneos.Utilidades.CrearSelectorEstadosProgramaciones("selEstado") %>
                     </div>
                 </div>
                 <div class="fila">
                     <div class="celdaLabel">
-                        Teléfono 1
+                        Depósitos
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtTelefono1" class="required" type="text" />
+                        <input id="TxtDeposito" class="required" type="text" />
                     </div>
                     <div class="celdaLabel">
-                        Teléfono 2
+                        Monto
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtTelefono2" type="text" />
+                        <input id="TxtMonto" type="text" />
                     </div>
                 </div>
                 <div class="fila">
-                    <div class="celdaLabel">
-                        Dieta
-                    </div>
-                    <div class="celdaCampo">
-                        <input id="TxtDieta" class="required" type="text" />
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="celdaLabel">
-                        Ubicación
-                    </div>
-                    <div class="">
-                        <textarea id="TxtUbicacion" class="required" rows="2" cols="40"></textarea>
-                    </div>
                     <div class="celdaLabel">
                         Observaciones
                     </div>
                     <div class="">
                         <textarea id="TxtObservaciones" rows="2" cols="40"></textarea>
+                    </div>
+                    <div class="celdaLabel">
+                        Observaciones Asosición
+                    </div>
+                    <div class="">
+                        <textarea id="TxtObservacionesAsociacion" rows="2" cols="40"></textarea>
                     </div>
                 </div>
             </div>
