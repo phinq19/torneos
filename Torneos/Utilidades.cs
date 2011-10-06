@@ -114,6 +114,21 @@ namespace Torneos
 
         }
 
+        public static String CrearSelectorEstadosProgramaciones(String idSelector)
+        {
+            StringBuilder selEstados = new StringBuilder();
+            String[] oNombresEstados = Enum.GetNames(typeof(EstadoProgramaciones));
+
+            selEstados.Append("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oNombresEstados.Length; indice++)
+            {
+                selEstados.AppendLine("   <option value=\"" + indice + "\">" + oNombresEstados[indice] + "</option>");
+            }
+            selEstados.AppendLine("</select>");
+
+            return selEstados.ToString();
+        }
+
         public static String CrearSelectorTorneosParaGrid()
         {
             StringBuilder selTorneos = new StringBuilder();
