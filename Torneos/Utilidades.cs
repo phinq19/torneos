@@ -197,6 +197,23 @@ namespace Torneos
             return selCategoria.ToString();
         }
 
+        public static String CrearSelectorEstadoProgramacionesParaGrid()
+        {
+            StringBuilder selEstado = new StringBuilder();
+            String[] oNombresEstados = Enum.GetNames(typeof(EstadoProgramaciones));
+
+            for (int indice = 0; indice < oNombresEstados.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selEstado.ToString()))
+                {
+                    selEstado.Append(";");
+                }
+                selEstado.Append(indice + ":" + oNombresEstados[indice]);
+            }
+
+            return selEstado.ToString();
+        }
+
         public static String CrearSelectorTiposUsuarioParaGrid()
         {
             StringBuilder selTiposUsuario = new StringBuilder();
