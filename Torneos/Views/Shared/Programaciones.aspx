@@ -16,7 +16,7 @@
                 zIndex: 500,
                 resizable: false,
                 modal: true,
-                title: "Programaciones",
+                title: "Programación de Partidos",
                 //closeOnEscape: true,
                 height: 500,
                 width: 810
@@ -359,14 +359,19 @@
             if (bHabilitar) {
                 //$("#selTorneo").removeAttr("disabled");
                 //$("#selEstado").removeAttr("disabled");
+                $("#selTorneo").attr("disabled", "disabled");
+                $("#selEstado").attr("disabled", "disabled");
+
                 $("#TxtMonto").removeAttr("disabled");
                 $("#TxtDeposito").removeAttr("disabled");
                 $("#TxtObservaciones").removeAttr("disabled");
-                $("#TxtObservacionesAsociacion").removeAttr("disabled");
 
-                $("#add_gridCanchas").show();
-                $("#edit_gridCanchas").show();
-                $("#del_gridCanchas").show();
+                //$("#TxtObservacionesAsociacion").removeAttr("disabled");
+                $("#TxtObservacionesAsociacion").attr("disabled", "disabled");
+
+                $("#add_gridPartidos").show();
+                $("#edit_gridPartidos").show();
+                $("#del_gridPartidos").show();
 
             } else {
                 $("#selTorneo").attr("disabled", "disabled");
@@ -376,9 +381,9 @@
                 $("#TxtObservaciones").attr("disabled", "disabled");
                 $("#TxtObservacionesAsociacion").attr("disabled", "disabled");
 
-                $("#add_gridCanchas").hide();
-                $("#edit_gridCanchas").hide();
-                $("#del_gridCanchas").hide();
+                $("#add_gridPartidos").hide();
+                $("#edit_gridPartidos").hide();
+                $("#del_gridPartidos").hide();
             }
         }
 
