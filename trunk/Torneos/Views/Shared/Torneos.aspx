@@ -18,7 +18,7 @@
                 modal: true,
                 title: "Torneos",
                 //closeOnEscape: true,
-                height: 550,
+                height: 520,
                 width: 800
             });
 
