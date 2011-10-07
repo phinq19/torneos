@@ -87,6 +87,7 @@ namespace Torneos.Controllers
                                                       oPartidos.telefono_coordinador,
                                                       oPartidos.equipos,
                                                       oPartidos.observaciones,
+                                                      arbitros = 1,
                                                       accionregistro = 0
                                                   }
                             }
