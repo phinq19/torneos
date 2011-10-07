@@ -156,16 +156,16 @@ namespace Torneos.Controllers
                     switch (oper)
                     {
                         case "add":
-                            int nConsecutivo = bdTorneos.Programaciones.Max(u => u.id);
+                            int nConsecutivo = bdTorneos.Programaciones.Max(u => u.id) + 1;
 
                             Programaciones oProgramacionNuevo = new Programaciones();
                             oProgramacionNuevo.deposito = oProgramacion.deposito;
-                            oProgramacionNuevo.numero = "PGR" + nConsecutivo.ToString().PadLeft(10, '0');
+                            oProgramacionNuevo.numero = "PGR" + nConsecutivo.ToString().PadLeft(6, '0');
                             oProgramacionNuevo.monto = oProgramacion.monto;
                             oProgramacionNuevo.observaciones = oProgramacion.observaciones;
-                            oProgramacionNuevo.idTorneo = oProgramacion.idTorneo;
-                            oProgramacionNuevo.idUsuario = Convert.ToInt32(Session["idSession"]);
-                            oProgramacionNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);;
+                            oProgramacionNuevo.idTorneo = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTorneo"].Value);
+                            oProgramacionNuevo.idUsuario = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idUsuario"].Value);
+                            oProgramacionNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idAsociacion"].Value);
                             oProgramacionNuevo.id = 0;
 
                             bdTorneos.AddToProgramaciones(oProgramacionNuevo);
@@ -229,19 +229,20 @@ namespace Torneos.Controllers
                 case 1:
                     Partidos oPartidoNuevo = new Partidos();
 
-                    int nConsecutivo = bdTorneos.Partidos.Max(u => u.id);
+                    int nConsecutivo = bdTorneos.Partidos.Max(u => u.id) + 1;
                     CultureInfo ciCurr = CultureInfo.CurrentCulture;
                     int nNumSemana = ciCurr.Calendar.GetWeekOfYear(oPartido.fecha_hora, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
                     
                     oPartidoNuevo.coordinador = oPartido.coordinador;
                     oPartidoNuevo.equipos = oPartido.equipos;
                     oPartidoNuevo.observaciones = oPartido.observaciones;
-                    oPartidoNuevo.fecha_hora = oPartido.fecha_hora;
+                    //oPartidoNuevo.fecha_hora = oPartido.fecha_hora;
+                    oPartidoNuevo.fecha_hora = DateTime.Now;
                     oPartidoNuevo.telefono_coordinador = oPartido.telefono_coordinador;
                     oPartidoNuevo.idCancha = oPartido.idCancha;
-                    oPartidoNuevo.numero = "PRT" + nNumSemana.ToString() + "-" + nConsecutivo.ToString().PadLeft(10, '0');
+                    oPartidoNuevo.numero = "PRT" + nNumSemana.ToString().PadLeft(2, '0') + "-" + nConsecutivo.ToString().PadLeft(6, '0');
                     oPartidoNuevo.idProgramacion = nIDProgramacion;
-                    oPartidoNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);;
+                    oPartidoNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idAsociacion"].Value);;
                     oPartidoNuevo.id = 0;
                     oPartidoNuevo.estado = 0;
 
