@@ -126,6 +126,7 @@
     <Property Name="idAsociacion" Type="int" Nullable="false" />
     <Property Name="idProgramacion" Type="int" Nullable="false" />
     <Property Name="idCancha" Type="int" Nullable="false" />
+    <Property Name="numero" Type="varchar" MaxLength="20" />
     <Property Name="fecha_hora" Type="datetime" Nullable="false" />
     <Property Name="coordinador" Type="varchar" Nullable="false" MaxLength="256" />
     <Property Name="telefono_coordinador" Type="varchar" MaxLength="64" />
@@ -143,6 +144,7 @@
     <Property Name="idAsociacion" Type="int" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
     <Property Name="idTorneo" Type="int" Nullable="false" />
+    <Property Name="numero" Type="varchar" MaxLength="20" />
     <Property Name="deposito" Type="varchar" MaxLength="128" />
     <Property Name="monto" Type="numeric" Precision="16" Scale="6" />
     <Property Name="observaciones" Type="varchar" MaxLength="1024" />

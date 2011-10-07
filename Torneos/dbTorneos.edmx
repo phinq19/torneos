@@ -131,6 +131,7 @@
           <Property Name="idAsociacion" Type="int" Nullable="false" />
           <Property Name="idProgramacion" Type="int" Nullable="false" />
           <Property Name="idCancha" Type="int" Nullable="false" />
+          <Property Name="numero" Type="varchar" MaxLength="20" />
           <Property Name="fecha_hora" Type="datetime" Nullable="false" />
           <Property Name="coordinador" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="telefono_coordinador" Type="varchar" MaxLength="64" />
@@ -148,6 +149,7 @@
           <Property Name="idAsociacion" Type="int" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="idTorneo" Type="int" Nullable="false" />
+          <Property Name="numero" Type="varchar" MaxLength="20" />
           <Property Name="deposito" Type="varchar" MaxLength="128" />
           <Property Name="monto" Type="numeric" Precision="16" Scale="6" />
           <Property Name="observaciones" Type="varchar" MaxLength="1024" />
@@ -572,6 +574,7 @@
           <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Partidos" ToRole="Programaciones" />
           <Property Type="Int32" Name="accionregistro" />
           <Property Type="String" Name="equipos" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="numero" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Programaciones">
           <Key>
@@ -589,6 +592,7 @@
           <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Programaciones" ToRole="Partidos" />
           <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Progamacion_Usuarios" FromRole="Programaciones" ToRole="Usuarios" />
           <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Programaciones_Torneos" FromRole="Programaciones" ToRole="Torneos" />
+          <Property Type="String" Name="numero" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -917,6 +921,7 @@
           <EntitySetMapping Name="Partidos">
             <EntityTypeMapping TypeName="TorneosModel.Partidos">
               <MappingFragment StoreEntitySet="Partidos">
+                <ScalarProperty Name="numero" ColumnName="numero" />
                 <ScalarProperty Name="equipos" ColumnName="equipos" />
                 <ScalarProperty Name="accionregistro" ColumnName="accionregistro" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
@@ -935,6 +940,7 @@
           <EntitySetMapping Name="Programaciones">
             <EntityTypeMapping TypeName="TorneosModel.Programaciones">
               <MappingFragment StoreEntitySet="Programaciones">
+                <ScalarProperty Name="numero" ColumnName="numero" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
                 <ScalarProperty Name="monto" ColumnName="monto" />

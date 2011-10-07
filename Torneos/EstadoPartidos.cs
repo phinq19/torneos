@@ -8,7 +8,7 @@ namespace Torneos
 {
     public enum EstadoPartidos
     {
-        Pendiente,
+        Pendiente_Programacion,
         Programado,
         No_Jugado,
         Jugado,

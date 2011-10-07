@@ -76,7 +76,7 @@ namespace Torneos.Controllers
                             oUsuarioNuevo.telefono1 = oUsuario.telefono1;
                             oUsuarioNuevo.tipo = oUsuario.tipo;
                             oUsuarioNuevo.idTorneo = oUsuario.idTorneo;
-                            oUsuarioNuevo.idAsociacion = 1;
+                            oUsuarioNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);;
                             oUsuarioNuevo.id = 0;
 
                             bdTorneos.AddToUsuarios(oUsuarioNuevo);

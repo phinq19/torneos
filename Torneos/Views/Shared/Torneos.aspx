@@ -264,7 +264,7 @@
             }
             switch (oRegistro.accionregistro) {
                 case 0:
-                    oRegistros.splice(_Torneo.Torneos_Canchas[indiceRegistro], 1);
+                    _Torneo.Torneos_Canchas.splice(indiceRegistro, 1);
                 break;
                 case 1:
                     _Torneo.Torneos_Canchas.push(oRegistro);

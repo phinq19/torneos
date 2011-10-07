@@ -38,14 +38,16 @@
                 height: 120,
                 width: 775,
                 shrinkToFit: false,
-                colNames: ['id', 'Cancha', 'Equipos', 'Fecha', 'Coordinador', 'Teléfono Coord.', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Número', 'Cancha', 'Equipos', 'Fecha', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Convert.ToInt32(Session["idTorneo"])) %>' }, formatter: 'select' },
-                    { name: 'equipos', index: 'equipos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'fecha_hora', index: 'fecha_hora', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true}, formatter:"date"},
-                    { name: 'coordinador', index: 'coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20 }},
+                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Convert.ToInt32(Context.Request.Cookies["idTorneo"].Value)) %>' }, formatter: 'select' },
+                    { name: 'equipos', index: 'equipos', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'fecha_hora', index: 'fecha_hora', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true}, formatter:"date"},
+                    { name: 'coordinador', index: 'coordinador', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'estado', index: 'estado', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
@@ -167,9 +169,10 @@
                 height: 250,
                 width: 850,
                 shrinkToFit: false,
-                colNames: ['id', 'Torneo', 'Estado', 'Depósitos', 'Monto', 'Observaciones'],
+                colNames: ['id', 'Número', 'Torneo', 'Estado', 'Depósitos', 'Monto', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
+                    { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 10} },
                     { name: 'idTorneo', index: 'idTorneo', width: 250, editable: true, editoptions: { size: 40 }, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosParaGrid() %>' }, formatter: 'select' },
                     { name: 'estado', index: 'estado', width: 100, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoProgramacionesParaGrid() %>' }, formatter: 'select' },
                     { name: 'deposito', index: 'deposito', width: 300, editable: true, sortable: false, editrules: { required: true} },
@@ -263,7 +266,7 @@
             }
             switch (oRegistro.accionregistro) {
                 case 0:
-                    oRegistros.splice(_Programacion.Partidos[indiceRegistro], 1);
+                    _Programacion.Partidos.splice(indiceRegistro, 1);
                 break;
                 case 1:
                     _Programacion.Partidos.push(oRegistro);
@@ -281,6 +284,7 @@
             $("#selEstado").val(oProgramacion.estado);
             $("#TxtDeposito").val(oProgramacion.deposito);
             $("#TxtMonto").val(oProgramacion.monto);
+            $("#TxtNumero").val(oProgramacion.numero);
             $("#selTorneo").val(oProgramacion.idTorneo);
             $("#TxtObservaciones").val(oProgramacion.observaciones);
 
@@ -302,17 +306,19 @@
             for (var i = 0; i < _Programacion.Partidos.length; i++) {
                 var oPartido = {};
                 oPartido.id = _Programacion.Partidos[i].id;
-                oPartido.viaticos = _Programacion.Partidos[i].viaticos.toString();
-                oPartido.idCancha = _Programacion.Partidos[i].idCancha;
-                oPartido.observaciones = _Programacion.Partidos[i].observaciones;
-                oPartido.idTorneo = _Programacion.Partidos[i].idTorneo;
+                oPartido.coordinador = _Programacion.Partidos[i].coordinador.toString();
+                oPartido.equipos = _Programacion.Partidos[i].equipos.toString();
+                oPartido.observaciones = _Programacion.Partidos[i].observaciones.toString();
+                oPartido.telefono_coordinador = _Programacion.Partidos[i].telefono_coordinador.toString();
+                oPartido.fecha_hora = _Programacion.Partidos[i].fecha_hora.toString();
+                oPartido.idCancha = _Programacion.Partidos[i].idCancha.toString();
                 oPartido.accionregistro = _Programacion.Partidos[i].accionregistro;
 
-                Partidos.push(oCancha);
+                oPartidos.push(oPartido);
 
             }
             Entidad["oProgramacion"] = oProgramacion;
-            Entidad["oPartidos"] = oCanchas;
+            Entidad["oPartidos"] = oPartidos;
             return Entidad;
             
         }
@@ -328,6 +334,7 @@
             $("#TxtDeposito").val("");
             $("#TxtObservaciones").val("");
             $("#TxtObservacionesAsociacion").val("");
+            $("#TxtNumero").val("");
 
             $('#gridPartidos').clearGridData();
         }
@@ -362,6 +369,8 @@
                 $("#selTorneo").attr("disabled", "disabled");
                 $("#selEstado").attr("disabled", "disabled");
 
+                $("#TxtNumero").attr("disabled", "disabled");
+
                 $("#TxtMonto").removeAttr("disabled");
                 $("#TxtDeposito").removeAttr("disabled");
                 $("#TxtObservaciones").removeAttr("disabled");
@@ -380,6 +389,7 @@
                 $("#TxtDeposito").attr("disabled", "disabled");
                 $("#TxtObservaciones").attr("disabled", "disabled");
                 $("#TxtObservacionesAsociacion").attr("disabled", "disabled");
+                $("#TxtNumero").attr("disabled", "disabled");
 
                 $("#add_gridPartidos").hide();
                 $("#edit_gridPartidos").hide();
@@ -398,7 +408,7 @@
                     $("#ventanaEditar").dialog("close");
                 }
 
-                RealizarPeticionAjax("GuardarProgramaciones", "/Programaciones/EditarProgramacioness", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
+                RealizarPeticionAjax("GuardarProgramaciones", "/Programaciones/EditarProgramaciones", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
             }
         }
 
@@ -426,6 +436,14 @@
             <div class="ContenidoOrdenado">
                 <div class="fila">
                     <div class="celdaLabel">
+                        Número
+                    </div>
+                    <div class="celdaCampo">
+                        <input id="TxtNumero" type="text" />
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="celdaLabel">
                         Torneos
                     </div>
                     <div class="celdaCampo">
@@ -449,7 +467,7 @@
                         Monto
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtMonto" type="text" />
+                        <input id="TxtMonto" class="required" type="text" />
                     </div>
                 </div>
                 <div class="fila">
@@ -460,7 +478,7 @@
                         <textarea id="TxtObservaciones" rows="2" cols="40"></textarea>
                     </div>
                     <div class="celdaLabel">
-                        Observaciones Asosición
+                        Observaciones Asociación
                     </div>
                     <div class="">
                         <textarea id="TxtObservacionesAsociacion" rows="2" cols="40"></textarea>

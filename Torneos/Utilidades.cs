@@ -177,9 +177,11 @@ namespace Torneos
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
            
-            List<Canchas> oListaCanchas  = (from tc in bdTorneos.Torneos_Canchas
-                                            join t in bdTorneos.Torneos on idTorneo equals t.id
+            List<Canchas> oListaCanchas  = (
+                                            from tc in bdTorneos.Torneos_Canchas
+                                            join t in bdTorneos.Torneos on  tc.idTorneo equals t.id
                                             join c in bdTorneos.Canchas on tc.idCancha equals c.id
+                                            where t.id == idTorneo
                                             select c).ToList<Canchas>();
 
             for (int indice = 0; indice < oListaCanchas.Count; indice++)
@@ -216,6 +218,23 @@ namespace Torneos
         {
             StringBuilder selEstado = new StringBuilder();
             String[] oNombresEstados = Enum.GetNames(typeof(EstadoProgramaciones));
+
+            for (int indice = 0; indice < oNombresEstados.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selEstado.ToString()))
+                {
+                    selEstado.Append(";");
+                }
+                selEstado.Append(indice + ":" + oNombresEstados[indice]);
+            }
+
+            return selEstado.ToString();
+        }
+
+        public static String CrearSelectorEstadoPartidosParaGrid()
+        {
+            StringBuilder selEstado = new StringBuilder();
+            String[] oNombresEstados = Enum.GetNames(typeof(EstadoPartidos));
 
             for (int indice = 0; indice < oNombresEstados.Length; indice++)
             {
