@@ -45,6 +45,7 @@
     <EntitySetMapping Name="Partidos">
       <EntityTypeMapping TypeName="TorneosModel.Partidos">
         <MappingFragment StoreEntitySet="Partidos">
+          <ScalarProperty Name="numero" ColumnName="numero" />
           <ScalarProperty Name="equipos" ColumnName="equipos" />
           <ScalarProperty Name="accionregistro" ColumnName="accionregistro" />
           <ScalarProperty Name="estado" ColumnName="estado" />
@@ -63,6 +64,7 @@
     <EntitySetMapping Name="Programaciones">
       <EntityTypeMapping TypeName="TorneosModel.Programaciones">
         <MappingFragment StoreEntitySet="Programaciones">
+          <ScalarProperty Name="numero" ColumnName="numero" />
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="monto" ColumnName="monto" />

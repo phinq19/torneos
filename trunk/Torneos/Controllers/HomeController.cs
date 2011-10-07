@@ -36,9 +36,27 @@ namespace Torneos.Controllers
                 if (usuarios.Count() == 1)
                 {
                     Usuarios oUsuario = usuarios.Single<Usuarios>();
+
+                    HttpCookie cookieTipo = new HttpCookie("tipo", oUsuario.tipo.ToString());
+                    cookieTipo.Expires = new DateTime(9999, 1, 1);
+                    this.ControllerContext.HttpContext.Response.Cookies.Add(cookieTipo);
+                    
+                    HttpCookie cookieIdUsuario = new HttpCookie("idUsuario", oUsuario.id.ToString());
+                    cookieIdUsuario.Expires = new DateTime(9999, 1, 1);
+                    this.ControllerContext.HttpContext.Response.Cookies.Add(cookieIdUsuario);
+                    
+                    HttpCookie cookieIdTorneo = new HttpCookie("idTorneo", oUsuario.idTorneo.ToString());
+                    cookieIdTorneo.Expires = new DateTime(9999, 1, 1);
+                    this.ControllerContext.HttpContext.Response.Cookies.Add(cookieIdTorneo);
+
+                    HttpCookie cookieIdAsoc = new HttpCookie("idTAsociacion", oUsuario.idAsociacion.ToString());
+                    cookieIdAsoc.Expires = new DateTime(9999, 1, 1);
+                    this.ControllerContext.HttpContext.Response.Cookies.Add(cookieIdAsoc);
+                   
+                    //Session.Add("tipo", oUsuario.tipo);
+                    //Session.Add("idUsuario", oUsuario.id);
+                    //Session.Add("idTorneo", oUsuario.idTorneo);
                     FormsAuthentication.SetAuthCookie(cCodigoUsuario, false);
-                    Session.Add("tipo", oUsuario.tipo);
-                    Session.Add("idTorneo", oUsuario.idTorneo);
                     jsonData = Json(new { mensaje = "", estadoAutenticacion = "autenticado", estado = "exito" });
                 }
                 else

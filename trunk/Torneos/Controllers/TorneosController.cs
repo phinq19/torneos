@@ -114,18 +114,6 @@ namespace Torneos.Controllers
                             if(oCancha.accionregistro == 0){
                                 oCancha.accionregistro = 2;
                             }
-                            /*
-                            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-                            Torneos_Canchas oCanchaEditado = (from t in bdTorneos.Torneos_Canchas
-                                                where t.id == oCancha.id
-                                                select t).Single();
-
-                            oCanchaEditado.idCancha = oCancha.idCancha;
-                            oCanchaEditado.viaticos = oCancha.viaticos;
-                            oCanchaEditado.observaciones = oCancha.observaciones;
-                            bdTorneos.SaveChanges();
-                            bdTorneos.Detach(oCanchaEditado);
-                            */
                             break;
                         case "add":
                             oCancha.accionregistro = 1;
@@ -177,7 +165,7 @@ namespace Torneos.Controllers
                             oTorneosNuevo.telefono2 = oTorneo.telefono2;
                             oTorneosNuevo.observaciones = oTorneo.observaciones;
                             oTorneosNuevo.ubicacion = oTorneo.ubicacion;
-                            oTorneosNuevo.idAsociacion = 1;
+                            oTorneosNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);
                             oTorneosNuevo.id = 0;
 
                             bdTorneos.AddToTorneos(oTorneosNuevo);

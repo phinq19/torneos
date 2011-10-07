@@ -442,3 +442,7 @@ label.error {
 {
     display:block;
 }
+
+textarea {
+    resize: none;
+} 

@@ -63,7 +63,7 @@ namespace Torneos.Controllers
                             oCanchasNuevo.nombre = oCanchas.nombre;
                             oCanchasNuevo.observaciones = oCanchas.observaciones;
                             oCanchasNuevo.ubicacion = oCanchas.ubicacion;
-                            oCanchasNuevo.idAsociacion = 1;
+                            oCanchasNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);;
                             oCanchasNuevo.id = 0;
 
                             bdTorneos.AddToCanchas(oCanchasNuevo);

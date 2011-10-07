@@ -33,6 +33,7 @@ namespace Torneos.Controllers
                             select new
                             {
                                 oProgramaciones.id,
+                                oProgramaciones.numero,
                                 oProgramaciones.deposito,
                                 oProgramaciones.estado,
                                 oProgramaciones.idTorneo,
@@ -66,6 +67,7 @@ namespace Torneos.Controllers
                     mensaje = "",
                     oProgramacion = new {
                                 oProgramacion.id,
+                                oProgramacion.numero,
                                 oProgramacion.monto,
                                 oProgramacion.idUsuario,
                                 oProgramacion.idTorneo,
@@ -76,6 +78,7 @@ namespace Torneos.Controllers
                                                   select new
                                                   {
                                                       oPartidos.id,
+                                                      oPartidos.numero,
                                                       oPartidos.coordinador,
                                                       oPartidos.estado,
                                                       oPartidos.fecha_hora,
@@ -109,18 +112,6 @@ namespace Torneos.Controllers
                             if(oPartido.accionregistro == 0){
                                 oPartido.accionregistro = 2;
                             }
-                            /*
-                            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-                            Partidos oPartidoEditado = (from p in bdTorneos.Partidos
-                                                where p.id == oPartido.id
-                                                select p).Single();
-
-                            oPartidoEditado.idPartido = oPartido.idPartido;
-                            oPartidoEditado.viaticos = oPartido.viaticos;
-                            oPartidoEditado.observaciones = oPartido.observaciones;
-                            bdTorneos.SaveChanges();
-                            bdTorneos.Detach(oPartidoEditado);
-                            */
                             break;
                         case "add":
                             oPartido.accionregistro = 1;
@@ -164,9 +155,16 @@ namespace Torneos.Controllers
                     switch (oper)
                     {
                         case "add":
+                            int nConsecutivo = bdTorneos.Programaciones.Max(u => u.id);
+
                             Programaciones oProgramacionNuevo = new Programaciones();
+                            oProgramacionNuevo.deposito = oProgramacion.deposito;
+                            oProgramacionNuevo.numero = "PGR" + nConsecutivo.ToString().PadLeft(10, '0');
+                            oProgramacionNuevo.monto = oProgramacion.monto;
                             oProgramacionNuevo.observaciones = oProgramacion.observaciones;
-                            oProgramacionNuevo.idAsociacion = 1;
+                            oProgramacionNuevo.idTorneo = oProgramacion.idTorneo;
+                            oProgramacionNuevo.idUsuario = Convert.ToInt32(Session["idSession"]);
+                            oProgramacionNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);;
                             oProgramacionNuevo.id = 0;
 
                             bdTorneos.AddToProgramaciones(oProgramacionNuevo);
@@ -194,7 +192,8 @@ namespace Torneos.Controllers
                                                        select p).Single();
 
                             oProgramacionEditado.observaciones = oProgramacion.observaciones;
-                            
+                            oProgramacionEditado.deposito = oProgramacion.deposito;
+                            oProgramacionEditado.monto = oProgramacion.monto;
 
                             bdTorneos.SaveChanges();
                             bdTorneos.Detach(oProgramacionEditado);
@@ -228,11 +227,20 @@ namespace Torneos.Controllers
             {
                 case 1:
                     Partidos oPartidoNuevo = new Partidos();
-                    
-                    oPartidoNuevo.observaciones = oPartido.observaciones;
-                    oPartidoNuevo.idProgramacion = nIDProgramacion;
-                    oPartidoNuevo.id = 0;
 
+                    int nConsecutivo = bdTorneos.Partidos.Max(u => u.id);
+
+                    oPartidoNuevo.coordinador = oPartido.coordinador;
+                    oPartidoNuevo.equipos = oPartido.equipos;
+                    oPartidoNuevo.observaciones = oPartido.observaciones;
+                    oPartidoNuevo.fecha_hora = oPartido.fecha_hora;
+                    oPartidoNuevo.telefono_coordinador = oPartido.telefono_coordinador;
+                    oPartidoNuevo.idCancha = oPartido.idCancha;
+                    oPartidoNuevo.numero = "PRT" + nConsecutivo.ToString().PadLeft(10, '0');
+                    oPartidoNuevo.idProgramacion = nIDProgramacion;
+                    oPartidoNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);;
+                    oPartidoNuevo.id = 0;
+                    oPartidoNuevo.estado = 0;
 
                     bdTorneos.AddToPartidos(oPartidoNuevo);
                     bdTorneos.SaveChanges();
@@ -251,9 +259,14 @@ namespace Torneos.Controllers
                                                 where p.id == oPartido.id
                                                 select p).Single();
 
-                    
+                    oPartidoEditado.coordinador = oPartido.coordinador;
+                    oPartidoEditado.equipos = oPartido.equipos;
                     oPartidoEditado.observaciones = oPartido.observaciones;
-
+                    //oPartidoEditado.fecha_hora = oPartido.fecha_hora;
+                    oPartidoEditado.fecha_hora = DateTime.Now;
+                    oPartidoEditado.telefono_coordinador = oPartido.telefono_coordinador;
+                    oPartidoEditado.idCancha = oPartido.idCancha;
+                    
                     bdTorneos.SaveChanges();
                            
                     break;
