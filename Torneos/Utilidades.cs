@@ -268,6 +268,23 @@ namespace Torneos
             return selEstado.ToString();
         }
 
+        public static String CrearSelectorCantidadArbitrosParaGrid()
+        {
+            StringBuilder selArbitros = new StringBuilder();
+            String[] oNombresCantidadArbitros = Enum.GetNames(typeof(CantidadArbitros));
+
+            for (int indice = 0; indice < oNombresCantidadArbitros.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selArbitros.ToString()))
+                {
+                    selArbitros.Append(";");
+                }
+                selArbitros.Append(indice + ":" + oNombresCantidadArbitros[indice]);
+            }
+
+            return selArbitros.ToString();
+        }
+
         public static String CrearSelectorTiposUsuarioParaGrid()
         {
             StringBuilder selTiposUsuario = new StringBuilder();
