@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Security.Cryptography;
 using System.Text;
+using System.Globalization;
 
 namespace Torneos
 {
@@ -60,6 +61,25 @@ namespace Torneos
             oMenu.AppendLine("  </tr>");
             oMenu.AppendLine("</table>");
             return oMenu.ToString();
+        }
+
+        public static String ObtenerConsecutivoPartido(DateTime fecha)
+        {
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+            int nConsecutivo = bdTorneos.Partidos.Max(u => u.id) + 1;
+            CultureInfo ciCurr = CultureInfo.CurrentCulture;
+            int nNumSemana = ciCurr.Calendar.GetWeekOfYear(fecha, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            String consecutivo = "PRT" + nNumSemana.ToString().PadLeft(2, '0') + "-" + nConsecutivo.ToString().PadLeft(6, '0');
+            return consecutivo;
+        }
+
+        public static String ObtenerConsecutivoProgramacion()
+        {
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+            int nConsecutivo = bdTorneos.Programaciones.Max(u => u.id) + 1;
+            String consecutivo = "PGR" + nConsecutivo.ToString().PadLeft(6, '0');
+            return consecutivo;
+
         }
 
         public static String CrearSelectorCategorias(String idSelector)
