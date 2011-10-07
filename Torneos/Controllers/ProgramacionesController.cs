@@ -115,6 +115,7 @@ namespace Torneos.Controllers
                             }
                             break;
                         case "add":
+                            oPartido.numero = Utilidades.ObtenerConsecutivoPartido(DateTime.Now);
                             oPartido.accionregistro = 1;
                             oPartido.id = Math.Abs(Guid.NewGuid().GetHashCode());
                             break;
@@ -156,11 +157,10 @@ namespace Torneos.Controllers
                     switch (oper)
                     {
                         case "add":
-                            int nConsecutivo = bdTorneos.Programaciones.Max(u => u.id) + 1;
 
                             Programaciones oProgramacionNuevo = new Programaciones();
                             oProgramacionNuevo.deposito = oProgramacion.deposito;
-                            oProgramacionNuevo.numero = "PGR" + nConsecutivo.ToString().PadLeft(6, '0');
+                            oProgramacionNuevo.numero = Utilidades.ObtenerConsecutivoProgramacion();
                             oProgramacionNuevo.monto = oProgramacion.monto;
                             oProgramacionNuevo.observaciones = oProgramacion.observaciones;
                             oProgramacionNuevo.idTorneo = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTorneo"].Value);
@@ -229,18 +229,15 @@ namespace Torneos.Controllers
                 case 1:
                     Partidos oPartidoNuevo = new Partidos();
 
-                    int nConsecutivo = bdTorneos.Partidos.Max(u => u.id) + 1;
-                    CultureInfo ciCurr = CultureInfo.CurrentCulture;
-                    int nNumSemana = ciCurr.Calendar.GetWeekOfYear(oPartido.fecha_hora, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-                    
+                    oPartido.fecha_hora = DateTime.Now;
+
                     oPartidoNuevo.coordinador = oPartido.coordinador;
                     oPartidoNuevo.equipos = oPartido.equipos;
                     oPartidoNuevo.observaciones = oPartido.observaciones;
-                    //oPartidoNuevo.fecha_hora = oPartido.fecha_hora;
-                    oPartidoNuevo.fecha_hora = DateTime.Now;
+                    oPartidoNuevo.fecha_hora = oPartido.fecha_hora;
                     oPartidoNuevo.telefono_coordinador = oPartido.telefono_coordinador;
                     oPartidoNuevo.idCancha = oPartido.idCancha;
-                    oPartidoNuevo.numero = "PRT" + nNumSemana.ToString().PadLeft(2, '0') + "-" + nConsecutivo.ToString().PadLeft(6, '0');
+                    oPartidoNuevo.numero = Utilidades.ObtenerConsecutivoPartido(oPartido.fecha_hora);
                     oPartidoNuevo.idProgramacion = nIDProgramacion;
                     oPartidoNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idAsociacion"].Value);;
                     oPartidoNuevo.id = 0;
@@ -276,5 +273,6 @@ namespace Torneos.Controllers
                     break;
             }
         }
+
     }
 }
