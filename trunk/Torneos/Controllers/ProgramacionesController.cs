@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Torneos;
+using System.Globalization;
 
 namespace Torneos.Controllers
 {
@@ -229,14 +230,16 @@ namespace Torneos.Controllers
                     Partidos oPartidoNuevo = new Partidos();
 
                     int nConsecutivo = bdTorneos.Partidos.Max(u => u.id);
-
+                    CultureInfo ciCurr = CultureInfo.CurrentCulture;
+                    int nNumSemana = ciCurr.Calendar.GetWeekOfYear(oPartido.fecha_hora, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+                    
                     oPartidoNuevo.coordinador = oPartido.coordinador;
                     oPartidoNuevo.equipos = oPartido.equipos;
                     oPartidoNuevo.observaciones = oPartido.observaciones;
                     oPartidoNuevo.fecha_hora = oPartido.fecha_hora;
                     oPartidoNuevo.telefono_coordinador = oPartido.telefono_coordinador;
                     oPartidoNuevo.idCancha = oPartido.idCancha;
-                    oPartidoNuevo.numero = "PRT" + nConsecutivo.ToString().PadLeft(10, '0');
+                    oPartidoNuevo.numero = "PRT" + nNumSemana.ToString() + "-" + nConsecutivo.ToString().PadLeft(10, '0');
                     oPartidoNuevo.idProgramacion = nIDProgramacion;
                     oPartidoNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);;
                     oPartidoNuevo.id = 0;
