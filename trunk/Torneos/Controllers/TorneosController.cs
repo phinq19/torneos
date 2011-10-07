@@ -165,7 +165,7 @@ namespace Torneos.Controllers
                             oTorneosNuevo.telefono2 = oTorneo.telefono2;
                             oTorneosNuevo.observaciones = oTorneo.observaciones;
                             oTorneosNuevo.ubicacion = oTorneo.ubicacion;
-                            oTorneosNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTAsociacion"].Value);
+                            oTorneosNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idAsociacion"].Value);
                             oTorneosNuevo.id = 0;
 
                             bdTorneos.AddToTorneos(oTorneosNuevo);

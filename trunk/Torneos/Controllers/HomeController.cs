@@ -49,7 +49,7 @@ namespace Torneos.Controllers
                     cookieIdTorneo.Expires = new DateTime(9999, 1, 1);
                     this.ControllerContext.HttpContext.Response.Cookies.Add(cookieIdTorneo);
 
-                    HttpCookie cookieIdAsoc = new HttpCookie("idTAsociacion", oUsuario.idAsociacion.ToString());
+                    HttpCookie cookieIdAsoc = new HttpCookie("idAsociacion", oUsuario.idAsociacion.ToString());
                     cookieIdAsoc.Expires = new DateTime(9999, 1, 1);
                     this.ControllerContext.HttpContext.Response.Cookies.Add(cookieIdAsoc);
                    
