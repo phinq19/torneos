@@ -47,8 +47,8 @@
                     { name: 'fecha_hora', index: 'fecha_hora', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true}, formatter:"date"},
                     { name: 'coordinador', index: 'coordinador', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'estado', index: 'estado', width: 120, editable: false, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
-                    { name: 'arbitros', index: 'arbitros', width: 120, editable: false, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorCantidadArbitrosParaGrid() %>' }, formatter: 'select' },
+                    { name: 'estado', index: 'estado', width: 150, editable: false, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
+                    { name: 'arbitros', index: 'arbitros', width: 180, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorCantidadArbitrosParaGrid() %>' }, formatter: 'select' },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
@@ -170,13 +170,13 @@
                 height: 250,
                 width: 850,
                 shrinkToFit: false,
-                colNames: ['id', 'Número', 'Torneo', 'Estado', 'Depósitos', 'Monto', 'Observaciones'],
+                colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 10} },
                     { name: 'idTorneo', index: 'idTorneo', width: 250, editable: true, editoptions: { size: 40 }, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosParaGrid() %>' }, formatter: 'select' },
                     { name: 'estado', index: 'estado', width: 100, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoProgramacionesParaGrid() %>' }, formatter: 'select' },
-                    { name: 'deposito', index: 'deposito', width: 300, editable: true, sortable: false, editrules: { required: true} },
+                    { name: 'deposito', index: 'deposito', width: 200, editable: true, sortable: false, editrules: { required: true} },
                     { name: 'monto', index: 'monto', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
@@ -307,11 +307,11 @@
             for (var i = 0; i < _Programacion.Partidos.length; i++) {
                 var oPartido = {};
                 oPartido.id = _Programacion.Partidos[i].id;
-                oPartido.coordinador = _Programacion.Partidos[i].coordinador.toString();
-                oPartido.equipos = _Programacion.Partidos[i].equipos.toString();
-                oPartido.observaciones = _Programacion.Partidos[i].observaciones.toString();
-                oPartido.telefono_coordinador = _Programacion.Partidos[i].telefono_coordinador.toString();
-                oPartido.fecha_hora = _Programacion.Partidos[i].fecha_hora.toString();
+                oPartido.coordinador = _Programacion.Partidos[i].coordinador;
+                oPartido.equipos = _Programacion.Partidos[i].equipos;
+                oPartido.observaciones = _Programacion.Partidos[i].observaciones;
+                oPartido.telefono_coordinador = _Programacion.Partidos[i].telefono_coordinador;
+                oPartido.fecha_hora = _Programacion.Partidos[i].fecha_hora;
                 oPartido.idCancha = _Programacion.Partidos[i].idCancha.toString();
                 oPartido.accionregistro = _Programacion.Partidos[i].accionregistro;
 
@@ -433,7 +433,7 @@
     <div id="ventanaEditar">
         <form id="frmProgramaciones" action="">
             <fieldset class="Fieldset">
-            <legend>Identificación</legend>
+            <legend>Información General</legend>
             <div class="ContenidoOrdenado">
                 <div class="fila">
                     <div class="celdaLabel">
@@ -459,16 +459,16 @@
                 </div>
                 <div class="fila">
                     <div class="celdaLabel">
-                        Depósitos
+                        Números Depósitos
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtDeposito" class="required" type="text" />
+                        <input id="TxtDeposito" name="TxtDeposito" class="required" type="text" />
                     </div>
                     <div class="celdaLabel">
                         Monto
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtMonto" class="required" type="text" />
+                        <input id="TxtMonto" name="TxtMonto" class="required" type="text" />
                     </div>
                 </div>
                 <div class="fila">
