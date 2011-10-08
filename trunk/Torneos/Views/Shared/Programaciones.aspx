@@ -6,10 +6,42 @@
     </table>
     <div id="barraGridProgramaciones">
     </div>
+    <br />
+    <fieldset class="Fieldset">
+        <legend>Herramientas</legend>
+        <input type="button" value="Calcular Depósito" id="BtnCalcular"/>
+        <div id="ventanaCalcular">
+            <table id="gridCalcular">
+            </table>
+            <div id="barraGridCalcular">
+            </div>
+        </div>
+    </fieldset> 
     <script type='text/javascript'>
         $(document).ready(function () {
 
+
             $("#frmProgramaciones").validate();
+
+            $("#BtnCalcular").click(function () {
+                $("#ventanaCalcular").dialog("option", "buttons", { "Cerrar": function () {
+                    $(this).dialog("close");
+                    $('#gridCalcular').clearGridData();
+                }
+                });
+                $("#ventanaCalcular").dialog("open")
+            });
+
+            $("#ventanaCalcular").dialog({
+                autoOpen: false,
+                zIndex: 500,
+                resizable: false,
+                modal: true,
+                title: "Cálcular monto depósito",
+                //closeOnEscape: true,
+                height: 350,
+                width: 810
+            });
 
             $("#ventanaEditar").dialog({
                 autoOpen: false,
@@ -21,6 +53,146 @@
                 height: 500,
                 width: 810
             });
+
+            $("#gridCalcular").jqGrid({
+                //url: '<%= Url.Action("ObtenerProgramacions","Programacions") %>',
+                datatype: "local",
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                mtype: "post",
+                pager: '#barraGridCalcular',
+                loadonce: true,
+                viewrecords: true,
+                caption: "Cálcular monto depósito",
+                editurl: '<%= Url.Action("ValidarCalcular","Programaciones") %>',
+                jsonReader: { repeatitems: false },
+                ignoreCase: true,
+                height: 120,
+                width: 750,
+                shrinkToFit: false,
+                footerrow: true,
+                userDataOnFooter: false,
+                altRows: true,
+                colNames: ['id', 'Cancha', 'Cantidad de Partidos', 'Viaticos por Partido', 'Dieta por Partido', 'Monto total'],
+                colModel: [
+                    { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
+                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Convert.ToInt32(Context.Request.Cookies["idTorneo"].Value)) %>' }, formatter: 'select' },
+                    { name: 'cantidad', index: 'cantidad', width: 120, editable: true, editoptions: { size: 20 }, editrules: { required: true} },
+                    { name: 'viaticos', index: 'viaticos', width: 120, editable: false, editoptions: { size: 100} },
+                    { name: 'dieta', index: 'dieta', width: 120, editable: false, editoptions: { size: 100} },
+                    { name: 'monto', index: 'monto', width: 120, editable: false, editoptions: { size: 20} }
+            ]
+            });
+
+            var ProcesarEditar_gvCalcular = {
+                closeAfterAdd: true,
+                closeAfterEdit: true,
+                closeOnEscape: true,
+                reloadAfterSubmit: false,
+                modal: false,
+                width: "500",
+                savekey: [true, 13],
+                navkeys: [true, 38, 40],
+                afterShowForm: function (formId) {
+
+                },
+                onclickSubmit: function (params, registroCliente) {
+                },
+                afterSubmit: function (datosRespuesta, registroCliente, formid) {
+                    var datos = JSON.parse(datosRespuesta.responseText);
+                    switch (datos.estado) {
+                        case "exito":
+                            switch (datos.estadoValidacion) {
+                                case "exito":
+                                    $.each(datos.ObjetoDetalle, function (att, value) {
+                                        registroCliente[att] = value;
+                                    });
+                                    return [true, '', datos.ObjetoDetalle.id];
+                                    break;
+                                case "error":
+                                    return [false, datos.mensaje, '-1']
+                                    break;
+                                case "sinAutenticar":
+                                    window.location = "/";
+                                    break;
+                            }
+                            break;
+                        case "error":
+                            return [false, datos.mensaje, '-1']
+                            break;
+                    }
+                },
+                afterComplete: function (response, postdata, formid) {
+                    var valores = { monto: 0, dieta: "Total:" };
+                    var oRegistros = $("#gridCalcular").jqGrid('getGridParam', 'data');
+                    for (var indice = 0; indice < oRegistros.length; indice++) {
+                        valores["monto"] += parseFloat(oRegistros[indice].monto);
+                    }
+                    $("#gridCalcular").jqGrid('footerData', 'set', valores, true);
+                }
+            }
+
+            var Procesar_Eliminar_gvCalcular = {
+                closeAfterAdd: true,
+                closeAfterEdit: true,
+                closeOnEscape: true,
+                reloadAfterSubmit: false,
+                modal: false,
+                width: "500",
+                savekey: [true, 13],
+                navkeys: [true, 38, 40],
+                afterShowForm: function (formId) {
+                },
+                onclickSubmit: function (params, registroCliente) {
+                },
+                afterSubmit: function (datosRespuesta, registroCliente, formid) {
+                    var datos = JSON.parse(datosRespuesta.responseText);
+                    switch (datos.estado) {
+                        case "exito":
+                            switch (datos.estadoValidacion) {
+                                case "exito":
+                                    return [true, '', datos.ObjetoDetalle.id];
+                                    break;
+                                case "error":
+                                    return [false, datos.mensaje, '-1']
+                                    break;
+                                case "sinAutenticar":
+                                    window.location = "/";
+                                    break;
+                            }
+                            break;
+                        case "error":
+                            return [false, datos.mensaje, '-1']
+                            break;
+                    }
+                },
+                afterComplete: function (response, postdata, formid) {
+                    var valores = { monto: 0, dieta: "Total:" };
+                    var oRegistros = $("#gridCalcular").jqGrid('getGridParam', 'data');
+                    for (var indice = 0; indice < oRegistros.length; indice++) {
+                        valores["monto"] += parseFloat(oRegistros[indice].monto);
+                    }
+                    $("#gridCalcular").jqGrid('footerData', 'set', valores, true);
+                }
+            }
+
+
+            $("#gridCalcular").jqGrid('navGrid', '#barraGridCalcular',
+            {
+                edit: true,
+                add: true,
+                del: true,
+                refresh: false,
+                search: false,
+                view: false
+            }, //options 
+                 ProcesarEditar_gvCalcular, // edit options 
+                 ProcesarEditar_gvCalcular, // add options 
+                 Procesar_Eliminar_gvCalcular, // del options
+                 {}, // search options 
+                 {width: "600" }
+            );
+
 
             $("#gridPartidos").jqGrid({
                 //url: '<%= Url.Action("ObtenerProgramacions","Programacions") %>',
@@ -37,14 +209,15 @@
                 ignoreCase: true,
                 height: 120,
                 width: 775,
+                altRows: true,
                 shrinkToFit: false,
                 colNames: ['id', 'Número', 'Cancha', 'Equipos', 'Fecha', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Árbitros', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'numero', index: 'numero', width: 100, editable: false, editoptions: { size: 20 }},
+                    { name: 'numero', index: 'numero', width: 100, editable: false, editoptions: { size: 20} },
                     { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Convert.ToInt32(Context.Request.Cookies["idTorneo"].Value)) %>' }, formatter: 'select' },
                     { name: 'equipos', index: 'equipos', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'fecha_hora', index: 'fecha_hora', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true}, formatter:"date"},
+                    { name: 'fecha_hora', index: 'fecha_hora', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true }, formatter: "date" },
                     { name: 'coordinador', index: 'coordinador', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'estado', index: 'estado', width: 150, editable: false, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
@@ -169,6 +342,7 @@
                 ignoreCase: true,
                 height: 250,
                 width: 850,
+                altRows: true,
                 shrinkToFit: false,
                 colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto', 'Observaciones'],
                 colModel: [
@@ -183,7 +357,7 @@
             });
 
 
-        $("#gridProgramaciones").jqGrid("navGrid", "#barraGridProgramaciones",
+            $("#gridProgramaciones").jqGrid("navGrid", "#barraGridProgramaciones",
         {
             addfunc: function () {
                 MostrarVentana("add");

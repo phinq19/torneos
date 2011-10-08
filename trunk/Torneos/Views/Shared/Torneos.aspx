@@ -37,6 +37,7 @@
                 ignoreCase: true,
                 height: 120,
                 width: 775,
+                altRows: true,
                 shrinkToFit: false,
                 colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones', 'accionregistro'],
                 colModel: [
@@ -159,6 +160,7 @@
                 pager: '#barraGridTorneos',
                 //loadonce: true,
                 viewrecords: true,
+                altRows: true,
                 caption: "Mantenimiento de Torneos",
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
                 jsonReader: { repeatitems: false },
