@@ -27,6 +27,7 @@
                 $("#ventanaCalcular").dialog("option", "buttons", { "Cerrar": function () {
                     $(this).dialog("close");
                     $('#gridCalcular').clearGridData();
+                    CalcularDeposito();
                 }
                 });
                 $("#ventanaCalcular").dialog("open")
@@ -34,7 +35,7 @@
 
             $("#ventanaCalcular").dialog({
                 autoOpen: false,
-                zIndex: 500,
+                zIndex: 100,
                 resizable: false,
                 modal: true,
                 title: "Cálcular monto depósito",
@@ -45,7 +46,7 @@
 
             $("#ventanaEditar").dialog({
                 autoOpen: false,
-                zIndex: 500,
+                zIndex: 100,
                 resizable: false,
                 modal: true,
                 title: "Programación de Partidos",
@@ -77,7 +78,7 @@
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Convert.ToInt32(Context.Request.Cookies["idTorneo"].Value)) %>' }, formatter: 'select' },
-                    { name: 'cantidad', index: 'cantidad', width: 120, editable: true, editoptions: { size: 20 }, editrules: { required: true} },
+                    { name: 'cantidad', index: 'cantidad', width: 120, editable: true, editoptions: { size: 20 }, editrules: { required: true, integer: true, minValue: 1} },
                     { name: 'viaticos', index: 'viaticos', width: 120, editable: false, editoptions: { size: 100} },
                     { name: 'dieta', index: 'dieta', width: 120, editable: false, editoptions: { size: 100} },
                     { name: 'monto', index: 'monto', width: 120, editable: false, editoptions: { size: 20} }
@@ -93,11 +94,6 @@
                 width: "500",
                 savekey: [true, 13],
                 navkeys: [true, 38, 40],
-                afterShowForm: function (formId) {
-
-                },
-                onclickSubmit: function (params, registroCliente) {
-                },
                 afterSubmit: function (datosRespuesta, registroCliente, formid) {
                     var datos = JSON.parse(datosRespuesta.responseText);
                     switch (datos.estado) {
@@ -123,13 +119,17 @@
                     }
                 },
                 afterComplete: function (response, postdata, formid) {
-                    var valores = { monto: 0, dieta: "Total:" };
-                    var oRegistros = $("#gridCalcular").jqGrid('getGridParam', 'data');
-                    for (var indice = 0; indice < oRegistros.length; indice++) {
-                        valores["monto"] += parseFloat(oRegistros[indice].monto);
-                    }
-                    $("#gridCalcular").jqGrid('footerData', 'set', valores, true);
+                    CalcularDeposito();
                 }
+            }
+
+            function CalcularDeposito() {
+                var valores = { monto: 0, dieta: "Total Depósito:" };
+                var oRegistros = $("#gridCalcular").jqGrid('getGridParam', 'data');
+                for (var indice = 0; indice < oRegistros.length; indice++) {
+                    valores["monto"] += parseFloat(oRegistros[indice].monto);
+                }
+                $("#gridCalcular").jqGrid('footerData', 'set', valores, true);
             }
 
             var Procesar_Eliminar_gvCalcular = {
@@ -141,10 +141,6 @@
                 width: "500",
                 savekey: [true, 13],
                 navkeys: [true, 38, 40],
-                afterShowForm: function (formId) {
-                },
-                onclickSubmit: function (params, registroCliente) {
-                },
                 afterSubmit: function (datosRespuesta, registroCliente, formid) {
                     var datos = JSON.parse(datosRespuesta.responseText);
                     switch (datos.estado) {
