@@ -11,6 +11,11 @@ namespace Torneos
 {
     public class Utilidades 
     {
+        public static int ObtenerValorSession(String cNombreVariable) {
+            return Convert.ToInt32(HttpContext.Current.Request.Cookies[cNombreVariable].Value);
+            
+        }
+
         public static String CalcularMD5(string input)
         {
             // step 1, calculate MD5 hash from input
@@ -302,7 +307,8 @@ namespace Torneos
             return selTiposUsuario.ToString();
         }
 
-        public static String ObtenerNombreTorneoUsuario(int idTorneo){
+        public static String ObtenerNombreTorneoUsuario(){
+            int idTorneo = ObtenerValorSession("idTorneo");
             String cNombreTorneo = "No tiene asignado";
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 

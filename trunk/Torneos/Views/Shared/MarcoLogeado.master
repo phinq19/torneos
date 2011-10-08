@@ -5,7 +5,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Encabezado" runat="server">
     <div class="columnaDerecha">
         <div class="ElementoEncabezado">
-            Torneo: <%= Torneos.Utilidades.ObtenerNombreTorneoUsuario(Convert.ToInt32(Context.Request.Cookies["idTorneo"].Value))%></div>
+            Torneo: <%= Torneos.Utilidades.ObtenerNombreTorneoUsuario()%></div>
         <div class="ElementoEncabezado">
             Usuario: <%= Page.User.Identity.Name.ToUpper() %></div>
         <div class="ElementoEncabezado">

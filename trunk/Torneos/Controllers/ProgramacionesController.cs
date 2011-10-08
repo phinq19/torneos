@@ -116,7 +116,7 @@ namespace Torneos.Controllers
                     if(oper == "edit" || oper == "add"){
                         BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
-                        int idTorneo = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTorneo"].Value);
+                        int idTorneo = Utilidades.ObtenerValorSession("idTorneo");
                         Torneos oTorneo = (from t in bdTorneos.Torneos
                                            where t.id == idTorneo
                                            select t).Single<Torneos>();
@@ -210,9 +210,9 @@ namespace Torneos.Controllers
                             oProgramacionNuevo.numero = Utilidades.ObtenerConsecutivoProgramacion();
                             oProgramacionNuevo.monto = oProgramacion.monto;
                             oProgramacionNuevo.observaciones = oProgramacion.observaciones;
-                            oProgramacionNuevo.idTorneo = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTorneo"].Value);
-                            oProgramacionNuevo.idUsuario = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idUsuario"].Value);
-                            oProgramacionNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idAsociacion"].Value);
+                            oProgramacionNuevo.idTorneo = Utilidades.ObtenerValorSession("idTorneo");
+                            oProgramacionNuevo.idUsuario = Utilidades.ObtenerValorSession("idUsuario");
+                            oProgramacionNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                             oProgramacionNuevo.id = 0;
 
                             bdTorneos.AddToProgramaciones(oProgramacionNuevo);
@@ -286,7 +286,7 @@ namespace Torneos.Controllers
                     oPartidoNuevo.idCancha = oPartido.idCancha;
                     oPartidoNuevo.numero = Utilidades.ObtenerConsecutivoPartido(oPartido.fecha_hora);
                     oPartidoNuevo.idProgramacion = nIDProgramacion;
-                    oPartidoNuevo.idAsociacion = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idAsociacion"].Value);;
+                    oPartidoNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");;
                     oPartidoNuevo.id = 0;
                     oPartidoNuevo.estado = 0;
 
