@@ -31,6 +31,7 @@ namespace Torneos.Controllers
                     estado = "exito",
                     mensaje = "",
                     rows = (from oProgramaciones in bdTorneos.Programaciones
+                            where oProgramaciones.idTorneo == Utilidades.ObtenerValorSession("idTorneo")
                             select new
                             {
                                 oProgramaciones.id,
