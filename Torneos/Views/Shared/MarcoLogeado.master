@@ -16,7 +16,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="Contenido" runat="server">
     <div class="SeccionContenidoLogin">
         <!--EsquinasSuperioresRedondas-->
-        <div class="EncabezadoSeccionContenidoLogeado">
+        <div class="EncabezadoSeccionContenidoLogeado ">
             <asp:ContentPlaceHolder ID="ContenidoEncabezado" runat="server" />
         </div>
         <div class="ContenidoSeccionContenidoLogeado EsquinasInferioresRedondas">
