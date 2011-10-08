@@ -196,9 +196,10 @@ namespace Torneos
 
         }
 
-        public static String CrearSelectorTorneosCanchasParaGrid(int idTorneo)
+        public static String CrearSelectorTorneosCanchasParaGrid()
         {
             StringBuilder selCanchas = new StringBuilder();
+            int idTorneo = Utilidades.ObtenerValorSession("idTorneo");
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
            
