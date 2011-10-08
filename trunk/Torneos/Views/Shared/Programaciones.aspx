@@ -2,11 +2,6 @@
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
-    <table id="gridProgramaciones">
-    </table>
-    <div id="barraGridProgramaciones">
-    </div>
-    <br />
     <fieldset class="Fieldset">
         <legend>Herramientas</legend>
         <input type="button" value="Calcular Depósito" id="BtnCalcular"/>
@@ -17,6 +12,12 @@
             </div>
         </div>
     </fieldset> 
+    <br />
+    <table id="gridProgramaciones">
+    </table>
+    <div id="barraGridProgramaciones">
+    </div>
+    
     <script type='text/javascript'>
         $(document).ready(function () {
 
@@ -77,7 +78,7 @@
                 colNames: ['id', 'Cancha', 'Cantidad de Partidos', 'Viaticos por Partido', 'Dieta por Partido', 'Monto total'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Utilidades.ObtenerValorSession("idTorneo")) %>' }, formatter: 'select' },
+                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>' }, formatter: 'select' },
                     { name: 'cantidad', index: 'cantidad', width: 120, editable: true, editoptions: { size: 20 }, editrules: { required: true, integer: true, minValue: 1} },
                     { name: 'viaticos', index: 'viaticos', width: 120, editable: false, editoptions: { size: 100} },
                     { name: 'dieta', index: 'dieta', width: 120, editable: false, editoptions: { size: 100} },
@@ -211,7 +212,7 @@
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'numero', index: 'numero', width: 100, editable: false, editoptions: { size: 20} },
-                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid(Utilidades.ObtenerValorSession("idTorneo")) %>' }, formatter: 'select' },
+                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>' }, formatter: 'select' },
                     { name: 'equipos', index: 'equipos', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'fecha_hora', index: 'fecha_hora', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true }, formatter: "date" },
                     { name: 'coordinador', index: 'coordinador', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
