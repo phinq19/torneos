@@ -16,10 +16,10 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="Contenido" runat="server">
     <div class="SeccionContenidoLogin">
         <!--EsquinasSuperioresRedondas-->
-        <div class="EncabezadoSeccionContenidoLogin">
+        <div class="EncabezadoSeccionContenidoLogeado">
             <asp:ContentPlaceHolder ID="ContenidoEncabezado" runat="server" />
         </div>
-        <div class="ContenidoSeccionContenidoLogin EsquinasInferioresRedondas">
+        <div class="ContenidoSeccionContenidoLogeado EsquinasInferioresRedondas">
             <asp:ContentPlaceHolder ID="Contenido" runat="server" />
         </div>
     </div>

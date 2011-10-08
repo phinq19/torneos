@@ -14,6 +14,7 @@
     <AssemblyName>Torneos</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -114,6 +115,7 @@
     <Content Include="Imagenes\face.png" />
     <Content Include="Imagenes\Menu-Pequeno.png" />
     <Content Include="Imagenes\Menu.png" />
+    <Content Include="Imagenes\Menu_Doble.png" />
     <Content Include="Imagenes\twit.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
