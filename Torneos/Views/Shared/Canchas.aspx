@@ -11,6 +11,7 @@
         $("#gridCanchas").jqGrid({
             url: '<%= Url.Action("ObtenerCanchas","Canchas") %>',
             datatype: "json",
+            altRows: true,
             rowNum: 10,
             rowList: [10, 20, 30],
             mtype: "post",

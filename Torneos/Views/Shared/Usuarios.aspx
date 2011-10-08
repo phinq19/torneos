@@ -26,6 +26,7 @@
                 mtype: "post",
                 pager: "#barraGridUsuarios",
                 loadonce: true,
+                altRows: true,
                 viewrecords: true,
                 caption: "Mantenimiento de Usuarios",
                 editurl: '<%= Url.Action("EditarUsuarios","Usuarios") %>',

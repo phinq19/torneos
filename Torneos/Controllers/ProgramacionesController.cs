@@ -101,7 +101,53 @@ namespace Torneos.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
+        //[Authorize]
+        public JsonResult ValidarCalcular(String oper, int idCancha = 0, int cantidad = 0, int id=0)
+        {
+            JsonResult jsonData = null;
+            if (HttpContext.Request.IsAuthenticated)
+            {
+                try
+                {
+                    Decimal monto = 0;
+                    Decimal viaticos = 0;
+                    Decimal dieta = 0;
+                    
+                    if(oper == "edit" || oper == "add"){
+                        BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+                        int idTorneo = Convert.ToInt32(this.ControllerContext.HttpContext.Request.Cookies["idTorneo"].Value);
+                        Torneos oTorneo = (from t in bdTorneos.Torneos
+                                           where t.id == idTorneo
+                                           select t).Single<Torneos>();
+                        Torneos_Canchas oCancha = (from t in bdTorneos.Torneos_Canchas
+                                                   where t.idCancha == idCancha && t.idTorneo == idTorneo
+                                                   select t).Single<Torneos_Canchas>();
+                        viaticos = oCancha.viaticos;
+                        dieta = oTorneo.dieta;
+                        monto = (viaticos + dieta) * cantidad;
+                    }
+                    if(oper == "add")
+                    {
+                        id = Math.Abs(Guid.NewGuid().GetHashCode());
+                        
+                    }
+                    jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = new {id, idCancha, viaticos, dieta, cantidad, monto }, estadoValidacion = "exito" });
+                }
+                catch
+                {
+                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
+                }
+            }
+            else
+            {
+                jsonData = Json(new { estado = "exito", mensaje = "", estadoValidacion = "sinAutenticar" });
+            }
+            return jsonData;
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        //[Authorize]
         public JsonResult ValidarPartidos(Partidos oPartido, String oper)
         {
             JsonResult jsonData = null;
