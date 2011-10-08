@@ -433,14 +433,14 @@
     <div id="ventanaEditar">
         <form id="frmTorneos" action="">
             <fieldset class="Fieldset">
-            <legend>Identificación</legend>
+            <legend>Información General</legend>
             <div class="ContenidoOrdenado">
                 <div class="fila">
                     <div class="celdaLabel">
                         Nombre
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtNombre" class="required" type="text" />
+                        <input id="TxtNombre" name="TxtNombre" class="required" type="text" />
                     </div>
                     <div class="celdaLabel">
                         Categoría
@@ -454,7 +454,7 @@
                         Teléfono 1
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtTelefono1" class="required" type="text" />
+                        <input id="TxtTelefono1" name="TxtTelefono1" class="required" type="text" />
                     </div>
                     <div class="celdaLabel">
                         Teléfono 2
@@ -468,7 +468,7 @@
                         Dieta
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtDieta" class="required" type="text" />
+                        <input id="TxtDieta" name="TxtDieta" class="required" type="text" />
                     </div>
                 </div>
                 <div class="fila">
@@ -476,7 +476,7 @@
                         Ubicación
                     </div>
                     <div class="">
-                        <textarea id="TxtUbicacion" class="required" rows="2" cols="40"></textarea>
+                        <textarea id="TxtUbicacion" name="TxtUbicacion" class="required" rows="2" cols="40"></textarea>
                     </div>
                     <div class="celdaLabel">
                         Observaciones

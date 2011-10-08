@@ -279,7 +279,7 @@ namespace Torneos
                 {
                     selArbitros.Append(";");
                 }
-                selArbitros.Append(indice + ":" + oNombresCantidadArbitros[indice]);
+                selArbitros.Append((indice + 1) + ":" + oNombresCantidadArbitros[indice]);
             }
 
             return selArbitros.ToString();
