@@ -23,12 +23,13 @@ namespace Torneos.Controllers
             try
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-
+                int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
-                    rows = (from oTorneo in bdTorneos.Torneos
+                    rows = (from  oTorneo in bdTorneos.Torneos
+                            where oTorneo.idAsociacion == idAsociacion
                             select new
                             {
                                 id = oTorneo.id,

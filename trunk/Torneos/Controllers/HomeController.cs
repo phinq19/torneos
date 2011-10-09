@@ -36,7 +36,11 @@ namespace Torneos.Controllers
                 if (usuarios.Count() == 1)
                 {
                     Usuarios oUsuario = usuarios.Single<Usuarios>();
-
+                    Utilidades.AsignarValorSession("tipoUsuario", oUsuario.tipo.ToString());
+                    Utilidades.AsignarValorSession("idUsuario", oUsuario.id.ToString());
+                    Utilidades.AsignarValorSession("idTorneo", oUsuario.idTorneo.ToString());
+                    Utilidades.AsignarValorSession("idAsociacion", oUsuario.idAsociacion.ToString());
+                    /*
                     HttpCookie cookieTipo = new HttpCookie("tipo", oUsuario.tipo.ToString());
                     cookieTipo.Expires = new DateTime(9999, 1, 1);
                     this.ControllerContext.HttpContext.Response.Cookies.Add(cookieTipo);
@@ -52,7 +56,7 @@ namespace Torneos.Controllers
                     HttpCookie cookieIdAsoc = new HttpCookie("idAsociacion", oUsuario.idAsociacion.ToString());
                     cookieIdAsoc.Expires = new DateTime(9999, 1, 1);
                     this.ControllerContext.HttpContext.Response.Cookies.Add(cookieIdAsoc);
-                   
+                    */
                     //Session.Add("tipo", oUsuario.tipo);
                     //Session.Add("idUsuario", oUsuario.id);
                     //Session.Add("idTorneo", oUsuario.idTorneo);
@@ -79,6 +83,7 @@ namespace Torneos.Controllers
             {
                 Session.Abandon();
                 FormsAuthentication.SignOut();
+                this.HttpContext.Request.Cookies.Clear();
                 jsonData = Json(new { estado = "exito", mensaje = "" });
             }
             catch

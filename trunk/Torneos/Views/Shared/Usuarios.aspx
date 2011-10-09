@@ -33,7 +33,7 @@
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 250,
-                width: 830,
+                width: 856,
                 //sortorder: "desc",
                 //sortname: 'nombre',
                 shrinkToFit: false,

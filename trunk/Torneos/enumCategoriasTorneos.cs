@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Torneos
 {
-    public enum Categorias
+    public enum enumCategorias
     {
         Categoria1 = 0,
         Categoria2,

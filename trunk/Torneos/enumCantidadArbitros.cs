@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Torneos
 {
-    public enum CantidadArbitros
+    public enum enumCantidadArbitros
     {
         Central = 1,
         Central_Un_Asistente,

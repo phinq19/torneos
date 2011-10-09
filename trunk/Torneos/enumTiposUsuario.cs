@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Torneos
 {
-    public enum TipoUsuario
+    public enum enumTipoUsuario
     {
         SuperAdministrado = 0,
         EncargadoTorneo,

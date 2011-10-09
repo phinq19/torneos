@@ -22,13 +22,14 @@ namespace Torneos.Controllers
             try
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-
+                int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
                     rows = (
                         from c in bdTorneos.Canchas
+                        where c.idAsociacion == idAsociacion
                         select new
                         {
                             id = c.id,
@@ -98,6 +99,10 @@ namespace Torneos.Controllers
                             jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCanchasEditado, estadoValidacion = "exito" });
                             break;
                     }
+                }
+                catch (System.Data.UpdateException exc)
+                {
+                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
                 }
                 catch
                 {

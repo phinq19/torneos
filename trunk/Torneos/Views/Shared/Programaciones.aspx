@@ -338,7 +338,7 @@
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 250,
-                width: 850,
+                width: 856,
                 altRows: true,
                 shrinkToFit: false,
                 colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto', 'Observaciones'],
