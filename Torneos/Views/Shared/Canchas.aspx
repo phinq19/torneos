@@ -23,7 +23,7 @@
             jsonReader: { repeatitems: false },
             ignoreCase: true,
             height: 250,
-            width: 850,
+            width: 856,
             shrinkToFit: false,
             colNames: ['id', 'Nombre', 'Ubicacion', 'Observaciones'],
             colModel: [

@@ -6,11 +6,12 @@ using System.Web.Mvc;
 
 namespace Torneos
 {
-    public enum AccionRegistro
+    public enum enumEstadoPartidos
     {
-        NoModificado = 0,
-        Nuevo,
-        Editado,
-        Eliminado
+        Pendiente_Programacion,
+        Programado,
+        No_Jugado,
+        Jugado,
+        Con_Informe
     }
 }

@@ -25,13 +25,15 @@ namespace Torneos.Controllers
             try
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-
+                int idTorneo = Utilidades.ObtenerValorSession("idTorneo");
+                int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
-                    rows = (from oProgramaciones in bdTorneos.Programaciones
-                            where oProgramaciones.idTorneo == Utilidades.ObtenerValorSession("idTorneo")
+                    rows = (from  oProgramaciones in bdTorneos.Programaciones
+                            where oProgramaciones.idTorneo == idTorneo && 
+                                  oProgramaciones.idAsociacion == idAsociacion
                             select new
                             {
                                 oProgramaciones.id,
@@ -44,6 +46,10 @@ namespace Torneos.Controllers
                                 oProgramaciones.observaciones
                             })
                 });
+            }
+            catch (System.Data.UpdateException exc)
+            {
+                jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
             }
             catch
             {

@@ -16,6 +16,15 @@ namespace Torneos
             
         }
 
+        public static void AsignarValorSession(String cNombreVariable, String Valor) {
+            if(String.IsNullOrEmpty(Valor)){
+                Valor = "0";
+            }
+            HttpCookie cookie = new HttpCookie(cNombreVariable, Valor);
+            cookie.Expires = new DateTime(9999, 1, 1);
+            HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+
         public static String CalcularMD5(string input)
         {
             // step 1, calculate MD5 hash from input
@@ -34,35 +43,79 @@ namespace Torneos
 
         public static String CrearOpcionesMenu()
         {
+            int tipoUsuario = ObtenerValorSession("tipoUsuario");
+
             StringBuilder oMenu = new StringBuilder();
             oMenu.AppendLine("<table>");
             oMenu.AppendLine("  <tr>");
-            oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Usuarios/\" class=\"itemMenu\">Usuarios<a>");
-            oMenu.AppendLine("      </td>");
-            oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Canchas/\" class=\"itemMenu\">Canchas<a>");
-            oMenu.AppendLine("      </td>");
-            oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Torneos/\" class=\"itemMenu\">Torneos<a>");
-            oMenu.AppendLine("      </td>");
-            oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Programaciones/\" class=\"itemMenu\">Programaciones<a>");
-            oMenu.AppendLine("      </td>");
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Usuarios/\" class=\"itemMenu\">Usuarios<a>");
+                oMenu.AppendLine("      </td>");
+            }
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Canchas/\" class=\"itemMenu\">Canchas<a>");
+                oMenu.AppendLine("      </td>");
+            }
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Torneos/\" class=\"itemMenu\">Torneos<a>");
+                oMenu.AppendLine("      </td>");
+            }
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.EncargadoTorneo ||
+                tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion
+                )
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Programaciones/\" class=\"itemMenu\">Programaciones<a>");
+                oMenu.AppendLine("      </td>");
+            }
             oMenu.AppendLine("  </tr>");
             oMenu.AppendLine("  <tr>");
-            oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Verificaciones/\" class=\"itemMenu\">Verificaciones<a>");
-            oMenu.AppendLine("      </td>");
-            oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Asignaciones/\" class=\"itemMenu\">Asignaciones<a>");
-            oMenu.AppendLine("      </td>");
-            oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Informes/\" class=\"itemMenu\">Informes<a>");
-            oMenu.AppendLine("      </td>");
-            oMenu.AppendLine("      <td>");
-            oMenu.AppendLine("          <a href=\"/Tesoreria/\" class=\"itemMenu\">Tesoreria<a>");
-            oMenu.AppendLine("      </td>");
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Verificaciones/\" class=\"itemMenu\">Verificaciones<a>");
+                oMenu.AppendLine("      </td>");
+            }
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Asignaciones/\" class=\"itemMenu\">Asignaciones<a>");
+                oMenu.AppendLine("      </td>");
+            }
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.Arbitro)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Informes/\" class=\"itemMenu\">Informes<a>");
+                oMenu.AppendLine("      </td>");
+            }
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.Tesorero)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Tesoreria/\" class=\"itemMenu\">Tesoreria<a>");
+                oMenu.AppendLine("      </td>");
+            }
             oMenu.AppendLine("  </tr>");
             oMenu.AppendLine("</table>");
             return oMenu.ToString();
@@ -90,7 +143,7 @@ namespace Torneos
         public static String CrearSelectorCategorias(String idSelector)
         {
             StringBuilder selCategoria = new StringBuilder();
-            String[] oNombresCategoria = Enum.GetNames(typeof(Categorias));
+            String[] oNombresCategoria = Enum.GetNames(typeof(enumCategorias));
 
             selCategoria.Append("<select id=\"" + idSelector + "\">");
             for (int indice = 0; indice < oNombresCategoria.Length; indice++ )
@@ -142,7 +195,7 @@ namespace Torneos
         public static String CrearSelectorEstadosProgramaciones(String idSelector)
         {
             StringBuilder selEstados = new StringBuilder();
-            String[] oNombresEstados = Enum.GetNames(typeof(EstadoProgramaciones));
+            String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoProgramaciones));
 
             selEstados.Append("<select id=\"" + idSelector + "\">");
             for (int indice = 0; indice < oNombresEstados.Length; indice++)
@@ -226,7 +279,7 @@ namespace Torneos
         public static String CrearSelectorCategoriasParaGrid()
         {
             StringBuilder selCategoria = new StringBuilder();
-            String[] oNombresCategoria = Enum.GetNames(typeof(Categorias));
+            String[] oNombresCategoria = Enum.GetNames(typeof(enumCategorias));
 
             for (int indice = 0; indice < oNombresCategoria.Length; indice++)
             {
@@ -243,7 +296,7 @@ namespace Torneos
         public static String CrearSelectorEstadoProgramacionesParaGrid()
         {
             StringBuilder selEstado = new StringBuilder();
-            String[] oNombresEstados = Enum.GetNames(typeof(EstadoProgramaciones));
+            String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoProgramaciones));
 
             for (int indice = 0; indice < oNombresEstados.Length; indice++)
             {
@@ -260,7 +313,7 @@ namespace Torneos
         public static String CrearSelectorEstadoPartidosParaGrid()
         {
             StringBuilder selEstado = new StringBuilder();
-            String[] oNombresEstados = Enum.GetNames(typeof(EstadoPartidos));
+            String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoPartidos));
 
             for (int indice = 0; indice < oNombresEstados.Length; indice++)
             {
@@ -277,7 +330,7 @@ namespace Torneos
         public static String CrearSelectorCantidadArbitrosParaGrid()
         {
             StringBuilder selArbitros = new StringBuilder();
-            String[] oNombresCantidadArbitros = Enum.GetNames(typeof(CantidadArbitros));
+            String[] oNombresCantidadArbitros = Enum.GetNames(typeof(enumCantidadArbitros));
 
             for (int indice = 0; indice < oNombresCantidadArbitros.Length; indice++)
             {
@@ -294,7 +347,7 @@ namespace Torneos
         public static String CrearSelectorTiposUsuarioParaGrid()
         {
             StringBuilder selTiposUsuario = new StringBuilder();
-            String[] oNombresTiposUsuarios = Enum.GetNames(typeof(TipoUsuario));
+            String[] oNombresTiposUsuarios = Enum.GetNames(typeof(enumTipoUsuario));
 
             for (int indice = 1; indice < oNombresTiposUsuarios.Length; indice++)
             {

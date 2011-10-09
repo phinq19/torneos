@@ -25,11 +25,13 @@ namespace Torneos.Controllers
             try
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 jsonData = Json(new{ 
                     estado = "exito", 
                     mensaje = "",
                     rows = (
                         from u in bdTorneos.Usuarios
+                        where u.tipo != 0 && u.idAsociacion == idAsociacion
                         select new
                         {
                             id =  u.id,
@@ -88,8 +90,8 @@ namespace Torneos.Controllers
                             break;
                         case "del":
                             Usuarios oUsuarioEliminado = (from u in bdTorneos.Usuarios
-                                                   where u.id == oUsuario.id
-                                                   select u).Single();
+                                                          where u.id == oUsuario.id
+                                                          select u).Single();
 
                             jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuarioEliminado, estadoValidacion = "exito" });
 
@@ -98,8 +100,8 @@ namespace Torneos.Controllers
                             break;
                         case "edit":
                             Usuarios oUsuarioEditado = (from u in bdTorneos.Usuarios
-                                                   where u.id == oUsuario.id
-                                                   select u).Single();
+                                                        where u.id == oUsuario.id
+                                                        select u).Single();
 
                             oUsuarioEditado.codigo = oUsuario.codigo;
                             oUsuarioEditado.correo = oUsuario.correo;
@@ -117,8 +119,11 @@ namespace Torneos.Controllers
                             break;
                     }
                 }
-                catch
+                catch (System.Data.UpdateException exc)
                 {
+                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
+                }
+                catch {
                     jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
                 }
             }
