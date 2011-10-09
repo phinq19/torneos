@@ -65,6 +65,16 @@ namespace Torneos.Controllers
                 try
                 {
                     BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                    int nContador = (from u in bdTorneos.Usuarios
+                                     where  u.codigo == oUsuario.codigo && 
+                                            u.id != oUsuario.id &&
+                                            u.idAsociacion == Utilidades.ObtenerValorSession("idAsociacion")
+                                     select u.id
+                                    ).Count();
+                    if (nContador > 0)
+                    {    
+                        return jsonData = Json(new { estado = "exito", mensaje = "Ya existe un Usuario con el código: " + oUsuario.codigo, estadoValidacion = "falloLlave" });
+                    }
                     switch (oper)
                     {
                         case "add":
@@ -86,7 +96,6 @@ namespace Torneos.Controllers
                             bdTorneos.Detach(oUsuarioNuevo);
 
                             jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuarioNuevo, estadoValidacion = "exito" });
-
                             break;
                         case "del":
                             Usuarios oUsuarioEliminado = (from u in bdTorneos.Usuarios
@@ -118,10 +127,6 @@ namespace Torneos.Controllers
                             jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oUsuarioEditado, estadoValidacion = "exito" });
                             break;
                     }
-                }
-                catch (System.Data.UpdateException exc)
-                {
-                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
                 }
                 catch {
                     jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });

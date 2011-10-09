@@ -155,6 +155,16 @@ namespace Torneos.Controllers
                 try
                 {
                     BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                    int nContador = (from t in bdTorneos.Torneos
+                                     where  t.nombre == oTorneo.nombre &&
+                                            t.id != oTorneo.id &&
+                                            t.idAsociacion == Utilidades.ObtenerValorSession("idAsociacion")
+                                     select t.id
+                                    ).Count();
+                    if (nContador > 0)
+                    {
+                        return jsonData = Json(new { estado = "exito", mensaje = "Ya existe un Torneo con el nombre: " + oTorneo.nombre, estadoValidacion = "falloLlave" });
+                    }
                     switch (oper)
                     {
                         case "add":

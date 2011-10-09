@@ -57,6 +57,16 @@ namespace Torneos.Controllers
                 try
                 {
                     BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                    int nContador = (from c in bdTorneos.Canchas
+                                     where c.nombre == oCanchas.nombre &&
+                                            c.id != oCanchas.id &&
+                                            c.idAsociacion == Utilidades.ObtenerValorSession("idAsociacion")
+                                     select c.id
+                                    ).Count();
+                    if (nContador > 0)
+                    {
+                        return jsonData = Json(new { estado = "exito", mensaje = "Ya existe una Cancha con el nombre: " + oCanchas.nombre, estadoValidacion = "falloLlave" });
+                    }
                     switch (oper)
                     {
                         case "add":

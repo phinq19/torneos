@@ -51,7 +51,8 @@
                 ]
             });
 
-            var ProcesarAgregar_gvUsuarios = {
+            
+            var ProcesarEditar_gvUsuarios = {
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
@@ -76,41 +77,7 @@
                                 case "error":
                                     return [false, datos.mensaje, '-1'];
                                     break;
-                                case "sinAutenticar":
-                                    window.location = "/";
-                                    break;
-                            }
-                            break;
-                        case "error":
-                            return [false, datos.mensaje, '-1'];
-                            break;
-                    }
-                }
-            };
-
-            var ProcesarEditar_gvUsuarios = {
-                closeAfterAdd: true,
-                closeAfterEdit: true,
-                closeOnEscape: true,
-                reloadAfterSubmit: false,
-                modal: false,
-                width: "500",
-                savekey: [true, 13],
-                navkeys: [true, 38, 40],
-                afterShowForm: function (formId) {
-
-                },
-                onclickSubmit: function (params, registroCliente) {
-                },
-                afterSubmit: function (datosRespuesta, registroCliente, formid) {
-                    var datos = JSON.parse(datosRespuesta.responseText);
-                    switch (datos.estado) {
-                        case "exito":
-                            switch (datos.estadoValidacion) {
-                                case "exito":
-                                    return [true, '', datos.ObjetoDetalle.id];
-                                    break;
-                                case "error":
+                                case "falloLlave":
                                     return [false, datos.mensaje, '-1'];
                                     break;
                                 case "sinAutenticar":
@@ -172,7 +139,7 @@
                 view: true
             }, //options 
             ProcesarEditar_gvUsuarios, // edit options 
-            ProcesarAgregar_gvUsuarios, // add options 
+            ProcesarEditar_gvUsuarios, // add options 
             Procesar_Eliminar_gvUsuarios, // del options
             {}, // search options 
             {width: "500" }
