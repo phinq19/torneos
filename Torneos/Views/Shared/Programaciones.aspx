@@ -6,6 +6,7 @@
         <legend>Herramientas</legend>
         <input type="button" value="Calcular Depósito" id="BtnCalcular"/>
         <div id="ventanaCalcular">
+            <br />
             <table id="gridCalcular">
             </table>
             <div id="barraGridCalcular">
@@ -41,7 +42,7 @@
                 modal: true,
                 title: "Cálcular monto depósito",
                 //closeOnEscape: true,
-                height: 350,
+                height: 310,
                 width: 810
             });
 
@@ -52,7 +53,7 @@
                 modal: true,
                 title: "Programación de Partidos",
                 //closeOnEscape: true,
-                height: 500,
+                height: 530,
                 width: 810
             });
 
@@ -65,12 +66,12 @@
                 pager: '#barraGridCalcular',
                 loadonce: true,
                 viewrecords: true,
-                caption: "Cálcular monto depósito",
+                caption: "",
                 editurl: '<%= Url.Action("ValidarCalcular","Programaciones") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 120,
-                width: 750,
+                width: "auto",
                 shrinkToFit: false,
                 footerrow: true,
                 userDataOnFooter: false,
