@@ -158,8 +158,11 @@ namespace Torneos
         public static String CrearSelectorCanchas(String idSelector) {
             StringBuilder selCanchas = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+            
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
 
             List<Canchas> oListaCanchas = (from c in bdTorneos.Canchas
+                                           where c.idAsociacion == idAsociacion
                                            select c).ToList<Canchas>();
             selCanchas.AppendLine("<select id=\"" + idSelector + "\">");
             for (int indice = 0; indice < oListaCanchas.Count; indice++)
@@ -177,7 +180,10 @@ namespace Torneos
             StringBuilder selTorneos = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+
             List<Torneos> oListaTorneos = (from t in bdTorneos.Torneos
+                                           where t.idAsociacion == idAsociacion
                                            select t).ToList<Torneos>();
 
             selTorneos.AppendLine("<select id=\"" + idSelector + "\">");
@@ -212,7 +218,10 @@ namespace Torneos
             StringBuilder selTorneos = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+
             List<Torneos> oListaTorneos = (from t in bdTorneos.Torneos
+                                           where t.idAsociacion == idAsociacion
                                            select t).ToList<Torneos>();
 
             selTorneos.Append("null:**Ninguno**");
@@ -231,7 +240,10 @@ namespace Torneos
             StringBuilder selCanchas = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+
             List<Canchas> oListaCanchas = (from c in bdTorneos.Canchas
+                                           where c.idAsociacion == idAsociacion
                                            select c).ToList<Canchas>();
 
             //selCanchas.Append("null:**Ninguno**");
