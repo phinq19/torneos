@@ -57,10 +57,11 @@ namespace Torneos.Controllers
                 try
                 {
                     BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                    int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                     int nContador = (from c in bdTorneos.Canchas
                                      where c.nombre == oCanchas.nombre &&
                                             c.id != oCanchas.id &&
-                                            c.idAsociacion == Utilidades.ObtenerValorSession("idAsociacion")
+                                            c.idAsociacion == idAsociacion
                                      select c.id
                                     ).Count();
                     if (nContador > 0)
