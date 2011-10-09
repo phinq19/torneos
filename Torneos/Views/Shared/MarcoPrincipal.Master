@@ -21,7 +21,6 @@
     
     <script language="javascript" type="text/javascript" src="/Scripts/lib/general/RealizarPeticiones.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/lib/blockUI.js"></script>
-    <script language="javascript" type="text/javascript" src="/Scripts/lib/Validate/jquery.validate.min.js"></script> 
     <script language="javascript" type="text/javascript" src="/Scripts/lib/Validate/messages_es.js"></script> 
 
       

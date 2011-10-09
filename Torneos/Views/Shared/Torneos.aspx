@@ -81,6 +81,9 @@
                                 case "error":
                                     return [false, datos.mensaje, '-1']
                                     break;
+                                case "falloLlave":
+                                    return [false, datos.mensaje, '-1'];
+                                    break;
                                 case "sinAutenticar":
                                     window.location = "/";
                                     break;

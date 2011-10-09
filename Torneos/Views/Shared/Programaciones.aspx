@@ -525,7 +525,7 @@
             var bCampos = $("#frmProgramaciones").valid();
             var bCanchas = $('#gridPartidos').getGridParam("data").length > 0;
             if(bCanchas == false){
-                alert("Debe de agregar al menos un partidos a la jornada");
+                alert("Debe de agregar al menos un partido a la jornada");
             }
             if (bCanchas == false || bCampos == false) {
                 return false;
