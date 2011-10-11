@@ -31,12 +31,12 @@
                 pager: '#barraGridCanchas',
                 loadonce: true,
                 viewrecords: true,
-                caption: "Canchas en las que se juega el torneo",
+                caption: "",
                 editurl: '<%= Url.Action("ValidarTorneoCanchas","Torneos") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 120,
-                width: 775,
+                width: 766,
                 altRows: true,
                 shrinkToFit: false,
                 colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones', 'accionregistro'],
@@ -164,7 +164,7 @@
                 //loadonce: true,
                 viewrecords: true,
                 altRows: true,
-                caption: "Mantenimiento de Torneos",
+                caption: "",
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
@@ -494,10 +494,13 @@
         </fieldset>
     </form>
     <br />
-    <table id="gridCanchas">
-    </table>
-    <div id="barraGridCanchas">
-    </div>
+    <fieldset class="Fieldset">
+        <legend>Canchas en las que se juega el torneo</legend>
+        <table id="gridCanchas">
+        </table>
+        <div id="barraGridCanchas">
+        </div>
+    </fieldset>
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">

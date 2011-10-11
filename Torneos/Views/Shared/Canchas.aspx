@@ -18,7 +18,7 @@
             pager: '#barraGridCanchas',
             loadonce: true,
             viewrecords: true,
-            caption: "Mantenimiento de Canchas",
+            caption: "",
             editurl: '<%= Url.Action("EditarCanchas","Canchas") %>',
             jsonReader: { repeatitems: false },
             ignoreCase: true,

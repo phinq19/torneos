@@ -201,12 +201,12 @@
                 pager: '#barraGridPartidos',
                 loadonce: true,
                 viewrecords: true,
-                caption: "Partidos de la jornada",
+                caption: "",
                 editurl: '<%= Url.Action("ValidarPartidos","Programaciones") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 120,
-                width: 775,
+                width: 766,
                 altRows: true,
                 shrinkToFit: false,
                 colNames: ['id', 'Número', 'Cancha', 'Equipos', 'Fecha', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Árbitros', 'Observaciones', 'accionregistro'],
@@ -334,7 +334,7 @@
                 pager: '#barraGridProgramaciones',
                 //loadonce: true,
                 viewrecords: true,
-                caption: "Programación de partidos",
+                caption: "",
                 //editurl: '<%= Url.Action("EditarProgramacions","Programacions") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
@@ -661,10 +661,13 @@
         </fieldset>
     </form>
     <br />
+    <fieldset class="Fieldset">
+    <legend>Partidos de la jornada</legend>
     <table id="gridPartidos">
     </table>
     <div id="barraGridPartidos">
     </div>
+    </fieldset>
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
