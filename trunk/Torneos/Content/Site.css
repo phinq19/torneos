@@ -494,3 +494,11 @@ legend
     font-weight:bold;    
     font-size:12px;
 }
+
+.MensajeError
+{
+    font-size:20px;
+    color:Red;
+    font-weight:bold;
+    text-align:center;    
+}

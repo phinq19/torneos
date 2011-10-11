@@ -34,7 +34,7 @@ function RealizarPeticionAjax(
     _Ajax[cID] = $.ajax({
         type: "POST",
         dataType: "json",
-        contentType: "application/json", 
+        contentType: "application/json",
         url: cURLPeticion,
         data: jsonString,
         async: bAsync,
@@ -43,27 +43,18 @@ function RealizarPeticionAjax(
             try {
                 switch (oRespuesta.estado) {
                     case "exito":
-                        funcionProcesamientoCliente(oRespuesta);
+                        if (oRespuesta.estadoValidacion == "sinAutenticar") {
+                            SessionInactiva();
+                        } else {
+                            funcionProcesamientoCliente(oRespuesta);
+                        }
                         break;
                     case "error":
                         ManejarErrorProcesamientoRespuesta(oRespuesta.mensaje, funcionErrorProcesamientoCliente);
                         break;
                     case "sesioninactiva":
-                        //MostrarDialogoError('Error en sesión');
-                        _PeticionPendiente = function () {
-                            RealizarPeticionAjax(
-                                    cID,
-                                    cURLPeticion,
-                                    oParametrosAjax,
-                                    bCritico,
-                                    bAsync,
-                                    cIDDiv,
-                                    funcionProcesamientoCliente,
-                                    funcionTerminadoCorrectamente,
-                                    funcionErrorProcesamientoCliente,
-                                    funcionErrorProcesamientoServidor);
-                        }
-
+                        //alert('Error en sesión');
+                        SessionInactiva();
                         break;
                     default:
                         //MostrarDialogoError('Error desconocido: ' + oRespuesta);
@@ -90,12 +81,31 @@ function RealizarPeticionAjax(
             }
         }
     });
+
+
+    function SessionInactiva() {
+        /*_PeticionPendiente = function () {
+            RealizarPeticionAjax(
+                                    cID,
+                                    cURLPeticion,
+                                    oParametrosAjax,
+                                    bCritico,
+                                    bAsync,
+                                    cIDDiv,
+                                    funcionProcesamientoCliente,
+                                    funcionTerminadoCorrectamente,
+                                    funcionErrorProcesamientoCliente,
+                                    funcionErrorProcesamientoServidor);
+        }
+        */
+        window.location = "/";
+    }
 }
 
 
 
 function ManejarErrorProcesamientoRespuesta(mensaje, funcionErrorProcesamientoCliente) {
-    //MostrarDialogoError(mensaje);
+    alert(mensaje);
     if (typeof (funcionErrorProcesamientoCliente) != "undefined") {
         if (funcionErrorProcesamientoCliente != null) {
             funcionErrorProcesamientoCliente(mensaje);
@@ -104,7 +114,7 @@ function ManejarErrorProcesamientoRespuesta(mensaje, funcionErrorProcesamientoCl
 }
 
 function MenejoErrorProcesamientoServidor(mensaje, funcionErrorProcesamientoServidor) {
-    //MostrarDialogoError(mensaje);
+    alert(mensaje);
     if (typeof (funcionErrorProcesamientoServidor) != "undefined") {
         if (funcionErrorProcesamientoServidor != null) {
             funcionErrorProcesamientoServidor(mensaje);
@@ -116,7 +126,8 @@ function ManejarErrorServidor(data, status, xhr) {
     switch (status) {
         case "timeout":
             //MostrarDialogoError(Mensajes.formMantenimiento.general.error.timeout);
-            window.location = "/";
+            //window.location = "/";
+            alert("El servidor a tardado en resolver. Vuelva a intentarlo");
             break;
         case "error":
             break;
@@ -127,6 +138,7 @@ function ManejarErrorServidor(data, status, xhr) {
             break;
         default:
             //MostrarDialogoError('Error desconocido en servidor');
+            alert('Error desconocido en servidor');
             break;
     }
 }
