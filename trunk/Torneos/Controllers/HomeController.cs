@@ -65,7 +65,7 @@ namespace Torneos.Controllers
                 }
                 else
                 {
-                    jsonData = Json(new { mensaje = "El usuario no existe, la contraseña no es correcta o el Dominio es incorrecto", estadoAutenticacion = "falloAutenticacion", estado = "exito" });
+                    jsonData = Json(new { mensaje = "El usuario no existe o la contraseña es incorrecta", estadoAutenticacion = "falloAutenticacion", estado = "exito" });
                 }
             }
             catch

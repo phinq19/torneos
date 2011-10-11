@@ -28,7 +28,7 @@
                 loadonce: true,
                 altRows: true,
                 viewrecords: true,
-                caption: "Mantenimiento de Usuarios",
+                caption: "",
                 editurl: '<%= Url.Action("EditarUsuarios","Usuarios") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
