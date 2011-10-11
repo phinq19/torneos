@@ -8,14 +8,14 @@ namespace Torneos.Controllers
 {
     public class CanchasController : Controller
     {
-        [Authorize]
+        [Autorizado]
         public ActionResult Index()
         {
             return View("Canchas");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
+        [Autorizado]
         public JsonResult ObtenerCanchas(string sidx, string sord, int page, int rows)
         {
             JsonResult jsonData = null;
@@ -48,7 +48,7 @@ namespace Torneos.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
+        [Autorizado]
         public JsonResult EditarCanchas(Canchas oCanchas, String oper)
         {
             JsonResult jsonData = null;

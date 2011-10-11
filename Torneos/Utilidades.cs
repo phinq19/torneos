@@ -12,8 +12,7 @@ namespace Torneos
     public class Utilidades 
     {
         public static int ObtenerValorSession(String cNombreVariable) {
-            return Convert.ToInt32(HttpContext.Current.Request.Cookies[cNombreVariable].Value);
-            
+            return Convert.ToInt32(HttpContext.Current.Request.Cookies[cNombreVariable].Value);    
         }
 
         public static void AsignarValorSession(String cNombreVariable, String Valor) {

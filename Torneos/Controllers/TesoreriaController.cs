@@ -9,7 +9,7 @@ namespace Torneos.Controllers
     public class TesoreriaController : Controller
     {
         [AcceptVerbs(HttpVerbs.Get)]
-        [Authorize]
+        [Autorizado]
         public ActionResult Index()
         {
             return View("Tesoreria");

@@ -61,6 +61,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Autorizado.cs" />
     <Compile Include="Controllers\AsignacionesController.cs" />
     <Compile Include="Controllers\CanchasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -185,6 +186,7 @@
     <Content Include="Views\Shared\Informes.aspx" />
     <Content Include="Views\Shared\Inicio.aspx" />
     <Content Include="Views\Shared\Login.aspx" />
+    <Content Include="Views\Shared\PaginaError.aspx" />
     <Content Include="Views\Shared\Programaciones.aspx" />
     <Content Include="Views\Shared\Tesoreria.aspx" />
     <Content Include="Views\Shared\Torneos.aspx" />
@@ -250,7 +252,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50557</DevelopmentServerPort>
+          <DevelopmentServerPort>51671</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

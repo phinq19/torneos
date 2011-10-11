@@ -9,14 +9,14 @@ namespace Torneos.Controllers
     public class TorneosController : Controller
     {
         [AcceptVerbs(HttpVerbs.Get)]
-        [Authorize]
+        [Autorizado]
         public ActionResult Index()
         {
             return View("Torneos");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
+        [Autorizado]
         public JsonResult ObtenerTorneos()
         {
             JsonResult jsonData = null;
@@ -59,7 +59,7 @@ namespace Torneos.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
+        [Autorizado]
         public JsonResult ObtenerTorneoPorID(int cID) {
             JsonResult jsonData = null;
             try
@@ -102,142 +102,128 @@ namespace Torneos.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
+        [Autorizado]
         public JsonResult ValidarTorneoCanchas(Torneos_Canchas oCancha, String oper)
         {
             JsonResult jsonData = null;
-            if (HttpContext.Request.IsAuthenticated)
+            try
             {
-                try
-                {
-                    switch(oper){
-                        case"edit": 
-                            if(oCancha.accionregistro == 0){
-                                oCancha.accionregistro = 2;
-                            }
-                            break;
-                        case "add":
-                            oCancha.accionregistro = 1;
-                            oCancha.id = Math.Abs(Guid.NewGuid().GetHashCode());
-                            break;
-                        case "del":
-                            if (oCancha.accionregistro == 1)
-                            {
-                                oCancha.accionregistro = 0;
-                            }
-                            else {
-                                oCancha.accionregistro = 3;
-                            }
-                            break;
-                    }
-                    jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCancha, estadoValidacion = "exito" });
+                switch(oper){
+                    case"edit": 
+                        if(oCancha.accionregistro == 0){
+                            oCancha.accionregistro = 2;
+                        }
+                        break;
+                    case "add":
+                        oCancha.accionregistro = 1;
+                        oCancha.id = Math.Abs(Guid.NewGuid().GetHashCode());
+                        break;
+                    case "del":
+                        if (oCancha.accionregistro == 1)
+                        {
+                            oCancha.accionregistro = 0;
+                        }
+                        else {
+                            oCancha.accionregistro = 3;
+                        }
+                        break;
                 }
-                catch
-                {
-                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
-                }
+                jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCancha, estadoValidacion = "exito" });
             }
-            else
+            catch
             {
-                jsonData = Json(new { estado = "exito", mensaje = "", estadoValidacion = "sinAutenticar" });
+                jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
             }
             return jsonData;
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
+        [Autorizado]
         public JsonResult EditarTorneos(Torneos oTorneo, Torneos_Canchas[] oCanchas, String oper)
         {
             int nIDTorneos = 0;
             JsonResult jsonData = null;
-            if (HttpContext.Request.IsAuthenticated)
+            try
             {
-                try
+                BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+                int nContador = (from t in bdTorneos.Torneos
+                                    where  t.nombre == oTorneo.nombre &&
+                                        t.id != oTorneo.id &&
+                                        t.idAsociacion == idAsociacion
+                                    select t.id
+                                ).Count();
+                if (nContador > 0)
                 {
-                    BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-                    int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
-                    int nContador = (from t in bdTorneos.Torneos
-                                     where  t.nombre == oTorneo.nombre &&
-                                            t.id != oTorneo.id &&
-                                            t.idAsociacion == idAsociacion
-                                     select t.id
-                                    ).Count();
-                    if (nContador > 0)
-                    {
-                        return jsonData = Json(new { estado = "exito", mensaje = "Ya existe un Torneo con el nombre: " + oTorneo.nombre, estadoValidacion = "falloLlave" });
-                    }
-                    switch (oper)
-                    {
-                        case "add":
-                            Torneos oTorneosNuevo = new Torneos();
-                            oTorneosNuevo.nombre = oTorneo.nombre;
-                            oTorneosNuevo.categoria = oTorneo.categoria;
-                            oTorneosNuevo.dieta = oTorneo.dieta;
-                            oTorneosNuevo.telefono1 = oTorneo.telefono1;
-                            oTorneosNuevo.telefono2 = oTorneo.telefono2;
-                            oTorneosNuevo.observaciones = oTorneo.observaciones;
-                            oTorneosNuevo.ubicacion = oTorneo.ubicacion;
-                            oTorneosNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
-                            oTorneosNuevo.id = 0;
-
-                            bdTorneos.AddToTorneos(oTorneosNuevo);
-                            bdTorneos.SaveChanges();
-                            bdTorneos.Detach(oTorneosNuevo);
-                            nIDTorneos = oTorneosNuevo.id;
-
-                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosNuevo, estadoValidacion = "exito" });
-
-                            break;
-                        case "del":
-                            Torneos oTorneosEliminado = (from t in bdTorneos.Torneos
-                                                         where t.id == oTorneo.id
-                                                         select t).Single();
-
-                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosEliminado, estadoValidacion = "exito" });
-
-                            bdTorneos.DeleteObject(oTorneosEliminado);
-                            bdTorneos.SaveChanges();
-                            nIDTorneos = oTorneosEliminado.id;
-                            break;
-                        case "edit":
-                            Torneos oTorneosEditado = (from t in bdTorneos.Torneos
-                                                       where t.id == oTorneo.id
-                                                       select t).Single();
-
-                            oTorneosEditado.nombre = oTorneo.nombre;
-                            oTorneosEditado.categoria = oTorneo.categoria;
-                            oTorneosEditado.dieta = oTorneo.dieta;
-                            oTorneosEditado.telefono1 = oTorneo.telefono1;
-                            oTorneosEditado.telefono2 = oTorneo.telefono2;
-                            oTorneosEditado.observaciones = oTorneo.observaciones;
-                            oTorneosEditado.ubicacion = oTorneo.ubicacion;
-
-                            bdTorneos.SaveChanges();
-                            bdTorneos.Detach(oTorneosEditado);
-                            nIDTorneos = oTorneosEditado.id;
-
-                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosEditado, estadoValidacion = "exito" });
-                            break;
-                    }
-                    //foreach (Torneos_Canchas oCancha in oTorneo.Torneos_Canchas) {oCanchas
-                    foreach (Torneos_Canchas oCancha in oCanchas) {
-                        EditarTorneosCanchas(oCancha, nIDTorneos);
-                    }
+                    return jsonData = Json(new { estado = "exito", mensaje = "Ya existe un Torneo con el nombre: " + oTorneo.nombre, estadoValidacion = "falloLlave" });
                 }
-                catch
+                switch (oper)
                 {
-                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
+                    case "add":
+                        Torneos oTorneosNuevo = new Torneos();
+                        oTorneosNuevo.nombre = oTorneo.nombre;
+                        oTorneosNuevo.categoria = oTorneo.categoria;
+                        oTorneosNuevo.dieta = oTorneo.dieta;
+                        oTorneosNuevo.telefono1 = oTorneo.telefono1;
+                        oTorneosNuevo.telefono2 = oTorneo.telefono2;
+                        oTorneosNuevo.observaciones = oTorneo.observaciones;
+                        oTorneosNuevo.ubicacion = oTorneo.ubicacion;
+                        oTorneosNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+                        oTorneosNuevo.id = 0;
+
+                        bdTorneos.AddToTorneos(oTorneosNuevo);
+                        bdTorneos.SaveChanges();
+                        bdTorneos.Detach(oTorneosNuevo);
+                        nIDTorneos = oTorneosNuevo.id;
+
+                        jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosNuevo, estadoValidacion = "exito" });
+
+                        break;
+                    case "del":
+                        Torneos oTorneosEliminado = (from t in bdTorneos.Torneos
+                                                        where t.id == oTorneo.id
+                                                        select t).Single();
+
+                        jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosEliminado, estadoValidacion = "exito" });
+
+                        bdTorneos.DeleteObject(oTorneosEliminado);
+                        bdTorneos.SaveChanges();
+                        nIDTorneos = oTorneosEliminado.id;
+                        break;
+                    case "edit":
+                        Torneos oTorneosEditado = (from t in bdTorneos.Torneos
+                                                    where t.id == oTorneo.id
+                                                    select t).Single();
+
+                        oTorneosEditado.nombre = oTorneo.nombre;
+                        oTorneosEditado.categoria = oTorneo.categoria;
+                        oTorneosEditado.dieta = oTorneo.dieta;
+                        oTorneosEditado.telefono1 = oTorneo.telefono1;
+                        oTorneosEditado.telefono2 = oTorneo.telefono2;
+                        oTorneosEditado.observaciones = oTorneo.observaciones;
+                        oTorneosEditado.ubicacion = oTorneo.ubicacion;
+
+                        bdTorneos.SaveChanges();
+                        bdTorneos.Detach(oTorneosEditado);
+                        nIDTorneos = oTorneosEditado.id;
+
+                        jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosEditado, estadoValidacion = "exito" });
+                        break;
+                }
+                //foreach (Torneos_Canchas oCancha in oTorneo.Torneos_Canchas) {oCanchas
+                foreach (Torneos_Canchas oCancha in oCanchas) {
+                    EditarTorneosCanchas(oCancha, nIDTorneos);
                 }
             }
-            else
+            catch
             {
-                jsonData = Json(new { estado = "exito", mensaje = "", estadoValidacion = "sinAutenticar" });
+                jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
             }
             return jsonData;
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
-        //[Authorize]
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Autorizado]
         public void EditarTorneosCanchas(Torneos_Canchas oCancha, int nIDTorneo)
         {
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
