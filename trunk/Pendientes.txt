@@ -1,11 +1,17 @@
 General
+
 *Permisos de usuarios
+
 *Recuperar contrasena
 
+
 Mantenimiento de usuarios
+
 *Validar que usuarios encargados de torneos tengan un torneo asociado
 
+
 Mantenimiento de programaciones
+
 *Validar al entrar que el usuario tenga un torneos asociado
 
 
