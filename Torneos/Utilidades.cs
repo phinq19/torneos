@@ -139,42 +139,8 @@ namespace Torneos
 
         }
 
-        public static String CrearSelectorCategorias(String idSelector)
-        {
-            StringBuilder selCategoria = new StringBuilder();
-            String[] oNombresCategoria = Enum.GetNames(typeof(enumCategorias));
-
-            selCategoria.Append("<select id=\"" + idSelector + "\">");
-            for (int indice = 0; indice < oNombresCategoria.Length; indice++ )
-            {
-                selCategoria.AppendLine("   <option value=\"" + indice + "\">" + oNombresCategoria[indice] + "</option>");
-            }
-            selCategoria.AppendLine("</select>");
-
-            return selCategoria.ToString();
-        }
-
-        public static String CrearSelectorCanchas(String idSelector) {
-            StringBuilder selCanchas = new StringBuilder();
-            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-            
-            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
-
-            List<Canchas> oListaCanchas = (from c in bdTorneos.Canchas
-                                           where c.idAsociacion == idAsociacion
-                                           select c).ToList<Canchas>();
-            selCanchas.AppendLine("<select id=\"" + idSelector + "\">");
-            for (int indice = 0; indice < oListaCanchas.Count; indice++)
-            {
-                selCanchas.AppendLine("   <option value=\"" + oListaCanchas[indice].id + "\">" + oListaCanchas[indice].nombre + "</option>");
-            }
-            selCanchas.AppendLine("</select>");
-
-            return selCanchas.ToString();
-            
-        }
-
-        public static String CrearSelectorTorneos(String idSelector)
+        #region Grid
+        public static String CrearSelectorTorneosParaGrid()
         {
             StringBuilder selTorneos = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
@@ -185,42 +151,29 @@ namespace Torneos
                                            where t.idAsociacion == idAsociacion
                                            select t).ToList<Torneos>();
 
-            selTorneos.AppendLine("<select id=\"" + idSelector + "\">");
-            selTorneos.AppendLine("   <option value=\"0\">Ninguno</option>");
+            selTorneos.Append("null:**Ninguno**");
+
             for (int indice = 0; indice < oListaTorneos.Count; indice++)
             {
-                selTorneos.AppendLine("   <option value=\"" + oListaTorneos[indice].id + "\">" + oListaTorneos[indice].nombre + "</option>");
+                selTorneos.Append(";" + oListaTorneos[indice].id + ":" + oListaTorneos[indice].nombre);
             }
-            selTorneos.AppendLine("</select>");
 
             return selTorneos.ToString();
 
         }
 
-        public static String CrearSelectorEstadosProgramaciones(String idSelector)
-        {
-            StringBuilder selEstados = new StringBuilder();
-            String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoProgramaciones));
-
-            selEstados.Append("<select id=\"" + idSelector + "\">");
-            for (int indice = 0; indice < oNombresEstados.Length; indice++)
-            {
-                selEstados.AppendLine("   <option value=\"" + indice + "\">" + oNombresEstados[indice] + "</option>");
-            }
-            selEstados.AppendLine("</select>");
-
-            return selEstados.ToString();
-        }
-
-        public static String CrearSelectorTorneosParaGrid()
+        public static String CrearSelectorTorneosUsuariosParaGrid()
         {
             StringBuilder selTorneos = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
             int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+            int idUsuario = Utilidades.ObtenerValorSession("idUsuario");
 
             List<Torneos> oListaTorneos = (from t in bdTorneos.Torneos
-                                           where t.idAsociacion == idAsociacion
+                                           join u in bdTorneos.Usuarios on t.id equals u.idTorneo
+                                           where t.idAsociacion == idAsociacion &&
+                                           u.id == idUsuario
                                            select t).ToList<Torneos>();
 
             selTorneos.Append("null:**Ninguno**");
@@ -253,7 +206,7 @@ namespace Torneos
                 {
                     selCanchas.Append(";");
                 }
-                selCanchas.Append( oListaCanchas[indice].id + ":" + oListaCanchas[indice].nombre);
+                selCanchas.Append(oListaCanchas[indice].id + ":" + oListaCanchas[indice].nombre);
             }
 
             return selCanchas.ToString();
@@ -266,10 +219,10 @@ namespace Torneos
             int idTorneo = Utilidades.ObtenerValorSession("idTorneo");
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
-           
-            List<Canchas> oListaCanchas  = (
+
+            List<Canchas> oListaCanchas = (
                                             from tc in bdTorneos.Torneos_Canchas
-                                            join t in bdTorneos.Torneos on  tc.idTorneo equals t.id
+                                            join t in bdTorneos.Torneos on tc.idTorneo equals t.id
                                             join c in bdTorneos.Canchas on tc.idCancha equals c.id
                                             where t.id == idTorneo
                                             select c).ToList<Canchas>();
@@ -372,7 +325,109 @@ namespace Torneos
             return selTiposUsuario.ToString();
         }
 
-        public static String ObtenerNombreTorneoUsuario(){
+        #endregion
+
+        #region General
+        public static String CrearSelectorCategorias(String idSelector)
+        {
+            StringBuilder selCategoria = new StringBuilder();
+            String[] oNombresCategoria = Enum.GetNames(typeof(enumCategorias));
+
+            selCategoria.Append("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oNombresCategoria.Length; indice++ )
+            {
+                selCategoria.AppendLine("   <option value=\"" + indice + "\">" + oNombresCategoria[indice] + "</option>");
+            }
+            selCategoria.AppendLine("</select>");
+
+            return selCategoria.ToString();
+        }
+
+        public static String CrearSelectorCanchas(String idSelector) {
+            StringBuilder selCanchas = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+            
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+
+            List<Canchas> oListaCanchas = (from c in bdTorneos.Canchas
+                                           where c.idAsociacion == idAsociacion
+                                           select c).ToList<Canchas>();
+            selCanchas.AppendLine("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oListaCanchas.Count; indice++)
+            {
+                selCanchas.AppendLine("   <option value=\"" + oListaCanchas[indice].id + "\">" + oListaCanchas[indice].nombre + "</option>");
+            }
+            selCanchas.AppendLine("</select>");
+
+            return selCanchas.ToString();
+            
+        }
+
+        public static String CrearSelectorTorneos(String idSelector)
+        {
+            StringBuilder selTorneos = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+
+            List<Torneos> oListaTorneos = (from t in bdTorneos.Torneos
+                                           where t.idAsociacion == idAsociacion
+                                           select t).ToList<Torneos>();
+
+            selTorneos.AppendLine("<select id=\"" + idSelector + "\">");
+            selTorneos.AppendLine("   <option value=\"0\">Ninguno</option>");
+            for (int indice = 0; indice < oListaTorneos.Count; indice++)
+            {
+                selTorneos.AppendLine("   <option value=\"" + oListaTorneos[indice].id + "\">" + oListaTorneos[indice].nombre + "</option>");
+            }
+            selTorneos.AppendLine("</select>");
+
+            return selTorneos.ToString();
+
+        }
+
+        public static String CrearSelectorTorneosUsuarios(String idSelector)
+        {
+            StringBuilder selTorneos = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+            int idUsuario = Utilidades.ObtenerValorSession("idUsuario");
+            List<Torneos> oListaTorneos = (from t in bdTorneos.Torneos
+                                           join u in bdTorneos.Usuarios on t.id equals u.idTorneo
+                                           where t.idAsociacion == idAsociacion &&
+                                                 u.id == idUsuario
+                                           select t).ToList<Torneos>();
+
+            selTorneos.AppendLine("<select id=\"" + idSelector + "\">");
+            selTorneos.AppendLine("   <option value=\"0\">Ninguno</option>");
+            for (int indice = 0; indice < oListaTorneos.Count; indice++)
+            {
+                selTorneos.AppendLine("   <option value=\"" + oListaTorneos[indice].id + "\">" + oListaTorneos[indice].nombre + "</option>");
+            }
+            selTorneos.AppendLine("</select>");
+
+            return selTorneos.ToString();
+
+        }
+
+        public static String CrearSelectorEstadosProgramaciones(String idSelector)
+        {
+            StringBuilder selEstados = new StringBuilder();
+            String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoProgramaciones));
+
+            selEstados.Append("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oNombresEstados.Length; indice++)
+            {
+                selEstados.AppendLine("   <option value=\"" + indice + "\">" + oNombresEstados[indice] + "</option>");
+            }
+            selEstados.AppendLine("</select>");
+
+            return selEstados.ToString();
+        }
+
+        public static String ObtenerNombreTorneoUsuario()
+        {
             int idTorneo = ObtenerValorSession("idTorneo");
             String cNombreTorneo = "No tiene asignado";
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
@@ -387,5 +442,6 @@ namespace Torneos
             }
             return cNombreTorneo;
         } 
+        #endregion
     }
 }

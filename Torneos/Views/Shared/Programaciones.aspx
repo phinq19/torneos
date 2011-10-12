@@ -39,7 +39,7 @@
                 autoOpen: false,
                 zIndex: 100,
                 resizable: false,
-                modal: true,
+                modal: false,
                 title: "Cálcular monto depósito",
                 //closeOnEscape: true,
                 height: 310,
@@ -50,7 +50,7 @@
                 autoOpen: false,
                 zIndex: 100,
                 resizable: false,
-                modal: true,
+                modal: false,
                 title: "Programación de Partidos",
                 //closeOnEscape: true,
                 height: 530,
@@ -234,6 +234,7 @@
                 width: "500",
                 savekey: [true, 13],
                 navkeys: [true, 38, 40],
+                zIndex: 9999,
                 afterShowForm: function (formId) {
 
                 },
@@ -276,6 +277,7 @@
                 width: "500",
                 savekey: [true, 13],
                 navkeys: [true, 38, 40],
+                zIndex: 9999,
                 afterShowForm: function (formId) {
                 },
                 onclickSubmit: function (params, registroCliente) {
@@ -397,6 +399,7 @@
             switch (accion) {
                 case "add":
                     Limpiar();
+                    $("#selTorneo").val('<%= Torneos.Utilidades.ObtenerValorSession("idTorneo") %>');
                     $("#ventanaEditar").dialog('open');
                     $("#ventanaEditar").dialog("option", "buttons", {
                         "Aceptar": function () { GuardarAgregar(); },
@@ -620,7 +623,7 @@
                         Torneos
                     </div>
                     <div class="celdaCampo">
-                        <%= Torneos.Utilidades.CrearSelectorTorneos("selTorneo")%>
+                        <%= Torneos.Utilidades.CrearSelectorTorneosUsuarios("selTorneo")%>
                     </div>
                     <div class="celdaLabel">
                         Estado
