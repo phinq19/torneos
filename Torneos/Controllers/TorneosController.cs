@@ -32,14 +32,15 @@ namespace Torneos.Controllers
                             where oTorneo.idAsociacion == idAsociacion
                             select new
                             {
-                                id = oTorneo.id,
-                                nombre = oTorneo.nombre,
-                                categoria = oTorneo.categoria,
-                                telefono1 = oTorneo.telefono1,
-                                ubicacion = oTorneo.ubicacion,
-                                telefono2 = oTorneo.telefono2,
-                                dieta = oTorneo.dieta,
-                                observaciones = oTorneo.observaciones/*,
+                                oTorneo.id,
+                                oTorneo.nombre,
+                                oTorneo.categoria,
+                                oTorneo.telefono1,
+                                oTorneo.ubicacion,
+                                oTorneo.telefono2,
+                                oTorneo.dieta,
+                                oTorneo.email,
+                                oTorneo.observaciones/*,
                                 Torneos_Canchas = from c in oTorneo.Torneos_Canchas
                                                   select new
                                                   {
@@ -74,14 +75,15 @@ namespace Torneos.Controllers
                     estado = "exito",
                     mensaje = "",
                     oTorneo = new {
-                                id = oTorneo.id,
-                                nombre = oTorneo.nombre,
-                                categoria = oTorneo.categoria,
-                                telefono1 = oTorneo.telefono1,
-                                ubicacion = oTorneo.ubicacion,
-                                telefono2 = oTorneo.telefono2,
-                                dieta = oTorneo.dieta,
-                                observaciones = oTorneo.observaciones,
+                                oTorneo.id,
+                                oTorneo.nombre,
+                                oTorneo.categoria,
+                                oTorneo.telefono1,
+                                oTorneo.ubicacion,
+                                oTorneo.telefono2,
+                                oTorneo.dieta,
+                                oTorneo.email,
+                                oTorneo.observaciones,
                                 Torneos_Canchas = from c in oTorneo.Torneos_Canchas
                                                   select new
                                                   {
@@ -168,6 +170,7 @@ namespace Torneos.Controllers
                         oTorneosNuevo.telefono2 = oTorneo.telefono2;
                         oTorneosNuevo.observaciones = oTorneo.observaciones;
                         oTorneosNuevo.ubicacion = oTorneo.ubicacion;
+                        oTorneosNuevo.email = oTorneo.email;
                         oTorneosNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                         oTorneosNuevo.id = 0;
 
@@ -201,6 +204,7 @@ namespace Torneos.Controllers
                         oTorneosEditado.telefono1 = oTorneo.telefono1;
                         oTorneosEditado.telefono2 = oTorneo.telefono2;
                         oTorneosEditado.observaciones = oTorneo.observaciones;
+                        oTorneosEditado.email = oTorneo.email;
                         oTorneosEditado.ubicacion = oTorneo.ubicacion;
 
                         bdTorneos.SaveChanges();

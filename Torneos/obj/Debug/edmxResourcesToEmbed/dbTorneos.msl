@@ -12,6 +12,7 @@
     <EntitySetMapping Name="Canchas">
       <EntityTypeMapping TypeName="TorneosModel.Canchas">
         <MappingFragment StoreEntitySet="Canchas">
+          <ScalarProperty Name="telefonos" ColumnName="telefonos" />
           <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -45,15 +46,18 @@
     <EntitySetMapping Name="Partidos">
       <EntityTypeMapping TypeName="TorneosModel.Partidos">
         <MappingFragment StoreEntitySet="Partidos">
+          <ScalarProperty Name="equipoLocal" ColumnName="equipoLocal" />
+          <ScalarProperty Name="equipoVisita" ColumnName="equipoVisita" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="hora" ColumnName="hora" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="numero" ColumnName="numero" />
-          <ScalarProperty Name="equipos" ColumnName="equipos" />
           <ScalarProperty Name="accionregistro" ColumnName="accionregistro" />
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="informe" ColumnName="informe" />
           <ScalarProperty Name="telefono_coordinador" ColumnName="telefono_coordinador" />
           <ScalarProperty Name="coordinador" ColumnName="coordinador" />
-          <ScalarProperty Name="fecha_hora" ColumnName="fecha_hora" />
           <ScalarProperty Name="idCancha" ColumnName="idCancha" />
           <ScalarProperty Name="idProgramacion" ColumnName="idProgramacion" />
           <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
@@ -90,6 +94,7 @@
     <EntitySetMapping Name="Torneos">
       <EntityTypeMapping TypeName="TorneosModel.Torneos">
         <MappingFragment StoreEntitySet="Torneos">
+          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="dieta" ColumnName="dieta" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
@@ -105,6 +110,7 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="TorneosModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
           <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="tipo" ColumnName="tipo" />
@@ -113,7 +119,6 @@
           <ScalarProperty Name="correo" ColumnName="correo" />
           <ScalarProperty Name="contrasena" ColumnName="contrasena" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="codigo" ColumnName="codigo" />
           <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>

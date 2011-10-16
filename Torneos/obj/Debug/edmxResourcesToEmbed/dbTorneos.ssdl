@@ -96,6 +96,7 @@
     <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="512" />
     <Property Name="observaciones" Type="varchar" MaxLength="512" />
     <Property Name="ubicacion" Type="varchar" Nullable="false" MaxLength="1024" />
+    <Property Name="telefonos" Type="varchar" MaxLength="64" />
   </EntityType>
   <EntityType Name="DetallePartidos">
     <Key>
@@ -127,12 +128,15 @@
     <Property Name="idProgramacion" Type="int" Nullable="false" />
     <Property Name="idCancha" Type="int" Nullable="false" />
     <Property Name="numero" Type="varchar" MaxLength="20" />
-    <Property Name="fecha_hora" Type="datetime" Nullable="false" />
+    <Property Name="fecha" Type="date" Nullable="false" />
+    <Property Name="hora" Type="time" Precision="5" />
+    <Property Name="tipo" Type="int" />
     <Property Name="coordinador" Type="varchar" Nullable="false" MaxLength="256" />
     <Property Name="telefono_coordinador" Type="varchar" MaxLength="64" />
     <Property Name="informe" Type="varchar" MaxLength="3072" />
     <Property Name="observaciones" Type="varchar" MaxLength="1024" />
-    <Property Name="equipos" Type="varchar" Nullable="false" MaxLength="128" />
+    <Property Name="equipoVisita" Type="varchar" MaxLength="128" />
+    <Property Name="equipoLocal" Type="varchar" Nullable="false" MaxLength="128" />
     <Property Name="estado" Type="int" Nullable="false" />
     <Property Name="accionregistro" Type="int" />
   </EntityType>
@@ -167,6 +171,7 @@
     <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="idAsociacion" Type="int" Nullable="false" />
     <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="256" />
+    <Property Name="email" Type="varchar" MaxLength="256" />
     <Property Name="categoria" Type="int" Nullable="false" />
     <Property Name="telefono1" Type="varchar" Nullable="false" MaxLength="64" />
     <Property Name="telefono2" Type="varchar" MaxLength="64" />
@@ -192,7 +197,7 @@
     <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="idTorneo" Type="int" />
     <Property Name="idAsociacion" Type="int" Nullable="false" />
-    <Property Name="codigo" Type="varchar" Nullable="false" MaxLength="64" />
+    <Property Name="cedula" Type="varchar" Nullable="false" MaxLength="64" />
     <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="256" />
     <Property Name="contrasena" Type="varchar" Nullable="false" MaxLength="512" />
     <Property Name="correo" Type="varchar" Nullable="false" MaxLength="512" />

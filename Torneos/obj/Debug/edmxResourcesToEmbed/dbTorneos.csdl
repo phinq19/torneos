@@ -105,6 +105,7 @@
     <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Canchas_Asociacion" FromRole="Canchas" ToRole="Asociaciones" />
     <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Canchas" FromRole="Canchas" ToRole="Partidos" />
     <NavigationProperty Name="Torneos_Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Canchas" ToRole="Torneos_Canchas" />
+    <Property Type="String" Name="telefonos" MaxLength="64" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DetallePartidos">
     <Key>
@@ -138,7 +139,6 @@
     <Property Type="Int32" Name="idAsociacion" Nullable="false" />
     <Property Type="Int32" Name="idProgramacion" Nullable="false" />
     <Property Type="Int32" Name="idCancha" Nullable="false" />
-    <Property Type="DateTime" Name="fecha_hora" Nullable="false" />
     <Property Type="String" Name="coordinador" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="telefono_coordinador" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="informe" MaxLength="3072" FixedLength="false" Unicode="false" />
@@ -149,8 +149,12 @@
     <NavigationProperty Name="DetallePartidos" Relationship="TorneosModel.FK_DetallePartidos_Partidos" FromRole="Partidos" ToRole="DetallePartidos" />
     <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Partidos" ToRole="Programaciones" />
     <Property Type="Int32" Name="accionregistro" />
-    <Property Type="String" Name="equipos" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="numero" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="fecha" Nullable="false" />
+    <Property Type="Time" Name="hora" />
+    <Property Type="Int32" Name="tipo" />
+    <Property Type="String" Name="equipoVisita" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="equipoLocal" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Programaciones">
     <Key>
@@ -198,6 +202,7 @@
     <NavigationProperty Name="UsuariosTorneos" Relationship="TorneosModel.FK_UsuariosTorneos_Torneos" FromRole="Torneos" ToRole="UsuariosTorneos" />
     <NavigationProperty Name="Torneos_Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos" ToRole="Torneos_Canchas" />
     <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Usuarios_Torneos" FromRole="Torneos" ToRole="Usuarios" />
+    <Property Type="String" Name="email" MaxLength="256" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
@@ -205,7 +210,6 @@
     </Key>
     <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="Int32" Name="idAsociacion" Nullable="false" />
-    <Property Type="String" Name="codigo" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="nombre" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="contrasena" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="correo" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
@@ -219,6 +223,7 @@
     <NavigationProperty Name="UsuariosTorneos" Relationship="TorneosModel.FK_UsuariosTorneos_Usuarios" FromRole="Usuarios" ToRole="UsuariosTorneos" />
     <Property Type="Int32" Name="idTorneo" />
     <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Usuarios_Torneos" FromRole="Usuarios" ToRole="Torneos" />
+    <Property Type="String" Name="cedula" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="UsuariosTorneos">
     <Key>

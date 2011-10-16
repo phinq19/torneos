@@ -60,6 +60,7 @@
                 width: "500",
                 savekey: [true, 13],
                 navkeys: [true, 38, 40],
+                zIndex: 9999,
                 afterShowForm: function (formId) {
 
                 },
@@ -105,6 +106,7 @@
                 width: "500",
                 savekey: [true, 13],
                 navkeys: [true, 38, 40],
+                zIndex: 9999,
                 afterShowForm: function (formId) {
                 },
                 onclickSubmit: function (params, registroCliente) {
@@ -171,7 +173,7 @@
                 height: 250,
                 width: 856,
                 shrinkToFit: false,
-                colNames: ['id', 'Nombre', 'Ubicacion', 'Categoría', 'Teléfono 1', 'Teléfono 2', 'Dieta', 'Observaciones'],
+                colNames: ['id', 'Nombre', 'Ubicacion', 'Categoría', 'Teléfono 1', 'Teléfono 2', 'Correo', 'Dieta', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
@@ -179,6 +181,7 @@
                     { name: 'categoria', index: 'categoria', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCategoriasParaGrid() %>" }, formatter: 'select' },
                     { name: 'telefono1', index: 'telefono1', width: 80, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
                     { name: 'telefono2', index: 'telefono2', width: 80, editable: true, sortable: false, editoptions: { size: 20} },
+                    { name: 'email', index: 'email', width: 120, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { email: true} },
                     { name: 'dieta', index: 'dieta', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
@@ -289,6 +292,7 @@
             $("#TxtTelefono1").val(oTorneo.telefono1);
             $("#TxtTelefono2").val(oTorneo.telefono2);
             $("#TxtDieta").val(oTorneo.dieta);
+            $("#TxtCorreo").val(oTorneo.email);
             $("#TxtUbicacion").val(oTorneo.ubicacion);
             $("#TxtObservaciones").val(oTorneo.observaciones);
 
@@ -314,6 +318,7 @@
             oTorneo.telefono1 = $("#TxtTelefono1").val();
             oTorneo.telefono2 = $("#TxtTelefono2").val();
             oTorneo.dieta = $("#TxtDieta").val();
+            oTorneo.email = $("#TxtCorreo").val();
             oTorneo.ubicacion = $("#TxtUbicacion").val();
             oTorneo.observaciones = $("#TxtObservaciones").val();
             oTorneo.idAsociacion = _Torneo.idAsociacion;
@@ -346,6 +351,7 @@
             $("#TxtTelefono1").val("");
             $("#TxtTelefono2").val("");
             $("#TxtDieta").val("");
+            $("#TxtCorreo").val("");
             $("#TxtUbicacion").val("");
             $("#TxtObservaciones").val("");
 
@@ -382,6 +388,7 @@
                 $("#TxtTelefono1").removeAttr("disabled");
                 $("#TxtTelefono2").removeAttr("disabled");
                 $("#TxtDieta").removeAttr("disabled");
+                $("#TxtCorreo").removeAttr("disabled");
                 $("#TxtUbicacion").removeAttr("disabled");
                 $("#TxtObservaciones").removeAttr("disabled");
 
@@ -395,6 +402,7 @@
                 $("#TxtTelefono1").attr("disabled", "disabled");
                 $("#TxtTelefono2").attr("disabled", "disabled");
                 $("#TxtDieta").attr("disabled", "disabled");
+                $("#TxtCorreo").attr("disabled", "disabled");
                 $("#TxtUbicacion").attr("disabled", "disabled");
                 $("#TxtObservaciones").attr("disabled", "disabled");
 
@@ -474,6 +482,12 @@
                     </div>
                     <div class="celdaCampo">
                         <input id="TxtDieta" name="TxtDieta" class="required" type="text" />
+                    </div>
+                    <div class="celdaLabel">
+                        Correo
+                    </div>
+                    <div class="celdaCampo">
+                        <input id="TxtCorreo" name="TxtCorreo" type="text" class="required email"/>
                     </div>
                 </div>
                 <div class="fila">
