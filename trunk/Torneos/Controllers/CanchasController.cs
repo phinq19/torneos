@@ -32,10 +32,11 @@ namespace Torneos.Controllers
                         where c.idAsociacion == idAsociacion
                         select new
                         {
-                            id = c.id,
-                            nombre = c.nombre,
-                            observaciones = c.observaciones,
-                            ubicacion = c.ubicacion
+                            c.id,
+                            c.nombre,
+                            c.telefonos,
+                            c.observaciones,
+                            c.ubicacion
                         }
                     )
                 });
@@ -75,6 +76,7 @@ namespace Torneos.Controllers
                             oCanchasNuevo.nombre = oCanchas.nombre;
                             oCanchasNuevo.observaciones = oCanchas.observaciones;
                             oCanchasNuevo.ubicacion = oCanchas.ubicacion;
+                            oCanchasNuevo.telefonos = oCanchas.telefonos;
                             oCanchasNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                             oCanchasNuevo.id = 0;
 
@@ -103,6 +105,7 @@ namespace Torneos.Controllers
                             oCanchasEditado.nombre = oCanchas.nombre;
                             oCanchasEditado.ubicacion = oCanchas.ubicacion;
                             oCanchasEditado.observaciones = oCanchas.observaciones;
+                            oCanchasEditado.telefonos = oCanchas.telefonos;
 
                             bdTorneos.SaveChanges();
                             bdTorneos.Detach(oCanchasEditado);
@@ -110,10 +113,6 @@ namespace Torneos.Controllers
                             jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oCanchasEditado, estadoValidacion = "exito" });
                             break;
                     }
-                }
-                catch (System.Data.UpdateException exc)
-                {
-                    jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
                 }
                 catch
                 {

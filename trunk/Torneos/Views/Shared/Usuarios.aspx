@@ -9,9 +9,9 @@
     </div>
     <script type='text/javascript'>
         $(document).ready(function () {
-            function validarCodigo(value, colname) {
+            function validarCedula(value, colname) {
                 if (value.indexOf(" ") != -1) {
-                    return [false, "Por favor ingrese un valor para el código sin espacios en blanco"];
+                    return [false, "Por favor ingrese un valor para la cedula sin espacios en blanco"];
                 }
                 else {
                     return [true, ""];
@@ -37,11 +37,11 @@
                 //sortorder: "desc",
                 //sortname: 'nombre',
                 shrinkToFit: false,
-                colNames: ['id', 'Nombre', 'Código', 'Tipo', 'Torneo', 'Correo', 'Teléfono', 'Cuenta Bancaria', 'Observaciones'],
+                colNames: ['id', 'Nombre', 'Cédula', 'Tipo', 'Torneo', 'Correo', 'Teléfono', 'Cuenta Bancaria', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'codigo', index: 'codigo', width: 80, editable: true, editoptions: { size: 20 }, editrules: { required: true, custom: true, custom_func: validarCodigo} },
+                    { name: 'cedula', index: 'cedula', width: 80, editable: true, editoptions: { size: 20 }, editrules: { required: true, custom: true, custom_func: validarCedula} },
                     { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorTiposUsuarioParaGrid() %>" }, formatter: 'select' },
                     { name: 'idTorneo', index: 'idTorneo', width: 200, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorTorneosParaGrid() %>" }, formatter: 'select' },
                     { name: 'correo', index: 'correo', width: 120, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true, email: true} },

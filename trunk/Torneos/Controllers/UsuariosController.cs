@@ -39,7 +39,7 @@ namespace Torneos.Controllers
                             telefono1 =  u.telefono1,
                             correo =   u.correo,
                             observaciones =   u.observaciones,
-                            codigo =   u.codigo,
+                            cedula = u.cedula,
                             contrasena =   u.contrasena,
                             cuenta =  u.cuenta,
                             tipo = u.tipo,
@@ -65,20 +65,20 @@ namespace Torneos.Controllers
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 int nContador = (from u in bdTorneos.Usuarios
-                                    where  u.codigo == oUsuario.codigo && 
+                                    where  u.cedula == oUsuario.cedula && 
                                         u.id != oUsuario.id &&
                                         u.idAsociacion == idAsociacion
                                     select u.id
                                 ).Count();
                 if (nContador > 0)
                 {    
-                    return jsonData = Json(new { estado = "exito", mensaje = "Ya existe un Usuario con el código: " + oUsuario.codigo, estadoValidacion = "falloLlave" });
+                    return jsonData = Json(new { estado = "exito", mensaje = "Ya existe un Usuario con el código: " + oUsuario.cedula, estadoValidacion = "falloLlave" });
                 }
                 switch (oper)
                 {
                     case "add":
                         Usuarios oUsuarioNuevo = new Usuarios();
-                        oUsuarioNuevo.codigo = oUsuario.codigo;
+                        oUsuarioNuevo.cedula = oUsuario.cedula;
                         oUsuarioNuevo.contrasena = Utilidades.CalcularMD5("123456");
                         oUsuarioNuevo.correo = oUsuario.correo;
                         oUsuarioNuevo.cuenta = oUsuario.cuenta;
@@ -111,7 +111,7 @@ namespace Torneos.Controllers
                                                     where u.id == oUsuario.id
                                                     select u).Single();
 
-                        oUsuarioEditado.codigo = oUsuario.codigo;
+                        oUsuarioEditado.cedula = oUsuario.cedula;
                         oUsuarioEditado.correo = oUsuario.correo;
                         oUsuarioEditado.cuenta = oUsuario.cuenta;
                         oUsuarioEditado.nombre = oUsuario.nombre;

@@ -325,9 +325,73 @@ namespace Torneos
             return selTiposUsuario.ToString();
         }
 
+        public static String CrearSelectorTiposPartidoParaGrid() {
+            StringBuilder selTiposPartido = new StringBuilder();
+            String[] oNombresTiposPartidos = Enum.GetNames(typeof(enumTipoPartido));
+
+            for (int indice = 1; indice < oNombresTiposPartidos.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selTiposPartido.ToString()))
+                {
+                    selTiposPartido.Append(";");
+                }
+                selTiposPartido.Append(indice + ":" + oNombresTiposPartidos[indice]);
+            }
+
+            return selTiposPartido.ToString();
+        }
+
+        public static String CrearSelectorTiposArbitroParaGrid()
+        {
+            StringBuilder selTiposArbitro = new StringBuilder();
+            String[] oNombresTiposArbitro = Enum.GetNames(typeof(enumTipoArbitro));
+
+            for (int indice = 1; indice < oNombresTiposArbitro.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selTiposArbitro.ToString()))
+                {
+                    selTiposArbitro.Append(";");
+                }
+                selTiposArbitro.Append(indice + ":" + oNombresTiposArbitro[indice]);
+            }
+
+            return selTiposArbitro.ToString();
+        }
+
         #endregion
 
         #region General
+
+        public static String CrearSelectorTiposArbitro(String idSelector)
+        {
+            StringBuilder selTipo = new StringBuilder();
+            String[] oNombresArbitro = Enum.GetNames(typeof(enumTipoArbitro));
+
+            selTipo.Append("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oNombresArbitro.Length; indice++)
+            {
+                selTipo.AppendLine("   <option value=\"" + indice + "\">" + oNombresArbitro[indice] + "</option>");
+            }
+            selTipo.AppendLine("</select>");
+
+            return selTipo.ToString();
+        }
+
+        public static String CrearSelectorTiposPartido(String idSelector)
+        {
+            StringBuilder selTipo = new StringBuilder();
+            String[] oNombresTipo = Enum.GetNames(typeof(enumTipoPartido));
+
+            selTipo.Append("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oNombresTipo.Length; indice++)
+            {
+                selTipo.AppendLine("   <option value=\"" + indice + "\">" + oNombresTipo[indice] + "</option>");
+            }
+            selTipo.AppendLine("</select>");
+
+            return selTipo.ToString();
+        }
+
         public static String CrearSelectorCategorias(String idSelector)
         {
             StringBuilder selCategoria = new StringBuilder();

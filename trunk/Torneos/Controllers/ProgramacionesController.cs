@@ -54,10 +54,6 @@ namespace Torneos.Controllers
                             })
                 });
             }
-            catch (System.Data.UpdateException exc)
-            {
-                jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
-            }
             catch
             {
                 jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
@@ -96,10 +92,13 @@ namespace Torneos.Controllers
                                                       oPartidos.numero,
                                                       oPartidos.coordinador,
                                                       oPartidos.estado,
-                                                      oPartidos.fecha_hora,
+                                                      oPartidos.fecha,
+                                                      oPartidos.hora,
+                                                      oPartidos.tipo,
                                                       oPartidos.idCancha,
                                                       oPartidos.telefono_coordinador,
-                                                      oPartidos.equipos,
+                                                      oPartidos.equipoLocal,
+                                                      oPartidos.equipoVisita,
                                                       oPartidos.observaciones,
                                                       arbitros = 1,
                                                       accionregistro = 0
@@ -116,7 +115,7 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
-        public JsonResult ValidarCalcular(String oper, int idCancha = 0, int cantidad = 0, int id=0)
+        public JsonResult ValidarCalcular(String oper, int idCancha = 0, int cantidad = 0, int cantidadArbitros = 0, int id=0)
         {
             JsonResult jsonData = null;
             try
@@ -137,14 +136,14 @@ namespace Torneos.Controllers
                                                 select t).Single<Torneos_Canchas>();
                     viaticos = oCancha.viaticos;
                     dieta = oTorneo.dieta;
-                    monto = (viaticos + dieta) * cantidad;
+                    monto = (viaticos + dieta) * cantidad * cantidadArbitros;
                 }
                 if(oper == "add")
                 {
                     id = Math.Abs(Guid.NewGuid().GetHashCode());
                         
                 }
-                jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = new {id, idCancha, viaticos, dieta, cantidad, monto }, estadoValidacion = "exito" });
+                jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = new { id, idCancha, viaticos, dieta, cantidad, monto, cantidadArbitros }, estadoValidacion = "exito" });
             }
             catch
             {
@@ -271,15 +270,19 @@ namespace Torneos.Controllers
                 case 1:
                     Partidos oPartidoNuevo = new Partidos();
 
-                    oPartido.fecha_hora = DateTime.Now;
+                    oPartido.fecha = DateTime.Now;
+                    oPartido.hora = DateTime.Now.TimeOfDay;
 
                     oPartidoNuevo.coordinador = oPartido.coordinador;
-                    oPartidoNuevo.equipos = oPartido.equipos;
+                    oPartidoNuevo.equipoVisita = oPartido.equipoVisita;
+                    oPartidoNuevo.equipoLocal = oPartido.equipoLocal;
                     oPartidoNuevo.observaciones = oPartido.observaciones;
-                    oPartidoNuevo.fecha_hora = oPartido.fecha_hora;
+                    oPartidoNuevo.fecha = oPartido.fecha;
+                    oPartidoNuevo.hora = oPartido.hora;
                     oPartidoNuevo.telefono_coordinador = oPartido.telefono_coordinador;
                     oPartidoNuevo.idCancha = oPartido.idCancha;
-                    oPartidoNuevo.numero = Utilidades.ObtenerConsecutivoPartido(oPartido.fecha_hora);
+                    oPartidoNuevo.tipo = oPartido.tipo;
+                    oPartidoNuevo.numero = Utilidades.ObtenerConsecutivoPartido(oPartido.fecha);
                     oPartidoNuevo.idProgramacion = nIDProgramacion;
                     oPartidoNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");;
                     oPartidoNuevo.id = 0;
@@ -303,12 +306,15 @@ namespace Torneos.Controllers
                                                 select p).Single();
 
                     oPartidoEditado.coordinador = oPartido.coordinador;
-                    oPartidoEditado.equipos = oPartido.equipos;
+                    oPartidoEditado.equipoLocal = oPartido.equipoLocal;
+                    oPartidoEditado.equipoVisita = oPartido.equipoVisita;
                     oPartidoEditado.observaciones = oPartido.observaciones;
                     //oPartidoEditado.fecha_hora = oPartido.fecha_hora;
-                    oPartidoEditado.fecha_hora = DateTime.Now;
+                    oPartidoEditado.fecha = DateTime.Now;
+                    oPartidoEditado.hora = DateTime.Now.TimeOfDay;
                     oPartidoEditado.telefono_coordinador = oPartido.telefono_coordinador;
                     oPartidoEditado.idCancha = oPartido.idCancha;
+                    oPartidoEditado.tipo = oPartido.tipo;
                     
                     bdTorneos.SaveChanges();
                            

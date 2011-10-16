@@ -705,6 +705,30 @@ namespace Torneos
         private global::System.String _ubicacion;
         partial void OnubicacionChanging(global::System.String value);
         partial void OnubicacionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String telefonos
+        {
+            get
+            {
+                return _telefonos;
+            }
+            set
+            {
+                OntelefonosChanging(value);
+                ReportPropertyChanging("telefonos");
+                _telefonos = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("telefonos");
+                OntelefonosChanged();
+            }
+        }
+        private global::System.String _telefonos;
+        partial void OntelefonosChanging(global::System.String value);
+        partial void OntelefonosChanged();
 
         #endregion
     
@@ -1352,21 +1376,21 @@ namespace Torneos
         /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
         /// <param name="idProgramacion">Initial value of the idProgramacion property.</param>
         /// <param name="idCancha">Initial value of the idCancha property.</param>
-        /// <param name="fecha_hora">Initial value of the fecha_hora property.</param>
         /// <param name="coordinador">Initial value of the coordinador property.</param>
         /// <param name="estado">Initial value of the estado property.</param>
-        /// <param name="equipos">Initial value of the equipos property.</param>
-        public static Partidos CreatePartidos(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.Int32 idProgramacion, global::System.Int32 idCancha, global::System.DateTime fecha_hora, global::System.String coordinador, global::System.Int32 estado, global::System.String equipos)
+        /// <param name="fecha">Initial value of the fecha property.</param>
+        /// <param name="equipoLocal">Initial value of the equipoLocal property.</param>
+        public static Partidos CreatePartidos(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.Int32 idProgramacion, global::System.Int32 idCancha, global::System.String coordinador, global::System.Int32 estado, global::System.DateTime fecha, global::System.String equipoLocal)
         {
             Partidos partidos = new Partidos();
             partidos.id = id;
             partidos.idAsociacion = idAsociacion;
             partidos.idProgramacion = idProgramacion;
             partidos.idCancha = idCancha;
-            partidos.fecha_hora = fecha_hora;
             partidos.coordinador = coordinador;
             partidos.estado = estado;
-            partidos.equipos = equipos;
+            partidos.fecha = fecha;
+            partidos.equipoLocal = equipoLocal;
             return partidos;
         }
 
@@ -1471,30 +1495,6 @@ namespace Torneos
         private global::System.Int32 _idCancha;
         partial void OnidCanchaChanging(global::System.Int32 value);
         partial void OnidCanchaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime fecha_hora
-        {
-            get
-            {
-                return _fecha_hora;
-            }
-            set
-            {
-                Onfecha_horaChanging(value);
-                ReportPropertyChanging("fecha_hora");
-                _fecha_hora = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("fecha_hora");
-                Onfecha_horaChanged();
-            }
-        }
-        private global::System.DateTime _fecha_hora;
-        partial void Onfecha_horaChanging(global::System.DateTime value);
-        partial void Onfecha_horaChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1643,30 +1643,6 @@ namespace Torneos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String equipos
-        {
-            get
-            {
-                return _equipos;
-            }
-            set
-            {
-                OnequiposChanging(value);
-                ReportPropertyChanging("equipos");
-                _equipos = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("equipos");
-                OnequiposChanged();
-            }
-        }
-        private global::System.String _equipos;
-        partial void OnequiposChanging(global::System.String value);
-        partial void OnequiposChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String numero
@@ -1687,6 +1663,126 @@ namespace Torneos
         private global::System.String _numero;
         partial void OnnumeroChanging(global::System.String value);
         partial void OnnumeroChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime fecha
+        {
+            get
+            {
+                return _fecha;
+            }
+            set
+            {
+                OnfechaChanging(value);
+                ReportPropertyChanging("fecha");
+                _fecha = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("fecha");
+                OnfechaChanged();
+            }
+        }
+        private global::System.DateTime _fecha;
+        partial void OnfechaChanging(global::System.DateTime value);
+        partial void OnfechaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.TimeSpan> hora
+        {
+            get
+            {
+                return _hora;
+            }
+            set
+            {
+                OnhoraChanging(value);
+                ReportPropertyChanging("hora");
+                _hora = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("hora");
+                OnhoraChanged();
+            }
+        }
+        private Nullable<global::System.TimeSpan> _hora;
+        partial void OnhoraChanging(Nullable<global::System.TimeSpan> value);
+        partial void OnhoraChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> tipo
+        {
+            get
+            {
+                return _tipo;
+            }
+            set
+            {
+                OntipoChanging(value);
+                ReportPropertyChanging("tipo");
+                _tipo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("tipo");
+                OntipoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _tipo;
+        partial void OntipoChanging(Nullable<global::System.Int32> value);
+        partial void OntipoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String equipoVisita
+        {
+            get
+            {
+                return _equipoVisita;
+            }
+            set
+            {
+                OnequipoVisitaChanging(value);
+                ReportPropertyChanging("equipoVisita");
+                _equipoVisita = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("equipoVisita");
+                OnequipoVisitaChanged();
+            }
+        }
+        private global::System.String _equipoVisita;
+        partial void OnequipoVisitaChanging(global::System.String value);
+        partial void OnequipoVisitaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String equipoLocal
+        {
+            get
+            {
+                return _equipoLocal;
+            }
+            set
+            {
+                OnequipoLocalChanging(value);
+                ReportPropertyChanging("equipoLocal");
+                _equipoLocal = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("equipoLocal");
+                OnequipoLocalChanged();
+            }
+        }
+        private global::System.String _equipoLocal;
+        partial void OnequipoLocalChanging(global::System.String value);
+        partial void OnequipoLocalChanged();
 
         #endregion
     
@@ -2634,6 +2730,30 @@ namespace Torneos
         private global::System.Decimal _dieta;
         partial void OndietaChanging(global::System.Decimal value);
         partial void OndietaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                OnemailChanging(value);
+                ReportPropertyChanging("email");
+                _email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("email");
+                OnemailChanged();
+            }
+        }
+        private global::System.String _email;
+        partial void OnemailChanging(global::System.String value);
+        partial void OnemailChanged();
 
         #endregion
     
@@ -3043,23 +3163,23 @@ namespace Torneos
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
         /// <param name="idAsociacion">Initial value of the idAsociacion property.</param>
-        /// <param name="codigo">Initial value of the codigo property.</param>
         /// <param name="nombre">Initial value of the nombre property.</param>
         /// <param name="contrasena">Initial value of the contrasena property.</param>
         /// <param name="correo">Initial value of the correo property.</param>
         /// <param name="telefono1">Initial value of the telefono1 property.</param>
         /// <param name="tipo">Initial value of the tipo property.</param>
-        public static Usuarios CreateUsuarios(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.String codigo, global::System.String nombre, global::System.String contrasena, global::System.String correo, global::System.String telefono1, global::System.Int32 tipo)
+        /// <param name="cedula">Initial value of the cedula property.</param>
+        public static Usuarios CreateUsuarios(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.String nombre, global::System.String contrasena, global::System.String correo, global::System.String telefono1, global::System.Int32 tipo, global::System.String cedula)
         {
             Usuarios usuarios = new Usuarios();
             usuarios.id = id;
             usuarios.idAsociacion = idAsociacion;
-            usuarios.codigo = codigo;
             usuarios.nombre = nombre;
             usuarios.contrasena = contrasena;
             usuarios.correo = correo;
             usuarios.telefono1 = telefono1;
             usuarios.tipo = tipo;
+            usuarios.cedula = cedula;
             return usuarios;
         }
 
@@ -3116,30 +3236,6 @@ namespace Torneos
         private global::System.Int32 _idAsociacion;
         partial void OnidAsociacionChanging(global::System.Int32 value);
         partial void OnidAsociacionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String codigo
-        {
-            get
-            {
-                return _codigo;
-            }
-            set
-            {
-                OncodigoChanging(value);
-                ReportPropertyChanging("codigo");
-                _codigo = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("codigo");
-                OncodigoChanged();
-            }
-        }
-        private global::System.String _codigo;
-        partial void OncodigoChanging(global::System.String value);
-        partial void OncodigoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3332,6 +3428,30 @@ namespace Torneos
         private Nullable<global::System.Int32> _idTorneo;
         partial void OnidTorneoChanging(Nullable<global::System.Int32> value);
         partial void OnidTorneoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String cedula
+        {
+            get
+            {
+                return _cedula;
+            }
+            set
+            {
+                OncedulaChanging(value);
+                ReportPropertyChanging("cedula");
+                _cedula = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("cedula");
+                OncedulaChanged();
+            }
+        }
+        private global::System.String _cedula;
+        partial void OncedulaChanging(global::System.String value);
+        partial void OncedulaChanged();
 
         #endregion
     
