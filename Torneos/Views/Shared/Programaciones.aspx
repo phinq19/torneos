@@ -210,7 +210,7 @@
                 width: 766,
                 altRows: true,
                 shrinkToFit: false,
-                colNames: ['id', 'Número', 'Local', 'Visita', 'Cancha', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Árbitros', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Árbitros', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'numero', index: 'numero', width: 100, editable: false, editoptions: { size: 20} },

@@ -304,15 +304,7 @@
             var Entidad = {};
             var oTorneo = {};
             var oCanchas = [];
-            /*
-            _Torneo.nombre = $("#TxtNombre").val();
-            _Torneo.categoria = $("#selCategoria").val();
-            _Torneo.telefono1 = $("#TxtTelefono1").val();
-            _Torneo.telefono2 = $("#TxtTelefono2").val();
-            _Torneo.dieta = $("#TxtDieta").val();
-            _Torneo.ubicacion = $("#TxtUbicacion").val();
-            _Torneo.observaciones = $("#TxtObservaciones").val();
-            */
+ 
             oTorneo.nombre = $("#TxtNombre").val();
             oTorneo.categoria = $("#selCategoria").val();
             oTorneo.telefono1 = $("#TxtTelefono1").val();
