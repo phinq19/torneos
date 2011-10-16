@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
 
 
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
