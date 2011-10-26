@@ -32,6 +32,24 @@
     <script language="javascript" type="text/javascript" src="/Scripts/menu/jquery.hoverIntent.minified.js"></script> 
 
     <script type="text/javascript">
+        // Here we set a globally the altRows option
+        jQuery.extend(jQuery.jgrid.defaults, {
+            altRows: true,
+            datatype: "json",
+            rowNum: 10,
+            rowList: [10, 20, 30],
+            mtype: "post", 
+            viewrecords: true,
+            jsonReader: { repeatitems: false },
+            ignoreCase: true,
+            height: 250,
+            width: 856,
+            altRows: true,
+            shrinkToFit: false
+        });
+    </script>
+
+    <script type="text/javascript">
         $(document).ready(function () {
             document.body.style.display = "";
             $('#menu').dcMegaMenu({
