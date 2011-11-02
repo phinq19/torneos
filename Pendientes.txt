@@ -16,3 +16,7 @@ Mantenimiento de programaciones
 
 
 
+
+
+Validar que no haya canchas repetidas para un torneo
+Foreing Keys

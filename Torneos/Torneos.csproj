@@ -72,6 +72,7 @@
     <Compile Include="Controllers\TorneosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\VerificacionesController.cs" />
+    <Compile Include="enumPuestosArbitros.cs" />
     <Compile Include="enumTiposArbitro.cs" />
     <Compile Include="enumTiposPartido.cs" />
     <Compile Include="enumCategoriasTorneos.cs" />

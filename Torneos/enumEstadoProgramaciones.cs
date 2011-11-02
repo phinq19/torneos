@@ -9,7 +9,8 @@ namespace Torneos
     public enum enumEstadoProgramaciones
     {
         Pendiente,
-        Rechazada,
-        Verificado
+        Verificado,
+        Rechazada
+        
     }
 }
