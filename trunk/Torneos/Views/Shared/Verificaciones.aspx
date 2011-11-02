@@ -15,59 +15,107 @@
         </div>
     </fieldset>
     <br />
-    <table id="gridProgramaciones">
+    <table id="gridVerificaciones">
     </table>
-    <div id="barraGridProgramaciones">
+    <div id="barraGridVerificaciones">
     </div>
 
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $("#selEstado").change(function () {
-                var postData = jQuery("#gridProgramaciones").getGridParam("postData");
+                var postData = jQuery("#gridVerificaciones").getGridParam("postData");
                 postData.estado = $("#selEstado").val();
-                jQuery("#gridProgramaciones").setGridParam("postData", postData);
-                jQuery("#gridProgramaciones").trigger("reloadGrid");
+                jQuery("#gridVerificaciones").setGridParam("postData", postData);
+                jQuery("#gridVerificaciones").trigger("reloadGrid");
             });
 
-            $("#gridProgramaciones").jqGrid({
-                url: '<%= Url.Action("ObtenerProgramaciones","Programaciones") %>',
+            $("#gridVerificaciones").jqGrid({
+                url: '<%= Url.Action("ObtenerProgramaciones","Verificaciones") %>',
                 postData: { estado: $("#selEstado").val() },
                 datatype: "json",
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 mtype: "post",
-                pager: '#barraGridProgramaciones',
+                pager: '#barraGridVerificaciones',
                 //loadonce: true,
                 viewrecords: true,
                 caption: "",
-                //editurl: '<%= Url.Action("EditarProgramacions","Programacions") %>',
+                editurl: '<%= Url.Action("EditarProgramaciones","Verificaciones") %>',
                 jsonReader: { repeatitems: false },
                 ignoreCase: true,
                 height: 250,
                 width: 856,
                 altRows: true,
                 shrinkToFit: false,
-                colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto', 'Observaciones'],
+                colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto depositado', 'Monto Calculado', 'Observaciones del Cliente', 'Observaciones Asociación'],
                 colModel: [
                         { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                        { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 10} },
-                        { name: 'idTorneo', index: 'idTorneo', width: 250, editable: true, editoptions: { size: 40 }, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosParaGrid() %>' }, formatter: 'select' },
+                        { name: 'numero', index: 'numero', width: 100, editable: false },
+                        { name: 'idTorneo', index: 'idTorneo', width: 250, editable: false, editoptions: { size: 40 }, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosParaGrid() %>' }, formatter: 'select' },
                         { name: 'estado', index: 'estado', width: 100, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoProgramacionesParaGrid() %>' }, formatter: 'select' },
-                        { name: 'deposito', index: 'deposito', width: 200, editable: true, sortable: false, editrules: { required: true} },
-                        { name: 'monto', index: 'monto', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                        { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
+                        { name: 'deposito', index: 'deposito', width: 200, editable: false, sortable: false, editrules: { required: true} },
+                        { name: 'monto', index: 'monto', width: 100, editable: false, editoptions: { size: 40 }, editrules: { required: true} },
+                        { name: 'montoCalculado', index: 'montoCalculado', width: 100, editable: false, editoptions: { size: 40 }, editrules: { required: true} },
+                        { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: false, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
+                        { name: 'observacionesAsoc', index: 'observacionesAsoc', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                     ]
             });
 
-            $("#gridProgramaciones").jqGrid('navGrid', '#barraGridProgramaciones',
+            var ProcesarEditar_gvVerificaciones = {
+                closeAfterAdd: true,
+                closeAfterEdit: true,
+                closeOnEscape: true,
+                reloadAfterSubmit: false,
+                modal: false,
+                width: "500",
+                savekey: [true, 13],
+                navkeys: [true, 38, 40],
+                afterShowForm: function (formId) {
+
+                },
+                onclickSubmit: function (params, registroCliente) {
+                },
+                afterSubmit: function (datosRespuesta, registroCliente, formid) {
+                    var datos = JSON.parse(datosRespuesta.responseText);
+                    switch (datos.estado) {
+                        case "exito":
+                            switch (datos.estadoValidacion) {
+                                case "exito":
+                                    return [true, '', datos.ObjetoDetalle.id];
+                                    break;
+                                case "error":
+                                    return [false, datos.mensaje, '-1'];
+                                    break;
+                                case "falloLlave":
+                                    return [false, datos.mensaje, '-1'];
+                                    break;
+                                case "sinAutenticar":
+                                    window.location = "/";
+                                    break;
+                            }
+                            break;
+                        case "error":
+                            return [false, datos.mensaje, '-1'];
+                            break;
+                    }
+                }
+            };
+
+            $("#gridVerificaciones").jqGrid('navGrid', '#barraGridVerificaciones',
                         {
                             edit: true,
-                            add: true,
-                            del: true,
+                            add: false,
+                            del: false,
                             refresh: true,
                             search: true,
                             view: true
-                        });
+                        }, //options 
+            ProcesarEditar_gvVerificaciones, // edit options 
+            ProcesarEditar_gvVerificaciones, // add options 
+            {}, // del options
+            {}, // search options 
+            {width: "500" }
+            );
         });
 </script>
 

@@ -218,20 +218,20 @@
                 width: 766,
                 altRows: true,
                 shrinkToFit: false,
-                colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Árbitros', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'equipoLocal', index: 'equipoLocal', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'equipoVisita', index: 'equipoVisita', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>' }, formatter: 'select' },
+                    { name: 'arbitros', index: 'arbitros', width: 180, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorCantidadArbitrosParaGrid() %>' }, formatter: 'select' },
                     { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTiposPartidoParaGrid() %>' }, formatter: 'select' },
                     { name: 'fecha', index: 'fecha', datefmt: 'd/m/y', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true, date: true }, sorttype: "date", formatter: "fechaFmatter", editoptions: { defaultValue: '<%= DateTime.Now.ToShortDateString() %>'} },
                     { name: 'hora', index: 'hora', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true }, formatter: "time" },
                     { name: 'coordinador', index: 'coordinador', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'estado', index: 'estado', width: 150, editable: false, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
-                    { name: 'arbitros', index: 'arbitros', width: 180, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorCantidadArbitrosParaGrid() %>' }, formatter: 'select' },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
@@ -356,7 +356,7 @@
                 width: 856,
                 altRows: true,
                 shrinkToFit: false,
-                colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto', 'Observaciones'],
+                colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto', 'Observaciones del Cliente', 'Observaciones Asociación'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 10} },
@@ -364,7 +364,8 @@
                     { name: 'estado', index: 'estado', width: 100, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoProgramacionesParaGrid() %>' }, formatter: 'select' },
                     { name: 'deposito', index: 'deposito', width: 200, editable: true, sortable: false, editrules: { required: true} },
                     { name: 'monto', index: 'monto', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
+                    { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
+                    { name: 'observacionesAsoc', index: 'observacionesAsoc', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
             });
 
@@ -505,6 +506,7 @@
                 oPartido.numero = _Programacion.Partidos[i].numero;
                 oPartido.idCancha = _Programacion.Partidos[i].idCancha.toString();
                 oPartido.accionregistro = _Programacion.Partidos[i].accionregistro;
+                oPartido.arbitros = _Programacion.Partidos[i].arbitros;
 
                 oPartidos.push(oPartido);
 
@@ -664,7 +666,7 @@
                 </div>
                 <div class="fila">
                     <div class="celdaLabel">
-                        Observaciones
+                        Observaciones del Cliente
                     </div>
                     <div class="">
                         <textarea id="TxtObservaciones" rows="2" cols="40"></textarea>

@@ -6,12 +6,10 @@ using System.Web.Mvc;
 
 namespace Torneos
 {
-    public enum enumEstadoPartidos
+    public enum enumPuestosArbitros
     {
-        Pendiente_Programacion,
-        Programado,
-        //Jugado,
-        Con_Informe,
-        No_Jugado
+        Central = 1,
+        Linea,
+        Secretario
     }
 }

@@ -368,6 +368,32 @@ namespace Torneos
             return selTiposArbitro.ToString();
         }
 
+        public static String CrearSelectorCanchasParaGrid()
+        {
+            StringBuilder selArbitros = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+            int tipoArbitro = (int)enumTipoUsuario.Arbitro;
+
+            List<Usuarios> oListaUsuarios = (from u in bdTorneos.Usuarios 
+                                            join d in bdTorneos.Disponibilidad on u.id equals d.idArbitro
+                                            where u.idAsociacion == idAsociacion && u.tipo. == tipoArbitro
+                                            select u).ToList<Usuarios>();
+
+            for (int indice = 0; indice < oListaUsuarios.Count; indice++)
+            {
+                if (!String.IsNullOrEmpty(selArbitros.ToString()))
+                {
+                    selArbitros.Append(";");
+                }
+                selArbitros.Append(oListaUsuarios[indice].id + ":" + oListaUsuarios[indice].nombre);
+            }
+
+            return selArbitros.ToString();
+
+        }
+
         #endregion
 
         #region General

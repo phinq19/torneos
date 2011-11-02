@@ -50,7 +50,8 @@ namespace Torneos.Controllers
                                 oProgramaciones.idTorneo,
                                 oProgramaciones.idUsuario,
                                 oProgramaciones.monto,
-                                oProgramaciones.observaciones
+                                oProgramaciones.observaciones,
+                                oProgramaciones.observacionesAsoc
                             })
                 });
             }
@@ -100,7 +101,7 @@ namespace Torneos.Controllers
                                                       oPartidos.equipoLocal,
                                                       oPartidos.equipoVisita,
                                                       oPartidos.observaciones,
-                                                      arbitros = 1,
+                                                      oPartidos.arbitros,
                                                       accionregistro = 0
                                                   }
                             }
@@ -199,59 +200,71 @@ namespace Torneos.Controllers
             JsonResult jsonData = null;
             try
             {
-                BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-                switch (oper)
+                decimal montoCalculado = ObtenerMontoDeposito(oPartidos);
+                if (montoCalculado <= oProgramacion.monto)
                 {
-                    case "add":
+                    BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                    switch (oper)
+                    {
+                        case "add":
 
-                        Programaciones oProgramacionNuevo = new Programaciones();
-                        oProgramacionNuevo.deposito = oProgramacion.deposito;
-                        oProgramacionNuevo.numero = Utilidades.ObtenerConsecutivoProgramacion();
-                        oProgramacionNuevo.monto = oProgramacion.monto;
-                        oProgramacionNuevo.observaciones = oProgramacion.observaciones;
-                        oProgramacionNuevo.idTorneo = Utilidades.ObtenerValorSession("idTorneo");
-                        oProgramacionNuevo.idUsuario = Utilidades.ObtenerValorSession("idUsuario");
-                        oProgramacionNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
-                        oProgramacionNuevo.id = 0;
+                            Programaciones oProgramacionNuevo = new Programaciones();
+                            oProgramacionNuevo.deposito = oProgramacion.deposito;
+                            oProgramacionNuevo.numero = Utilidades.ObtenerConsecutivoProgramacion();
+                            oProgramacionNuevo.monto = oProgramacion.monto;
+                            oProgramacionNuevo.montoCalculado = montoCalculado;
+                            oProgramacionNuevo.observaciones = oProgramacion.observaciones;
+                            oProgramacionNuevo.estado = (int)enumEstadoProgramaciones.Pendiente;
+                            oProgramacionNuevo.idTorneo = Utilidades.ObtenerValorSession("idTorneo");
+                            oProgramacionNuevo.idUsuario = Utilidades.ObtenerValorSession("idUsuario");
+                            oProgramacionNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+                            oProgramacionNuevo.id = 0;
 
-                        bdTorneos.AddToProgramaciones(oProgramacionNuevo);
-                        bdTorneos.SaveChanges();
-                        bdTorneos.Detach(oProgramacionNuevo);
-                        nIDProgramacion = oProgramacionNuevo.id;
+                            bdTorneos.AddToProgramaciones(oProgramacionNuevo);
+                            bdTorneos.SaveChanges();
+                            bdTorneos.Detach(oProgramacionNuevo);
+                            nIDProgramacion = oProgramacionNuevo.id;
 
-                        jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oProgramacionNuevo, estadoValidacion = "exito" });
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oProgramacionNuevo, estadoValidacion = "exito" });
 
-                        break;
-                    case "del":
-                        Programaciones oTorneosEliminado = (from p in bdTorneos.Programaciones
-                                                        where p.id == oProgramacion.id
-                                                        select p).Single();
+                            break;
+                        case "del":
+                            Programaciones oTorneosEliminado = (from p in bdTorneos.Programaciones
+                                                                where p.id == oProgramacion.id
+                                                                select p).Single();
 
-                        jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosEliminado, estadoValidacion = "exito" });
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oTorneosEliminado, estadoValidacion = "exito" });
 
-                        bdTorneos.DeleteObject(oTorneosEliminado);
-                        bdTorneos.SaveChanges();
-                        nIDProgramacion = oTorneosEliminado.id;
-                        break;
-                    case "edit":
-                        Programaciones oProgramacionEditado = (from p in bdTorneos.Programaciones
-                                                    where p.id == oProgramacion.id
-                                                    select p).Single();
+                            bdTorneos.DeleteObject(oTorneosEliminado);
+                            bdTorneos.SaveChanges();
+                            nIDProgramacion = oTorneosEliminado.id;
+                            break;
+                        case "edit":
+                            Programaciones oProgramacionEditado = (from p in bdTorneos.Programaciones
+                                                                   where p.id == oProgramacion.id
+                                                                   select p).Single();
 
-                        oProgramacionEditado.observaciones = oProgramacion.observaciones;
-                        oProgramacionEditado.deposito = oProgramacion.deposito;
-                        oProgramacionEditado.monto = oProgramacion.monto;
+                            oProgramacionEditado.observaciones = oProgramacion.observaciones;
+                            oProgramacionEditado.deposito = oProgramacion.deposito;
+                            oProgramacionEditado.monto = oProgramacion.monto;
+                            oProgramacionEditado.montoCalculado = montoCalculado;
 
-                        bdTorneos.SaveChanges();
-                        bdTorneos.Detach(oProgramacionEditado);
-                        nIDProgramacion = oProgramacionEditado.id;
+                            bdTorneos.SaveChanges();
+                            bdTorneos.Detach(oProgramacionEditado);
+                            nIDProgramacion = oProgramacionEditado.id;
 
-                        jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oProgramacionEditado, estadoValidacion = "exito" });
-                        break;
+                            jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oProgramacionEditado, estadoValidacion = "exito" });
+                            break;
+                    }
+                    foreach (Partidos oPartido in oPartidos)
+                    {
+                        EditarPartidos(oPartido, nIDProgramacion);
+                    }
                 }
-                foreach (Partidos oPartido in oPartidos) {
-                    EditarPartidos(oPartido, nIDProgramacion);
+                else {
+                    jsonData = Json(new { estado = "error", mensaje = "El monto del depósito debe ser:" + montoCalculado });
                 }
+                
             }
             catch
             {
@@ -270,9 +283,6 @@ namespace Torneos.Controllers
                 case 1:
                     Partidos oPartidoNuevo = new Partidos();
 
-                    //oPartido.fecha = DateTime.Now;
-                    //oPartido.hora = DateTime.Now.TimeOfDay;
-
                     oPartidoNuevo.coordinador = oPartido.coordinador;
                     oPartidoNuevo.equipoVisita = oPartido.equipoVisita;
                     oPartidoNuevo.equipoLocal = oPartido.equipoLocal;
@@ -284,13 +294,15 @@ namespace Torneos.Controllers
                     oPartidoNuevo.tipo = oPartido.tipo;
                     oPartidoNuevo.numero = Utilidades.ObtenerConsecutivoPartido(oPartido.fecha);
                     oPartidoNuevo.idProgramacion = nIDProgramacion;
-                    oPartidoNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");;
+                    oPartidoNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+                    oPartidoNuevo.arbitros = oPartido.arbitros;
                     oPartidoNuevo.id = 0;
-                    oPartidoNuevo.estado = 0;
+                    oPartidoNuevo.estado = (int)enumEstadoPartidos.Pendiente_Programacion;
 
                     bdTorneos.AddToPartidos(oPartidoNuevo);
                     bdTorneos.SaveChanges();
 
+                    CrearDetallePartidos(oPartidoNuevo);
                     break;
                 case 3:
                     Partidos oPartidoEliminado = (from p in bdTorneos.Partidos
@@ -309,18 +321,68 @@ namespace Torneos.Controllers
                     oPartidoEditado.equipoLocal = oPartido.equipoLocal;
                     oPartidoEditado.equipoVisita = oPartido.equipoVisita;
                     oPartidoEditado.observaciones = oPartido.observaciones;
-                    //oPartidoEditado.fecha_hora = oPartido.fecha_hora;
                     oPartidoEditado.fecha = oPartido.fecha;
                     oPartidoEditado.hora = oPartido.hora;
                     oPartidoEditado.telefono_coordinador = oPartido.telefono_coordinador;
                     oPartidoEditado.idCancha = oPartido.idCancha;
                     oPartidoEditado.tipo = oPartido.tipo;
+                    oPartidoEditado.arbitros = oPartido.arbitros;
                     
                     bdTorneos.SaveChanges();
-                           
+
+                    EliminarDetallePartidos(oPartidoEditado);
+                    CrearDetallePartidos(oPartidoEditado);       
                     break;
             }
         }
 
+        private void EliminarDetallePartidos(Partidos oPartido) {
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+            List<DetallePartidos> oDetallesPartidos = (from d in bdTorneos.DetallePartidos
+                                          where d.idPartido == oPartido.id
+                                          select d).ToList<DetallePartidos>();
+            for (int indice = 0; indice < oDetallesPartidos.Count(); indice++)
+            {
+                bdTorneos.DeleteObject(oDetallesPartidos[indice]);
+                bdTorneos.SaveChanges();
+            }
+        }
+
+        private void CrearDetallePartidos(Partidos oPartido)
+        {
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+            for (int indice = 0; indice < oPartido.arbitros; indice++)
+            {
+                DetallePartidos oDetalleNuevo = new DetallePartidos();
+                oDetalleNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+                oDetalleNuevo.idPartido = oPartido.id;
+                oDetalleNuevo.puesto = (int)enumPuestosArbitros.Central;
+
+                bdTorneos.AddToDetallePartidos(oDetalleNuevo);
+                bdTorneos.SaveChanges();
+            }
+        }
+
+        private decimal ObtenerMontoDeposito(Partidos[] oPartidos)
+        {
+            decimal montoDeposito = 0;
+            int nIdTorneo = Utilidades.ObtenerValorSession("idTorneo");
+
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            Torneos oTorneo = (from t in bdTorneos.Torneos
+                            where t.id == nIdTorneo
+                            select t).Single();
+
+            for (int indice = 0; indice < oPartidos.Count(); indice++)
+            {
+                int nIdCancha = oPartidos[indice].idCancha;
+                Torneos_Canchas oCancha = (from tc in bdTorneos.Torneos_Canchas
+                                           where tc.idCancha == nIdCancha && tc.idTorneo == nIdTorneo
+                                           select tc).Single();
+                montoDeposito += (oTorneo.dieta + oCancha.viaticos) * oPartidos[indice].arbitros;
+            }
+            return montoDeposito;
+        }
     }
 }
