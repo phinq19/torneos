@@ -115,7 +115,7 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
-        public JsonResult ValidarCalcular(String oper, int idCancha = 0, int cantidad = 0, int cantidadArbitros = 0, int id=0)
+        public JsonResult ValidarCalcular(String oper, int idCancha = 0, int cantidadArbitros = 0, int id=0)
         {
             JsonResult jsonData = null;
             try
@@ -136,14 +136,14 @@ namespace Torneos.Controllers
                                                 select t).Single<Torneos_Canchas>();
                     viaticos = oCancha.viaticos;
                     dieta = oTorneo.dieta;
-                    monto = (viaticos + dieta) * cantidad * cantidadArbitros;
+                    monto = (viaticos + dieta) * cantidadArbitros;
                 }
                 if(oper == "add")
                 {
                     id = Math.Abs(Guid.NewGuid().GetHashCode());
                         
                 }
-                jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = new { id, idCancha, viaticos, dieta, cantidad, monto, cantidadArbitros }, estadoValidacion = "exito" });
+                jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = new { id, idCancha, viaticos, dieta, monto, cantidadArbitros }, estadoValidacion = "exito" });
             }
             catch
             {
@@ -270,8 +270,8 @@ namespace Torneos.Controllers
                 case 1:
                     Partidos oPartidoNuevo = new Partidos();
 
-                    oPartido.fecha = DateTime.Now;
-                    oPartido.hora = DateTime.Now.TimeOfDay;
+                    //oPartido.fecha = DateTime.Now;
+                    //oPartido.hora = DateTime.Now.TimeOfDay;
 
                     oPartidoNuevo.coordinador = oPartido.coordinador;
                     oPartidoNuevo.equipoVisita = oPartido.equipoVisita;
@@ -310,8 +310,8 @@ namespace Torneos.Controllers
                     oPartidoEditado.equipoVisita = oPartido.equipoVisita;
                     oPartidoEditado.observaciones = oPartido.observaciones;
                     //oPartidoEditado.fecha_hora = oPartido.fecha_hora;
-                    oPartidoEditado.fecha = DateTime.Now;
-                    oPartidoEditado.hora = DateTime.Now.TimeOfDay;
+                    oPartidoEditado.fecha = oPartido.fecha;
+                    oPartidoEditado.hora = oPartido.hora;
                     oPartidoEditado.telefono_coordinador = oPartido.telefono_coordinador;
                     oPartidoEditado.idCancha = oPartido.idCancha;
                     oPartidoEditado.tipo = oPartido.tipo;

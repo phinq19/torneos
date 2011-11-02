@@ -116,6 +116,16 @@ namespace Torneos
                 oMenu.AppendLine("      </td>");
             }
             oMenu.AppendLine("  </tr>");
+            oMenu.AppendLine("  <tr>");
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.Arbitro)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Disponibilidad/\" class=\"itemMenu\">Disponibilidad<a>");
+                oMenu.AppendLine("      </td>");
+            }
+            oMenu.AppendLine("  </tr>");
             oMenu.AppendLine("</table>");
             return oMenu.ToString();
         }

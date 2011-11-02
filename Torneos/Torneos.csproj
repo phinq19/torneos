@@ -64,6 +64,7 @@
     <Compile Include="Autorizado.cs" />
     <Compile Include="Controllers\AsignacionesController.cs" />
     <Compile Include="Controllers\CanchasController.cs" />
+    <Compile Include="Controllers\DisponibilidadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformesController.cs" />
     <Compile Include="Controllers\ProgramacionesController.cs" />
@@ -198,6 +199,7 @@
     <Content Include="Scripts\lib\toJson.js" />
     <Content Include="Views\Shared\Asignaciones.aspx" />
     <Content Include="Views\Shared\Canchas.aspx" />
+    <Content Include="Views\Shared\Disponibilidad.aspx" />
     <Content Include="Views\Shared\Informes.aspx" />
     <Content Include="Views\Shared\Inicio.aspx" />
     <Content Include="Views\Shared\Login.aspx" />
@@ -267,7 +269,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51671</DevelopmentServerPort>
+          <DevelopmentServerPort>61501</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -2,9 +2,16 @@
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
+     
+    
+    <table id="gridProgramaciones">
+    </table>
+    <div id="barraGridProgramaciones">
+    </div>
+    <br />
     <fieldset class="Fieldset">
-        <legend>Herramientas</legend>
-        <input type="button" value="Calcular Depósito" id="BtnCalcular"/>
+        <legend>Cálcular Depósito</legend>
+        <!--<input type="button" value="Calcular Depósito" id="BtnCalcular"/>
         <div id="ventanaCalcular">
             <br />
             <table id="gridCalcular">
@@ -12,13 +19,13 @@
             <div id="barraGridCalcular">
             </div>
         </div>
-    </fieldset> 
-    <br />
-    <table id="gridProgramaciones">
-    </table>
-    <div id="barraGridProgramaciones">
-    </div>
-    
+        -->
+        <table id="gridCalcular">
+        </table>
+        <div id="barraGridCalcular">
+        </div>
+    </fieldset>
+
     <script type='text/javascript'>
         $(document).ready(function () {
 
@@ -29,10 +36,10 @@
                 $("#ventanaCalcular").dialog("option", "buttons", { "Cerrar": function () {
                     $(this).dialog("close");
                     $('#gridCalcular').clearGridData();
-                    CalcularDeposito();
+                    //CalcularDeposito();
                 }
                 });
-                $("#ventanaCalcular").dialog("open")
+                $("#ventanaCalcular").dialog("open");
             });
 
             $("#ventanaCalcular").dialog({
@@ -76,16 +83,15 @@
                 footerrow: true,
                 userDataOnFooter: false,
                 altRows: true,
-                colNames: ['id', 'Cancha', 'Cantidad de Partidos', 'Cantidad de Partidos', 'Viaticos por Partido', 'Dieta por Partido', 'Monto total'],
+                colNames: ['id', 'Cancha', 'Cantidad de Árbitros', 'Viaticos por Árbitros', 'Dieta por Árbitros', 'Monto total'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>' }, formatter: 'select' },
-                    { name: 'cantidad', index: 'cantidad', width: 120, editable: true, editoptions: { size: 20 }, editrules: { required: true, integer: true, minValue: 1} },
-                    { name: 'cantidadArbitros', index: 'cantidadArbitros', width: 120, editable: true, editoptions: { size: 20 }, editrules: { required: true, integer: true, minValue: 1} },
+                    { name: 'idCancha', index: 'idCancha', width: 200, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>' }, formatter: 'select' },
+                    { name: 'cantidadArbitros', index: 'cantidadArbitros', width: 200, editable: true, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorCantidadArbitrosParaGrid() %>' }, formatter: 'select' },
                     { name: 'viaticos', index: 'viaticos', width: 120, editable: false, editoptions: { size: 100} },
                     { name: 'dieta', index: 'dieta', width: 120, editable: false, editoptions: { size: 100} },
                     { name: 'monto', index: 'monto', width: 120, editable: false, editoptions: { size: 20} }
-            ]
+                ]
             });
 
             var ProcesarEditar_gvCalcular = {
@@ -97,6 +103,7 @@
                 width: "500",
                 savekey: [true, 13],
                 navkeys: [true, 38, 40],
+                zIndex: 99999999,
                 afterSubmit: function (datosRespuesta, registroCliente, formid) {
                     var datos = JSON.parse(datosRespuesta.responseText);
                     switch (datos.estado) {
@@ -144,6 +151,7 @@
                 width: "500",
                 savekey: [true, 13],
                 navkeys: [true, 38, 40],
+                zIndex: 99999999,
                 afterSubmit: function (datosRespuesta, registroCliente, formid) {
                     var datos = JSON.parse(datosRespuesta.responseText);
                     switch (datos.estado) {
@@ -213,12 +221,12 @@
                 colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Árbitros', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'numero', index: 'numero', width: 100, editable: false, editoptions: { size: 20} },
+                    { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'equipoLocal', index: 'equipoLocal', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'equipoVisita', index: 'equipoVisita', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>' }, formatter: 'select' },
                     { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTiposPartidoParaGrid() %>' }, formatter: 'select' },
-                    { name: 'fecha', index: 'fecha', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true }, formatter: "date" },
+                    { name: 'fecha', index: 'fecha', datefmt: 'd/m/y', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true, date: true }, sorttype: "date", formatter: "fechaFmatter", editoptions: { defaultValue: '<%= DateTime.Now.ToShortDateString() %>'} },
                     { name: 'hora', index: 'hora', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true }, formatter: "time" },
                     { name: 'coordinador', index: 'coordinador', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
@@ -487,10 +495,14 @@
                 var oPartido = {};
                 oPartido.id = _Programacion.Partidos[i].id;
                 oPartido.coordinador = _Programacion.Partidos[i].coordinador;
-                oPartido.equipos = _Programacion.Partidos[i].equipos;
+                oPartido.equipoLocal = _Programacion.Partidos[i].equipoLocal;
+                oPartido.equipoVisita = _Programacion.Partidos[i].equipoVisita;
                 oPartido.observaciones = _Programacion.Partidos[i].observaciones;
                 oPartido.telefono_coordinador = _Programacion.Partidos[i].telefono_coordinador;
-                oPartido.fecha_hora = _Programacion.Partidos[i].fecha_hora;
+                oPartido.fecha = Convertir_Json_A_Fecha(_Programacion.Partidos[i].fecha);
+                oPartido.hora = _Programacion.Partidos[i].hora;
+                oPartido.tipo = _Programacion.Partidos[i].tipo;
+                oPartido.numero = _Programacion.Partidos[i].numero;
                 oPartido.idCancha = _Programacion.Partidos[i].idCancha.toString();
                 oPartido.accionregistro = _Programacion.Partidos[i].accionregistro;
 
