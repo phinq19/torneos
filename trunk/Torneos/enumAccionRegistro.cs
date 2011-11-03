@@ -8,7 +8,7 @@ namespace Torneos
 {
     public enum enumAccionRegistro
     {
-        NoModificado = 0,
+        NoModificado,
         Nuevo,
         Editado,
         Eliminado
