@@ -67,22 +67,11 @@
             $("#gridCalcular").jqGrid({
                 //url: '<%= Url.Action("ObtenerProgramacions","Programacions") %>',
                 datatype: "local",
-                rowNum: 10,
-                rowList: [10, 20, 30],
-                mtype: "post",
                 pager: '#barraGridCalcular',
                 loadonce: true,
-                viewrecords: true,
-                caption: "",
                 editurl: '<%= Url.Action("ValidarCalcular","Programaciones") %>',
-                jsonReader: { repeatitems: false },
-                ignoreCase: true,
-                height: 120,
-                width: "auto",
-                shrinkToFit: false,
                 footerrow: true,
                 userDataOnFooter: false,
-                altRows: true,
                 colNames: ['id', 'Cancha', 'Cantidad de Árbitros', 'Viaticos por Árbitros', 'Dieta por Árbitros', 'Monto total'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
@@ -204,20 +193,10 @@
             $("#gridPartidos").jqGrid({
                 //url: '<%= Url.Action("ObtenerProgramacions","Programacions") %>',
                 datatype: "local",
-                rowNum: 10,
-                rowList: [10, 20, 30],
-                mtype: "post",
                 pager: '#barraGridPartidos',
-                loadonce: true,
-                viewrecords: true,
-                caption: "",
                 editurl: '<%= Url.Action("ValidarPartidos","Programaciones") %>',
-                jsonReader: { repeatitems: false },
-                ignoreCase: true,
                 height: 120,
                 width: 766,
-                altRows: true,
-                shrinkToFit: false,
                 colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
@@ -233,7 +212,7 @@
                     { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'estado', index: 'estado', width: 150, editable: false, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
-                    { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
+                    { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true }
             ]
             });
 
@@ -342,20 +321,8 @@
             $("#gridProgramaciones").jqGrid({
                 url: '<%= Url.Action("ObtenerProgramaciones","Programaciones") %>',
                 datatype: "json",
-                rowNum: 10,
-                rowList: [10, 20, 30],
-                mtype: "post",
                 pager: '#barraGridProgramaciones',
-                //loadonce: true,
-                viewrecords: true,
-                caption: "",
                 //editurl: '<%= Url.Action("EditarProgramacions","Programacions") %>',
-                jsonReader: { repeatitems: false },
-                ignoreCase: true,
-                height: 250,
-                width: 856,
-                altRows: true,
-                shrinkToFit: false,
                 colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto', 'Observaciones del Cliente', 'Observaciones Asociación'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },

@@ -11,26 +11,14 @@
         $("#gridCanchas").jqGrid({
             url: '<%= Url.Action("ObtenerCanchas","Canchas") %>',
             datatype: "json",
-            altRows: true,
-            rowNum: 10,
-            rowList: [10, 20, 30],
-            mtype: "post",
             pager: '#barraGridCanchas',
-            loadonce: true,
-            viewrecords: true,
-            caption: "",
             editurl: '<%= Url.Action("EditarCanchas","Canchas") %>',
-            jsonReader: { repeatitems: false },
-            ignoreCase: true,
-            height: 250,
-            width: 856,
-            shrinkToFit: false,
             colNames: ['id', 'Nombre', 'Ubicacion', 'Teléfonos','Observaciones'],
             colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'ubicacion', index: 'ubicacion', width: 300, editable: true, sortable: false, edittype: "textarea", editoptions: { rows: "2", cols: "50" }, editrules: { required: true} },
-                     { name: 'telefonos', index: 'telefonos', width: 300, editable: true, sortable: false, editoptions: { size: 30 } },
+                    { name: 'telefonos', index: 'telefonos', width: 300, editable: true, sortable: false, editoptions: { size: 30 } },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
         });

@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace Torneos
 {
-    public class Utilidades 
+    public class Utilidades
     {
         public static int ObtenerValorSession(String cNombreVariable) {
             return Convert.ToInt32(HttpContext.Current.Request.Cookies[cNombreVariable].Value);    
@@ -150,6 +150,7 @@ namespace Torneos
         }
 
         #region Grid
+
         public static String CrearSelectorTorneosParaGrid()
         {
             StringBuilder selTorneos = new StringBuilder();
@@ -356,7 +357,7 @@ namespace Torneos
             StringBuilder selTiposArbitro = new StringBuilder();
             String[] oNombresTiposArbitro = Enum.GetNames(typeof(enumTipoArbitro));
 
-            for (int indice = 1; indice < oNombresTiposArbitro.Length; indice++)
+            for (int indice = 0; indice < oNombresTiposArbitro.Length; indice++)
             {
                 if (!String.IsNullOrEmpty(selTiposArbitro.ToString()))
                 {
@@ -368,17 +369,17 @@ namespace Torneos
             return selTiposArbitro.ToString();
         }
 
-        public static String CrearSelectorCanchasParaGrid()
+        public static String CrearSelectorArbitrosAsignacionesParaGrid()
         {
             StringBuilder selArbitros = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
 
             int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
             int tipoArbitro = (int)enumTipoUsuario.Arbitro;
-
+            
             List<Usuarios> oListaUsuarios = (from u in bdTorneos.Usuarios 
                                             join d in bdTorneos.Disponibilidad on u.id equals d.idArbitro
-                                            where u.idAsociacion == idAsociacion && u.tipo. == tipoArbitro
+                                            where u.idAsociacion == idAsociacion && u.tipo == tipoArbitro 
                                             select u).ToList<Usuarios>();
 
             for (int indice = 0; indice < oListaUsuarios.Count; indice++)
@@ -526,6 +527,49 @@ namespace Torneos
             return selEstados.ToString();
         }
 
+        public static String CrearSelectorEstadosPartidos(String idSelector)
+        {
+            StringBuilder selEstados = new StringBuilder();
+            String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoPartidos));
+
+            selEstados.Append("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oNombresEstados.Length; indice++)
+            {
+                selEstados.AppendLine("   <option value=\"" + indice + "\">" + oNombresEstados[indice] + "</option>");
+            }
+            selEstados.AppendLine("</select>");
+
+            return selEstados.ToString();
+        }
+
+        public static String CrearSelectorArbitrosAsignaciones(String idSelector, DateTime dFecha)
+        {
+           
+            StringBuilder selArbitros = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+            int tipoArbitro = (int)enumTipoUsuario.Arbitro;
+            int diaSemana = dFecha.Day;
+
+            List<Usuarios> oListaUsuarios = (from u in bdTorneos.Usuarios
+                                             join d in bdTorneos.Disponibilidad on u.id equals d.idArbitro
+                                             where (u.idAsociacion == idAsociacion && u.tipo == tipoArbitro) &&
+                                                   (d.lunes == diaSemana || d.martes == diaSemana || d.miercoles == diaSemana ||
+                                                    d.jueves == diaSemana || d.viernes == diaSemana || d.sabado == diaSemana || d.domingo == diaSemana)
+                                             select u).ToList<Usuarios>();
+
+            selArbitros.AppendLine("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oListaUsuarios.Count; indice++)
+            {
+                selArbitros.AppendLine("   <option value=\"" + oListaUsuarios[indice].id + "\">" + oListaUsuarios[indice].nombre + "</option>");
+            }
+            selArbitros.AppendLine("</select>");
+
+            return selArbitros.ToString();
+
+        }
+
         public static String ObtenerNombreTorneoUsuario()
         {
             int idTorneo = ObtenerValorSession("idTorneo");
@@ -543,5 +587,6 @@ namespace Torneos
             return cNombreTorneo;
         } 
         #endregion
+
     }
 }

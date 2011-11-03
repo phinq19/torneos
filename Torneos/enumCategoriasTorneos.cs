@@ -8,7 +8,7 @@ namespace Torneos
 {
     public enum enumCategorias
     {
-        Categoria1 = 0,
+        Categoria1,
         Categoria2,
         Categoria3,
         Categoria4,
