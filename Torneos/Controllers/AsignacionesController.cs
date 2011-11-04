@@ -51,6 +51,7 @@ namespace Torneos.Controllers
                                 oPartido.observaciones,
                                 oPartido.arbitros,
                                 oPartido.Programaciones.Torneos.nombre,
+                                numeroTorneo = oPartido.Programaciones.numero
                             })
                 });
             }
@@ -93,6 +94,7 @@ namespace Torneos.Controllers
                         oPartido.observaciones,
                         oPartido.arbitros,
                         oPartido.Programaciones.Torneos.nombre,
+                        numeroProgramacion = oPartido.Programaciones.numero,
                         DetallePartidos = from d in oPartido.DetallePartidos
                                           select new
                                           {

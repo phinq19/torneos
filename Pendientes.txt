@@ -22,3 +22,5 @@ Validar que no haya canchas repetidas para un torneo
 Foreing Keys
 Páginado del grid
 Comprimir JsonResult
+Encriptar valores de session
+Acceso a las paginas

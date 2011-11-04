@@ -23,6 +23,7 @@ namespace Torneos.Controllers
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+                int pagina = page * rows;
                 jsonData = Json(new
                 {
                     estado = "exito",
@@ -38,7 +39,7 @@ namespace Torneos.Controllers
                             c.observaciones,
                             c.ubicacion
                         }
-                    )
+                    ).Skip(pagina).Take(rows)
                 });
             }
             catch

@@ -5,8 +5,8 @@
     <legend>Filtro</legend>
         <div class="ContenidoOrdenado">
             <div class="fila">
-                <div class="celdaLabel">
-                    Estado
+                <div class="columna">
+                    Estado de la programación
                 </div>
                 <div class="celdaCampo">
                     <%= Torneos.Utilidades.CrearSelectorEstadosProgramaciones("selEstado") %>
