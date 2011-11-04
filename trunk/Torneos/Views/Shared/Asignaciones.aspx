@@ -169,9 +169,10 @@
                 datatype: "json",
                 pager: '#barraGridPartidos',
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
-                colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Torneo', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
+                    { name: 'nombre', index: 'nombre', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'equipoLocal', index: 'equipoLocal', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'equipoVisita', index: 'equipoVisita', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
@@ -278,6 +279,7 @@
         function MostarPartido(oPartido) {
             _Partido = oPartido;
 
+            $("#TxtNombre").val(oPartido.nombre);
             $("#TxtNumero").val(oPartido.numero);
             $("#selEstadoPartido").val(oPartido.estado);
             $("#TxtLocal").val(oPartido.equipoLocal);
@@ -331,6 +333,7 @@
                 DetallePartidos: []
             };
 
+            $("#TxtNombre").val("");
             $("#TxtNumero").val("");
             $("#selEstadoPartido").val("");
             $("#TxtLocal").val("");
@@ -357,21 +360,19 @@
         }
 
         function ValidarCampos() {
-            /*var bCampos = $("#frmPartidos").valid();
-            var bArbitros = $('#gridArbitros').getGridParam("data").length > 0;
-            if (bArbitros == false) {
-                alert("Debe de asignar al menos una cancha al torneos");
+            for (var i = 0; i < _Partido.DetallePartidos.length; i++) {
+                if (_Partido.DetallePartidos[i].idArbitro == -1) {
+                    alert("No se puede realizar esta operación, hace falta asignar árbitros");
+                    return false;
+                }
             }
-            if (bArbitros == false || bCampos == false) {
-                return false;
-            }
-            */
             return true;
         }
 
 
         function HabilitarCampos(bHabilitar) {
             if (bHabilitar) {
+                $("#TxtNombre").attr("disabled", "disabled");
                 $("#TxtNumero").attr("disabled", "disabled");
                 $("#selEstadoPartido").attr("disabled", "disabled");
                 $("#TxtLocal").attr("disabled", "disabled");
@@ -389,6 +390,7 @@
                 //$("#del_gridArbitros").show();
 
             } else {
+                $("#TxtNombre").attr("disabled", "disabled");
                 $("#TxtNumero").attr("disabled", "disabled");
                 $("#selEstadoPartido").attr("disabled", "disabled");
                 $("#TxtLocal").attr("disabled", "disabled");
@@ -480,16 +482,16 @@
             <div class="ContenidoOrdenado">
                 <div class="fila">
                     <div class="celdaLabel">
-                        Número
+                        Torneo
+                    </div>
+                    <div class="celdaCampo">
+                        <input id="TxtNombre" name="TxtNombre" class="required" type="text" />
+                    </div>
+                    <div class="celdaLabel">
+                        Partido
                     </div>
                     <div class="celdaCampo">
                         <input id="TxtNumero" name="TxtNumero" class="required" type="text" />
-                    </div>
-                    <div class="celdaLabel">
-                        Estado
-                    </div>
-                    <div class="celdaCampo">
-                        <%= Torneos.Utilidades.CrearSelectorEstadosPartidos("selEstadoPartido")%>
                     </div>
                 </div>
                  <div class="fila">
@@ -549,6 +551,12 @@
                     </div>
                 </div>
                 <div class="fila">
+                    <div class="celdaLabel">
+                        Estado
+                    </div>
+                    <div class="celdaCampo">
+                        <%= Torneos.Utilidades.CrearSelectorEstadosPartidos("selEstadoPartido")%>
+                    </div>
                     <div class="celdaLabel">
                         Observaciones
                     </div>

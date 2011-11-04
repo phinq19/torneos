@@ -382,6 +382,7 @@ namespace Torneos
                                             where u.idAsociacion == idAsociacion && u.tipo == tipoArbitro 
                                             select u).ToList<Usuarios>();
 
+            selArbitros.Append("-1:**Sin Asignar**");
             for (int indice = 0; indice < oListaUsuarios.Count; indice++)
             {
                 if (!String.IsNullOrEmpty(selArbitros.ToString()))
@@ -560,6 +561,7 @@ namespace Torneos
                                              select u).ToList<Usuarios>();
 
             selArbitros.AppendLine("<select id=\"" + idSelector + "\">");
+            selArbitros.AppendLine("   <option value=\"-1\">**Sin Asignar**</option>");
             for (int indice = 0; indice < oListaUsuarios.Count; indice++)
             {
                 selArbitros.AppendLine("   <option value=\"" + oListaUsuarios[indice].id + "\">" + oListaUsuarios[indice].nombre + "</option>");
