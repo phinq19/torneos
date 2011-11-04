@@ -351,12 +351,24 @@ namespace Torneos.Controllers
         private void CrearDetallePartidos(Partidos oPartido)
         {
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+            int idTorneo = Utilidades.ObtenerValorSession("idTorneo");
+            Torneos oTorneo = (from t in bdTorneos.Torneos
+                               where t.id == idTorneo
+                                   select t).Single();
+            
             for (int indice = 0; indice < oPartido.arbitros; indice++)
             {
+                int idCancha = oPartido.idCancha;
+                Torneos_Canchas oCancha = (from c in bdTorneos.Torneos_Canchas
+                                   where c.idCancha == idCancha
+                                   select c).Single();
+
                 DetallePartidos oDetalleNuevo = new DetallePartidos();
                 oDetalleNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 oDetalleNuevo.idPartido = oPartido.id;
                 oDetalleNuevo.puesto = (int)enumPuestosArbitros.Central;
+                oDetalleNuevo.dieta = oTorneo.dieta;
+                oDetalleNuevo.viaticos = oCancha.viaticos;
 
                 bdTorneos.AddToDetallePartidos(oDetalleNuevo);
                 bdTorneos.SaveChanges();
