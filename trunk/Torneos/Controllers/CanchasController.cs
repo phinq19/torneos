@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ArconWeb.Filter;
 
 namespace Torneos.Controllers
 {
     public class CanchasController : Controller
     {
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public ActionResult Index()
         {
             return View("Canchas");
@@ -16,6 +19,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerCanchas(string sidx, string sord, int page, int rows)
         {
             JsonResult jsonData = null;
@@ -51,6 +56,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult EditarCanchas(Canchas oCanchas, String oper)
         {
             JsonResult jsonData = null;

@@ -3,32 +3,30 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
      
-    
-    <table id="gridProgramaciones">
-    </table>
-    <div id="barraGridProgramaciones">
-    </div>
-    <br />
-    <fieldset class="Fieldset">
-        <legend>Cálcular Depósito</legend>
-        <!--<input type="button" value="Calcular Depósito" id="BtnCalcular"/>
-        <div id="ventanaCalcular">
-            <br />
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Programaciones</a></li>
+            <li><a href="#tabs-2">Cálcular Depósito</a></li>
+        </ul>
+        <div id="tabs-1">
+            <table id="gridProgramaciones">
+            </table>
+            <div id="barraGridProgramaciones">
+            </div>
+        </div>
+        <div id="tabs-2">
             <table id="gridCalcular">
             </table>
             <div id="barraGridCalcular">
             </div>
         </div>
-        -->
-        <table id="gridCalcular">
-        </table>
-        <div id="barraGridCalcular">
-        </div>
-    </fieldset>
-
+    </div>
     <script type='text/javascript'>
         $(document).ready(function () {
 
+            $(function () {
+                $("#tabs").tabs();
+            });
 
             $("#frmProgramaciones").validate();
 
@@ -69,7 +67,7 @@
                 datatype: "local",
                 pager: '#barraGridCalcular',
                 height: 120,
-                width: 800,
+                width: 822,
                 loadonce: true,
                 editurl: '<%= Url.Action("ValidarCalcular","Programaciones") %>',
                 footerrow: true,
@@ -324,6 +322,7 @@
                 url: '<%= Url.Action("ObtenerProgramaciones","Programaciones") %>',
                 datatype: "json",
                 pager: '#barraGridProgramaciones',
+                width: "822",
                 //editurl: '<%= Url.Action("EditarProgramacions","Programacions") %>',
                 colNames: ['id', 'Número', 'Torneo', 'Estado', 'Números Depósitos', 'Monto', 'Observaciones del Cliente', 'Observaciones Asociación'],
                 colModel: [

@@ -4,12 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using ArconWeb.Filter;
 
 namespace Torneos.Controllers
 {
     public class HomeController : Controller
     {
         [AcceptVerbs(HttpVerbs.Get)]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public ActionResult Index()
         {
             if (HttpContext.Request.IsAuthenticated)
@@ -23,6 +26,8 @@ namespace Torneos.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult Autenticar(string cCodigoUsuario, string cContrasena)
         {
             JsonResult jsonData = null;
@@ -76,6 +81,9 @@ namespace Torneos.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult CerrarSesion()
         {
             JsonResult jsonData = null;

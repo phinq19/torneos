@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autorizado.cs" />
+    <Compile Include="Encriptador.cs" />
     <Compile Include="Controllers\AsignacionesController.cs" />
     <Compile Include="Controllers\CanchasController.cs" />
     <Compile Include="Controllers\DisponibilidadController.cs" />
@@ -85,6 +86,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbTorneos.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Filters\CacheFilter.cs" />
+    <Compile Include="Filters\CompressFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -239,6 +242,11 @@
     <Content Include="Views\Shared\Error.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Filters\.svn\prop-base\" />
+    <Folder Include="Filters\.svn\props\" />
+    <Folder Include="Filters\.svn\tmp\prop-base\" />
+    <Folder Include="Filters\.svn\tmp\props\" />
+    <Folder Include="Filters\.svn\tmp\text-base\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +260,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>dbTorneos.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Filters\.svn\all-wcprops" />
+    <None Include="Filters\.svn\entries" />
+    <None Include="Filters\.svn\text-base\CacheFilter.cs.svn-base" />
+    <None Include="Filters\.svn\text-base\CompressFilter.cs.svn-base" />
+    <None Include="Filters\Tabla de contenido de OneNote.onetoc2" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

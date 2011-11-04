@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ArconWeb.Filter;
 
 namespace Torneos.Controllers
 {
@@ -10,6 +11,8 @@ namespace Torneos.Controllers
     {
         [AcceptVerbs(HttpVerbs.Get)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public ActionResult Index()
         {
             return View("Asignaciones");
@@ -17,6 +20,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerPartidos(int estado)
         {
             JsonResult jsonData = null;
@@ -64,6 +69,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerPartidoPorID(int cID)
         {
             JsonResult jsonData = null;
@@ -115,6 +122,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ValidarDetallePartido(DetallePartidos oDetallePartido)
         {
             JsonResult jsonData = null;
@@ -131,6 +140,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult EditarPartidos(Torneos oPartido, DetallePartidos[] oDetallePartidos)
         {
             JsonResult jsonData = null;
@@ -165,6 +176,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public void EditarDetallePartidos(DetallePartidos oDetallePartido)
         {
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
@@ -181,6 +194,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerSelectorArbitrosParaAsignaciones(String idSelector, DateTime dFecha)
         {
             JsonResult jsonData = null;

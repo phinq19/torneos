@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using ArconWeb.Filter;
 
 namespace Torneos.Controllers
 {
@@ -12,6 +13,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Get)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public ActionResult Index()
         {
             return View("Usuarios");
@@ -19,6 +22,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerUsuarios()
         {
             JsonResult jsonData = null;
@@ -57,6 +62,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult EditarUsuarios(Usuarios oUsuario, String oper)
         {
             JsonResult jsonData = null;

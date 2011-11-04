@@ -12,14 +12,14 @@ namespace Torneos
     public class Utilidades
     {
         public static int ObtenerValorSession(String cNombreVariable) {
-            return Convert.ToInt32(HttpContext.Current.Request.Cookies[cNombreVariable].Value);    
+            return Convert.ToInt32(Encriptador.Desencriptar(HttpContext.Current.Request.Cookies[cNombreVariable].Value));    
         }
 
         public static void AsignarValorSession(String cNombreVariable, String Valor) {
             if(String.IsNullOrEmpty(Valor)){
                 Valor = "0";
             }
-            HttpCookie cookie = new HttpCookie(cNombreVariable, Valor);
+            HttpCookie cookie = new HttpCookie(cNombreVariable, Encriptador.Encriptar(Valor));
             cookie.Expires = new DateTime(9999, 1, 1);
             HttpContext.Current.Response.Cookies.Add(cookie);
         }
