@@ -266,23 +266,13 @@
 
         function ActualizarEntidad(oRegistro) {
             var indiceRegistro = -1;
-            for (var i = 0; i < _Torneo.DetallePartidos.length; i++) {
-                if (_Torneo.DetallePartidos[i].id == oRegistro.id) {
+            for (var i = 0; i < _Partido.DetallePartidos.length; i++) {
+                if (_Partido.DetallePartidos[i].id == oRegistro.id) {
                     indiceRegistro = i;
                 }
             }
-            switch (oRegistro.accionregistro) {
-                case 0:
-                    _Partido.DetallePartidos.splice(indiceRegistro, 1);
-                    break;
-                case 1:
-                    _Partido.DetallePartidos.push(oRegistro);
-                    break;
-                case 2:
-                case 3:
-                    _Partido.DetallePartidos[indiceRegistro] = oRegistro;
-                    break;
-            }
+            
+            _Partido.DetallePartidos[indiceRegistro] = oRegistro;
         }
 
         function MostarPartido(oPartido) {
@@ -322,13 +312,13 @@
             oPartido.observaciones = $("#TxtObservaciones").val();
             oPartido.id = _Partido.id;
 
-            for (var i = 0; i < _Torneo.DetallePartidos.length; i++) {
+            for (var i = 0; i < _Partido.DetallePartidos.length; i++) {
                 var oDetallePartidos = {};
                 oDetallePartidos.id = _Partido.DetallePartidos[i].id;
                 oDetallePartidos.idArbitro = _Partido.DetallePartidos[i].idArbitro;
                 oDetallePartidos.puesto = _Partido.DetallePartidos[i].puesto;
 
-                oDetallesPartidos.push(oCancha);
+                oDetallesPartidos.push(oDetallePartidos);
             }
             Entidad["oPartido"] = oPartido;
             Entidad["oDetallePartidos"] = oDetallesPartidos;
