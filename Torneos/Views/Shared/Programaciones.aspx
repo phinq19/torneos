@@ -68,6 +68,8 @@
                 //url: '<%= Url.Action("ObtenerProgramacions","Programacions") %>',
                 datatype: "local",
                 pager: '#barraGridCalcular',
+                height: 120,
+                width: 800,
                 loadonce: true,
                 editurl: '<%= Url.Action("ValidarCalcular","Programaciones") %>',
                 footerrow: true,

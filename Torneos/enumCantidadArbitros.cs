@@ -8,7 +8,7 @@ namespace Torneos
 {
     public enum enumCantidadArbitros
     {
-        Central = 1,
+        Solo_Central = 1,
         Central_Un_Asistente,
         Central_Dos_Asistentes,
         Central_Tres_Asistentes

@@ -49,7 +49,8 @@ namespace Torneos.Controllers
                                 oPartido.equipoLocal,
                                 oPartido.equipoVisita,
                                 oPartido.observaciones,
-                                oPartido.arbitros
+                                oPartido.arbitros,
+                                oPartido.Programaciones.Torneos.nombre,
                             })
                 });
             }
@@ -91,11 +92,13 @@ namespace Torneos.Controllers
                         oPartido.equipoVisita,
                         oPartido.observaciones,
                         oPartido.arbitros,
+                        oPartido.Programaciones.Torneos.nombre,
                         DetallePartidos = from d in oPartido.DetallePartidos
                                           select new
                                           {
                                               d.id,
-                                              d.idArbitro,
+                                              //d.idArbitro,
+                                              idArbitro = (d.idArbitro != null ? d.idArbitro : -1),
                                               d.puesto
                                           }
                     }
