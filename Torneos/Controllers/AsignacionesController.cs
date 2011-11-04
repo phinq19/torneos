@@ -51,7 +51,7 @@ namespace Torneos.Controllers
                                 oPartido.observaciones,
                                 oPartido.arbitros,
                                 oPartido.Programaciones.Torneos.nombre,
-                                numeroTorneo = oPartido.Programaciones.numero
+                                numeroProgramacion = oPartido.Programaciones.numero
                             })
                 });
             }
@@ -142,7 +142,7 @@ namespace Torneos.Controllers
                 Partidos oPartidosEditado = (from t in bdTorneos.Partidos
                                             where t.id == oPartido.id
                                             select t).Single();
-                oPartidosEditado.estado = (int)enumEstadoPartidos.Programado;
+                oPartidosEditado.estado = (int)enumEstadoPartidos.Pendiente_De_Informe;
 
                 bdTorneos.SaveChanges();
                 bdTorneos.Detach(oPartidosEditado);

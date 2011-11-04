@@ -15,5 +15,89 @@ namespace Torneos.Controllers
             return View("Informes");
         }
 
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Autorizado]
+        public JsonResult ObtenerPartidos(int estado)
+        {
+            JsonResult jsonData = null;
+            try
+            {
+                BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+                int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+                int idUsuario = Utilidades.ObtenerValorSession("idUsuario");
+                int ProgramacionVerificada = (int)enumEstadoProgramaciones.Verificado;
+                int puestoCentral = (int)enumPuestosArbitros.Central;
+                int estadoProgramado = (int)enumEstadoPartidos.Pendiente_De_Informe;
+                int estadoInforme = (int)enumEstadoPartidos.Con_Informe;
+                jsonData = Json(new
+                {
+                    estado = "exito",
+                    mensaje = "",
+                    rows = (from oPartido in bdTorneos.Partidos
+                            join oProgramacion in bdTorneos.Programaciones on oPartido.idProgramacion equals oProgramacion.id
+                            join oDetallePartido in bdTorneos.DetallePartidos on idUsuario equals oDetallePartido.idArbitro
+                                where oPartido.idAsociacion == idAsociacion && 
+                                      oProgramacion.estado == ProgramacionVerificada &&
+                                      oDetallePartido.puesto == puestoCentral &&
+                                      (oPartido.estado == estadoProgramado  || oPartido.estado == estadoInforme )
+                                      && oPartido.estado == estado
+                            select new
+                            {
+                                oPartido.id,
+                                oPartido.numero,
+                                oPartido.coordinador,
+                                oPartido.estado,
+                                oPartido.fecha,
+                                oPartido.hora,
+                                oPartido.tipo,
+                                oPartido.idCancha,
+                                oPartido.telefono_coordinador,
+                                oPartido.equipoLocal,
+                                oPartido.equipoVisita,
+                                oPartido.observaciones,
+                                oPartido.arbitros,
+                                oPartido.informe,
+                                oPartido.Programaciones.Torneos.nombre,
+                                numeroProgramacion = oPartido.Programaciones.numero
+                            })
+                });
+            }
+            catch
+            {
+                jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
+            }
+            return jsonData;
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Autorizado]
+        public JsonResult EditarDisponibilidad(Partidos oPartido)
+        {
+            JsonResult jsonData = null;
+            try
+            {
+                BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+
+                Partidos oPartidoEditado = (from p in bdTorneos.Partidos
+                                           where p.id == oPartido.id
+                                                         select p).Single();
+                oPartidoEditado.id = oPartido.id;
+                oPartidoEditado.informe = oPartido.informe;
+                oPartidoEditado.estado = (int)enumEstadoPartidos.Con_Informe;
+
+                bdTorneos.SaveChanges();
+                bdTorneos.Detach(oPartidoEditado);
+
+
+                jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oPartidoEditado, estadoValidacion = "exito" });
+            }
+            catch
+            {
+                jsonData = Json(new { estado = "error", mensaje = "Error cargando datos" });
+            }
+            return jsonData;
+        }
+
     }
 }
