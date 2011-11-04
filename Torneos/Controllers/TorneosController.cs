@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ArconWeb.Filter;
 
 namespace Torneos.Controllers
 {
@@ -10,6 +11,8 @@ namespace Torneos.Controllers
     {
         [AcceptVerbs(HttpVerbs.Get)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public ActionResult Index()
         {
             return View("Torneos");
@@ -17,6 +20,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerTorneos()
         {
             JsonResult jsonData = null;
@@ -61,6 +66,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerTorneoPorID(int cID) {
             JsonResult jsonData = null;
             try
@@ -105,6 +112,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ValidarTorneoCanchas(Torneos_Canchas oCancha, String oper)
         {
             JsonResult jsonData = null;
@@ -141,6 +150,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult EditarTorneos(Torneos oTorneo, Torneos_Canchas[] oCanchas, String oper)
         {
             int nIDTorneos = 0;
@@ -228,6 +239,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public void EditarTorneosCanchas(Torneos_Canchas oCancha, int nIDTorneo)
         {
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();

@@ -21,8 +21,6 @@ Mantenimiento de programaciones
 Validar que no haya canchas repetidas para un torneo
 Foreing Keys
 Páginado del grid
-Comprimir JsonResult
-Encriptar valores de session
 Acceso a las paginas
 Para un partido debe existir al menos un central
 Recuperar contraseña

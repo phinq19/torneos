@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ArconWeb.Filter;
 
 namespace Torneos.Controllers
 {
@@ -10,6 +11,8 @@ namespace Torneos.Controllers
     {
         [AcceptVerbs(HttpVerbs.Get)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public ActionResult Index()
         {
             if ((enumTipoUsuario)Utilidades.ObtenerValorSession("tipoUsuario") != enumTipoUsuario.Arbitro)
@@ -26,6 +29,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerDisponibilidad()
         {
             JsonResult jsonData = null;
@@ -64,6 +69,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult EditarDisponibilidad(Disponibilidad oDisponibilidad)
         {
             JsonResult jsonData = null;

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Torneos;
 using System.Globalization;
+using ArconWeb.Filter;
 
 namespace Torneos.Controllers
 {
@@ -12,6 +13,8 @@ namespace Torneos.Controllers
     {
         [AcceptVerbs(HttpVerbs.Get)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public ActionResult Index()
         {
             if (Utilidades.ObtenerValorSession("idTorneo") == 0)
@@ -26,6 +29,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerProgramaciones()
         {
             JsonResult jsonData = null;
@@ -64,6 +69,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ObtenerProgramacionPorID(int cID) {
             JsonResult jsonData = null;
             try
@@ -116,6 +123,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ValidarCalcular(String oper, int idCancha = 0, int cantidadArbitros = 0, int id=0)
         {
             JsonResult jsonData = null;
@@ -157,6 +166,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult ValidarPartidos(Partidos oPartido, String oper)
         {
             JsonResult jsonData = null;
@@ -194,6 +205,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public JsonResult EditarProgramaciones(Programaciones oProgramacion, Partidos[] oPartidos, String oper)
         {
             int nIDProgramacion = 0;
@@ -275,6 +288,8 @@ namespace Torneos.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Autorizado]
+        [CompressFilter(Order = 1)]
+        [CacheFilter(Duration = 60, Order = 2)]
         public void EditarPartidos(Partidos oPartido, int nIDProgramacion)
         {
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
