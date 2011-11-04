@@ -5,8 +5,8 @@
     <legend>Filtro</legend>
         <div class="ContenidoOrdenado">
             <div class="fila">
-                <div class="celdaLabel">
-                    Estado
+                <div class="columna">
+                    Estado del partido
                 </div>
                 <div class="celdaCampo">
                     <%= Torneos.Utilidades.CrearSelectorEstadosPartidos("selEstado")%>
@@ -169,10 +169,11 @@
                 datatype: "json",
                 pager: '#barraGridPartidos',
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
-                colNames: ['id', 'Torneo', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Torneo', 'Programación', 'Partido', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
+                    { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'equipoLocal', index: 'equipoLocal', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'equipoVisita', index: 'equipoVisita', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
@@ -279,6 +280,7 @@
         function MostarPartido(oPartido) {
             _Partido = oPartido;
 
+            $("#TxtNumeroProgramacion").val(oPartido.numeroProgramacion);
             $("#TxtNombre").val(oPartido.nombre);
             $("#TxtNumero").val(oPartido.numero);
             $("#selEstadoPartido").val(oPartido.estado);
@@ -300,7 +302,7 @@
             var Entidad = {};
             var oPartido = {};
             var oDetallesPartidos = [];
-
+            
             oPartido.numero = $("#TxtNumero").val();
             oPartido.estado = $("#selEstadoPartido").val();
             oPartido.equipoLocal = $("#TxtLocal").val();
@@ -333,6 +335,7 @@
                 DetallePartidos: []
             };
 
+            $("#TxtNumeroProgramacion").val("");
             $("#TxtNombre").val("");
             $("#TxtNumero").val("");
             $("#selEstadoPartido").val("");
@@ -372,6 +375,7 @@
 
         function HabilitarCampos(bHabilitar) {
             if (bHabilitar) {
+                $("#TxtNumeroProgramacion").attr("disabled", "disabled");
                 $("#TxtNombre").attr("disabled", "disabled");
                 $("#TxtNumero").attr("disabled", "disabled");
                 $("#selEstadoPartido").attr("disabled", "disabled");
@@ -390,6 +394,7 @@
                 //$("#del_gridArbitros").show();
 
             } else {
+                $("#TxtNumeroProgramacion").attr("disabled", "disabled");
                 $("#TxtNombre").attr("disabled", "disabled");
                 $("#TxtNumero").attr("disabled", "disabled");
                 $("#selEstadoPartido").attr("disabled", "disabled");
@@ -482,16 +487,24 @@
             <div class="ContenidoOrdenado">
                 <div class="fila">
                     <div class="celdaLabel">
-                        Torneo
-                    </div>
-                    <div class="celdaCampo">
-                        <input id="TxtNombre" name="TxtNombre" class="required" type="text" />
-                    </div>
-                    <div class="celdaLabel">
                         Partido
                     </div>
                     <div class="celdaCampo">
                         <input id="TxtNumero" name="TxtNumero" class="required" type="text" />
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="celdaLabel">
+                        Programación
+                    </div>
+                    <div class="celdaCampo">
+                        <input id="TxtNumeroProgramacion" name="TxtNumeroProgramacion" class="required" type="text" />
+                    </div>
+                    <div class="celdaLabel">
+                        Torneo
+                    </div>
+                    <div class="celdaCampo">
+                        <input id="TxtNombre" name="TxtNombre" class="required" type="text" />
                     </div>
                 </div>
                  <div class="fila">
