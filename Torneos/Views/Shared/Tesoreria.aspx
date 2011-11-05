@@ -10,7 +10,7 @@
                     Estado
                 </div>
                 <div class="celdaCampo">
-                    <%= Torneos.Utilidades.CrearSelectorEstadosDetallePartidos("selEstado")%>
+                    <%= Torneos.Utilidades.CrearSelectorEstadosDetallePartidos("selEstadoDetallePartido")%>
                 </div>
             </div>
         </div>
@@ -22,9 +22,9 @@
     </div>
     <script type='text/javascript'>
         $(document).ready(function () {
-            $("#selEstado").change(function () {
+            $("#selEstadoDetallePartido").change(function () {
                 var postData = jQuery("#gridPartidos").getGridParam("postData");
-                postData.estado = $("#selEstado").val();
+                postData.estado = $("#selEstadoDetallePartido").val();
                 jQuery("#gridVPartidos").setGridParam("postData", postData);
                 jQuery("#gridPartidos").trigger("reloadGrid");
             });
@@ -50,11 +50,11 @@
                 editurl: '<%= Url.Action("ValidarDeducciones","Tesoreria") %>',
                 height: 120,
                 width: 756,
-                colNames: ['id', 'Cancha', 'Viáticos', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Monto', 'Descripción', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCanchasParaGrid() %>" }, formatter: 'select' },
-                    { name: 'viaticos', index: 'viaticos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'monto', index: 'monto', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'descripcion', index: 'descripcion', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
@@ -171,7 +171,7 @@
                 url: '<%= Url.Action("ObtenerDetallePartidos","Tesoreria") %>',
                 datatype: "json",
                 pager: '#barraGridPartidos',
-                postData: { estado: $("#selEstado").val() },
+                postData: { estado: $("#selEstadoDetallePartido").val() },
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
                 colNames: ['id', 'Torneo', 'Programación', 'Partido', 'Número Depósito', 'Monto depósito', 'Monto rebajos', 'Estado'],
                 colModel: [
@@ -255,7 +255,7 @@
 
         function ActualizarEntidad(oRegistro) {
             var indiceRegistro = -1;
-            for (var i = 0; i < _DetallePartido.Deducciones.length; i++) {
+            for (var i = 0; i < oDetallePartido.Deducciones.length; i++) {
                 if (_DetallePartido.Deducciones[i].id == oRegistro.id) {
                     indiceRegistro = i;
                 }
@@ -277,14 +277,14 @@
         function MostrarTorneo(oDetallePartido) {
             _DetallePartido = oDetallePartido;
 
+            $("#TxtNumero").val(_DetallePartido.numero);
+            $("#selArbitros").val(_DetallePartido.idArbitro);
+            $("#TxtNumeroProgramacion").val(_DetallePartido.numeroProgramacion);
             $("#TxtNombre").val(_DetallePartido.nombre);
-            $("#selCategoria").val(_DetallePartido.categoria);
-            $("#TxtTelefono1").val(_DetallePartido.telefono1);
-            $("#TxtTelefono2").val(_DetallePartido.telefono2);
-            $("#TxtDieta").val(_DetallePartido.dieta);
-            $("#TxtCorreo").val(_DetallePartido.email);
-            $("#TxtUbicacion").val(_DetallePartido.ubicacion);
-            $("#TxtObservaciones").val(_DetallePartido.observaciones);
+            $("#TxtDeposito").val(_DetallePartido.deposito);
+            $("#TxtMontoDeposito").val(_DetallePartido.total_pagar);
+            $("#TxtMontoDeducciones").val(_DetallePartido.total_rebajos);
+            $("#selEstado").val(_DetallePartido.estado);
 
             $('#gridDeducciones').clearGridData();
             $('#gridDeducciones').setGridParam({ data: _DetallePartido.Deducciones }).trigger('reloadGrid');
@@ -292,32 +292,25 @@
 
         function CargarCampos() {
             var Entidad = {};
-            var _DetallePartido = {};
+            var oDetallePartido = {};
             var oDeducciones = [];
 
-            _DetallePartido.nombre = $("#TxtNombre").val();
-            _DetallePartido.categoria = $("#selCategoria").val();
-            _DetallePartido.telefono1 = $("#TxtTelefono1").val();
-            _DetallePartido.telefono2 = $("#TxtTelefono2").val();
-            _DetallePartido.dieta = $("#TxtDieta").val();
-            _DetallePartido.email = $("#TxtCorreo").val();
-            _DetallePartido.ubicacion = $("#TxtUbicacion").val();
-            _DetallePartido.observaciones = $("#TxtObservaciones").val();
-            _DetallePartido.idAsociacion = _Torneo.idAsociacion;
-            _DetallePartido.id = _Torneo.id;
+            oDetallePartido.deposito = $("#TxtDeposito").val();
+            oDetallePartido.total_pagar = $("#TxtMontoDeposito").val();
+            oDetallePartido.total_rebajos = $("#TxtMontoDeducciones").val();
+            oDetallePartido.id = _DetallePartido.id;
+
             for (var i = 0; i < _DetallePartido.Deducciones.length; i++) {
                 var oDeduccion = {};
                 oDeduccion.id = _DetallePartido.Deducciones[i].id;
-                oDeduccion.viaticos = _DetallePartido.Deducciones[i].viaticos.toString();
-                oDeduccion.idCancha = _DetallePartido.Deducciones[i].idCancha;
+                oDeduccion.descripcion = _DetallePartido.Deducciones[i].descripcion;
+                oDeduccion.monto = _DetallePartido.Deducciones[i].monto.toString();
                 oDeduccion.observaciones = _DetallePartido.Deducciones[i].observaciones;
-                oDeduccion.idTorneo = _DetallePartido.Deducciones[i].idTorneo;
                 oDeduccion.accionregistro = _DetallePartido.Deducciones[i].accionregistro;
 
-                Deducciones.push(oCancha);
-
+                oDeducciones.push(oDeduccion);
             }
-            Entidad["_DetallePartido"] = _DetallePartido;
+            Entidad["oDetallePartido"] = oDetallePartido;
             Entidad["oDeducciones"] = oDeducciones;
             return Entidad;
 
@@ -328,14 +321,14 @@
                 Deducciones: []
             };
 
+            $("#TxtNumero").val("");
+            $("#selArbitros").val("");
+            $("#TxtNumeroProgramacion").val("");
             $("#TxtNombre").val("");
-            $("#selCategoria").val("");
-            $("#TxtTelefono1").val("");
-            $("#TxtTelefono2").val("");
-            $("#TxtDieta").val("");
-            $("#TxtCorreo").val("");
-            $("#TxtUbicacion").val("");
-            $("#TxtObservaciones").val("");
+            $("#TxtDeposito").val("");
+            $("#TxtMontoDeposito").val("");
+            $("#TxtMontoDeducciones").val("");
+            $("#selEstado").val("");
 
             $('#gridDeducciones').clearGridData();
         }
@@ -344,7 +337,7 @@
             var oParametrosAjax = { cID: idTorneo };
 
             var funcionProcesamientoCliente = function (oRespuesta) {
-                MostrarTorneo(oRespuesta._DetallePartido);
+                MostrarTorneo(oRespuesta.oDetallePartido);
             }
 
             RealizarPeticionAjax("ObtenerDetallePartido", "/Tesoreria/ObtenerDetallePartidoPorID", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
@@ -352,42 +345,37 @@
 
         function ValidarCampos() {
             var bCampos = $("#frmPartidos").valid();
-            var bCanchas = $('#gridDeducciones').getGridParam("data").length > 0;
-            /*if (bCanchas == false) {
-                alert("Debe de asignar al menos una cancha al torneos");
-            }
-            if (bCanchas == false || bCampos == false) {
+            if (bCampos == false) {
                 return false;
             }
-            */
             return true;
         }
 
 
         function HabilitarCampos(bHabilitar) {
             if (bHabilitar) {
-                $("#TxtNombre").removeAttr("disabled");
-                $("#selCategoria").removeAttr("disabled");
-                $("#TxtTelefono1").removeAttr("disabled");
-                $("#TxtTelefono2").removeAttr("disabled");
-                $("#TxtDieta").removeAttr("disabled");
-                $("#TxtCorreo").removeAttr("disabled");
-                $("#TxtUbicacion").removeAttr("disabled");
-                $("#TxtObservaciones").removeAttr("disabled");
+                $("#TxtNumero").attr("disabled", "disabled");
+                $("#selArbitros").attr("disabled", "disabled");
+                $("#TxtNumeroProgramacion").attr("disabled", "disabled");
+                $("#TxtNombre").attr("disabled", "disabled");
+                $("#TxtDeposito").removeAttr("disabled");
+                $("#TxtMontoDeposito").removeAttr("disabled");
+                $("#TxtMontoDeducciones").attr("disabled", "disabled");
+                $("#selEstado").attr("disabled", "disabled");
 
                 $("#add_gridDeducciones").show();
                 $("#edit_gridDeducciones").show();
                 $("#del_gridDeducciones").show();
 
             } else {
+                $("#TxtNumero").attr("disabled", "disabled");
+                $("#selArbitros").attr("disabled", "disabled");
+                $("#TxtNumeroProgramacion").attr("disabled", "disabled");
                 $("#TxtNombre").attr("disabled", "disabled");
-                $("#selCategoria").attr("disabled", "disabled");
-                $("#TxtTelefono1").attr("disabled", "disabled");
-                $("#TxtTelefono2").attr("disabled", "disabled");
-                $("#TxtDieta").attr("disabled", "disabled");
-                $("#TxtCorreo").attr("disabled", "disabled");
-                $("#TxtUbicacion").attr("disabled", "disabled");
-                $("#TxtObservaciones").attr("disabled", "disabled");
+                $("#TxtDeposito").attr("disabled", "disabled");
+                $("#TxtMontoDeposito").attr("disabled", "disabled");
+                $("#TxtMontoDeducciones").attr("disabled", "disabled");
+                $("#selEstado").attr("disabled", "disabled");
 
                 $("#add_gridDeducciones").hide();
                 $("#edit_gridDeducciones").hide();
@@ -454,7 +442,7 @@
                         Monto del Depósito
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtMontoDeposito" name="TxtMontoDeposito" type="text" class="required email"/>
+                        <input id="TxtMontoDeposito" name="TxtMontoDeposito" type="text" class="required"/>
                     </div>
                 </div>
                 <div class="fila">
@@ -468,7 +456,7 @@
                         Estado
                     </div>
                     <div class="celdaCampo">
-                        <%= Torneos.Utilidades.CrearSelectorEstadosDetallePartidos("selEstado") %>>
+                        <%= Torneos.Utilidades.CrearSelectorEstadosDetallePartidos("selEstado") %>
                     </div>
                 </div>
             </div>

@@ -42,8 +42,8 @@ namespace Torneos.Controllers
                                       oDetallePartidos.id,
                                       oDetallePartidos.idArbitro,
                                       oDetallePartidos.deposito,
-                                      oDetallePartidos.total_pagar,
-                                      oDetallePartidos.total_rebajos,
+                                      total_pagar = oDetallePartidos.total_rebajos == null ? 0 : oDetallePartidos.total_pagar,
+                                      total_rebajos = oDetallePartidos.total_rebajos == null ? 0 : oDetallePartidos.total_rebajos,
                                       oDetallePartidos.estado,
                                       oPartido.numero,//Partido
                                       oPartido.Programaciones.Torneos.nombre,//Torneo
@@ -83,7 +83,7 @@ namespace Torneos.Controllers
             try
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
-                DetallePartidos oDetallePartidos = (from d in bdTorneos.DetallePartidos
+                DetallePartidos oDetallePartido = (from d in bdTorneos.DetallePartidos
                                      where d.id == cID
                                      select d).Single();
 
@@ -91,18 +91,18 @@ namespace Torneos.Controllers
                 {
                     estado = "exito",
                     mensaje = "",
-                    oPartido = new
+                    oDetallePartido = new
                     {
-                        oDetallePartidos.id,
-                        oDetallePartidos.idArbitro,
-                        oDetallePartidos.deposito,
-                        oDetallePartidos.total_pagar,
-                        oDetallePartidos.total_rebajos,
-                        oDetallePartidos.estado,
-                        oDetallePartidos.Partidos.numero,//Partido
-                        oDetallePartidos.Partidos.Programaciones.Torneos.nombre,//Torneo
-                        numeroProgramacion = oDetallePartidos.Partidos.Programaciones.numero,//Programacion
-                        Deducciones = from d in oDetallePartidos.Deducciones
+                        oDetallePartido.id,
+                        oDetallePartido.idArbitro,
+                        oDetallePartido.deposito,
+                        total_pagar = oDetallePartido.total_rebajos == null ? 0 : oDetallePartido.total_pagar,
+                        total_rebajos = oDetallePartido.total_rebajos == null ? 0 : oDetallePartido.total_rebajos,
+                        oDetallePartido.estado,
+                        oDetallePartido.Partidos.numero,//Partido
+                        oDetallePartido.Partidos.Programaciones.Torneos.nombre,//Torneo
+                        numeroProgramacion = oDetallePartido.Partidos.Programaciones.numero,//Programacion
+                        Deducciones = from d in oDetallePartido.Deducciones
                                           select new
                                           {
                                               d.id,
@@ -110,6 +110,7 @@ namespace Torneos.Controllers
                                               d.observaciones,
                                               d.descripcion,
                                               d.idDetallePartido,
+                                              d.accionregistro
                                           }
                     }
                 });
@@ -188,10 +189,12 @@ namespace Torneos.Controllers
 
                 jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oDetallePartidoEditado, estadoValidacion = "exito" });
 
-
-                foreach (Deducciones oDeduccion in oDeducciones)
+                if (oDeducciones != null)
                 {
-                    EditarDeducciones(oDeduccion, oDetallePartidoEditado.id);
+                    foreach (Deducciones oDeduccion in oDeducciones)
+                    {
+                        EditarDeducciones(oDeduccion, oDetallePartidoEditado.id);
+                    }
                 }
             }
             catch
