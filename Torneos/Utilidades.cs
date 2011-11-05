@@ -338,18 +338,35 @@ namespace Torneos
 
         public static String CrearSelectorTiposPartidoParaGrid() {
             StringBuilder selTiposPartido = new StringBuilder();
-            String[] oNombresTiposPartidos = Enum.GetNames(typeof(enumTipoPartido));
+            String[] oNombresTipos = Enum.GetNames(typeof(enumTipoPartido));
 
-            for (int indice = 1; indice < oNombresTiposPartidos.Length; indice++)
+            for (int indice = 0; indice < oNombresTipos.Length; indice++)
             {
                 if (!String.IsNullOrEmpty(selTiposPartido.ToString()))
                 {
                     selTiposPartido.Append(";");
                 }
-                selTiposPartido.Append(indice + ":" + oNombresTiposPartidos[indice]);
+                selTiposPartido.Append(indice + ":" + oNombresTipos[indice]);
             }
 
             return selTiposPartido.ToString();
+        }
+       
+        public static String CrearSelectorTiposDeduccionesParaGrid()
+        {
+            StringBuilder selTipos = new StringBuilder();
+            String[] oNombresTiposPartidos = Enum.GetNames(typeof(enumTipoDeducciones));
+
+            for (int indice = 0; indice < oNombresTiposPartidos.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selTipos.ToString()))
+                {
+                    selTipos.Append(";");
+                }
+                selTipos.Append(indice + ":" + oNombresTiposPartidos[indice]);
+            }
+
+            return selTipos.ToString();
         }
 
         public static String CrearSelectorTiposArbitroParaGrid()

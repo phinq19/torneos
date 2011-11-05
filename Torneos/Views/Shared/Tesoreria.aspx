@@ -53,8 +53,8 @@
                 colNames: ['id', 'Monto', 'Descripción', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'monto', index: 'monto', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
-                    { name: 'descripcion', index: 'descripcion', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'monto', index: 'monto', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true, integer: true} },
+                    { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorTiposDeduccionesParaGrid() %>" }, formatter: 'select' },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
@@ -173,12 +173,16 @@
             );
 
             function CalcularDeducciones() {
-                var monto = 0;
+                var montoDeducciones = 0;
+                var montoDeposito = _DetallePartido.total_pagar;
                 var oRegistros = $("#gridDeducciones").jqGrid('getGridParam', 'data');
                 for (var indice = 0; indice < oRegistros.length; indice++) {
-                    monto += parseFloat(oRegistros[indice].monto);
+                    if (oRegistros.accionregistro != "3") {
+                        montoDeducciones += parseFloat(oRegistros[indice].monto);
+                    }
                 }
-                $("#TxtMontoDeducciones").val(monto);
+                $("#TxtMontoDeducciones").val(montoDeducciones);
+                $("#TxtMontoDeposito").val(montoDeposito - montoDeducciones);
             }
 
             $("#gridPartidos").jqGrid({
@@ -212,7 +216,7 @@
             edit: true,
             add: false,
             del: false,
-            search: true,
+            search: false,
             refresh: false,
             view: false
         },
@@ -269,7 +273,7 @@
 
         function ActualizarEntidad(oRegistro) {
             var indiceRegistro = -1;
-            for (var i = 0; i < oDetallePartido.Deducciones.length; i++) {
+            for (var i = 0; i < _DetallePartido.Deducciones.length; i++) {
                 if (_DetallePartido.Deducciones[i].id == oRegistro.id) {
                     indiceRegistro = i;
                 }
@@ -310,15 +314,16 @@
             var oDeducciones = [];
 
             oDetallePartido.deposito = $("#TxtDeposito").val();
-            oDetallePartido.total_pagar = $("#TxtMontoDeposito").val();
-            oDetallePartido.total_rebajos = $("#TxtMontoDeducciones").val();
+            oDetallePartido.total_pagar = $("#TxtMontoDeposito").val().replace(".", ",");
+            oDetallePartido.total_rebajos = $("#TxtMontoDeducciones").val().replace(".", ",");
+            oDetallePartido.estado = $("#selEstado").val();
             oDetallePartido.id = _DetallePartido.id;
 
             for (var i = 0; i < _DetallePartido.Deducciones.length; i++) {
                 var oDeduccion = {};
                 oDeduccion.id = _DetallePartido.Deducciones[i].id;
-                oDeduccion.descripcion = _DetallePartido.Deducciones[i].descripcion;
-                oDeduccion.monto = _DetallePartido.Deducciones[i].monto.toString();
+                oDeduccion.tipo = _DetallePartido.Deducciones[i].tipo;
+                oDeduccion.monto = _DetallePartido.Deducciones[i].monto.toString().replace(".", ",");;
                 oDeduccion.observaciones = _DetallePartido.Deducciones[i].observaciones;
                 oDeduccion.accionregistro = _DetallePartido.Deducciones[i].accionregistro;
 
@@ -373,9 +378,9 @@
                 $("#TxtNumeroProgramacion").attr("disabled", "disabled");
                 $("#TxtNombre").attr("disabled", "disabled");
                 $("#TxtDeposito").removeAttr("disabled");
-                $("#TxtMontoDeposito").removeAttr("disabled");
+                $("#TxtMontoDeposito").attr("disabled", "disabled");
                 $("#TxtMontoDeducciones").attr("disabled", "disabled");
-                $("#selEstado").attr("disabled", "disabled");
+                $("#selEstado").removeAttr("disabled");
 
                 $("#add_gridDeducciones").show();
                 $("#edit_gridDeducciones").show();
@@ -456,7 +461,7 @@
                         Monto del Depósito
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtMontoDeposito" name="TxtMontoDeposito" type="text" class="required"/>
+                        <input id="TxtMontoDeposito" name="TxtMontoDeposito" type="text" class="required number"/>
                     </div>
                 </div>
                 <div class="fila">

@@ -202,7 +202,7 @@
             edit: true,
             add: false,
             del: false,
-            search: true,
+            search: false,
             refresh: false,
             view: false
         },

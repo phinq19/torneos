@@ -31,7 +31,7 @@ namespace Torneos.Controllers
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 int idUsuario = Utilidades.ObtenerValorSession("idUsuario");
                 int ProgramacionVerificada = (int)enumEstadoProgramaciones.Verificado;
-                int puestoCentral = (int)enumPuestosArbitros.Central;
+                int puestoCentral = (int)enumTipoArbitro.Central;
                 int estadoProgramado = (int)enumEstadoPartidos.Pendiente_De_Informe;
                 int estadoInforme = (int)enumEstadoPartidos.Con_Informe;
 

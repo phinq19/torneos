@@ -349,7 +349,7 @@
             edit: true,
             add: true,
             del: true,
-            search: true,
+            search: false,
             refresh: false,
             view: false
         },
@@ -455,7 +455,7 @@
             var oPartidos = [];
 
             oProgramacion.deposito = $("#TxtDeposito").val();
-            oProgramacion.monto = $("#TxtMonto").val();
+            oProgramacion.monto = $("#TxtMonto").val().replace(".", ",");
             oProgramacion.idTorneo = $("#selTorneosTorneo").val();
             oProgramacion.observaciones = $("#TxtObservaciones").val();
             oProgramacion.id = _Programacion.id;
@@ -626,10 +626,10 @@
                         <input id="TxtDeposito" name="TxtDeposito" class="required" type="text" />
                     </div>
                     <div class="celdaLabel">
-                        Monto
+                        Monto del Depósito
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtMonto" name="TxtMonto" class="required" type="text" />
+                        <input id="TxtMonto" name="TxtMonto" class="required number" type="text" />
                     </div>
                 </div>
                 <div class="fila">
