@@ -31,7 +31,7 @@ namespace Torneos.Controllers
         [Autorizado]
         [CompressFilter(Order = 1)]
         [CacheFilter(Duration = 60, Order = 2)]
-        public JsonResult ObtenerProgramaciones()
+        public JsonResult ObtenerProgramaciones(string sidx, string sord, int page, int rows)
         {
             JsonResult jsonData = null;
             try
@@ -39,25 +39,37 @@ namespace Torneos.Controllers
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                 int idTorneo = Utilidades.ObtenerValorSession("idTorneo");
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+
+                var oResultado = (from oProgramaciones in bdTorneos.Programaciones
+                                  where oProgramaciones.idTorneo == idTorneo &&
+                                        oProgramaciones.idAsociacion == idAsociacion
+                                  select new
+                                  {
+                                      oProgramaciones.id,
+                                      oProgramaciones.numero,
+                                      oProgramaciones.deposito,
+                                      oProgramaciones.estado,
+                                      oProgramaciones.idTorneo,
+                                      oProgramaciones.idUsuario,
+                                      oProgramaciones.monto,
+                                      oProgramaciones.observaciones,
+                                      oProgramaciones.observacionesAsoc
+                                  }).AsEnumerable(); ;
+
+                int pageIndex = Convert.ToInt32(page) - 1;
+                int pageSize = rows;
+                int totalRecords = oResultado.Count();
+                var totalPages = (int)Math.Ceiling(totalRecords / (float)pageSize);
+                int pagina = (page - 1) * rows;
+
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
-                    rows = (from  oProgramaciones in bdTorneos.Programaciones
-                            where oProgramaciones.idTorneo == idTorneo && 
-                                  oProgramaciones.idAsociacion == idAsociacion
-                            select new
-                            {
-                                oProgramaciones.id,
-                                oProgramaciones.numero,
-                                oProgramaciones.deposito,
-                                oProgramaciones.estado,
-                                oProgramaciones.idTorneo,
-                                oProgramaciones.idUsuario,
-                                oProgramaciones.monto,
-                                oProgramaciones.observaciones,
-                                oProgramaciones.observacionesAsoc
-                            })
+                    total = totalPages,
+                    page,
+                    records = totalRecords,
+                    rows = oResultado.Skip(pagina).Take(rows)
                 });
             }
             catch
@@ -384,6 +396,7 @@ namespace Torneos.Controllers
                 oDetalleNuevo.puesto = (int)enumPuestosArbitros.Central;
                 oDetalleNuevo.dieta = oTorneo.dieta;
                 oDetalleNuevo.viaticos = oCancha.viaticos;
+                oDetalleNuevo.estado = (int)enumEstadoDetallePartidos.Pendiente_Pago;
 
                 bdTorneos.AddToDetallePartidos(oDetalleNuevo);
                 bdTorneos.SaveChanges();

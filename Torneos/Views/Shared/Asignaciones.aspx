@@ -36,9 +36,9 @@
                 zIndex: 500,
                 resizable: false,
                 modal: false,
-                title: "Partidos",
+                title: "Asignaciones de árbitros",
                 //closeOnEscape: true,
-                height: 570,
+                height: 600,
                 width: 800
             });
 
@@ -48,7 +48,7 @@
                 pager: '#barraGridArbitros',
                 editurl: '<%= Url.Action("ValidarDetallePartido","Asignaciones") %>',
                 height: 120,
-                width: 756,
+                width: 739,
                 colNames: ['id', 'Árbitro', 'Puesto'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },

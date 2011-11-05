@@ -112,7 +112,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.Tesorero)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Tesoreria/\" class=\"itemMenu\">Tesoreria<a>");
+                oMenu.AppendLine("          <a href=\"/Tesoreria/\" class=\"itemMenu\">Tesorería<a>");
                 oMenu.AppendLine("      </td>");
             }
             oMenu.AppendLine("  </tr>");
@@ -396,6 +396,23 @@ namespace Torneos
 
         }
 
+        public static String CrearSelectorEstadosDetallePartidosParaGrid()
+        {
+            StringBuilder selEstado = new StringBuilder();
+            String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoDetallePartidos));
+
+            for (int indice = 0; indice < oNombresEstados.Length; indice++)
+            {
+                if (!String.IsNullOrEmpty(selEstado.ToString()))
+                {
+                    selEstado.Append(";");
+                }
+                selEstado.Append(indice + ":" + oNombresEstados[indice]);
+            }
+
+            return selEstado.ToString();
+        }
+
         #endregion
 
         #region General
@@ -543,6 +560,21 @@ namespace Torneos
             return selEstados.ToString();
         }
 
+        public static String CrearSelectorEstadosDetallePartidos(String idSelector)
+        {
+            StringBuilder selEstados = new StringBuilder();
+            String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoDetallePartidos));
+
+            selEstados.Append("<select id=\"" + idSelector + "\">");
+            for (int indice = 0; indice < oNombresEstados.Length; indice++)
+            {
+                selEstados.AppendLine("   <option value=\"" + indice + "\">" + oNombresEstados[indice] + "</option>");
+            }
+            selEstados.AppendLine("</select>");
+
+            return selEstados.ToString();
+        }
+
         public static String CrearSelectorArbitrosAsignaciones(String idSelector, DateTime dFecha)
         {
            
@@ -551,7 +583,7 @@ namespace Torneos
 
             int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
             int tipoArbitro = (int)enumTipoUsuario.Arbitro;
-            int diaSemana = dFecha.Day;
+            int diaSemana = (int)dFecha.DayOfWeek;
 
             List<Usuarios> oListaUsuarios = (from u in bdTorneos.Usuarios
                                              join d in bdTorneos.Disponibilidad on u.id equals d.idArbitro
@@ -562,6 +594,32 @@ namespace Torneos
 
             selArbitros.AppendLine("<select id=\"" + idSelector + "\">");
             selArbitros.AppendLine("   <option value=\"-1\">**Sin Asignar**</option>");
+            for (int indice = 0; indice < oListaUsuarios.Count; indice++)
+            {
+                selArbitros.AppendLine("   <option value=\"" + oListaUsuarios[indice].id + "\">" + oListaUsuarios[indice].nombre + "</option>");
+            }
+            selArbitros.AppendLine("</select>");
+
+            return selArbitros.ToString();
+
+        }
+
+        public static String CrearSelectorArbitros(String idSelector)
+        {
+
+            StringBuilder selArbitros = new StringBuilder();
+            BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
+
+            int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+            int tipoArbitro = (int)enumTipoUsuario.Arbitro;
+            
+
+            List<Usuarios> oListaUsuarios = (from u in bdTorneos.Usuarios
+                                             join d in bdTorneos.Disponibilidad on u.id equals d.idArbitro
+                                             where (u.idAsociacion == idAsociacion && u.tipo == tipoArbitro) 
+                                             select u).ToList<Usuarios>();
+
+            selArbitros.AppendLine("<select id=\"" + idSelector + "\">");
             for (int indice = 0; indice < oListaUsuarios.Count; indice++)
             {
                 selArbitros.AppendLine("   <option value=\"" + oListaUsuarios[indice].id + "\">" + oListaUsuarios[indice].nombre + "</option>");

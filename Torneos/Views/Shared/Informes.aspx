@@ -56,7 +56,7 @@
                     { name: 'hora', index: 'hora', width: 120, editable: true, editoptions: { readonly: true, size: 40 }, formatter: "time" },
                     { name: 'estado', index: 'estado', width: 150, editable: false, sortable: false, edittype: 'select', editoptions: { disabled: true, value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: false, edittype: "textarea", editoptions: { disabled: true, rows: "2", cols: "50"} },
-                    { name: 'informe', index: 'informe', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "50", cols: "120"} },
+                    { name: 'informe', index: 'informe', width: 300, sortable: false, editable: true, edittype: "textarea", editrules: { required: true }, editoptions: { rows: "50", cols: "120"} },
                 ]
             });
 

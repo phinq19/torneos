@@ -22,7 +22,7 @@ namespace Torneos.Controllers
         [Autorizado]
         [CompressFilter(Order = 1)]
         [CacheFilter(Duration = 60, Order = 2)]
-        public JsonResult ObtenerPartidos(int estado)
+        public JsonResult ObtenerPartidos(string sidx, string sord, int page, int rows, int estado)
         {
             JsonResult jsonData = null;
             try
@@ -30,34 +30,47 @@ namespace Torneos.Controllers
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 int ProgramacionVerificada = (int)enumEstadoProgramaciones.Verificado;
+
+                var oResultado = (from oPartido in bdTorneos.Partidos
+                                  join
+                                      oProgramacion in bdTorneos.Programaciones on oPartido.idProgramacion equals oProgramacion.id
+                                  where oPartido.idAsociacion == idAsociacion
+                                      && oProgramacion.estado == ProgramacionVerificada
+                                      && oPartido.estado == estado
+
+                                  select new
+                                  {
+                                      oPartido.id,
+                                      oPartido.numero,
+                                      oPartido.coordinador,
+                                      oPartido.estado,
+                                      oPartido.fecha,
+                                      oPartido.hora,
+                                      oPartido.tipo,
+                                      oPartido.idCancha,
+                                      oPartido.telefono_coordinador,
+                                      oPartido.equipoLocal,
+                                      oPartido.equipoVisita,
+                                      oPartido.observaciones,
+                                      oPartido.arbitros,
+                                      oPartido.Programaciones.Torneos.nombre,
+                                      numeroProgramacion = oPartido.Programaciones.numero
+                                  }).AsEnumerable(); ;
+
+                int pageIndex = Convert.ToInt32(page) - 1;
+                int pageSize = rows;
+                int totalRecords = oResultado.Count();
+                var totalPages = (int)Math.Ceiling(totalRecords / (float)pageSize);
+                int pagina = (page - 1) * rows;
+
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
-                    rows = (from oPartido in bdTorneos.Partidos join 
-                                 oProgramacion in bdTorneos.Programaciones on oPartido.idProgramacion equals oProgramacion.id
-                            where oPartido.idAsociacion == idAsociacion
-                                && oProgramacion.estado == ProgramacionVerificada
-                                && oPartido.estado == estado
-
-                            select new
-                            {
-                                oPartido.id,
-                                oPartido.numero,
-                                oPartido.coordinador,
-                                oPartido.estado,
-                                oPartido.fecha,
-                                oPartido.hora,
-                                oPartido.tipo,
-                                oPartido.idCancha,
-                                oPartido.telefono_coordinador,
-                                oPartido.equipoLocal,
-                                oPartido.equipoVisita,
-                                oPartido.observaciones,
-                                oPartido.arbitros,
-                                oPartido.Programaciones.Torneos.nombre,
-                                numeroProgramacion = oPartido.Programaciones.numero
-                            })
+                    total = totalPages,
+                    page,
+                    records = totalRecords,
+                    rows = oResultado.Skip(pagina).Take(rows)
                 });
             }
             catch
