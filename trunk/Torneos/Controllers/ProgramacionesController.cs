@@ -393,9 +393,11 @@ namespace Torneos.Controllers
                 DetallePartidos oDetalleNuevo = new DetallePartidos();
                 oDetalleNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                 oDetalleNuevo.idPartido = oPartido.id;
-                oDetalleNuevo.puesto = (int)enumPuestosArbitros.Central;
+                oDetalleNuevo.puesto = (int)enumTipoArbitro.Central;
                 oDetalleNuevo.dieta = oTorneo.dieta;
                 oDetalleNuevo.viaticos = oCancha.viaticos;
+                oDetalleNuevo.total_pagar = oTorneo.dieta + oCancha.viaticos;
+                oDetalleNuevo.total_rebajos = 0;
                 oDetalleNuevo.estado = (int)enumEstadoDetallePartidos.Pendiente_Pago;
 
                 bdTorneos.AddToDetallePartidos(oDetalleNuevo);

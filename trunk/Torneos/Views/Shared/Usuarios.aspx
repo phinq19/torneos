@@ -121,7 +121,7 @@
                 add: true,
                 del: true,
                 refresh: false,
-                search: true,
+                search: false,
                 view: true
             }, //options 
             ProcesarEditar_gvUsuarios, // edit options 

@@ -34,13 +34,15 @@
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: "<%= Torneos.Utilidades.CrearSelectorCanchasParaGrid() %>" }, formatter: 'select' },
-                    { name: 'viaticos', index: 'viaticos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
+                    { name: 'viaticos', index: 'viaticos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true, integer: true} },
                     { name: 'observaciones', index: 'observaciones', width: 300, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} },
                     { name: 'accionregistro', index: 'accionregistro', width: 55, editable: true, hidden: true },
             ]
             });
 
-
+            function ObtenerMonto(elem, option){
+                return "1000,5";
+            }
 
             var ProcesarEditar_gvCanchas = {
                 closeAfterAdd: true,
@@ -178,7 +180,7 @@
             edit: true,
             add: true,
             del: true,
-            search: true,
+            search: false,
             refresh: false,
             view: false
         },
@@ -288,7 +290,7 @@
             oTorneo.categoria = $("#selCategoria").val();
             oTorneo.telefono1 = $("#TxtTelefono1").val();
             oTorneo.telefono2 = $("#TxtTelefono2").val();
-            oTorneo.dieta = $("#TxtDieta").val();
+            oTorneo.dieta = $("#TxtDieta").val().replace(".", ",");
             oTorneo.email = $("#TxtCorreo").val();
             oTorneo.ubicacion = $("#TxtUbicacion").val();
             oTorneo.observaciones = $("#TxtObservaciones").val();
@@ -452,7 +454,7 @@
                         Dieta
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtDieta" name="TxtDieta" class="required" type="text" />
+                        <input id="TxtDieta" name="TxtDieta" class="required number" type="text" />
                     </div>
                     <div class="celdaLabel">
                         Correo

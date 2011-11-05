@@ -51,7 +51,8 @@
             height: 250,
             width: 856,
             altRows: true,
-            shrinkToFit: false
+            shrinkToFit: false,
+            cmTemplate: {sortable:false}
         });
     </script>
 

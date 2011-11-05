@@ -108,7 +108,7 @@ namespace Torneos.Controllers
                                               d.id,
                                               d.monto,
                                               d.observaciones,
-                                              d.descripcion,
+                                              d.tipo,
                                               d.idDetallePartido,
                                               d.accionregistro
                                           }
@@ -178,7 +178,7 @@ namespace Torneos.Controllers
                 DetallePartidos oDetallePartidoEditado = (from d in bdTorneos.DetallePartidos
                                              where d.id == oDetallePartido.id
                                              select d).Single();
-                oDetallePartidoEditado.estado = (int)enumEstadoDetallePartidos.Pagado;
+                oDetallePartidoEditado.estado = oDetallePartido.estado;
                 oDetallePartidoEditado.total_pagar = oDetallePartido.total_pagar;
                 oDetallePartidoEditado.total_rebajos = oDetallePartido.total_rebajos;
                 oDetallePartidoEditado.deposito = oDetallePartido.deposito;
@@ -216,7 +216,7 @@ namespace Torneos.Controllers
                 case 1:
                     Deducciones oDeduccionesNuevo = new Deducciones();
                     oDeduccionesNuevo.idDetallePartido = idDetallePartido;
-                    oDeduccionesNuevo.descripcion = oDeducciones.descripcion;
+                    oDeduccionesNuevo.tipo = oDeducciones.tipo;
                     oDeduccionesNuevo.monto = oDeducciones.monto;
                     oDeduccionesNuevo.observaciones = oDeducciones.observaciones;
 
@@ -238,7 +238,7 @@ namespace Torneos.Controllers
                                                 where t.id == oDeducciones.id
                                                 select t).Single();
 
-                    oDeduccionesEditado.descripcion = oDeducciones.descripcion;
+                    oDeduccionesEditado.tipo = oDeducciones.tipo;
                     oDeduccionesEditado.monto = oDeducciones.monto;
                     oDeduccionesEditado.observaciones = oDeducciones.observaciones;
 

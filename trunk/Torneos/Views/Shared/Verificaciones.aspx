@@ -95,7 +95,7 @@
                             add: false,
                             del: false,
                             refresh: true,
-                            search: true,
+                            search: false,
                             view: true
                         }, //options 
             ProcesarEditar_gvVerificaciones, // edit options 

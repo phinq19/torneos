@@ -34,9 +34,9 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("TorneosModel", "FK_Partidos_Canchas", "Canchas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Canchas), "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Partidos), true)]
 [assembly: EdmRelationshipAttribute("TorneosModel", "FK_Partidos_Programaciones", "Programaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Programaciones), "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Partidos), true)]
 [assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Asociacion", "Asociaciones", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Asociaciones), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartidos), true)]
+[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Deducciones_DetallePartido", "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.DetallePartidos), "Deducciones", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Deducciones), true)]
 [assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Arbitros", "Usuarios", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Torneos.Usuarios), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartidos), true)]
 [assembly: EdmRelationshipAttribute("TorneosModel", "FK_DetallePartidos_Partidos", "Partidos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.Partidos), "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.DetallePartidos), true)]
-[assembly: EdmRelationshipAttribute("TorneosModel", "FK_Deducciones_DetallePartido", "DetallePartidos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Torneos.DetallePartidos), "Deducciones", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Torneos.Deducciones), true)]
 
 #endregion
 
@@ -251,22 +251,6 @@ namespace Torneos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<DetallePartidos> DetallePartidos
-        {
-            get
-            {
-                if ((_DetallePartidos == null))
-                {
-                    _DetallePartidos = base.CreateObjectSet<DetallePartidos>("DetallePartidos");
-                }
-                return _DetallePartidos;
-            }
-        }
-        private ObjectSet<DetallePartidos> _DetallePartidos;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Deducciones> Deducciones
         {
             get
@@ -279,6 +263,22 @@ namespace Torneos
             }
         }
         private ObjectSet<Deducciones> _Deducciones;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DetallePartidos> DetallePartidos
+        {
+            get
+            {
+                if ((_DetallePartidos == null))
+                {
+                    _DetallePartidos = base.CreateObjectSet<DetallePartidos>("DetallePartidos");
+                }
+                return _DetallePartidos;
+            }
+        }
+        private ObjectSet<DetallePartidos> _DetallePartidos;
 
         #endregion
         #region AddTo Methods
@@ -364,19 +364,19 @@ namespace Torneos
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the DetallePartidos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToDetallePartidos(DetallePartidos detallePartidos)
-        {
-            base.AddObject("DetallePartidos", detallePartidos);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Deducciones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToDeducciones(Deducciones deducciones)
         {
             base.AddObject("Deducciones", deducciones);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DetallePartidos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDetallePartidos(DetallePartidos detallePartidos)
+        {
+            base.AddObject("DetallePartidos", detallePartidos);
         }
 
         #endregion
@@ -884,14 +884,14 @@ namespace Torneos
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
         /// <param name="idDetallePartido">Initial value of the idDetallePartido property.</param>
-        /// <param name="descripcion">Initial value of the descripcion property.</param>
+        /// <param name="tipo">Initial value of the tipo property.</param>
         /// <param name="monto">Initial value of the monto property.</param>
-        public static Deducciones CreateDeducciones(global::System.Int32 id, global::System.Int32 idDetallePartido, global::System.String descripcion, global::System.Decimal monto)
+        public static Deducciones CreateDeducciones(global::System.Int32 id, global::System.Int32 idDetallePartido, global::System.Int32 tipo, global::System.Decimal monto)
         {
             Deducciones deducciones = new Deducciones();
             deducciones.id = id;
             deducciones.idDetallePartido = idDetallePartido;
-            deducciones.descripcion = descripcion;
+            deducciones.tipo = tipo;
             deducciones.monto = monto;
             return deducciones;
         }
@@ -955,24 +955,24 @@ namespace Torneos
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String descripcion
+        public global::System.Int32 tipo
         {
             get
             {
-                return _descripcion;
+                return _tipo;
             }
             set
             {
-                OndescripcionChanging(value);
-                ReportPropertyChanging("descripcion");
-                _descripcion = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("descripcion");
-                OndescripcionChanged();
+                OntipoChanging(value);
+                ReportPropertyChanging("tipo");
+                _tipo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("tipo");
+                OntipoChanged();
             }
         }
-        private global::System.String _descripcion;
-        partial void OndescripcionChanging(global::System.String value);
-        partial void OndescripcionChanged();
+        private global::System.Int32 _tipo;
+        partial void OntipoChanging(global::System.Int32 value);
+        partial void OntipoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1251,30 +1251,6 @@ namespace Torneos
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> porcetaje_asociacion
-        {
-            get
-            {
-                return _porcetaje_asociacion;
-            }
-            set
-            {
-                Onporcetaje_asociacionChanging(value);
-                ReportPropertyChanging("porcetaje_asociacion");
-                _porcetaje_asociacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("porcetaje_asociacion");
-                Onporcetaje_asociacionChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _porcetaje_asociacion;
-        partial void Onporcetaje_asociacionChanging(Nullable<global::System.Decimal> value);
-        partial void Onporcetaje_asociacionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.Decimal> total_pagar
         {
             get
@@ -1293,102 +1269,6 @@ namespace Torneos
         private Nullable<global::System.Decimal> _total_pagar;
         partial void Ontotal_pagarChanging(Nullable<global::System.Decimal> value);
         partial void Ontotal_pagarChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> mensualidad
-        {
-            get
-            {
-                return _mensualidad;
-            }
-            set
-            {
-                OnmensualidadChanging(value);
-                ReportPropertyChanging("mensualidad");
-                _mensualidad = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("mensualidad");
-                OnmensualidadChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _mensualidad;
-        partial void OnmensualidadChanging(Nullable<global::System.Decimal> value);
-        partial void OnmensualidadChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> tienda
-        {
-            get
-            {
-                return _tienda;
-            }
-            set
-            {
-                OntiendaChanging(value);
-                ReportPropertyChanging("tienda");
-                _tienda = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("tienda");
-                OntiendaChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _tienda;
-        partial void OntiendaChanging(Nullable<global::System.Decimal> value);
-        partial void OntiendaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> soda
-        {
-            get
-            {
-                return _soda;
-            }
-            set
-            {
-                OnsodaChanging(value);
-                ReportPropertyChanging("soda");
-                _soda = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("soda");
-                OnsodaChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _soda;
-        partial void OnsodaChanging(Nullable<global::System.Decimal> value);
-        partial void OnsodaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> socorro_mutuo
-        {
-            get
-            {
-                return _socorro_mutuo;
-            }
-            set
-            {
-                Onsocorro_mutuoChanging(value);
-                ReportPropertyChanging("socorro_mutuo");
-                _socorro_mutuo = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("socorro_mutuo");
-                Onsocorro_mutuoChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _socorro_mutuo;
-        partial void Onsocorro_mutuoChanging(Nullable<global::System.Decimal> value);
-        partial void Onsocorro_mutuoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1461,30 +1341,6 @@ namespace Torneos
         private Nullable<global::System.Decimal> _viaticos;
         partial void OnviaticosChanging(Nullable<global::System.Decimal> value);
         partial void OnviaticosChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> otros_rebajos
-        {
-            get
-            {
-                return _otros_rebajos;
-            }
-            set
-            {
-                Onotros_rebajosChanging(value);
-                ReportPropertyChanging("otros_rebajos");
-                _otros_rebajos = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("otros_rebajos");
-                Onotros_rebajosChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _otros_rebajos;
-        partial void Onotros_rebajosChanging(Nullable<global::System.Decimal> value);
-        partial void Onotros_rebajosChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1582,6 +1438,28 @@ namespace Torneos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Deducciones_DetallePartido", "Deducciones")]
+        public EntityCollection<Deducciones> Deducciones
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Deducciones>("TorneosModel.FK_Deducciones_DetallePartido", "Deducciones");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Deducciones>("TorneosModel.FK_Deducciones_DetallePartido", "Deducciones", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_DetallePartidos_Arbitros", "Usuarios")]
         public Usuarios Usuarios
         {
@@ -1648,28 +1526,6 @@ namespace Torneos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Partidos>("TorneosModel.FK_DetallePartidos_Partidos", "Partidos", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TorneosModel", "FK_Deducciones_DetallePartido", "Deducciones")]
-        public EntityCollection<Deducciones> Deducciones
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Deducciones>("TorneosModel.FK_Deducciones_DetallePartido", "Deducciones");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Deducciones>("TorneosModel.FK_Deducciones_DetallePartido", "Deducciones", value);
                 }
             }
         }
