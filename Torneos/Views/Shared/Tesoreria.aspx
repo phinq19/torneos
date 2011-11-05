@@ -105,6 +105,9 @@
                             return [false, datos.mensaje, '-1']
                             break;
                     }
+                },
+                afterComplete: function (response, postdata, formid) {
+                    CalcularDeducciones();
                 }
             }
 
@@ -146,6 +149,9 @@
                             return [false, datos.mensaje, '-1']
                             break;
                     }
+                },
+                afterComplete: function (response, postdata, formid) {
+                    CalcularDeducciones();
                 }
             }
 
@@ -166,6 +172,14 @@
                  {width: "600" }
             );
 
+            function CalcularDeducciones() {
+                var monto = 0;
+                var oRegistros = $("#gridDeducciones").jqGrid('getGridParam', 'data');
+                for (var indice = 0; indice < oRegistros.length; indice++) {
+                    monto += parseFloat(oRegistros[indice].monto);
+                }
+                $("#TxtMontoDeducciones").val(monto);
+            }
 
             $("#gridPartidos").jqGrid({
                 url: '<%= Url.Action("ObtenerDetallePartidos","Tesoreria") %>',
@@ -187,7 +201,7 @@
             });
 
 
-        $("#gridPartidos").jqGrid("navGrid", "#barraGridPartidos",
+            $("#gridPartidos").jqGrid("navGrid", "#barraGridPartidos",
         {
             addfunc: function () {
                 MostrarVentana("add");
