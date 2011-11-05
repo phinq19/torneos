@@ -1,25 +1,19 @@
 General
+*Foreing Keys-eliminar
+*Acceso a las paginas
 
-*Permisos de usuarios
+Home
+*Recuperar contraseña
+*Ingresar contraseña
 
-*Recuperar contrasena
-
-
-Mantenimiento de usuarios
-
+Usuarios
 *Validar que usuarios encargados de torneos tengan un torneo asociado
 
+Torneos
+*Validar que no haya canchas repetidas para un torneo
 
-Mantenimiento de programaciones
+Programaciones
+*No se puede editar o borrar una programacion que este
 
-*Validar al entrar que el usuario tenga un torneos asociado
-
-
-
-
-
-Validar que no haya canchas repetidas para un torneo
-Foreing Keys-eliminar
-Acceso a las paginas
-Para un partido debe existir al menos un central
-Recuperar contraseña
+Asignaciones
+*Para un partido debe existir al menos un central

@@ -8,11 +8,11 @@ namespace Torneos
 {
     public enum enumCategorias
     {
-        Categoria1,
-        Categoria2,
-        Categoria3,
-        Categoria4,
-        Categoria5,
-        Categoria6
+        Infantil,
+        Juvenil,
+        Sub20,
+        Sub23,
+        Mayor,
+        Veteranos
     }
 }
