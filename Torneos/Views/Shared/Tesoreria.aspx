@@ -378,7 +378,7 @@
                 $("#TxtNumeroProgramacion").attr("disabled", "disabled");
                 $("#TxtNombre").attr("disabled", "disabled");
                 $("#TxtDeposito").removeAttr("disabled");
-                $("#TxtMontoDeposito").attr("disabled", "disabled");
+                $("#TxtMontoDeposito").attr("disabled", "disabled");ccc
                 $("#TxtMontoDeducciones").attr("disabled", "disabled");
                 $("#selEstado").removeAttr("disabled");
 
