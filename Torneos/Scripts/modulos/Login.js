@@ -22,17 +22,31 @@
 
     $("#TxtCodigo").focus();
 
-    $("#frmLogin").validate(/*{
-        rules: {
-            TxtCodigo: "required",
-            TxtContrasena: "required"
-        },
-        messages: {
-            TxtCodigo: "Debe ingresar un código de usuario",
-            TxtContrasena: "Debe ingresar una contraseña"
+    $("#frmLogin").validate();
+
+    $("#frmIngresarContrasena").validate();
+
+    $("#ventanaContrasena").dialog({
+        autoOpen: false,
+        zIndex: 100,
+        resizable: false,
+        modal: false,
+        title: "Ingresar Contraseña",
+        //closeOnEscape: true,
+        height: 220,
+        width: 450,
+        buttons: {
+            "Aceptar": function () {
+                if ($("#frmIngresarContrasena").valid()) {
+                    GuardarContrasena();
+                }
+            },
+            "Cancelar": function () { $(this).dialog("close"); }
         }
-    }*/);
+    });
+
 });
+
 
 
 function ObtenerValorQueryString(nombre) {
@@ -46,6 +60,21 @@ function ObtenerValorQueryString(nombre) {
     else {
         return results[1];
     }
+}
+
+function GuardarContrasena() { 
+        
+    var cClave = $('#TxtIngresarContrasena').val();
+
+    var oParametrosAjax = { cContrasena: cClave};
+
+    var funcionProcesamientoCliente = function (oRespuesta) {
+        window.location = "/Home";
+    }
+
+    BloquearPaginaCompleta(false);
+
+    RealizarPeticionAjax("Autenticar", "/Home/CambiarContrasena", oParametrosAjax, true, true, null, funcionProcesamientoCliente);
 }
 
 function Autenticar() {
@@ -70,6 +99,9 @@ function Autenticar() {
             case "autenticado":
                 $("#mensajeAutenticacio").html("");
                 window.location = cURL;
+                break;
+            case "Inactivo":
+                $("#ventanaContrasena").dialog("open");
                 break;
             case "falloAutenticacion":
                 DesbloquearPaginaCompleta();

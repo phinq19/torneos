@@ -109,6 +109,33 @@
                             </div>
                         </div>
                         </form>
+                        <div id="ventanaContrasena">
+                            <form id="frmIngresarContrasena" class="cmxform" action="">
+                            <div class="fila">
+                                <div class="ContenidoOrdenado">
+                                    <div class="celdaLabel">
+                                        <label>
+                                            Contraseña:</label>
+                                    </div>
+                                    <div class="celdaCampo">
+                                        <input id="TxtIngresarContrasena" name="TxtIngresarContrasena" type="password" class="required"
+                                            maxlength="40" size="20" />
+                                    </div>
+                                </div>
+                                <div class="fila">
+                                    <div class="celdaLabel">
+                                        <label>
+                                            Confirmar Contraseña:</label>
+                                    </div>
+                                    <div class="celdaCampo">
+                                        <input id="TxtIngresarContrasenaConfirmar" name="TxtIngresarContrasenaConfirmar"
+                                            type="password" class="required" equalto="#TxtIngresarContrasena" maxlength="40"
+                                            size="20" />
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
