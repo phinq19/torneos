@@ -4,7 +4,6 @@ General
 
 Home
 *Recuperar contraseña
-*Ingresar contraseña
 
 Usuarios
 *Validar que usuarios encargados de torneos tengan un torneo asociado
