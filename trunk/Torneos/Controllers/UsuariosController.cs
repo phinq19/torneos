@@ -24,33 +24,46 @@ namespace Torneos.Controllers
         [Autorizado]
         [CompressFilter(Order = 1)]
         [CacheFilter(Duration = 60, Order = 2)]
-        public JsonResult ObtenerUsuarios()
+        public JsonResult ObtenerUsuarios(string sidx, string sord, int page, int rows)
         {
             JsonResult jsonData = null;
             try
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
-                jsonData = Json(new{ 
-                    estado = "exito", 
-                    mensaje = "",
-                    rows = (
+
+                var oResultado = (
                         from u in bdTorneos.Usuarios
                         where u.tipo != 0 && u.idAsociacion == idAsociacion
                         select new
                         {
-                            id =  u.id,
-                            nombre =  u.nombre,
-                            telefono1 =  u.telefono1,
-                            correo =   u.correo,
-                            observaciones =   u.observaciones,
+                            id = u.id,
+                            nombre = u.nombre,
+                            telefono1 = u.telefono1,
+                            correo = u.correo,
+                            observaciones = u.observaciones,
                             cedula = u.cedula,
-                            contrasena =   u.contrasena,
-                            cuenta =  u.cuenta,
+                            contrasena = u.contrasena,
+                            cuenta = u.cuenta,
                             tipo = u.tipo,
                             idTorneo = u.idTorneo
                         }
-                    )
+                    ).AsEnumerable();
+
+                int pageIndex = Convert.ToInt32(page) - 1;
+                int pageSize = rows;
+                int totalRecords = oResultado.Count();
+                var totalPages = (int)Math.Ceiling(totalRecords / (float)pageSize);
+                int pagina = (page - 1) * rows;
+
+                jsonData = Json(new
+                {
+                    estado = "exito",
+                    mensaje = "",
+                    total = totalPages,
+                    page,
+                    records = totalRecords,
+                    rows = oResultado.Skip(pagina).Take(rows)
                 });
             }
             catch

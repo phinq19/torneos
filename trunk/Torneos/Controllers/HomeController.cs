@@ -11,8 +11,6 @@ namespace Torneos.Controllers
     public class HomeController : Controller
     {
         [AcceptVerbs(HttpVerbs.Get)]
-        [CompressFilter(Order = 1)]
-        [CacheFilter(Duration = 60, Order = 2)]
         public ActionResult Index()
         {
             if (HttpContext.Request.IsAuthenticated)

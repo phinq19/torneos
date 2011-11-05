@@ -22,7 +22,7 @@ namespace Torneos.Controllers
         [Autorizado]
         [CompressFilter(Order = 1)]
         [CacheFilter(Duration = 60, Order = 2)]
-        public JsonResult ObtenerProgramaciones(int estado)
+        public JsonResult ObtenerProgramaciones(string sidx, string sord, int page, int rows, int estado)
         {
             JsonResult jsonData = null;
             try
@@ -30,28 +30,39 @@ namespace Torneos.Controllers
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                 int idTorneo = Utilidades.ObtenerValorSession("idTorneo");
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
-                
+
+                var oResultado = (from oProgramaciones in bdTorneos.Programaciones
+                                  where oProgramaciones.idTorneo == idTorneo &&
+                                        oProgramaciones.idAsociacion == idAsociacion &&
+                                        oProgramaciones.estado == estado
+                                  select new
+                                  {
+                                      oProgramaciones.id,
+                                      oProgramaciones.numero,
+                                      oProgramaciones.deposito,
+                                      oProgramaciones.estado,
+                                      oProgramaciones.idTorneo,
+                                      oProgramaciones.idUsuario,
+                                      oProgramaciones.monto,
+                                      oProgramaciones.montoCalculado,
+                                      oProgramaciones.observaciones,
+                                      oProgramaciones.observacionesAsoc
+                                  }).AsEnumerable(); ;
+
+                int pageIndex = Convert.ToInt32(page) - 1;
+                int pageSize = rows;
+                int totalRecords = oResultado.Count();
+                var totalPages = (int)Math.Ceiling(totalRecords / (float)pageSize);
+                int pagina = (page - 1) * rows;
+
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
-                    rows = (from oProgramaciones in bdTorneos.Programaciones
-                            where oProgramaciones.idTorneo == idTorneo &&
-                                  oProgramaciones.idAsociacion == idAsociacion &&
-                                  oProgramaciones.estado == estado
-                            select new
-                            {
-                                oProgramaciones.id,
-                                oProgramaciones.numero,
-                                oProgramaciones.deposito,
-                                oProgramaciones.estado,
-                                oProgramaciones.idTorneo,
-                                oProgramaciones.idUsuario,
-                                oProgramaciones.monto,
-                                oProgramaciones.montoCalculado,
-                                oProgramaciones.observaciones,
-                                oProgramaciones.observacionesAsoc
-                            })
+                    total = totalPages,
+                    page,
+                    records = totalRecords,
+                    rows = oResultado.Skip(pagina).Take(rows)
                 });
             }
             catch

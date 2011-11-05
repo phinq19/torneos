@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autorizado.cs" />
+    <Compile Include="enumEstadoDetallePartidos.cs" />
     <Compile Include="Encriptador.cs" />
     <Compile Include="Controllers\AsignacionesController.cs" />
     <Compile Include="Controllers\CanchasController.cs" />

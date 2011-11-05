@@ -28,23 +28,32 @@ namespace Torneos.Controllers
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
-                int pagina = page * rows;
+
+                var oResultado = (from c in bdTorneos.Canchas
+                                  where c.idAsociacion == idAsociacion
+                                  select new
+                                  {
+                                      c.id,
+                                      c.nombre,
+                                      c.telefonos,
+                                      c.observaciones,
+                                      c.ubicacion
+                                  }).AsEnumerable();
+
+                int pageIndex = Convert.ToInt32(page) - 1;
+                int pageSize = rows;
+                int totalRecords = oResultado.Count();
+                var totalPages = (int)Math.Ceiling(totalRecords / (float)pageSize);
+                int pagina = (page - 1) * rows;
+
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
-                    rows = (
-                        from c in bdTorneos.Canchas
-                        where c.idAsociacion == idAsociacion
-                        select new
-                        {
-                            c.id,
-                            c.nombre,
-                            c.telefonos,
-                            c.observaciones,
-                            c.ubicacion
-                        }
-                    ).Skip(pagina).Take(rows)
+                    total = totalPages,
+                    page,
+                    records = totalRecords,
+                    rows = oResultado.Skip(pagina).Take(rows)
                 });
             }
             catch

@@ -22,39 +22,43 @@ namespace Torneos.Controllers
         [Autorizado]
         [CompressFilter(Order = 1)]
         [CacheFilter(Duration = 60, Order = 2)]
-        public JsonResult ObtenerTorneos()
+        public JsonResult ObtenerTorneos(string sidx, string sord, int page, int rows)
         {
             JsonResult jsonData = null;
             try
             {
                 BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
                 int idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
+
+                var oResultado = (from oTorneo in bdTorneos.Torneos
+                                  where oTorneo.idAsociacion == idAsociacion
+                                  select new
+                                  {
+                                      oTorneo.id,
+                                      oTorneo.nombre,
+                                      oTorneo.categoria,
+                                      oTorneo.telefono1,
+                                      oTorneo.ubicacion,
+                                      oTorneo.telefono2,
+                                      oTorneo.dieta,
+                                      oTorneo.email,
+                                      oTorneo.observaciones
+                                  }).AsEnumerable(); ;
+
+                int pageIndex = Convert.ToInt32(page) - 1;
+                int pageSize = rows;
+                int totalRecords = oResultado.Count();
+                var totalPages = (int)Math.Ceiling(totalRecords / (float)pageSize);
+                int pagina = (page - 1) * rows;
+
                 jsonData = Json(new
                 {
                     estado = "exito",
                     mensaje = "",
-                    rows = (from  oTorneo in bdTorneos.Torneos
-                            where oTorneo.idAsociacion == idAsociacion
-                            select new
-                            {
-                                oTorneo.id,
-                                oTorneo.nombre,
-                                oTorneo.categoria,
-                                oTorneo.telefono1,
-                                oTorneo.ubicacion,
-                                oTorneo.telefono2,
-                                oTorneo.dieta,
-                                oTorneo.email,
-                                oTorneo.observaciones/*,
-                                Torneos_Canchas = from c in oTorneo.Torneos_Canchas
-                                                  select new
-                                                  {
-                                                      id = c.id,
-                                                      idCancha = c.idCancha,
-                                                      viaticos = c.viaticos,
-                                                      observaciones = c.observaciones
-                                                  }*/
-                            })
+                    total = totalPages,
+                    page,
+                    records = totalRecords,
+                    rows = oResultado.Skip(pagina).Take(rows)
                 });
             }
             catch
