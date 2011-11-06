@@ -81,7 +81,7 @@
                                 <div class="celdaLabel">
                                     <label>Usuario:</label>
                                 </div>
-                                <div class="">
+                                <div class="celdaCampo">
                                     <input id="TxtCodigo" name="TxtCodigo" type="text" class="required"/>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                 <div class="celdaLabel">
                                 </div>
                                 <div class="celdaCampo">
-                                    <a id="LnkRecuperar" href="">Recuperar contraseña</a>
+                                    <a id="LnkRecuperar" href="#">Recuperar contraseña</a>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                             <form id="frmIngresarContrasena" class="cmxform" action="">
                             <div class="fila">
                                 <div class="ContenidoOrdenado">
-                                    <div class="celdaLabel">
+                                    <div class="celdaCampo">
                                         <label>
                                             Contraseña:</label>
                                     </div>
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="fila">
-                                    <div class="celdaLabel">
+                                    <div class="celdaCampo">
                                         <label>
                                             Confirmar Contraseña:</label>
                                     </div>
@@ -131,6 +131,22 @@
                                         <input id="TxtIngresarContrasenaConfirmar" name="TxtIngresarContrasenaConfirmar"
                                             type="password" class="required" equalto="#TxtIngresarContrasena" maxlength="40"
                                             size="20" />
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <div id="ventanaRecuparar">
+                            <form id="frmRecuperar" class="cmxform" action="">
+                            <div class="fila">
+                                <div class="ContenidoOrdenado">
+                                    <div class="celdaLabel">
+                                        <label>
+                                            Cédula:</label>
+                                    </div>
+                                    <div class="celdaCampo">
+                                        <input id="TxtCedula" name="TxtCedula" type="text" class="required"
+                                            maxlength="40" size="20" />
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +164,9 @@
     
     <script language="javascript" type="text/javascript" src="/Scripts/lib/s3Slider.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/modulos/Login.js"></script>
-
+    <script language="javascript" type="text/javascript">
+        $("#frmLogin").resetForm()
+    </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>

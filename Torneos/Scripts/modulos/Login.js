@@ -20,10 +20,16 @@
         return false;
     });
 
+    $("#LnkRecuperar").click(function (event) {
+        $("#frmRecuperar").validate().resetForm();
+        $("#ventanaRecuparar").dialog("open");
+        return false;
+    });
+
     $("#TxtCodigo").focus();
 
     $("#frmLogin").validate();
-
+    $("#frmRecuperar").validate();
     $("#frmIngresarContrasena").validate();
 
     $("#ventanaContrasena").dialog({
@@ -39,6 +45,25 @@
             "Aceptar": function () {
                 if ($("#frmIngresarContrasena").valid()) {
                     GuardarContrasena();
+                }
+            },
+            "Cancelar": function () { $(this).dialog("close"); }
+        }
+    });
+
+    $("#ventanaRecuparar").dialog({
+        autoOpen: false,
+        zIndex: 100,
+        resizable: false,
+        modal: false,
+        title: "Recuperar Contraseña",
+        //closeOnEscape: true,
+        height: 150,
+        width: 450,
+        buttons: {
+            "Aceptar": function () {
+                if ($("#frmRecuperar").valid()) {
+                    alert("Esta función todavia está con contrucción")
                 }
             },
             "Cancelar": function () { $(this).dialog("close"); }
@@ -101,6 +126,7 @@ function Autenticar() {
                 window.location = cURL;
                 break;
             case "Inactivo":
+                $("#frmIngresarContrasena").validate().resetForm();
                 $("#ventanaContrasena").dialog("open");
                 break;
             case "falloAutenticacion":
