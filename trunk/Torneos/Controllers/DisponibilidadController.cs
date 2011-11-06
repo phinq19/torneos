@@ -93,8 +93,19 @@ namespace Torneos.Controllers
                 bdTorneos.SaveChanges();
                 bdTorneos.Detach(oDisponibilidadEditado);
 
-
-                jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oDisponibilidadEditado, estadoValidacion = "exito" });
+                var oResultado = new
+                {
+                    oDisponibilidadEditado.id,
+                    oDisponibilidadEditado.idArbitro,
+                    lunes = oDisponibilidadEditado.lunes == 1 ? true : false,
+                    martes = oDisponibilidadEditado.martes == 2 ? true : false,
+                    miercoles = oDisponibilidadEditado.miercoles == 3 ? true : false,
+                    jueves = oDisponibilidadEditado.jueves == 4 ? true : false,
+                    viernes = oDisponibilidadEditado.viernes == 5 ? true : false,
+                    sabado = oDisponibilidadEditado.sabado == 6 ? true : false,
+                    domingo = oDisponibilidadEditado.domingo == 7 ? true : false
+                };
+                jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oResultado, estadoValidacion = "exito" });
             }
             catch
             {

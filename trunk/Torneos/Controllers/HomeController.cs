@@ -46,7 +46,7 @@ namespace Torneos.Controllers
                         Utilidades.AsignarValorSession("idTorneo", oUsuario.idTorneo.ToString());
                         Utilidades.AsignarValorSession("idAsociacion", oUsuario.idAsociacion.ToString());
 
-                        FormsAuthentication.SetAuthCookie(cCodigoUsuario, false);
+                        FormsAuthentication.SetAuthCookie(oUsuario.nombre, false);
                         jsonData = Json(new { mensaje = "", estadoAutenticacion = "autenticado", estado = "exito" });
                     }
                     else {
@@ -90,7 +90,7 @@ namespace Torneos.Controllers
                 Utilidades.AsignarValorSession("idTorneo", oUsuarioEditado.idTorneo.ToString());
                 Utilidades.AsignarValorSession("idAsociacion", oUsuarioEditado.idAsociacion.ToString());
 
-                FormsAuthentication.SetAuthCookie(cCodigoUsuario, false);
+                FormsAuthentication.SetAuthCookie(oUsuarioEditado.nombre, false);
 
                 jsonData = Json(new { mensaje = "", estado = "exito" });
             }
