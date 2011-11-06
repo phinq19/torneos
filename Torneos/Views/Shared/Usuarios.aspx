@@ -19,10 +19,10 @@
             }
 
             $("#gridUsuarios").jqGrid({
-                url: '<%= Url.Action("ObtenerUsuarios","Usuarios") %>',
+                url: "/Usuarios/ObtenerUsuarios", //'<%= Url.Action("ObtenerUsuarios","Usuarios") %>',
                 datatype: "json",
                 pager: "#barraGridUsuarios",
-                editurl: '<%= Url.Action("EditarUsuarios","Usuarios") %>',
+                editurl: "/Usuarios/EditarUsuarios", //'<%= Url.Action("EditarUsuarios","Usuarios") %>',
                 colNames: ['id', 'Nombre', 'Cédula', 'Tipo', 'Torneo', 'Correo', 'Teléfono', 'Cuenta Bancaria', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
@@ -58,6 +58,9 @@
                         case "exito":
                             switch (datos.estadoValidacion) {
                                 case "exito":
+                                    if (datos.ObjetoDetalle.idTorneo == null && datos.ObjetoDetalle.tipo.toString() == "1") {
+                                        return [false, "Los Usuarios que son encargados de Torneo, deben de tener un Torneo asignado", "-1"];
+                                    }
                                     return [true, '', datos.ObjetoDetalle.id];
                                     break;
                                 case "error":

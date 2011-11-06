@@ -164,9 +164,6 @@
     
     <script language="javascript" type="text/javascript" src="/Scripts/lib/s3Slider.js"></script>
     <script language="javascript" type="text/javascript" src="/Scripts/modulos/Login.js"></script>
-    <script language="javascript" type="text/javascript">
-        $("#frmLogin").resetForm()
-    </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
