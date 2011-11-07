@@ -344,7 +344,22 @@
                 MostrarVentana("add");
             },
             editfunc: function (id) {
-                MostrarVentana("edit", id);
+                var oData = jQuery('#gridProgramaciones').getRowData(id);
+                if (oData.estado.toString() == "1") {
+                    alert("No se puede editar o borrar una programacion que esten verificadas");
+                }
+                else {
+                    MostrarVentana("edit", id);
+                }
+            },
+            delfunc: function (id) {
+                var oData = jQuery('#gridProgramaciones').getRowData(id);
+                if (oData.estado.toString() == "1") {
+                    alert("No se puede editar o borrar una programacion que esten verificadas");
+                }
+                else {
+                    jQuery('#gridProgramaciones').delRowData(id);
+                }
             },
             edit: true,
             add: true,

@@ -80,6 +80,14 @@
                             switch (datos.estadoValidacion) {
                                 case "exito":
                                     //var registroCliente = datos.ObjetoDetalle;
+                                    for (var i = 0; i < _Torneo.Torneos_Canchas.length; i++) {
+                                        if (_Partido.DetallePartidos[i].id != datos.ObjetoDetalle.id &&
+                                            _Partido.DetallePartidos[i].accionregistro != 3 &&
+                                            _Partido.DetallePartidos[i].puesto == 0 &&
+                                             datos.ObjetoDetalle.puesto == 0) {
+                                            return [false, "Este partido ya tiene un árbitro central asignado", '-1'];
+                                        }
+                                    }
                                     $.each(datos.ObjetoDetalle, function (att, value) {
                                         registroCliente[att] = value;
                                     });
@@ -363,11 +371,19 @@
         }
 
         function ValidarCampos() {
+            var bCentral = false;
             for (var i = 0; i < _Partido.DetallePartidos.length; i++) {
                 if (_Partido.DetallePartidos[i].idArbitro == -1) {
                     alert("No se puede realizar esta operación, hace falta asignar árbitros");
                     return false;
                 }
+                if (_Partido.DetallePartidos[i].puesto == 0) {
+                    bCentral = true;
+                }
+            }
+            if (bCentral == false) {
+                alert("No se puede realizar esta operación, hace falta asignar un árbitro central");
+                return false;
             }
             return true;
         }
