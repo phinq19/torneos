@@ -5,12 +5,5 @@ General
 Home
 *Recuperar contraseña
 
-
-Torneo
-*Validar que no haya canchas repetidas para un torneo
-
 Programaciones
 *No se puede editar o borrar una programacion que esten verificadas
-
-Asignaciones
-*Para un partido debe existir al menos un central

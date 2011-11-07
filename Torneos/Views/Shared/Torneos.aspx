@@ -66,6 +66,13 @@
                             switch (datos.estadoValidacion) {
                                 case "exito":
                                     //var registroCliente = datos.ObjetoDetalle;
+                                    for (var i = 0; i < _Torneo.Torneos_Canchas.length; i++) {
+                                        if (_Torneo.Torneos_Canchas[i].id != datos.ObjetoDetalle.id && 
+                                            _Torneo.Torneos_Canchas[i].accionregistro != 3 &&
+                                             _Torneo.Torneos_Canchas[i].idCancha == datos.ObjetoDetalle.idCancha) {
+                                            return [false, "Esta cancha ya pertenece al torneo", '-1'];
+                                        }
+                                    }
                                     $.each(datos.ObjetoDetalle, function (att, value) {
                                         registroCliente[att] = value;
                                     });

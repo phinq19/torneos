@@ -79,7 +79,7 @@
                         <div class="ContenidoOrdenado">
                             <div class="fila">
                                 <div class="celdaLabel">
-                                    <label>Usuario:</label>
+                                    <label>Cédula:</label>
                                 </div>
                                 <div class="celdaCampo">
                                     <input id="TxtCodigo" name="TxtCodigo" type="text" class="required"/>
