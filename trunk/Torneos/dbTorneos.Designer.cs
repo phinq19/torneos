@@ -3735,7 +3735,8 @@ namespace Torneos
         /// <param name="correo">Initial value of the correo property.</param>
         /// <param name="telefono1">Initial value of the telefono1 property.</param>
         /// <param name="tipo">Initial value of the tipo property.</param>
-        public static Usuarios CreateUsuarios(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.String cedula, global::System.String nombre, global::System.String contrasena, global::System.String correo, global::System.String telefono1, global::System.Int32 tipo)
+        /// <param name="activo">Initial value of the activo property.</param>
+        public static Usuarios CreateUsuarios(global::System.Int32 id, global::System.Int32 idAsociacion, global::System.String cedula, global::System.String nombre, global::System.String contrasena, global::System.String correo, global::System.String telefono1, global::System.Int32 tipo, global::System.Boolean activo)
         {
             Usuarios usuarios = new Usuarios();
             usuarios.id = id;
@@ -3746,6 +3747,7 @@ namespace Torneos
             usuarios.correo = correo;
             usuarios.telefono1 = telefono1;
             usuarios.tipo = tipo;
+            usuarios.activo = activo;
             return usuarios;
         }
 
@@ -4024,7 +4026,55 @@ namespace Torneos
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> activo
+        public Nullable<global::System.Boolean> activoContrasena
+        {
+            get
+            {
+                return _activoContrasena;
+            }
+            set
+            {
+                OnactivoContrasenaChanging(value);
+                ReportPropertyChanging("activoContrasena");
+                _activoContrasena = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("activoContrasena");
+                OnactivoContrasenaChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _activoContrasena;
+        partial void OnactivoContrasenaChanging(Nullable<global::System.Boolean> value);
+        partial void OnactivoContrasenaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String parametro
+        {
+            get
+            {
+                return _parametro;
+            }
+            set
+            {
+                OnparametroChanging(value);
+                ReportPropertyChanging("parametro");
+                _parametro = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("parametro");
+                OnparametroChanged();
+            }
+        }
+        private global::System.String _parametro;
+        partial void OnparametroChanging(global::System.String value);
+        partial void OnparametroChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean activo
         {
             get
             {
@@ -4039,8 +4089,8 @@ namespace Torneos
                 OnactivoChanged();
             }
         }
-        private Nullable<global::System.Boolean> _activo;
-        partial void OnactivoChanging(Nullable<global::System.Boolean> value);
+        private global::System.Boolean _activo;
+        partial void OnactivoChanging(global::System.Boolean value);
         partial void OnactivoChanged();
 
         #endregion

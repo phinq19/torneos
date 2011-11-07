@@ -37,16 +37,17 @@ namespace Torneos.Controllers
                         where u.tipo != 0 && u.idAsociacion == idAsociacion
                         select new
                         {
-                            id = u.id,
-                            nombre = u.nombre,
-                            telefono1 = u.telefono1,
-                            correo = u.correo,
-                            observaciones = u.observaciones,
-                            cedula = u.cedula,
-                            contrasena = u.contrasena,
-                            cuenta = u.cuenta,
-                            tipo = u.tipo,
-                            idTorneo = u.idTorneo
+                            u.id,
+                            u.nombre,
+                            u.telefono1,
+                            u.correo,
+                            u.observaciones,
+                            u.cedula,
+                            u.contrasena,
+                            u.cuenta,
+                            u.tipo,
+                            u.idTorneo,
+                            u.activo
                         }
                     ).AsEnumerable();
 
@@ -107,6 +108,8 @@ namespace Torneos.Controllers
                         oUsuarioNuevo.telefono1 = oUsuario.telefono1;
                         oUsuarioNuevo.tipo = oUsuario.tipo;
                         oUsuarioNuevo.idTorneo = oUsuario.idTorneo;
+                        oUsuarioNuevo.activoContrasena = false;
+                        oUsuarioNuevo.activo = oUsuario.activo;
                         oUsuarioNuevo.idAsociacion = Utilidades.ObtenerValorSession("idAsociacion");
                         oUsuarioNuevo.id = 0;
 
@@ -152,6 +155,7 @@ namespace Torneos.Controllers
                         oUsuarioEditado.telefono1 = oUsuario.telefono1;
                         oUsuarioEditado.tipo = oUsuario.tipo;
                         oUsuarioEditado.idTorneo = oUsuario.idTorneo;
+                        oUsuarioEditado.activo = oUsuario.activo;
 
                         bdTorneos.SaveChanges();
                         bdTorneos.Detach(oUsuarioEditado);
