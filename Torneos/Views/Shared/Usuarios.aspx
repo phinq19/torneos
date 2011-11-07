@@ -23,7 +23,7 @@
                 datatype: "json",
                 pager: "#barraGridUsuarios",
                 editurl: "/Usuarios/EditarUsuarios", //'<%= Url.Action("EditarUsuarios","Usuarios") %>',
-                colNames: ['id', 'Nombre', 'Cédula', 'Tipo', 'Torneo', 'Correo', 'Teléfono', 'Cuenta Bancaria', 'Observaciones'],
+                colNames: ['id', 'Nombre', 'Cédula', 'Tipo', 'Torneo', 'Correo', 'Teléfono', 'Cuenta Bancaria', 'Activo', 'Observaciones'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 200, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
@@ -33,6 +33,7 @@
                     { name: 'correo', index: 'correo', width: 120, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true, email: true} },
                     { name: 'telefono1', index: 'telefono1', width: 80, editable: true, sortable: false, editoptions: { size: 20 }, editrules: { required: true} },
                     { name: 'cuenta', index: 'cuenta', width: 120, editable: true, sortable: false, editoptions: { size: 20} },
+                    { name: 'activo', index: 'activo', edittype: "checkbox", editoptions: { value: "true:false" },  editable: true,  editrules: { },  formatter: "checkbox",  },
                     { name: 'observaciones', index: 'observaciones', width: 200, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "50"} }
                 ]
             });
@@ -122,6 +123,7 @@
             {
                 edit: true,
                 add: true,
+                //del:false,
                 del: true,
                 refresh: false,
                 search: false,

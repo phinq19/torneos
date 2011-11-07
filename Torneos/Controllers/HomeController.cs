@@ -40,7 +40,7 @@ namespace Torneos.Controllers
                 {
                     Usuarios oUsuario = usuarios.Single<Usuarios>();
                     Utilidades.AsignarValorSession("idUsuario", oUsuario.id.ToString());
-                    if (usuarios[0].activo == true)
+                    if (usuarios[0].activoContrasena == true)
                     {
                         Utilidades.AsignarValorSession("tipoUsuario", oUsuario.tipo.ToString());
                         Utilidades.AsignarValorSession("idTorneo", oUsuario.idTorneo.ToString());
@@ -81,7 +81,7 @@ namespace Torneos.Controllers
                                            where u.id == idUsuario
                                            select u).Single();
                 oUsuarioEditado.contrasena = cContrasenaMD5;
-                oUsuarioEditado.activo = true;
+                oUsuarioEditado.activoContrasena = true;
 
                 bdTorneos.SaveChanges();
                 bdTorneos.Detach(oUsuarioEditado);

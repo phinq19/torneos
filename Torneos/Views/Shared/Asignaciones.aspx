@@ -80,7 +80,7 @@
                             switch (datos.estadoValidacion) {
                                 case "exito":
                                     //var registroCliente = datos.ObjetoDetalle;
-                                    for (var i = 0; i < _Torneo.Torneos_Canchas.length; i++) {
+                                    for (var i = 0; i < _Partido.DetallePartidos.length; i++) {
                                         if (_Partido.DetallePartidos[i].id != datos.ObjetoDetalle.id &&
                                             _Partido.DetallePartidos[i].accionregistro != 3 &&
                                             _Partido.DetallePartidos[i].puesto == 0 &&
@@ -468,20 +468,23 @@
             return el;
             */
             var elem = {};
-            var rowKey = $("#gridPartidos").getGridParam("selrow");
-            var rowData = $("#gridPartidos").getRowData(rowKey);
+            var idPartido = $("#gridPartidos").getGridParam("selrow");
+            var oPartido = $("#gridPartidos").getRowData(idPartido);
+
+            var idDetallePartido = $("#gridArbitros").getGridParam("selrow");
+            var oDetallePartido = $("#gridArbitros").getRowData(idDetallePartido);
 
             var oParametrosAjax = {
                 idSelector: "selArbitros",
-                dFecha: rowData.fecha 
+                dFecha: oPartido.fecha 
             };
 
             var funcionProcesamientoCliente = function (oRespuesta) {
-                elem = oRespuesta.selector;
+                elem = $(oRespuesta.selector).val(oDetallePartido.idArbitro);
             }
 
             RealizarPeticionAjax("ObtenerSelectorArbitrosParaAsignaciones", "/Asignaciones/ObtenerSelectorArbitrosParaAsignaciones", oParametrosAjax, true, false, null, funcionProcesamientoCliente);
-
+            
             return elem;
         }
 
