@@ -33,7 +33,7 @@ namespace Torneos.Controllers
 
                 var oResultado = (from oDetallePartidos in bdTorneos.DetallePartidos
                                   join
-                                  oPartido in bdTorneos.Partidos on oDetallePartidos.id equals oPartido.id
+                                  oPartido in bdTorneos.Partidos on oDetallePartidos.idPartido equals oPartido.id
                                   where oPartido.idAsociacion == idAsociacion &&
                                         oPartido.estado == PartidoConInforme &&
                                         oDetallePartidos.estado == estado
@@ -47,8 +47,9 @@ namespace Torneos.Controllers
                                       oDetallePartidos.estado,
                                       oPartido.numero,//Partido
                                       oPartido.Programaciones.Torneos.nombre,//Torneo
+                                      oDetallePartidos.Usuarios.cuenta,
                                       numeroProgramacion = oPartido.Programaciones.numero//Programacion
-                                  }).AsEnumerable(); ;
+                                  }).Distinct().AsEnumerable();
 
                 int pageIndex = Convert.ToInt32(page) - 1;
                 int pageSize = rows;
@@ -99,6 +100,7 @@ namespace Torneos.Controllers
                         total_pagar = oDetallePartido.total_rebajos == null ? 0 : oDetallePartido.total_pagar,
                         total_rebajos = oDetallePartido.total_rebajos == null ? 0 : oDetallePartido.total_rebajos,
                         oDetallePartido.estado,
+                        oDetallePartido.Usuarios.cuenta,
                         oDetallePartido.Partidos.numero,//Partido
                         oDetallePartido.Partidos.Programaciones.Torneos.nombre,//Torneo
                         numeroProgramacion = oDetallePartido.Partidos.Programaciones.numero,//Programacion

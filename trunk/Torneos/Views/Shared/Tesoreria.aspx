@@ -107,7 +107,7 @@
                     }
                 },
                 afterComplete: function (response, postdata, formid) {
-                    CalcularDeducciones();
+                    CalcularDeducciones(response.ObjetoDetalle);
                 }
             }
 
@@ -151,7 +151,7 @@
                     }
                 },
                 afterComplete: function (response, postdata, formid) {
-                    CalcularDeducciones();
+                    CalcularDeducciones(response.ObjetoDetalle);
                 }
             }
 
@@ -172,12 +172,15 @@
                  {width: "600" }
             );
 
-            function CalcularDeducciones() {
+            function CalcularDeducciones(oRegistros) {
                 var montoDeducciones = 0;
                 var montoDeposito = _DetallePartido.total_pagar;
-                var oRegistros = $("#gridDeducciones").jqGrid('getGridParam', 'data');
+               // var oRegistros = $("#gridDeducciones").jqGrid('getGridParam', 'data');
                 for (var indice = 0; indice < oRegistros.length; indice++) {
-                    if (oRegistros.accionregistro != "3") {
+                    if (oRegistros.accionregistro == 3) {
+                        montoDeposito += parseFloat(oRegistros[indice].monto);
+                    }
+                    else {
                         montoDeducciones += parseFloat(oRegistros[indice].monto);
                     }
                 }
@@ -191,12 +194,14 @@
                 pager: '#barraGridPartidos',
                 postData: { estado: $("#selEstadoDetallePartido").val() },
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
-                colNames: ['id', 'Torneo', 'Programación', 'Partido', 'Número Depósito', 'Monto depósito', 'Monto rebajos', 'Estado'],
+                colNames: ['id', 'Torneo', 'Programación', 'Partido', 'Árbitro', 'Núm. Cuenta', 'Número Depósito', 'Monto depósito', 'Monto rebajos', 'Estado'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'numeroProgramacion', index: 'numeroProgramacion', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
+                    { name: 'idArbitro', index: 'idArbitro', width: 250, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorArbitrosParaGrid() %>' }, formatter: 'select' },
+                    { name: 'cuenta', index: 'cuenta', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'deposito', index: 'deposito', width: 200, editable: true, sortable: false, editrules: { required: true} },
                     { name: 'total_pagar', index: 'total_pagar', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'total_rebajos', index: 'total_rebajos', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
@@ -217,7 +222,7 @@
             add: false,
             del: false,
             search: false,
-            refresh: false,
+            refresh: true,
             view: false
         },
         { multipleSearch: true }
@@ -303,6 +308,7 @@
             $("#TxtMontoDeposito").val(_DetallePartido.total_pagar);
             $("#TxtMontoDeducciones").val(_DetallePartido.total_rebajos);
             $("#selEstado").val(_DetallePartido.estado);
+            $("#TxtCuenta").val(_DetallePartido.cuenta);
 
             $('#gridDeducciones').clearGridData();
             $('#gridDeducciones').setGridParam({ data: _DetallePartido.Deducciones }).trigger('reloadGrid');
@@ -348,6 +354,7 @@
             $("#TxtMontoDeposito").val("");
             $("#TxtMontoDeducciones").val("");
             $("#selEstado").val("");
+            $("#TxtCuenta").val("");
 
             $('#gridDeducciones').clearGridData();
         }
@@ -373,12 +380,13 @@
 
         function HabilitarCampos(bHabilitar) {
             if (bHabilitar) {
+                $("#TxtCuenta").attr("disabled", "disabled");
                 $("#TxtNumero").attr("disabled", "disabled");
                 $("#selArbitros").attr("disabled", "disabled");
                 $("#TxtNumeroProgramacion").attr("disabled", "disabled");
                 $("#TxtNombre").attr("disabled", "disabled");
                 $("#TxtDeposito").removeAttr("disabled");
-                $("#TxtMontoDeposito").attr("disabled", "disabled");ccc
+                $("#TxtMontoDeposito").attr("disabled", "disabled");
                 $("#TxtMontoDeducciones").attr("disabled", "disabled");
                 $("#selEstado").removeAttr("disabled");
 
@@ -387,6 +395,7 @@
                 $("#del_gridDeducciones").show();
 
             } else {
+                $("#TxtCuenta").attr("disabled", "disabled");
                 $("#TxtNumero").attr("disabled", "disabled");
                 $("#selArbitros").attr("disabled", "disabled");
                 $("#TxtNumeroProgramacion").attr("disabled", "disabled");
@@ -429,11 +438,19 @@
                     <div class="celdaCampo">
                         <input id="TxtNumero" name="TxtNumero" class="required" type="text" />
                     </div>
+                </div>
+                <div class="fila">
                     <div class="celdaLabel">
                         Árbitro
                     </div>
                     <div class="celdaCampo">
                         <%= Torneos.Utilidades.CrearSelectorArbitros("selArbitros") %>
+                    </div>
+                    <div class="celdaLabel">
+                        Número de Cuenta
+                    </div>
+                    <div class="celdaCampo">
+                        <input id="TxtCuenta" name="TxtCuenta" class="required" type="text" />
                     </div>
                 </div>
                 <div class="fila">

@@ -104,7 +104,7 @@
                      edit: true,
                      add: true,
                      del: true,
-                     refresh: false,
+                     refresh: true,
                      search: false,
                      view: true
                  }, //options 

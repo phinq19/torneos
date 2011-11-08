@@ -53,7 +53,7 @@
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
-                reloadAfterSubmit: false,
+                reloadAfterSubmit: true,
                 modal: false,
                 width: "500",
                 savekey: [true, 13],

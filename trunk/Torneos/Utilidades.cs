@@ -386,7 +386,7 @@ namespace Torneos
             return selTiposArbitro.ToString();
         }
 
-        public static String CrearSelectorArbitrosAsignacionesParaGrid()
+        public static String CrearSelectorArbitrosParaGrid()
         {
             StringBuilder selArbitros = new StringBuilder();
             BaseDatosTorneos bdTorneos = new BaseDatosTorneos();
@@ -395,7 +395,6 @@ namespace Torneos
             int tipoArbitro = (int)enumTipoUsuario.Arbitro;
             
             List<Usuarios> oListaUsuarios = (from u in bdTorneos.Usuarios 
-                                            join d in bdTorneos.Disponibilidad on u.id equals d.idArbitro
                                             where u.idAsociacion == idAsociacion && u.tipo == tipoArbitro 
                                             select u).ToList<Usuarios>();
 

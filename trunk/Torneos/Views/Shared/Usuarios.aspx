@@ -125,7 +125,7 @@
                 add: true,
                 //del:false,
                 del: true,
-                refresh: false,
+                refresh: true,
                 search: false,
                 view: true
             }, //options 

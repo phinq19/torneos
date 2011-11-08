@@ -52,7 +52,7 @@
                 colNames: ['id', 'Árbitro', 'Puesto'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'idArbitro', index: 'idArbitro', width: 250, editable: true, sortable: false, editrules: { required: true }, edittype: 'custom', editoptions: { custom_element: selArbitrosAsignaciones, custom_value: obtenerValorselArbitrosAsignaciones, value: '<%= Torneos.Utilidades.CrearSelectorArbitrosAsignacionesParaGrid() %>' }, /*editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorArbitrosAsignacionesParaGrid() %>' },*/formatter: 'select' },
+                    { name: 'idArbitro', index: 'idArbitro', width: 250, editable: true, sortable: false, editrules: { required: true }, edittype: 'custom', editoptions: { custom_element: selArbitrosAsignaciones, custom_value: obtenerValorselArbitrosAsignaciones, value: '<%= Torneos.Utilidades.CrearSelectorArbitrosParaGrid() %>' }, /*editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorArbitrosParaGrid() %>' },*/formatter: 'select' },
                     { name: 'puesto', index: 'puesto', width: 150, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTiposArbitroParaGrid() %>' }, formatter: 'select' }
                 ]
             });
@@ -211,7 +211,7 @@
             add: false,
             del: false,
             search: false,
-            refresh: false,
+            refresh: true,
             view: false
         },
         { multipleSearch: true }

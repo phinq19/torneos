@@ -273,6 +273,7 @@ namespace Torneos.Controllers
                             oProgramacionEditado.deposito = oProgramacion.deposito;
                             oProgramacionEditado.monto = oProgramacion.monto;
                             oProgramacionEditado.montoCalculado = montoCalculado;
+                            oProgramacionEditado.estado = (int)enumEstadoProgramaciones.Pendiente;
 
                             bdTorneos.SaveChanges();
                             bdTorneos.Detach(oProgramacionEditado);

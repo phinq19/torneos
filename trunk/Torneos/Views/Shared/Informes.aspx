@@ -41,7 +41,7 @@
                 datatype: "json",
                 postData: { estado: $("#selEstado").val() },
                 pager: '#barraGridPartidos',
-                editurl: '<%= Url.Action("EditarDisponibilidad","Informes") %>',
+                editurl: '<%= Url.Action("EditarInformes","Informes") %>',
                 colNames: ['id', 'Torneo','Programación', 'Partido', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Tipo Partido', 'Fecha', 'Hora', 'Estados', 'Observaciones', 'Informe'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
@@ -64,7 +64,7 @@
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 closeOnEscape: true,
-                reloadAfterSubmit: false,
+                reloadAfterSubmit: true,
                 modal: false,
                 width: "800",
                 savekey: [true, 13],
@@ -144,7 +144,7 @@
                 edit: true,
                 add: false,
                 del: false,
-                refresh: false,
+                refresh: true,
                 search: false,
                 view: true
             }, //options 
