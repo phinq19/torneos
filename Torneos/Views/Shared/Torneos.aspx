@@ -40,7 +40,7 @@
             ]
             });
 
-            function ObtenerMonto(elem, option){
+            function ObtenerMonto(elem, option) {
                 return "1000,5";
             }
 
@@ -67,7 +67,7 @@
                                 case "exito":
                                     //var registroCliente = datos.ObjetoDetalle;
                                     for (var i = 0; i < _Torneo.Torneos_Canchas.length; i++) {
-                                        if (_Torneo.Torneos_Canchas[i].id != datos.ObjetoDetalle.id && 
+                                        if (_Torneo.Torneos_Canchas[i].id != datos.ObjetoDetalle.id &&
                                             _Torneo.Torneos_Canchas[i].accionregistro != 3 &&
                                              _Torneo.Torneos_Canchas[i].idCancha == datos.ObjetoDetalle.idCancha) {
                                             return [false, "Esta cancha ya pertenece al torneo", '-1'];
@@ -188,7 +188,7 @@
             add: true,
             del: true,
             search: false,
-            refresh: false,
+            refresh: true,
             view: false
         },
         { multipleSearch: true }
@@ -234,7 +234,7 @@
                     });
                     ObtenerTorneo(id);
                     HabilitarCampos(true);
-                    
+
                     break;
                 case "view":
                     Limpiar();
@@ -244,7 +244,7 @@
                     $("#ventanaEditar").dialog("option", "buttons", { "Cerrar": function () { $(this).dialog("close"); } });
                     break;
             }
-            
+
         }
 
         var _Torneo = {
@@ -261,10 +261,10 @@
             switch (oRegistro.accionregistro) {
                 case 0:
                     _Torneo.Torneos_Canchas.splice(indiceRegistro, 1);
-                break;
+                    break;
                 case 1:
                     _Torneo.Torneos_Canchas.push(oRegistro);
-                break;
+                    break;
                 case 2:
                 case 3:
                     _Torneo.Torneos_Canchas[indiceRegistro] = oRegistro;
@@ -292,7 +292,7 @@
             var Entidad = {};
             var oTorneo = {};
             var oCanchas = [];
- 
+
             oTorneo.nombre = $("#TxtNombre").val();
             oTorneo.categoria = $("#selCategoria").val();
             oTorneo.telefono1 = $("#TxtTelefono1").val();
@@ -311,21 +311,21 @@
                 oCancha.observaciones = _Torneo.Torneos_Canchas[i].observaciones;
                 oCancha.idTorneo = _Torneo.Torneos_Canchas[i].idTorneo;
                 oCancha.accionregistro = _Torneo.Torneos_Canchas[i].accionregistro;
-                
+
                 oCanchas.push(oCancha);
 
             }
             Entidad["oTorneo"] = oTorneo;
             Entidad["oCanchas"] = oCanchas;
             return Entidad;
-            
+
         }
 
         function Limpiar() {
             _Torneo = {
                 Torneos_Canchas: []
             };
-            
+
             $("#TxtNombre").val("");
             $("#selCategoria").val("");
             $("#TxtTelefono1").val("");
@@ -351,7 +351,7 @@
         function ValidarCampos() {
             var bCampos = $("#frmTorneos").valid();
             var bCanchas = $('#gridCanchas').getGridParam("data").length > 0;
-            if(bCanchas == false){
+            if (bCanchas == false) {
                 alert("Debe de asignar al menos una cancha al torneos");
             }
             if (bCanchas == false || bCampos == false) {
@@ -402,7 +402,7 @@
                     $("#gridTorneos").trigger('reloadGrid');
                     $("#ventanaEditar").dialog("close");
                 }
-                
+
                 RealizarPeticionAjax("GuardarTorneo", "/Torneos/EditarTorneos", oParametrosAjax, true, true, "ventanaEditar", funcionProcesamientoCliente);
             }
         }
@@ -425,7 +425,7 @@
     </script>
     <div id="ventanaEditar">
         <form id="frmTorneos" action="">
-            <fieldset class="Fieldset">
+        <fieldset class="Fieldset">
             <legend>Información General</legend>
             <div class="ContenidoOrdenado">
                 <div class="fila">
@@ -467,7 +467,7 @@
                         Correo
                     </div>
                     <div class="celdaCampo">
-                        <input id="TxtCorreo" name="TxtCorreo" type="text" class="required email"/>
+                        <input id="TxtCorreo" name="TxtCorreo" type="text" class="required email" />
                     </div>
                 </div>
                 <div class="fila">
@@ -486,15 +486,15 @@
                 </div>
             </div>
         </fieldset>
-    </form>
-    <br />
-    <fieldset class="Fieldset">
-        <legend>Canchas en las que se juega el torneo</legend>
-        <table id="gridCanchas">
-        </table>
-        <div id="barraGridCanchas">
-        </div>
-    </fieldset>
+        </form>
+        <br />
+        <fieldset class="Fieldset">
+            <legend>Canchas en las que se juega el torneo</legend>
+            <table id="gridCanchas">
+            </table>
+            <div id="barraGridCanchas">
+            </div>
+        </fieldset>
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
@@ -502,6 +502,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContenidoEncabezado" runat="server">
-    <h1>Torneos</h1>
-    <h1><a href="/">Volver al menú principal</a></h1>
+    <h1>
+        Torneos</h1>
+    <h1>
+        <a href="/">Volver al menú principal</a></h1>
 </asp:Content>

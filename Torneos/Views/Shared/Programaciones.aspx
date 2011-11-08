@@ -365,7 +365,7 @@
             add: true,
             del: true,
             search: false,
-            refresh: false,
+            refresh: true,
             view: false
         },
         { multipleSearch: true }

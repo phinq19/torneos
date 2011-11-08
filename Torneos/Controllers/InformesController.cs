@@ -61,7 +61,7 @@ namespace Torneos.Controllers
                                       oPartido.informe,
                                       oPartido.Programaciones.Torneos.nombre,
                                       numeroProgramacion = oPartido.Programaciones.numero
-                                  }).AsEnumerable(); ;
+                                  }).Distinct().AsEnumerable();
 
                 int pageIndex = Convert.ToInt32(page) - 1;
                 int pageSize = rows;
@@ -91,7 +91,7 @@ namespace Torneos.Controllers
         [Autorizado]
         [CompressFilter(Order = 1)]
         [CacheFilter(Duration = 60, Order = 2)]
-        public JsonResult EditarDisponibilidad(Partidos oPartido)
+        public JsonResult EditarInformes(Partidos oPartido)
         {
             JsonResult jsonData = null;
             try
