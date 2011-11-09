@@ -504,7 +504,9 @@
             _Programacion = {
                 Partidos: []
             };
-            
+
+            $("#frmProgramaciones").validate().resetForm();
+
             $("#selTorneo").val("");
             $("#selEstado").val("");
             $("#TxtMonto").val("");

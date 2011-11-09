@@ -342,6 +342,7 @@
             _Partido = {
                 DetallePartidos: []
             };
+            $("#frmPartidos").validate().resetForm();
 
             $("#TxtNumeroProgramacion").val("");
             $("#TxtNombre").val("");

@@ -21,7 +21,7 @@
     });
 
     $("#LnkRecuperar").click(function (event) {
-        $("#frmRecuperar").validate().resetForm();
+    $("#frmRecuperar").validate().resetForm();
         $("#ventanaRecuparar").dialog("open");
         return false;
     });

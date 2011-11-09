@@ -52,7 +52,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Usuarios/\" class=\"itemMenu\">Usuarios<a>");
+                oMenu.AppendLine("          <a href=\"/Usuarios/\" class=\"itemMenu itemMenuImagen\">Usuarios<a>");
                 oMenu.AppendLine("      </td>");
             }
             if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
@@ -60,7 +60,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Canchas/\" class=\"itemMenu\">Canchas<a>");
+                oMenu.AppendLine("          <a href=\"/Canchas/\" class=\"itemMenu itemMenuImagen\">Canchas<a>");
                 oMenu.AppendLine("      </td>");
             }
             if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
@@ -68,7 +68,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Torneos/\" class=\"itemMenu\">Torneos<a>");
+                oMenu.AppendLine("          <a href=\"/Torneos/\" class=\"itemMenu itemMenuImagen\">Torneos<a>");
                 oMenu.AppendLine("      </td>");
             }
             if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
@@ -78,7 +78,7 @@ namespace Torneos
                 )
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Programaciones/\" class=\"itemMenu\">Programaciones<a>");
+                oMenu.AppendLine("          <a href=\"/Programaciones/\" class=\"itemMenu itemMenuProgramacionesImagen\">Programaciones<a>");
                 oMenu.AppendLine("      </td>");
             }
             oMenu.AppendLine("  </tr>");
@@ -88,7 +88,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Verificaciones/\" class=\"itemMenu\">Verificaciones<a>");
+                oMenu.AppendLine("          <a href=\"/Verificaciones/\" class=\"itemMenu itemMenuImagen\">Verificaciones<a>");
                 oMenu.AppendLine("      </td>");
             }
             if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
@@ -96,7 +96,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Asignaciones/\" class=\"itemMenu\">Asignaciones<a>");
+                oMenu.AppendLine("          <a href=\"/Asignaciones/\" class=\"itemMenu itemMenuImagen\">Asignaciones<a>");
                 oMenu.AppendLine("      </td>");
             }
             if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
@@ -104,7 +104,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.Arbitro)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Informes/\" class=\"itemMenu\">Informes<a>");
+                oMenu.AppendLine("          <a href=\"/Informes/\" class=\"itemMenu itemMenuImagen\">Informes<a>");
                 oMenu.AppendLine("      </td>");
             }
             if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
@@ -112,7 +112,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.Tesorero)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Tesoreria/\" class=\"itemMenu\">Tesorería<a>");
+                oMenu.AppendLine("          <a href=\"/Tesoreria/\" class=\"itemMenu itemMenuImagen\">Tesorería<a>");
                 oMenu.AppendLine("      </td>");
             }
             oMenu.AppendLine("  </tr>");
@@ -122,7 +122,7 @@ namespace Torneos
                 tipoUsuario == (int)enumTipoUsuario.Arbitro)
             {
                 oMenu.AppendLine("      <td>");
-                oMenu.AppendLine("          <a href=\"/Disponibilidad/\" class=\"itemMenu\">Disponibilidad<a>");
+                oMenu.AppendLine("          <a href=\"/Disponibilidad/\" class=\"itemMenu itemMenuImagen\">Disponibilidad<a>");
                 oMenu.AppendLine("      </td>");
             }
             oMenu.AppendLine("  </tr>");
