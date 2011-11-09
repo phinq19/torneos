@@ -358,27 +358,48 @@ p
 
 .itemMenu
 {
-    background-image: url("/Imagenes/Menu-Pequeno.png");
-    /*background-image: url("/Imagenes/Menu_Doble.png");*/
     background-repeat:no-repeat;
     background-position:center;
-    /*background-position: 30px 30px;*/
     width:150px;
     display:inline-block; 
     text-align:center;
-    padding-top: 105px;
     outline:none;
     text-decoration:none;
     color:#4A70D0;
 }
 
-.itemMenu:hover
+
+
+.itemMenuProgramacionesImagen
+{
+    background-image: url("/Imagenes/Programaciones-Pequeno.png");
+    padding-top: 125px;
+}
+
+.itemMenuImagen
+{
+    background-image: url("/Imagenes/Menu-Pequeno.png");
+    padding-top: 100px;
+}
+
+.itemMenuProgramacionesImagen:hover
+{
+    background-image: url("/Imagenes/Programaciones.png");
+    /*background-position: 30px -10px;*/
+}
+
+.itemMenuProgramacionesImagen:focus
+{
+    background-image: url("/Imagenes/Programaciones.png");
+}
+
+.itemMenuImagen:hover
 {
     background-image: url("/Imagenes/Menu.png");
     /*background-position: 30px -10px;*/
 }
 
-.itemMenu:focus
+.itemMenuImagen:focus
 {
     background-image: url("/Imagenes/Menu.png");
 }

@@ -48,6 +48,7 @@ namespace Torneos.Controllers
                                       oPartido.numero,//Partido
                                       oPartido.Programaciones.Torneos.nombre,//Torneo
                                       oDetallePartidos.Usuarios.cuenta,
+                                      oDetallePartidos.puesto,
                                       numeroProgramacion = oPartido.Programaciones.numero//Programacion
                                   }).Distinct().AsEnumerable();
 
@@ -101,6 +102,7 @@ namespace Torneos.Controllers
                         total_rebajos = oDetallePartido.total_rebajos == null ? 0 : oDetallePartido.total_rebajos,
                         oDetallePartido.estado,
                         oDetallePartido.Usuarios.cuenta,
+                        oDetallePartido.puesto,
                         oDetallePartido.Partidos.numero,//Partido
                         oDetallePartido.Partidos.Programaciones.Torneos.nombre,//Torneo
                         numeroProgramacion = oDetallePartido.Partidos.Programaciones.numero,//Programacion

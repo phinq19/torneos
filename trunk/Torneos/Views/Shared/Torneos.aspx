@@ -326,6 +326,8 @@
                 Torneos_Canchas: []
             };
 
+            $("#frmTorneos").validate().resetForm();
+
             $("#TxtNombre").val("");
             $("#selCategoria").val("");
             $("#TxtTelefono1").val("");

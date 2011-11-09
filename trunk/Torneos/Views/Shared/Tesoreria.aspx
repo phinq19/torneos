@@ -194,13 +194,14 @@
                 pager: '#barraGridPartidos',
                 postData: { estado: $("#selEstadoDetallePartido").val() },
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
-                colNames: ['id', 'Torneo', 'Programación', 'Partido', 'Árbitro', 'Núm. Cuenta', 'Número Depósito', 'Monto depósito', 'Monto rebajos', 'Estado'],
+                colNames: ['id', 'Torneo', 'Programación', 'Partido', 'Árbitro', 'Puesto', 'Núm. Cuenta', 'Número Depósito', 'Monto depósito', 'Monto rebajos', 'Estado'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'numeroProgramacion', index: 'numeroProgramacion', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
-                    { name: 'idArbitro', index: 'idArbitro', width: 250, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorArbitrosParaGrid() %>' }, formatter: 'select' },
+                    { name: 'idArbitro', index: 'idArbitro', width: 250, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { readonly: true, value: '<%= Torneos.Utilidades.CrearSelectorArbitrosParaGrid() %>' }, formatter: 'select' },
+                    { name: 'puesto', index: 'puesto', width: 150, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { readonly: true, value: '<%= Torneos.Utilidades.CrearSelectorTiposArbitroParaGrid() %>' }, formatter: 'select' },
                     { name: 'cuenta', index: 'cuenta', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
                     { name: 'deposito', index: 'deposito', width: 200, editable: true, sortable: false, editrules: { required: true} },
                     { name: 'total_pagar', index: 'total_pagar', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
@@ -309,6 +310,7 @@
             $("#TxtMontoDeducciones").val(_DetallePartido.total_rebajos);
             $("#selEstado").val(_DetallePartido.estado);
             $("#TxtCuenta").val(_DetallePartido.cuenta);
+            $("#selTipoArbitro").val(_DetallePartido.puesto);
 
             $('#gridDeducciones').clearGridData();
             $('#gridDeducciones').setGridParam({ data: _DetallePartido.Deducciones }).trigger('reloadGrid');
@@ -346,6 +348,8 @@
                 Deducciones: []
             };
 
+            $("#frmPartidos").validate().resetForm();
+
             $("#TxtNumero").val("");
             $("#selArbitros").val("");
             $("#TxtNumeroProgramacion").val("");
@@ -355,6 +359,7 @@
             $("#TxtMontoDeducciones").val("");
             $("#selEstado").val("");
             $("#TxtCuenta").val("");
+            $("#selTipoArbitro").val("");
 
             $('#gridDeducciones').clearGridData();
         }
@@ -389,6 +394,7 @@
                 $("#TxtMontoDeposito").attr("disabled", "disabled");
                 $("#TxtMontoDeducciones").attr("disabled", "disabled");
                 $("#selEstado").removeAttr("disabled");
+                $("#selTipoArbitro").attr("disabled", "disabled");
 
                 $("#add_gridDeducciones").show();
                 $("#edit_gridDeducciones").show();
@@ -404,6 +410,7 @@
                 $("#TxtMontoDeposito").attr("disabled", "disabled");
                 $("#TxtMontoDeducciones").attr("disabled", "disabled");
                 $("#selEstado").attr("disabled", "disabled");
+                $("#selTipoArbitro").attr("disabled", "disabled");
 
                 $("#add_gridDeducciones").hide();
                 $("#edit_gridDeducciones").hide();
@@ -438,16 +445,22 @@
                     <div class="celdaCampo">
                         <input id="TxtNumero" name="TxtNumero" class="required" type="text" />
                     </div>
-                </div>
-                <div class="fila">
                     <div class="celdaLabel">
                         Árbitro
                     </div>
                     <div class="celdaCampo">
                         <%= Torneos.Utilidades.CrearSelectorArbitros("selArbitros") %>
                     </div>
+                </div>
+                <div class="fila">
                     <div class="celdaLabel">
-                        Número de Cuenta
+                        Puesto
+                    </div>
+                    <div class="celdaCampo">
+                        <%= Torneos.Utilidades.CrearSelectorTiposArbitro("selTipoArbitro") %>
+                    </div>
+                    <div class="celdaLabel">
+                        Número de Cuenta del Árbitro
                     </div>
                     <div class="celdaCampo">
                         <input id="TxtCuenta" name="TxtCuenta" class="required" type="text" />

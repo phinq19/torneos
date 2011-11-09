@@ -131,6 +131,8 @@
     <Content Include="Imagenes\Menu-Pequeno.png" />
     <Content Include="Imagenes\Menu.png" />
     <Content Include="Imagenes\Menu_Doble.png" />
+    <Content Include="Imagenes\Programaciones-Pequeno.png" />
+    <Content Include="Imagenes\Programaciones.png" />
     <Content Include="Imagenes\twit.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
