@@ -148,7 +148,7 @@ namespace Torneos.Controllers
                         oDeducciones.id = Math.Abs(Guid.NewGuid().GetHashCode());
                         break;
                     case "del":
-                        if (oDeducciones.accionregistro == 1)
+                        if (oDeducciones.accionregistro == 1 || oDeducciones.accionregistro == null)
                         {
                             oDeducciones.accionregistro = 0;
                         }

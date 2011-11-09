@@ -134,7 +134,7 @@ namespace Torneos.Controllers
                         oCancha.id = Math.Abs(Guid.NewGuid().GetHashCode());
                         break;
                     case "del":
-                        if (oCancha.accionregistro == 1)
+                        if (oCancha.accionregistro == 1 || oCancha.accionregistro == null)
                         {
                             oCancha.accionregistro = 0;
                         }
