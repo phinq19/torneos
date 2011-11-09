@@ -5,5 +5,18 @@ General
 Home
 *Recuperar contraseña
 
-Programaciones
-*No se puede editar o borrar una programacion que esten verificadas
+*No se puede editar una asignacion que ya poseea informe
+
+
+Reportes
+*Partidos/Informes
+**Partido
+**Torneo
+**Programacion
+**Árbitro
+
+
+*Pagos
+**Partido
+**Árbitro
+**Todos
