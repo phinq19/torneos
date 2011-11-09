@@ -50,7 +50,7 @@
                 editurl: '<%= Url.Action("ValidarDeducciones","Tesoreria") %>',
                 height: 120,
                 width: 756,
-                colNames: ['id', 'Monto', 'Descripción', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Monto', 'Motivo', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'monto', index: 'monto', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true, integer: true} },
@@ -107,7 +107,8 @@
                     }
                 },
                 afterComplete: function (response, postdata, formid) {
-                    CalcularDeducciones(response.ObjetoDetalle);
+                    var datos = JSON.parse(response.responseText);
+                    CalcularDeducciones(datos.ObjetoDetalle);
                 }
             }
 
@@ -151,7 +152,8 @@
                     }
                 },
                 afterComplete: function (response, postdata, formid) {
-                    CalcularDeducciones(response.ObjetoDetalle);
+                    var datos = JSON.parse(response.responseText);
+                    CalcularDeducciones(datos.ObjetoDetalle);
                 }
             }
 
@@ -172,12 +174,12 @@
                  {width: "600" }
             );
 
-            function CalcularDeducciones(oRegistros) {
+            function CalcularDeducciones(oRegistro) {
                 var montoDeducciones = 0;
                 var montoDeposito = _DetallePartido.total_pagar;
-               // var oRegistros = $("#gridDeducciones").jqGrid('getGridParam', 'data');
+                var oRegistros = $("#gridDeducciones").jqGrid('getGridParam', 'data');
                 for (var indice = 0; indice < oRegistros.length; indice++) {
-                    if (oRegistros.accionregistro == 3) {
+                    if (oRegistro.accionregistro == 3) {
                         montoDeposito += parseFloat(oRegistros[indice].monto);
                     }
                     else {

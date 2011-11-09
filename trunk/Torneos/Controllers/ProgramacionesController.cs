@@ -197,7 +197,7 @@ namespace Torneos.Controllers
                         oPartido.id = Math.Abs(Guid.NewGuid().GetHashCode());
                         break;
                     case "del":
-                        if (oPartido.accionregistro == 1)
+                        if (oPartido.accionregistro == 1 || oPartido.accionregistro == null)
                         {
                             oPartido.accionregistro = 0;
                         }
@@ -388,7 +388,7 @@ namespace Torneos.Controllers
             {
                 int idCancha = oPartido.idCancha;
                 Torneos_Canchas oCancha = (from c in bdTorneos.Torneos_Canchas
-                                   where c.idCancha == idCancha
+                                   where c.idCancha == idCancha && c.idTorneo == idTorneo
                                    select c).Single();
 
                 DetallePartidos oDetalleNuevo = new DetallePartidos();
