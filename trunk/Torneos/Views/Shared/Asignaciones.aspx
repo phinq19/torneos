@@ -9,7 +9,10 @@
                     Estado del partido
                 </div>
                 <div class="celdaCampo">
-                    <%= Torneos.Utilidades.CrearSelectorEstadosPartidos("selEstado")%>
+                    <select id="selEstado">
+                        <option value="0">Pendiente_Programacion</option>
+                        <option value="1">Pendiente_De_Informe</option>
+                    </select>
                 </div>
             </div>
         </div>
