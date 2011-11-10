@@ -125,6 +125,14 @@ namespace Torneos
                 oMenu.AppendLine("          <a href=\"/Disponibilidad/\" class=\"itemMenu itemMenuImagen\">Disponibilidad<a>");
                 oMenu.AppendLine("      </td>");
             }
+            if (tipoUsuario == (int)enumTipoUsuario.Administrador ||
+                tipoUsuario == (int)enumTipoUsuario.SuperAdministrado ||
+                tipoUsuario == (int)enumTipoUsuario.EncargadoAsociacion)
+            {
+                oMenu.AppendLine("      <td>");
+                oMenu.AppendLine("          <a href=\"/Reportes/\" class=\"itemMenu itemMenuImagen\">Reportes<a>");
+                oMenu.AppendLine("      </td>");
+            }
             oMenu.AppendLine("  </tr>");
             oMenu.AppendLine("</table>");
             return oMenu.ToString();
@@ -438,7 +446,7 @@ namespace Torneos
             StringBuilder selTipo = new StringBuilder();
             String[] oNombresArbitro = Enum.GetNames(typeof(enumTipoArbitro));
 
-            selTipo.Append("<select id=\"" + idSelector + "\">");
+            selTipo.Append("<select id=\"" + idSelector + "\" name=\"" + idSelector + "\" >");
             for (int indice = 0; indice < oNombresArbitro.Length; indice++)
             {
                 selTipo.AppendLine("   <option value=\"" + indice + "\">" + oNombresArbitro[indice] + "</option>");
@@ -453,7 +461,7 @@ namespace Torneos
             StringBuilder selTipo = new StringBuilder();
             String[] oNombresTipo = Enum.GetNames(typeof(enumTipoPartido));
 
-            selTipo.Append("<select id=\"" + idSelector + "\">");
+            selTipo.Append("<select id=\"" + idSelector + "\" name=\"" + idSelector + "\" >");
             for (int indice = 0; indice < oNombresTipo.Length; indice++)
             {
                 selTipo.AppendLine("   <option value=\"" + indice + "\">" + oNombresTipo[indice] + "</option>");
@@ -468,7 +476,7 @@ namespace Torneos
             StringBuilder selCategoria = new StringBuilder();
             String[] oNombresCategoria = Enum.GetNames(typeof(enumCategorias));
 
-            selCategoria.Append("<select id=\"" + idSelector + "\">");
+            selCategoria.Append("<select id=\"" + idSelector + "\" name=\"" + idSelector + "\" >");
             for (int indice = 0; indice < oNombresCategoria.Length; indice++ )
             {
                 selCategoria.AppendLine("   <option value=\"" + indice + "\">" + oNombresCategoria[indice] + "</option>");
@@ -551,7 +559,7 @@ namespace Torneos
             StringBuilder selEstados = new StringBuilder();
             String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoProgramaciones));
 
-            selEstados.Append("<select id=\"" + idSelector + "\">");
+            selEstados.Append("<select id=\"" + idSelector + "\" name=\"" + idSelector + "\" >");
             for (int indice = 0; indice < oNombresEstados.Length; indice++)
             {
                 selEstados.AppendLine("   <option value=\"" + indice + "\">" + oNombresEstados[indice] + "</option>");
@@ -566,7 +574,7 @@ namespace Torneos
             StringBuilder selEstados = new StringBuilder();
             String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoPartidos));
 
-            selEstados.Append("<select id=\"" + idSelector + "\">");
+            selEstados.Append("<select id=\"" + idSelector + "\" name=\"" + idSelector + "\" >");
             for (int indice = 0; indice < oNombresEstados.Length; indice++)
             {
                 selEstados.AppendLine("   <option value=\"" + indice + "\">" + oNombresEstados[indice] + "</option>");
@@ -581,7 +589,7 @@ namespace Torneos
             StringBuilder selEstados = new StringBuilder();
             String[] oNombresEstados = Enum.GetNames(typeof(enumEstadoDetallePartidos));
 
-            selEstados.Append("<select id=\"" + idSelector + "\">");
+            selEstados.Append("<select id=\"" + idSelector + "\" name=\"" + idSelector + "\" >");
             for (int indice = 0; indice < oNombresEstados.Length; indice++)
             {
                 selEstados.AppendLine("   <option value=\"" + indice + "\">" + oNombresEstados[indice] + "</option>");
