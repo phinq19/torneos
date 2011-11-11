@@ -197,7 +197,7 @@
                 editurl: '<%= Url.Action("ValidarPartidos","Programaciones") %>',
                 height: 120,
                 width: 766,
-                colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Fecha', 'Hora (Militar)', 'Horario', 'Tipo Partido', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
@@ -205,9 +205,10 @@
                     { name: 'equipoVisita', index: 'equipoVisita', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>' }, formatter: 'select' },
                     { name: 'arbitros', index: 'arbitros', width: 180, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorCantidadArbitrosParaGrid() %>' }, formatter: 'select' },
-                    { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTiposPartidoParaGrid() %>' }, formatter: 'select' },
                     { name: 'fecha', index: 'fecha', datefmt: 'd/m/y', width: 120, editable: true, editoptions: { dataInit: function (elem) { $(elem).mask("99/99/9999"); }, size: 40 }, editrules: { required: true, date: true }, sorttype: "date", formatter: "fechaFmatter", editoptions: { defaultValue: '<%= DateTime.Now.ToShortDateString() %>'} },
                     { name: 'hora', index: 'hora', width: 120, editable: true, editoptions: { dataInit: function (elem) { $(elem).mask("99:99"); }, size: 40 }, editrules: { required: true, time: true }, formatter: "time" },
+                    { name: 'tiempo', index: 'tiempo', width: 120, editable: false, sortable: false,  edittype: 'select', editoptions: { readonly: true, value: '1:Mañana;2:Tarde;3:Noche' }, formatter: 'select' },
+                    { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTiposPartidoParaGrid() %>' }, formatter: 'select' },
                     { name: 'coordinador', index: 'coordinador', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'estado', index: 'estado', width: 150, editable: false, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
@@ -495,6 +496,7 @@
                 oPartido.idCancha = _Programacion.Partidos[i].idCancha.toString();
                 oPartido.accionregistro = _Programacion.Partidos[i].accionregistro;
                 oPartido.arbitros = _Programacion.Partidos[i].arbitros;
+                oPartido.tiempo = _Programacion.Partidos[i].tiempo;
 
                 oPartidos.push(oPartido);
 
