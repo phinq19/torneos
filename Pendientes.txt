@@ -5,7 +5,11 @@ General
 Home
 *Recuperar contraseña
 
-*No se puede editar una asignacion que ya poseea informe
+Programaciones
+*Multiples depositos
+
+Asignaciones
+*Query Selector de arbitros
 
 
 Reportes
