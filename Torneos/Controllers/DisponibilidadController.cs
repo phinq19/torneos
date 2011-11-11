@@ -56,6 +56,13 @@ namespace Torneos.Controllers
                             viernes = d.viernes == 5 ? true : false,
                             sabado = d.sabado == 6 ? true : false,
                             domingo = d.domingo == 7 ? true : false,
+                            d.tiempoLunes,
+                            d.tiempoMartes,
+                            d.tiempoMiercoles,
+                            d.tiempoJueves,
+                            d.tiempoViernes,
+                            d.tiempoSabado,
+                            d.tiempoDomingo
                         }   
                     ).Single()
                 });
@@ -89,6 +96,13 @@ namespace Torneos.Controllers
                 oDisponibilidadEditado.viernes = oDisponibilidad.viernes;
                 oDisponibilidadEditado.sabado = oDisponibilidad.sabado;
                 oDisponibilidadEditado.domingo = oDisponibilidad.domingo;
+                oDisponibilidadEditado.tiempoLunes = oDisponibilidad.tiempoLunes;
+                oDisponibilidadEditado.tiempoMartes = oDisponibilidad.tiempoMartes;
+                oDisponibilidadEditado.tiempoMiercoles = oDisponibilidad.tiempoMiercoles;
+                oDisponibilidadEditado.tiempoJueves = oDisponibilidad.tiempoJueves;
+                oDisponibilidadEditado.tiempoViernes = oDisponibilidad.tiempoViernes;
+                oDisponibilidadEditado.tiempoSabado = oDisponibilidad.tiempoSabado;
+                oDisponibilidadEditado.tiempoDomingo = oDisponibilidad.tiempoDomingo;
 
                 bdTorneos.SaveChanges();
                 bdTorneos.Detach(oDisponibilidadEditado);
@@ -103,7 +117,14 @@ namespace Torneos.Controllers
                     jueves = oDisponibilidadEditado.jueves == 4 ? true : false,
                     viernes = oDisponibilidadEditado.viernes == 5 ? true : false,
                     sabado = oDisponibilidadEditado.sabado == 6 ? true : false,
-                    domingo = oDisponibilidadEditado.domingo == 7 ? true : false
+                    domingo = oDisponibilidadEditado.domingo == 7 ? true : false,
+                    oDisponibilidadEditado.tiempoLunes,
+                    oDisponibilidadEditado.tiempoMartes,
+                    oDisponibilidadEditado.tiempoMiercoles,
+                    oDisponibilidadEditado.tiempoJueves,
+                    oDisponibilidadEditado.tiempoViernes,
+                    oDisponibilidadEditado.tiempoSabado,
+                    oDisponibilidadEditado.tiempoDomingo
                 };
                 jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oResultado, estadoValidacion = "exito" });
             }

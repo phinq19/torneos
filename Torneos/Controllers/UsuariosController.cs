@@ -196,6 +196,13 @@ namespace Torneos.Controllers
             oDisponibilidad.viernes = 5;
             oDisponibilidad.sabado = 6;
             oDisponibilidad.domingo = 7;
+            oDisponibilidad.tiempoLunes = "123";
+            oDisponibilidad.tiempoMartes = "123";
+            oDisponibilidad.tiempoMiercoles = "123";
+            oDisponibilidad.tiempoJueves = "123";
+            oDisponibilidad.tiempoViernes = "123";
+            oDisponibilidad.tiempoSabado = "123";
+            oDisponibilidad.tiempoDomingo = "123";
 
             bdTorneos.AddToDisponibilidad(oDisponibilidad);
             bdTorneos.SaveChanges();

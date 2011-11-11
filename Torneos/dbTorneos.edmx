@@ -153,6 +153,13 @@
           <Property Name="viernes" Type="int" Nullable="false" />
           <Property Name="sabado" Type="int" Nullable="false" />
           <Property Name="domingo" Type="int" Nullable="false" />
+          <Property Name="tiempoLunes" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="tiempoMartes" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="tiempoMiercoles" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="tiempoJueves" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="tiempoViernes" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="tiempoSabado" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="tiempoDomingo" Type="varchar" Nullable="false" MaxLength="3" />
         </EntityType>
         <EntityType Name="Partidos">
           <Key>
@@ -243,7 +250,7 @@
           <Property Name="cuenta" Type="varchar" MaxLength="128" />
           <Property Name="tipo" Type="int" Nullable="false" />
           <Property Name="observaciones" Type="varchar" MaxLength="1024" />
-          <Property Name="activoContrasena" Type="bit" />
+          <Property Name="activoContrasena" Type="bit" Nullable="false" />
           <Property Name="parametro" Type="varchar" MaxLength="512" />
           <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
@@ -492,15 +499,27 @@
         <EntityContainer Name="BaseDatosTorneos" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Asociaciones" EntityType="TorneosModel.Asociaciones" />
           <EntitySet Name="Canchas" EntityType="TorneosModel.Canchas" />
+          <EntitySet Name="Deducciones" EntityType="TorneosModel.Deducciones" />
+          <EntitySet Name="DetallePartidos" EntityType="TorneosModel.DetallePartidos" />
           <EntitySet Name="Disponibilidad" EntityType="TorneosModel.Disponibilidad" />
+          <EntitySet Name="Partidos" EntityType="TorneosModel.Partidos" />
           <EntitySet Name="Programaciones" EntityType="TorneosModel.Programaciones" />
           <EntitySet Name="sysdiagrams" EntityType="TorneosModel.sysdiagrams" />
           <EntitySet Name="Torneos" EntityType="TorneosModel.Torneos" />
           <EntitySet Name="Torneos_Canchas" EntityType="TorneosModel.Torneos_Canchas" />
+          <EntitySet Name="Usuarios" EntityType="TorneosModel.Usuarios" />
           <EntitySet Name="UsuariosTorneos" EntityType="TorneosModel.UsuariosTorneos" />
           <AssociationSet Name="FK_Canchas_Asociacion" Association="TorneosModel.FK_Canchas_Asociacion">
             <End Role="Asociaciones" EntitySet="Asociaciones" />
             <End Role="Canchas" EntitySet="Canchas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePartidos_Asociacion" Association="TorneosModel.FK_DetallePartidos_Asociacion">
+            <End Role="Asociaciones" EntitySet="Asociaciones" />
+            <End Role="DetallePartidos" EntitySet="DetallePartidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Asociacion" Association="TorneosModel.FK_Partidos_Asociacion">
+            <End Role="Asociaciones" EntitySet="Asociaciones" />
+            <End Role="Partidos" EntitySet="Partidos" />
           </AssociationSet>
           <AssociationSet Name="FK_Programaciones_Asociacion" Association="TorneosModel.FK_Programaciones_Asociacion">
             <End Role="Asociaciones" EntitySet="Asociaciones" />
@@ -510,9 +529,41 @@
             <End Role="Asociaciones" EntitySet="Asociaciones" />
             <End Role="Torneos" EntitySet="Torneos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Asociacion" Association="TorneosModel.FK_Usuarios_Asociacion">
+            <End Role="Asociaciones" EntitySet="Asociaciones" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Canchas" Association="TorneosModel.FK_Partidos_Canchas">
+            <End Role="Canchas" EntitySet="Canchas" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Torneos_Canchas_Canchas" Association="TorneosModel.FK_Torneos_Canchas_Canchas">
             <End Role="Canchas" EntitySet="Canchas" />
             <End Role="Torneos_Canchas" EntitySet="Torneos_Canchas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deducciones_DetallePartido" Association="TorneosModel.FK_Deducciones_DetallePartido">
+            <End Role="DetallePartidos" EntitySet="DetallePartidos" />
+            <End Role="Deducciones" EntitySet="Deducciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePartidos_Arbitros" Association="TorneosModel.FK_DetallePartidos_Arbitros">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="DetallePartidos" EntitySet="DetallePartidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePartidos_Partidos" Association="TorneosModel.FK_DetallePartidos_Partidos">
+            <End Role="Partidos" EntitySet="Partidos" />
+            <End Role="DetallePartidos" EntitySet="DetallePartidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disponibilidad_Arbitros" Association="TorneosModel.FK_Disponibilidad_Arbitros">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Disponibilidad" EntitySet="Disponibilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Programaciones" Association="TorneosModel.FK_Partidos_Programaciones">
+            <End Role="Programaciones" EntitySet="Programaciones" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Progamacion_Usuarios" Association="TorneosModel.FK_Progamacion_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Programaciones" EntitySet="Programaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Programaciones_Torneos" Association="TorneosModel.FK_Programaciones_Torneos">
             <End Role="Torneos" EntitySet="Torneos" />
@@ -522,63 +573,19 @@
             <End Role="Torneos" EntitySet="Torneos" />
             <End Role="Torneos_Canchas" EntitySet="Torneos_Canchas" />
           </AssociationSet>
-          <AssociationSet Name="FK_UsuariosTorneos_Torneos" Association="TorneosModel.FK_UsuariosTorneos_Torneos">
-            <End Role="Torneos" EntitySet="Torneos" />
-            <End Role="UsuariosTorneos" EntitySet="UsuariosTorneos" />
-          </AssociationSet>
-          <EntitySet Name="Partidos" EntityType="TorneosModel.Partidos" />
-          <AssociationSet Name="FK_Partidos_Asociacion" Association="TorneosModel.FK_Partidos_Asociacion">
-            <End Role="Asociaciones" EntitySet="Asociaciones" />
-            <End Role="Partidos" EntitySet="Partidos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Partidos_Canchas" Association="TorneosModel.FK_Partidos_Canchas">
-            <End Role="Canchas" EntitySet="Canchas" />
-            <End Role="Partidos" EntitySet="Partidos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Partidos_Programaciones" Association="TorneosModel.FK_Partidos_Programaciones">
-            <End Role="Programaciones" EntitySet="Programaciones" />
-            <End Role="Partidos" EntitySet="Partidos" />
-          </AssociationSet>
-          <EntitySet Name="Deducciones" EntityType="TorneosModel.Deducciones" />
-          <EntitySet Name="DetallePartidos" EntityType="TorneosModel.DetallePartidos" />
-          <AssociationSet Name="FK_DetallePartidos_Asociacion" Association="TorneosModel.FK_DetallePartidos_Asociacion">
-            <End Role="Asociaciones" EntitySet="Asociaciones" />
-            <End Role="DetallePartidos" EntitySet="DetallePartidos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Deducciones_DetallePartido" Association="TorneosModel.FK_Deducciones_DetallePartido">
-            <End Role="DetallePartidos" EntitySet="DetallePartidos" />
-            <End Role="Deducciones" EntitySet="Deducciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetallePartidos_Partidos" Association="TorneosModel.FK_DetallePartidos_Partidos">
-            <End Role="Partidos" EntitySet="Partidos" />
-            <End Role="DetallePartidos" EntitySet="DetallePartidos" />
-          </AssociationSet>
-          <EntitySet Name="Usuarios" EntityType="TorneosModel.Usuarios" />
-          <AssociationSet Name="FK_Usuarios_Asociacion" Association="TorneosModel.FK_Usuarios_Asociacion">
-            <End Role="Asociaciones" EntitySet="Asociaciones" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetallePartidos_Arbitros" Association="TorneosModel.FK_DetallePartidos_Arbitros">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="DetallePartidos" EntitySet="DetallePartidos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disponibilidad_Arbitros" Association="TorneosModel.FK_Disponibilidad_Arbitros">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Disponibilidad" EntitySet="Disponibilidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Progamacion_Usuarios" Association="TorneosModel.FK_Progamacion_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Programaciones" EntitySet="Programaciones" />
-          </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Torneos" Association="TorneosModel.FK_Usuarios_Torneos">
             <End Role="Torneos" EntitySet="Torneos" />
             <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosTorneos_Torneos" Association="TorneosModel.FK_UsuariosTorneos_Torneos">
+            <End Role="Torneos" EntitySet="Torneos" />
+            <End Role="UsuariosTorneos" EntitySet="UsuariosTorneos" />
           </AssociationSet>
           <AssociationSet Name="FK_UsuariosTorneos_Usuarios" Association="TorneosModel.FK_UsuariosTorneos_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="UsuariosTorneos" EntitySet="UsuariosTorneos" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="Asociaciones">
           <Key>
             <PropertyRef Name="id" />
@@ -586,10 +593,10 @@
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="nombre" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Canchas_Asociacion" FromRole="Asociaciones" ToRole="Canchas" />
+          <NavigationProperty Name="DetallePartidos" Relationship="TorneosModel.FK_DetallePartidos_Asociacion" FromRole="Asociaciones" ToRole="DetallePartidos" />
+          <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Asociacion" FromRole="Asociaciones" ToRole="Partidos" />
           <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Programaciones_Asociacion" FromRole="Asociaciones" ToRole="Programaciones" />
           <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Torneos_Asociacion" FromRole="Asociaciones" ToRole="Torneos" />
-          <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Asociacion" FromRole="Asociaciones" ToRole="Partidos" />
-          <NavigationProperty Name="DetallePartidos" Relationship="TorneosModel.FK_DetallePartidos_Asociacion" FromRole="Asociaciones" ToRole="DetallePartidos" />
           <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Usuarios_Asociacion" FromRole="Asociaciones" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Canchas">
@@ -603,243 +610,9 @@
           <Property Type="String" Name="ubicacion" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="telefonos" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Canchas_Asociacion" FromRole="Canchas" ToRole="Asociaciones" />
-          <NavigationProperty Name="Torneos_Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Canchas" ToRole="Torneos_Canchas" />
           <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Canchas" FromRole="Canchas" ToRole="Partidos" />
+          <NavigationProperty Name="Torneos_Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Canchas" ToRole="Torneos_Canchas" />
         </EntityType>
-        <EntityType Name="Disponibilidad">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="idArbitro" Nullable="false" />
-          <Property Type="Int32" Name="lunes" Nullable="false" />
-          <Property Type="Int32" Name="martes" Nullable="false" />
-          <Property Type="Int32" Name="miercoles" Nullable="false" />
-          <Property Type="Int32" Name="jueves" Nullable="false" />
-          <Property Type="Int32" Name="viernes" Nullable="false" />
-          <Property Type="Int32" Name="sabado" Nullable="false" />
-          <Property Type="Int32" Name="domingo" Nullable="false" />
-          <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Disponibilidad_Arbitros" FromRole="Disponibilidad" ToRole="Usuarios" />
-        </EntityType>
-        <EntityType Name="Programaciones">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="idAsociacion" Nullable="false" />
-          <Property Type="Int32" Name="idUsuario" Nullable="false" />
-          <Property Type="Int32" Name="idTorneo" Nullable="false" />
-          <Property Type="String" Name="numero" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="deposito" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="monto" Nullable="false" Precision="16" Scale="6" />
-          <Property Type="String" Name="observaciones" MaxLength="1024" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="observacionesAsoc" MaxLength="1024" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="estado" Nullable="false" />
-          <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Programaciones_Asociacion" FromRole="Programaciones" ToRole="Asociaciones" />
-          <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Programaciones_Torneos" FromRole="Programaciones" ToRole="Torneos" />
-          <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Programaciones" ToRole="Partidos" />
-          <Property Type="Decimal" Name="montoCalculado" Nullable="false" Precision="16" Scale="6" />
-          <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Progamacion_Usuarios" FromRole="Programaciones" ToRole="Usuarios" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="principal_id" Nullable="false" />
-          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="version" />
-          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Torneos">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="idAsociacion" Nullable="false" />
-          <Property Type="String" Name="nombre" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="email" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="categoria" Nullable="false" />
-          <Property Type="String" Name="telefono1" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="telefono2" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ubicacion" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="observaciones" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="dieta" Nullable="false" Precision="16" Scale="6" />
-          <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Torneos_Asociacion" FromRole="Torneos" ToRole="Asociaciones" />
-          <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Programaciones_Torneos" FromRole="Torneos" ToRole="Programaciones" />
-          <NavigationProperty Name="Torneos_Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos" ToRole="Torneos_Canchas" />
-          <NavigationProperty Name="UsuariosTorneos" Relationship="TorneosModel.FK_UsuariosTorneos_Torneos" FromRole="Torneos" ToRole="UsuariosTorneos" />
-          <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Usuarios_Torneos" FromRole="Torneos" ToRole="Usuarios" />
-        </EntityType>
-        <EntityType Name="Torneos_Canchas">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="idTorneo" Nullable="false" />
-          <Property Type="Int32" Name="idCancha" Nullable="false" />
-          <Property Type="Decimal" Name="viaticos" Nullable="false" Precision="16" Scale="6" />
-          <Property Type="String" Name="observaciones" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="accionregistro" />
-          <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Torneos_Canchas" ToRole="Canchas" />
-          <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos_Canchas" ToRole="Torneos" />
-        </EntityType>
-        <EntityType Name="UsuariosTorneos">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="idTorneo" Nullable="false" />
-          <Property Type="Int32" Name="idUsuario" Nullable="false" />
-          <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_UsuariosTorneos_Torneos" FromRole="UsuariosTorneos" ToRole="Torneos" />
-          <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_UsuariosTorneos_Usuarios" FromRole="UsuariosTorneos" ToRole="Usuarios" />
-        </EntityType>
-        <Association Name="FK_Canchas_Asociacion">
-          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
-          <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Asociaciones">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Canchas">
-              <PropertyRef Name="idAsociacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Programaciones_Asociacion">
-          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
-          <End Type="TorneosModel.Programaciones" Role="Programaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Asociaciones">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Programaciones">
-              <PropertyRef Name="idAsociacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Torneos_Asociacion">
-          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
-          <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Asociaciones">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Torneos">
-              <PropertyRef Name="idAsociacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Torneos_Canchas_Canchas">
-          <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="1" />
-          <End Type="TorneosModel.Torneos_Canchas" Role="Torneos_Canchas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Canchas">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Torneos_Canchas">
-              <PropertyRef Name="idCancha" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Programaciones_Torneos">
-          <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="1" />
-          <End Type="TorneosModel.Programaciones" Role="Programaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Torneos">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Programaciones">
-              <PropertyRef Name="idTorneo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Torneos_Canchas_Torneos">
-          <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="1" />
-          <End Type="TorneosModel.Torneos_Canchas" Role="Torneos_Canchas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Torneos">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Torneos_Canchas">
-              <PropertyRef Name="idTorneo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsuariosTorneos_Torneos">
-          <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="1" />
-          <End Type="TorneosModel.UsuariosTorneos" Role="UsuariosTorneos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Torneos">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UsuariosTorneos">
-              <PropertyRef Name="idTorneo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Partidos">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="idAsociacion" Nullable="false" />
-          <Property Type="Int32" Name="idProgramacion" Nullable="false" />
-          <Property Type="Int32" Name="idCancha" Nullable="false" />
-          <Property Type="String" Name="numero" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="fecha" Nullable="false" />
-          <Property Type="String" Name="hora" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="tipo" Nullable="false" />
-          <Property Type="String" Name="coordinador" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="telefono_coordinador" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="informe" MaxLength="3072" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="observaciones" MaxLength="1024" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="equipoVisita" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="equipoLocal" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="estado" Nullable="false" />
-          <Property Type="Int32" Name="accionregistro" />
-          <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Partidos_Asociacion" FromRole="Partidos" ToRole="Asociaciones" />
-          <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Partidos_Canchas" FromRole="Partidos" ToRole="Canchas" />
-          <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Partidos" ToRole="Programaciones" />
-          <Property Type="Int32" Name="arbitros" Nullable="false" />
-          <NavigationProperty Name="DetallePartidos" Relationship="TorneosModel.FK_DetallePartidos_Partidos" FromRole="Partidos" ToRole="DetallePartidos" />
-        </EntityType>
-        <Association Name="FK_Partidos_Asociacion">
-          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
-          <End Type="TorneosModel.Partidos" Role="Partidos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Asociaciones">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Partidos">
-              <PropertyRef Name="idAsociacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Partidos_Canchas">
-          <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="1" />
-          <End Type="TorneosModel.Partidos" Role="Partidos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Canchas">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Partidos">
-              <PropertyRef Name="idCancha" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Partidos_Programaciones">
-          <End Type="TorneosModel.Programaciones" Role="Programaciones" Multiplicity="1" />
-          <End Type="TorneosModel.Partidos" Role="Partidos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Programaciones">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Partidos">
-              <PropertyRef Name="idProgramacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Deducciones">
           <Key>
             <PropertyRef Name="id" />
@@ -869,45 +642,120 @@
           <Property Type="Int32" Name="estado" Nullable="false" />
           <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_DetallePartidos_Asociacion" FromRole="DetallePartidos" ToRole="Asociaciones" />
           <NavigationProperty Name="Deducciones" Relationship="TorneosModel.FK_Deducciones_DetallePartido" FromRole="DetallePartidos" ToRole="Deducciones" />
-          <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_DetallePartidos_Partidos" FromRole="DetallePartidos" ToRole="Partidos" />
           <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_DetallePartidos_Arbitros" FromRole="DetallePartidos" ToRole="Usuarios" />
+          <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_DetallePartidos_Partidos" FromRole="DetallePartidos" ToRole="Partidos" />
         </EntityType>
-        <Association Name="FK_DetallePartidos_Asociacion">
-          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
-          <End Type="TorneosModel.DetallePartidos" Role="DetallePartidos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Asociaciones">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DetallePartidos">
-              <PropertyRef Name="idAsociacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Deducciones_DetallePartido">
-          <End Type="TorneosModel.DetallePartidos" Role="DetallePartidos" Multiplicity="1" />
-          <End Type="TorneosModel.Deducciones" Role="Deducciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DetallePartidos">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Deducciones">
-              <PropertyRef Name="idDetallePartido" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetallePartidos_Partidos">
-          <End Type="TorneosModel.Partidos" Role="Partidos" Multiplicity="1" />
-          <End Type="TorneosModel.DetallePartidos" Role="DetallePartidos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Partidos">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DetallePartidos">
-              <PropertyRef Name="idPartido" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Disponibilidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idArbitro" Nullable="false" />
+          <Property Type="Int32" Name="lunes" Nullable="false" />
+          <Property Type="Int32" Name="martes" Nullable="false" />
+          <Property Type="Int32" Name="miercoles" Nullable="false" />
+          <Property Type="Int32" Name="jueves" Nullable="false" />
+          <Property Type="Int32" Name="viernes" Nullable="false" />
+          <Property Type="Int32" Name="sabado" Nullable="false" />
+          <Property Type="Int32" Name="domingo" Nullable="false" />
+          <Property Type="String" Name="tiempoLunes" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tiempoMartes" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tiempoMiercoles" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tiempoJueves" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tiempoViernes" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tiempoSabado" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tiempoDomingo" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Disponibilidad_Arbitros" FromRole="Disponibilidad" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Partidos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idAsociacion" Nullable="false" />
+          <Property Type="Int32" Name="idProgramacion" Nullable="false" />
+          <Property Type="Int32" Name="idCancha" Nullable="false" />
+          <Property Type="String" Name="numero" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" />
+          <Property Type="String" Name="hora" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="tipo" Nullable="false" />
+          <Property Type="String" Name="coordinador" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="telefono_coordinador" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="informe" MaxLength="3072" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="observaciones" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="equipoVisita" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="equipoLocal" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="estado" Nullable="false" />
+          <Property Type="Int32" Name="accionregistro" />
+          <Property Type="Int32" Name="arbitros" Nullable="false" />
+          <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Partidos_Asociacion" FromRole="Partidos" ToRole="Asociaciones" />
+          <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Partidos_Canchas" FromRole="Partidos" ToRole="Canchas" />
+          <NavigationProperty Name="DetallePartidos" Relationship="TorneosModel.FK_DetallePartidos_Partidos" FromRole="Partidos" ToRole="DetallePartidos" />
+          <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Partidos" ToRole="Programaciones" />
+        </EntityType>
+        <EntityType Name="Programaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idAsociacion" Nullable="false" />
+          <Property Type="Int32" Name="idUsuario" Nullable="false" />
+          <Property Type="Int32" Name="idTorneo" Nullable="false" />
+          <Property Type="String" Name="numero" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="deposito" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="montoCalculado" Nullable="false" Precision="16" Scale="6" />
+          <Property Type="Decimal" Name="monto" Nullable="false" Precision="16" Scale="6" />
+          <Property Type="String" Name="observaciones" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="observacionesAsoc" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="estado" Nullable="false" />
+          <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Programaciones_Asociacion" FromRole="Programaciones" ToRole="Asociaciones" />
+          <NavigationProperty Name="Partidos" Relationship="TorneosModel.FK_Partidos_Programaciones" FromRole="Programaciones" ToRole="Partidos" />
+          <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Progamacion_Usuarios" FromRole="Programaciones" ToRole="Usuarios" />
+          <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Programaciones_Torneos" FromRole="Programaciones" ToRole="Torneos" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Torneos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idAsociacion" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="email" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="categoria" Nullable="false" />
+          <Property Type="String" Name="telefono1" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="telefono2" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ubicacion" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="observaciones" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="dieta" Nullable="false" Precision="16" Scale="6" />
+          <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Torneos_Asociacion" FromRole="Torneos" ToRole="Asociaciones" />
+          <NavigationProperty Name="Programaciones" Relationship="TorneosModel.FK_Programaciones_Torneos" FromRole="Torneos" ToRole="Programaciones" />
+          <NavigationProperty Name="Torneos_Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos" ToRole="Torneos_Canchas" />
+          <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_Usuarios_Torneos" FromRole="Torneos" ToRole="Usuarios" />
+          <NavigationProperty Name="UsuariosTorneos" Relationship="TorneosModel.FK_UsuariosTorneos_Torneos" FromRole="Torneos" ToRole="UsuariosTorneos" />
+        </EntityType>
+        <EntityType Name="Torneos_Canchas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idTorneo" Nullable="false" />
+          <Property Type="Int32" Name="idCancha" Nullable="false" />
+          <Property Type="Decimal" Name="viaticos" Nullable="false" Precision="16" Scale="6" />
+          <Property Type="String" Name="observaciones" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="accionregistro" />
+          <NavigationProperty Name="Canchas" Relationship="TorneosModel.FK_Torneos_Canchas_Canchas" FromRole="Torneos_Canchas" ToRole="Canchas" />
+          <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Torneos_Canchas_Torneos" FromRole="Torneos_Canchas" ToRole="Torneos" />
+        </EntityType>
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="id" />
@@ -923,7 +771,7 @@
           <Property Type="String" Name="cuenta" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="tipo" Nullable="false" />
           <Property Type="String" Name="observaciones" MaxLength="1024" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="activoContrasena" />
+          <Property Type="Boolean" Name="activoContrasena" Nullable="false" />
           <Property Type="String" Name="parametro" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="activo" Nullable="false" />
           <NavigationProperty Name="Asociaciones" Relationship="TorneosModel.FK_Usuarios_Asociacion" FromRole="Usuarios" ToRole="Asociaciones" />
@@ -933,6 +781,76 @@
           <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_Usuarios_Torneos" FromRole="Usuarios" ToRole="Torneos" />
           <NavigationProperty Name="UsuariosTorneos" Relationship="TorneosModel.FK_UsuariosTorneos_Usuarios" FromRole="Usuarios" ToRole="UsuariosTorneos" />
         </EntityType>
+        <EntityType Name="UsuariosTorneos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idTorneo" Nullable="false" />
+          <Property Type="Int32" Name="idUsuario" Nullable="false" />
+          <NavigationProperty Name="Torneos" Relationship="TorneosModel.FK_UsuariosTorneos_Torneos" FromRole="UsuariosTorneos" ToRole="Torneos" />
+          <NavigationProperty Name="Usuarios" Relationship="TorneosModel.FK_UsuariosTorneos_Usuarios" FromRole="UsuariosTorneos" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Canchas_Asociacion">
+          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
+          <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Canchas">
+              <PropertyRef Name="idAsociacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePartidos_Asociacion">
+          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
+          <End Type="TorneosModel.DetallePartidos" Role="DetallePartidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetallePartidos">
+              <PropertyRef Name="idAsociacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Asociacion">
+          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
+          <End Type="TorneosModel.Partidos" Role="Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idAsociacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programaciones_Asociacion">
+          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
+          <End Type="TorneosModel.Programaciones" Role="Programaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Programaciones">
+              <PropertyRef Name="idAsociacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Torneos_Asociacion">
+          <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
+          <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Torneos">
+              <PropertyRef Name="idAsociacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Asociacion">
           <End Type="TorneosModel.Asociaciones" Role="Asociaciones" Multiplicity="1" />
           <End Type="TorneosModel.Usuarios" Role="Usuarios" Multiplicity="*" />
@@ -942,6 +860,42 @@
             </Principal>
             <Dependent Role="Usuarios">
               <PropertyRef Name="idAsociacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Canchas">
+          <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="1" />
+          <End Type="TorneosModel.Partidos" Role="Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canchas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idCancha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Torneos_Canchas_Canchas">
+          <End Type="TorneosModel.Canchas" Role="Canchas" Multiplicity="1" />
+          <End Type="TorneosModel.Torneos_Canchas" Role="Torneos_Canchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canchas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Torneos_Canchas">
+              <PropertyRef Name="idCancha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deducciones_DetallePartido">
+          <End Type="TorneosModel.DetallePartidos" Role="DetallePartidos" Multiplicity="1" />
+          <End Type="TorneosModel.Deducciones" Role="Deducciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetallePartidos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Deducciones">
+              <PropertyRef Name="idDetallePartido" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -957,6 +911,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetallePartidos_Partidos">
+          <End Type="TorneosModel.Partidos" Role="Partidos" Multiplicity="1" />
+          <End Type="TorneosModel.DetallePartidos" Role="DetallePartidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partidos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetallePartidos">
+              <PropertyRef Name="idPartido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Disponibilidad_Arbitros">
           <End Type="TorneosModel.Usuarios" Role="Usuarios" Multiplicity="1" />
           <End Type="TorneosModel.Disponibilidad" Role="Disponibilidad" Multiplicity="*" />
@@ -966,6 +932,18 @@
             </Principal>
             <Dependent Role="Disponibilidad">
               <PropertyRef Name="idArbitro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Programaciones">
+          <End Type="TorneosModel.Programaciones" Role="Programaciones" Multiplicity="1" />
+          <End Type="TorneosModel.Partidos" Role="Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="idProgramacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -981,6 +959,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Programaciones_Torneos">
+          <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="1" />
+          <End Type="TorneosModel.Programaciones" Role="Programaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Torneos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Programaciones">
+              <PropertyRef Name="idTorneo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Torneos_Canchas_Torneos">
+          <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="1" />
+          <End Type="TorneosModel.Torneos_Canchas" Role="Torneos_Canchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Torneos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Torneos_Canchas">
+              <PropertyRef Name="idTorneo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Torneos">
           <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="0..1" />
           <End Type="TorneosModel.Usuarios" Role="Usuarios" Multiplicity="*" />
@@ -989,6 +991,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Usuarios">
+              <PropertyRef Name="idTorneo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosTorneos_Torneos">
+          <End Type="TorneosModel.Torneos" Role="Torneos" Multiplicity="1" />
+          <End Type="TorneosModel.UsuariosTorneos" Role="UsuariosTorneos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Torneos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsuariosTorneos">
               <PropertyRef Name="idTorneo" />
             </Dependent>
           </ReferentialConstraint>
@@ -1031,9 +1045,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Deducciones">
+            <EntityTypeMapping TypeName="TorneosModel.Deducciones">
+              <MappingFragment StoreEntitySet="Deducciones">
+                <ScalarProperty Name="accionregistro" ColumnName="accionregistro" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="idDetallePartido" ColumnName="idDetallePartido" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallePartidos">
+            <EntityTypeMapping TypeName="TorneosModel.DetallePartidos">
+              <MappingFragment StoreEntitySet="DetallePartidos">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="deposito" ColumnName="deposito" />
+                <ScalarProperty Name="viaticos" ColumnName="viaticos" />
+                <ScalarProperty Name="dieta" ColumnName="dieta" />
+                <ScalarProperty Name="total_rebajos" ColumnName="total_rebajos" />
+                <ScalarProperty Name="total_pagar" ColumnName="total_pagar" />
+                <ScalarProperty Name="puesto" ColumnName="puesto" />
+                <ScalarProperty Name="idArbitro" ColumnName="idArbitro" />
+                <ScalarProperty Name="idPartido" ColumnName="idPartido" />
+                <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Disponibilidad">
             <EntityTypeMapping TypeName="TorneosModel.Disponibilidad">
               <MappingFragment StoreEntitySet="Disponibilidad">
+                <ScalarProperty Name="tiempoDomingo" ColumnName="tiempoDomingo" />
+                <ScalarProperty Name="tiempoSabado" ColumnName="tiempoSabado" />
+                <ScalarProperty Name="tiempoViernes" ColumnName="tiempoViernes" />
+                <ScalarProperty Name="tiempoJueves" ColumnName="tiempoJueves" />
+                <ScalarProperty Name="tiempoMiercoles" ColumnName="tiempoMiercoles" />
+                <ScalarProperty Name="tiempoMartes" ColumnName="tiempoMartes" />
+                <ScalarProperty Name="tiempoLunes" ColumnName="tiempoLunes" />
                 <ScalarProperty Name="domingo" ColumnName="domingo" />
                 <ScalarProperty Name="sabado" ColumnName="sabado" />
                 <ScalarProperty Name="viernes" ColumnName="viernes" />
@@ -1046,14 +1096,37 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Partidos">
+            <EntityTypeMapping TypeName="TorneosModel.Partidos">
+              <MappingFragment StoreEntitySet="Partidos">
+                <ScalarProperty Name="arbitros" ColumnName="arbitros" />
+                <ScalarProperty Name="accionregistro" ColumnName="accionregistro" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="equipoLocal" ColumnName="equipoLocal" />
+                <ScalarProperty Name="equipoVisita" ColumnName="equipoVisita" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="informe" ColumnName="informe" />
+                <ScalarProperty Name="telefono_coordinador" ColumnName="telefono_coordinador" />
+                <ScalarProperty Name="coordinador" ColumnName="coordinador" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="idCancha" ColumnName="idCancha" />
+                <ScalarProperty Name="idProgramacion" ColumnName="idProgramacion" />
+                <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Programaciones">
             <EntityTypeMapping TypeName="TorneosModel.Programaciones">
               <MappingFragment StoreEntitySet="Programaciones">
-                <ScalarProperty Name="montoCalculado" ColumnName="montoCalculado" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="observacionesAsoc" ColumnName="observacionesAsoc" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
                 <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="montoCalculado" ColumnName="montoCalculado" />
                 <ScalarProperty Name="deposito" ColumnName="deposito" />
                 <ScalarProperty Name="numero" ColumnName="numero" />
                 <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
@@ -1102,67 +1175,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UsuariosTorneos">
-            <EntityTypeMapping TypeName="TorneosModel.UsuariosTorneos">
-              <MappingFragment StoreEntitySet="UsuariosTorneos">
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Partidos">
-            <EntityTypeMapping TypeName="TorneosModel.Partidos">
-              <MappingFragment StoreEntitySet="Partidos">
-                <ScalarProperty Name="arbitros" ColumnName="arbitros" />
-                <ScalarProperty Name="accionregistro" ColumnName="accionregistro" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="equipoLocal" ColumnName="equipoLocal" />
-                <ScalarProperty Name="equipoVisita" ColumnName="equipoVisita" />
-                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-                <ScalarProperty Name="informe" ColumnName="informe" />
-                <ScalarProperty Name="telefono_coordinador" ColumnName="telefono_coordinador" />
-                <ScalarProperty Name="coordinador" ColumnName="coordinador" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="hora" ColumnName="hora" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="numero" ColumnName="numero" />
-                <ScalarProperty Name="idCancha" ColumnName="idCancha" />
-                <ScalarProperty Name="idProgramacion" ColumnName="idProgramacion" />
-                <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Deducciones">
-            <EntityTypeMapping TypeName="TorneosModel.Deducciones">
-              <MappingFragment StoreEntitySet="Deducciones">
-                <ScalarProperty Name="accionregistro" ColumnName="accionregistro" />
-                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-                <ScalarProperty Name="monto" ColumnName="monto" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="idDetallePartido" ColumnName="idDetallePartido" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetallePartidos">
-            <EntityTypeMapping TypeName="TorneosModel.DetallePartidos">
-              <MappingFragment StoreEntitySet="DetallePartidos">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="deposito" ColumnName="deposito" />
-                <ScalarProperty Name="viaticos" ColumnName="viaticos" />
-                <ScalarProperty Name="dieta" ColumnName="dieta" />
-                <ScalarProperty Name="total_rebajos" ColumnName="total_rebajos" />
-                <ScalarProperty Name="total_pagar" ColumnName="total_pagar" />
-                <ScalarProperty Name="puesto" ColumnName="puesto" />
-                <ScalarProperty Name="idArbitro" ColumnName="idArbitro" />
-                <ScalarProperty Name="idPartido" ColumnName="idPartido" />
-                <ScalarProperty Name="idAsociacion" ColumnName="idAsociacion" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="TorneosModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
@@ -1183,7 +1195,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+          <EntitySetMapping Name="UsuariosTorneos">
+            <EntityTypeMapping TypeName="TorneosModel.UsuariosTorneos">
+              <MappingFragment StoreEntitySet="UsuariosTorneos">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -1204,148 +1225,141 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="dbTorneos" ZoomLevel="65" >
-        <EntityTypeShape EntityType="TorneosModel.Asociaciones" Width="1.5" PointX="0.75" PointY="11.25" Height="2.5571907552083317" />
-        <EntityTypeShape EntityType="TorneosModel.Canchas" Width="1.5" PointX="3" PointY="8.875" Height="2.7494921875000031" />
-        <EntityTypeShape EntityType="TorneosModel.Disponibilidad" Width="1.5" PointX="10.5" PointY="8.625" Height="2.9417936197916674" />
-        <EntityTypeShape EntityType="TorneosModel.Programaciones" Width="1.5" PointX="8.25" PointY="14.125" Height="3.9033007812499978" />
+        <EntityTypeShape EntityType="TorneosModel.Asociaciones" Width="1.5" PointX="0.75" PointY="11" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="TorneosModel.Canchas" Width="1.5" PointX="3" PointY="8.5" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="TorneosModel.Deducciones" Width="1.5" PointX="12.75" PointY="14.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="TorneosModel.DetallePartidos" Width="1.5" PointX="10.5" PointY="13.875" Height="3.9033007812500031" />
+        <EntityTypeShape EntityType="TorneosModel.Disponibilidad" Width="1.5" PointX="7.5" PointY="18.625" Height="4.2879036458333388" />
+        <EntityTypeShape EntityType="TorneosModel.Partidos" Width="1.5" PointX="5.25" PointY="8.5" Height="5.0571093750000031" />
+        <EntityTypeShape EntityType="TorneosModel.Programaciones" Width="1.5" PointX="8.25" PointY="13.875" Height="3.9033007812500031" />
         <EntityTypeShape EntityType="TorneosModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333388" />
-        <EntityTypeShape EntityType="TorneosModel.Torneos" Width="1.5" PointX="3" PointY="17" Height="3.903300781249996" />
-        <EntityTypeShape EntityType="TorneosModel.Torneos_Canchas" Width="1.5" PointX="5.25" PointY="14.625" Height="2.5571907552083371" />
-        <EntityTypeShape EntityType="TorneosModel.UsuariosTorneos" Width="1.5" PointX="5.25" PointY="18" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="TorneosModel.Torneos" Width="1.5" PointX="3" PointY="16.75" Height="3.9033007812500031" />
+        <EntityTypeShape EntityType="TorneosModel.Torneos_Canchas" Width="1.5" PointX="5.25" PointY="14.25" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="TorneosModel.Usuarios" Width="1.5" PointX="5.25" PointY="18.375" Height="4.8648079427083246" />
+        <EntityTypeShape EntityType="TorneosModel.UsuariosTorneos" Width="1.5" PointX="10.5" PointY="19" Height="1.9802864583333388" />
         <AssociationConnector Association="TorneosModel.FK_Canchas_Asociacion" >
-          <ConnectorPoint PointX="2.25" PointY="11.437246093750002" />
-          <ConnectorPoint PointX="3" PointY="11.437246093750002" />
+          <ConnectorPoint PointX="2.25" PointY="12.40334197135417" />
+          <ConnectorPoint PointX="3.75" PointY="12.40334197135417" />
+          <ConnectorPoint PointX="3.75" PointY="11.249492187500003" />
+        </AssociationConnector>
+        <AssociationConnector Association="TorneosModel.FK_DetallePartidos_Asociacion" >
+          <ConnectorPoint PointX="2.25" PointY="13.011518363281255" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="13.011518363281255" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="13.011518363281255" />
+          <ConnectorPoint PointX="5" PointY="13.011518363281255" />
+          <ConnectorPoint PointX="5" PointY="13.807109375000003" />
+          <ConnectorPoint PointX="8" PointY="13.807109375000003" />
+          <ConnectorPoint PointX="8" PointY="13.625" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="13.625" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="13.625" />
+          <ConnectorPoint PointX="10.760414166666665" PointY="13.625" />
+          <ConnectorPoint PointX="10.927080833333333" PointY="13.625" />
+          <ConnectorPoint PointX="11.25" PointY="13.625" />
+          <ConnectorPoint PointX="11.25" PointY="13.875" />
+        </AssociationConnector>
+        <AssociationConnector Association="TorneosModel.FK_Partidos_Asociacion" >
+          <ConnectorPoint PointX="2.25" PointY="11.795167079427086" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="11.795167079427086" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="11.795167079427086" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="11.795167079427086" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="11.795167079427086" />
+          <ConnectorPoint PointX="5.25" PointY="11.795167079427086" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Programaciones_Asociacion" >
-          <ConnectorPoint PointX="1.5" PointY="13.807190755208332" />
-          <ConnectorPoint PointX="1.5" PointY="14.34375" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="14.34375" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="14.34375" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="14.34375" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="14.34375" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="14.343749999999998" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="14.34375" />
-          <ConnectorPoint PointX="8.25" PointY="14.34375" />
+          <ConnectorPoint PointX="1.5" PointY="13.557190755208339" />
+          <ConnectorPoint PointX="1.5" PointY="14.03125" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="14.03125" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="14.03125" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="14.03125" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="14.03125" />
+          <ConnectorPoint PointX="8.25" PointY="14.03125" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Torneos_Asociacion" >
-          <ConnectorPoint PointX="1.9062525" PointY="13.807190755208332" />
-          <ConnectorPoint PointX="1.9062525" PointY="18.951650390624998" />
-          <ConnectorPoint PointX="3" PointY="18.951650390624998" />
+          <ConnectorPoint PointX="1.9062525" PointY="13.557190755208339" />
+          <ConnectorPoint PointX="1.9062525" PointY="18.701650390625" />
+          <ConnectorPoint PointX="3" PointY="18.701650390625" />
         </AssociationConnector>
-        <AssociationConnector Association="TorneosModel.FK_Torneos_Canchas_Canchas" >
-          <ConnectorPoint PointX="4.5" PointY="11.624492187500003" />
-          <ConnectorPoint PointX="4.875" PointY="11.999492187500003" />
-          <ConnectorPoint PointX="4.875" PointY="15.903595377604169" />
-          <ConnectorPoint PointX="5.25" PointY="15.903595377604169" />
-        </AssociationConnector>
-        <AssociationConnector Association="TorneosModel.FK_Programaciones_Torneos" >
-          <ConnectorPoint PointX="4.5" PointY="17.591095377604169" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="17.591095377604169" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="17.591095377604169" />
-          <ConnectorPoint PointX="8.25" PointY="17.591095377604169" />
-        </AssociationConnector>
-        <AssociationConnector Association="TorneosModel.FK_Torneos_Canchas_Torneos" >
-          <ConnectorPoint PointX="3.75" PointY="17" />
-          <ConnectorPoint PointX="3.75" PointY="15.233045188802084" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="15.233045188802084" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="15.233045188802084" />
-          <ConnectorPoint PointX="5.25" PointY="15.233045188802084" />
-        </AssociationConnector>
-        <AssociationConnector Association="TorneosModel.FK_UsuariosTorneos_Torneos" >
-          <ConnectorPoint PointX="4.5" PointY="18.990143229166669" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="18.990143229166669" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="18.990143229166669" />
-          <ConnectorPoint PointX="5.25" PointY="18.990143229166669" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="TorneosModel.Partidos" Width="1.5" PointX="5.25" PointY="8.875" Height="5.0571093750000031" />
-        <AssociationConnector Association="TorneosModel.FK_Partidos_Asociacion" >
-          <ConnectorPoint PointX="2.25" PointY="12.747091471354167" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="12.747091471354167" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="12.747091471354167" />
-          <ConnectorPoint PointX="5.25" PointY="12.747091471354167" />
+        <AssociationConnector Association="TorneosModel.FK_Usuarios_Asociacion" >
+          <ConnectorPoint PointX="1.0937475" PointY="13.557190755208339" />
+          <ConnectorPoint PointX="1.0937475" PointY="21.977804361979164" />
+          <ConnectorPoint PointX="5.25" PointY="21.977804361979164" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Partidos_Canchas" >
-          <ConnectorPoint PointX="4.5" PointY="10.21849359375" />
-          <ConnectorPoint PointX="5.25" PointY="10.21849359375" />
+          <ConnectorPoint PointX="4.5" PointY="9.8747460937500016" />
+          <ConnectorPoint PointX="5.25" PointY="9.8747460937500016" />
         </AssociationConnector>
-        <AssociationConnector Association="TorneosModel.FK_Partidos_Programaciones" >
-          <ConnectorPoint PointX="8.25" PointY="14.125" />
-          <ConnectorPoint PointX="7.875" PointY="13.75" />
-          <ConnectorPoint PointX="7.125" PointY="13.75" />
-          <ConnectorPoint PointX="7.125" PointY="14.307109375000003" />
-          <ConnectorPoint PointX="6.75" PointY="13.932109375000003" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="TorneosModel.Deducciones" Width="1.5" PointX="15.75" PointY="9.625" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="TorneosModel.DetallePartidos" Width="1.5" PointX="13.5" PointY="8.875" Height="3.9033007812499996" />
-        <AssociationConnector Association="TorneosModel.FK_DetallePartidos_Asociacion" >
-          <ConnectorPoint PointX="1.5" PointY="11.25" />
-          <ConnectorPoint PointX="1.5" PointY="8.625" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="8.625" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="8.625" />
-          <ConnectorPoint PointX="8" PointY="8.625" />
-          <ConnectorPoint PointX="8" PointY="12.739807942708339" />
-          <ConnectorPoint PointX="8.5260409166666662" PointY="12.739807942708339" />
-          <ConnectorPoint PointX="8.692707583333334" PointY="12.739807942708339" />
-          <ConnectorPoint PointX="8.9479191666666669" PointY="12.739807942708339" />
-          <ConnectorPoint PointX="9.1145858333333347" PointY="12.739807942708339" />
-          <ConnectorPoint PointX="13.125" PointY="12.739807942708339" />
-          <ConnectorPoint PointX="13.125" PointY="10.826650390625" />
-          <ConnectorPoint PointX="13.5" PointY="10.826650390625" />
+        <AssociationConnector Association="TorneosModel.FK_Torneos_Canchas_Canchas" >
+          <ConnectorPoint PointX="4.5" PointY="11.249492187500003" />
+          <ConnectorPoint PointX="4.875" PointY="11.624492187500003" />
+          <ConnectorPoint PointX="4.875" PointY="15.528595377604169" />
+          <ConnectorPoint PointX="5.25" PointY="15.528595377604169" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Deducciones_DetallePartido" >
-          <ConnectorPoint PointX="15" PointY="10.807444661458334" />
-          <ConnectorPoint PointX="15.75" PointY="10.807444661458334" />
-        </AssociationConnector>
-        <AssociationConnector Association="TorneosModel.FK_DetallePartidos_Partidos" >
-          <ConnectorPoint PointX="6.75" PointY="12.583557942708339" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="12.583557942708337" />
-          <ConnectorPoint PointX="8.2395833333333339" PointY="12.583557942708339" />
-          <ConnectorPoint PointX="8.5260409166666662" PointY="12.583557942708339" />
-          <ConnectorPoint PointX="8.692707583333334" PointY="12.583557942708339" />
-          <ConnectorPoint PointX="8.9479191666666669" PointY="12.583557942708339" />
-          <ConnectorPoint PointX="9.1145858333333347" PointY="12.583557942708339" />
-          <ConnectorPoint PointX="13.041666666666666" PointY="12.583557942708339" />
-          <ConnectorPoint PointX="13.208333333333334" PointY="12.583557942708339" />
-          <ConnectorPoint PointX="13.5" PointY="12.583557942708339" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="TorneosModel.Usuarios" Width="1.5" PointX="8.25" PointY="7.625" Height="4.8648079427083388" />
-        <AssociationConnector Association="TorneosModel.FK_Usuarios_Asociacion" >
-          <ConnectorPoint PointX="1.9062525" PointY="11.25" />
-          <ConnectorPoint PointX="1.9062525" PointY="8.125" />
-          <ConnectorPoint PointX="8.25" PointY="8.125" />
+          <ConnectorPoint PointX="12" PointY="15.932444661458334" />
+          <ConnectorPoint PointX="12.75" PointY="15.932444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_DetallePartidos_Arbitros" >
-          <ConnectorPoint PointX="9.75" PointY="12.059550781250003" />
-          <ConnectorPoint PointX="13.041666666666666" PointY="12.059550781250003" />
-          <ConnectorPoint PointX="13.208333333333334" PointY="12.059550781250003" />
-          <ConnectorPoint PointX="13.5" PointY="12.059550781250003" />
+          <ConnectorPoint PointX="6.75" PointY="18.376152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="18.001152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="18.153300781250003" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="18.153300781250003" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="18.153300781250003" />
+          <ConnectorPoint PointX="10.125" PointY="18.153300781250003" />
+          <ConnectorPoint PointX="10.5" PointY="17.778300781250003" />
+        </AssociationConnector>
+        <AssociationConnector Association="TorneosModel.FK_DetallePartidos_Partidos" >
+          <ConnectorPoint PointX="6.75" PointY="11.028554687500002" />
+          <ConnectorPoint PointX="10.8437475" PointY="11.028554687500002" />
+          <ConnectorPoint PointX="10.8437475" PointY="13.875" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Disponibilidad_Arbitros" >
-          <ConnectorPoint PointX="9.75" PointY="10.095896809895834" />
-          <ConnectorPoint PointX="10.5" PointY="10.095896809895834" />
+          <ConnectorPoint PointX="6.75" PointY="20.768951822916669" />
+          <ConnectorPoint PointX="7.5" PointY="20.768951822916669" />
+        </AssociationConnector>
+        <AssociationConnector Association="TorneosModel.FK_Partidos_Programaciones" >
+          <ConnectorPoint PointX="9" PointY="13.875" />
+          <ConnectorPoint PointX="9" PointY="12.324084531249996" />
+          <ConnectorPoint PointX="6.75" PointY="12.324084531249996" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Progamacion_Usuarios" >
-          <ConnectorPoint PointX="9.0312525" PointY="12.489807942708339" />
-          <ConnectorPoint PointX="9.0312525" PointY="14.125" />
+          <ConnectorPoint PointX="6.75" PointY="23.107605794270832" />
+          <ConnectorPoint PointX="9.40625" PointY="23.107605794270832" />
+          <ConnectorPoint PointX="9.40625" PointY="17.778300781250003" />
+        </AssociationConnector>
+        <AssociationConnector Association="TorneosModel.FK_Programaciones_Torneos" >
+          <ConnectorPoint PointX="4.5" PointY="17.323995768229171" />
+          <ConnectorPoint PointX="8.25" PointY="17.323995768229171" />
+        </AssociationConnector>
+        <AssociationConnector Association="TorneosModel.FK_Torneos_Canchas_Torneos" >
+          <ConnectorPoint PointX="3.75" PointY="16.75" />
+          <ConnectorPoint PointX="3.75" PointY="14.858045188802091" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="14.858045188802091" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="14.858045188802091" />
+          <ConnectorPoint PointX="5.25" PointY="14.858045188802091" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_Usuarios_Torneos" >
-          <ConnectorPoint PointX="4.5" PointY="19.977974005208331" />
-          <ConnectorPoint PointX="5" PointY="19.977974005208331" />
-          <ConnectorPoint PointX="5" PointY="17.75" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="17.75" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="17.75" />
-          <ConnectorPoint PointX="8" PointY="17.75" />
-          <ConnectorPoint PointX="8" PointY="13.875" />
-          <ConnectorPoint PointX="8.60937425" PointY="13.875" />
-          <ConnectorPoint PointX="8.60937425" PointY="12.489807942708339" />
+          <ConnectorPoint PointX="4.5" PointY="19.514150390625" />
+          <ConnectorPoint PointX="5.25" PointY="19.514150390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="TorneosModel.FK_UsuariosTorneos_Torneos" >
+          <ConnectorPoint PointX="4.5" PointY="18.419073079427086" />
+          <ConnectorPoint PointX="5" PointY="18.419073079427086" />
+          <ConnectorPoint PointX="5" PointY="18" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="18" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="18" />
+          <ConnectorPoint PointX="10.194967447916669" PointY="18" />
+          <ConnectorPoint PointX="10.361634114583337" PointY="18" />
+          <ConnectorPoint PointX="11.25" PointY="18" />
+          <ConnectorPoint PointX="11.25" PointY="19" />
         </AssociationConnector>
         <AssociationConnector Association="TorneosModel.FK_UsuariosTorneos_Usuarios" >
-          <ConnectorPoint PointX="8.25" PointY="12.489807942708339" />
-          <ConnectorPoint PointX="7.875" PointY="12.864807942708339" />
-          <ConnectorPoint PointX="7.875" PointY="18.990143229166669" />
-          <ConnectorPoint PointX="6.75" PointY="18.990143229166669" />
+          <ConnectorPoint PointX="6.75" PointY="23.010252220052092" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="23.010252220052092" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="23.010252220052092" />
+          <ConnectorPoint PointX="11.25" PointY="23.010252220052092" />
+          <ConnectorPoint PointX="11.25" PointY="20.980286458333339" />
         </AssociationConnector>
-        </Diagram>
+      </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>
