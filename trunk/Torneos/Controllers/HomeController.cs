@@ -13,6 +13,7 @@ namespace Torneos.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Index()
         {
+                        
             if (HttpContext.Request.IsAuthenticated)
             {
                 return View("Inicio");

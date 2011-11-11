@@ -121,6 +121,7 @@ namespace Torneos.Controllers
                                                       oPartidos.equipoVisita,
                                                       oPartidos.observaciones,
                                                       oPartidos.arbitros,
+                                                      oPartidos.tiempo,
                                                       accionregistro = 0
                                                   }
                             }
@@ -205,6 +206,25 @@ namespace Torneos.Controllers
                             oPartido.accionregistro = 3;
                         }
                         break;
+                }
+                if (oper=="add" || oper=="edit")
+                {
+                    TimeSpan dHora = Convert.ToDateTime(oPartido.hora).TimeOfDay;
+                    TimeSpan dIninioManana = Convert.ToDateTime("06:00").TimeOfDay;
+                    TimeSpan dIninioTarde = Convert.ToDateTime("12:00").TimeOfDay;
+                    TimeSpan dIninioNoche = Convert.ToDateTime("18:00").TimeOfDay;
+                    if (dIninioManana <= dHora && dHora <= dIninioTarde)
+                    {
+                        oPartido.tiempo = "1";
+                    }
+                    if (dIninioTarde <= dHora && dHora <= dIninioNoche)
+                    {
+                        oPartido.tiempo = "2";
+                    }
+                    if (dIninioNoche <= dHora)
+                    {
+                        oPartido.tiempo = "3";
+                    }
                 }
                 jsonData = Json(new { estado = "exito", mensaje = "", ObjetoDetalle = oPartido, estadoValidacion = "exito" });
             }
