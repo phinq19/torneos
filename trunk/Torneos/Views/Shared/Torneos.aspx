@@ -18,7 +18,7 @@
                 modal: false,
                 title: "Torneos",
                 //closeOnEscape: true,
-                height: 550,
+                height: 510,
                 width: 800
             });
 
@@ -263,7 +263,12 @@
                     _Torneo.Torneos_Canchas.splice(indiceRegistro, 1);
                     break;
                 case 1:
-                    _Torneo.Torneos_Canchas.push(oRegistro);
+                    if (indiceRegistro != -1) {
+                        _Torneo.Torneos_Canchas[indiceRegistro] = oRegistro;
+                    }
+                    else {
+                        _Torneo.Torneos_Canchas.push(oRegistro);
+                    }
                     break;
                 case 2:
                 case 3:

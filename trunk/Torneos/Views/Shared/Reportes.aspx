@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MarcoLogeado.master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="ACAF Reportes" Language="C#" MasterPageFile="~/Views/Shared/MarcoLogeado.master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <div id="tabs">
@@ -8,14 +8,14 @@
         </ul>
         <div id="tabs-1">
             <fieldset class="Fieldset">
-                <form action="/ReportesGeneral/VerReportesPartido/Index.aspx" target="_blank" method="post">
+                <form action="/ReportesGeneral/VerReportesPartido/Default.aspx" target="_blank" method="post">
                 <div class="ContenidoOrdenado">
                     <div class="fila">
                         <div class="columna">
                             Por Partido
                         </div>
                         <div class="columna">
-                            <input id="rbPorPartido" name="rbTipo" type="radio" />
+                            <input id="rbPorPartido" name="rbTipo" type="radio" checked="checked" />
                         </div>
                         <div class="columna">
                         

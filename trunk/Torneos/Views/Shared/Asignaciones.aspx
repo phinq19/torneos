@@ -41,7 +41,7 @@
                 modal: false,
                 title: "Asignaciones de árbitros",
                 //closeOnEscape: true,
-                height: 600,
+                height: 580,
                 width: 800
             });
 
@@ -50,7 +50,7 @@
                 datatype: "local",
                 pager: '#barraGridArbitros',
                 editurl: '<%= Url.Action("ValidarDetallePartido","Asignaciones") %>',
-                height: 120,
+                height: 100,
                 width: 739,
                 colNames: ['id', 'Árbitro', 'Puesto'],
                 colModel: [
