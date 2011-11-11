@@ -38,7 +38,7 @@
                 modal: false,
                 title: "Partidos",
                 //closeOnEscape: true,
-                height: 550,
+                height: 530,
                 width: 800
             });
 
@@ -291,7 +291,12 @@
                     _DetallePartido.Deducciones.splice(indiceRegistro, 1);
                     break;
                 case 1:
-                    _DetallePartido.Deducciones.push(oRegistro);
+                    if (indiceRegistro != -1) {
+                        _DetallePartido.Deducciones[indiceRegistro] = oRegistro;
+                    }
+                    else {
+                        _DetallePartido.Deducciones.push(oRegistro);
+                    }
                     break;
                 case 2:
                 case 3:

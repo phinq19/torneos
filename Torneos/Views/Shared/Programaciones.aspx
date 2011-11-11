@@ -58,7 +58,7 @@
                 modal: false,
                 title: "Programación de Partidos",
                 //closeOnEscape: true,
-                height: 530,
+                height: 510,
                 width: 810
             });
 
@@ -200,7 +200,7 @@
                 colNames: ['id', 'Número', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
-                    { name: 'numero', index: 'numero', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
+                    { name: 'numero', index: 'numero', width: 100, editable: false, editoptions: { readonly: true, size: 20} },
                     { name: 'equipoLocal', index: 'equipoLocal', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'equipoVisita', index: 'equipoVisita', width: 150, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'idCancha', index: 'idCancha', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTorneosCanchasParaGrid() %>' }, formatter: 'select' },
@@ -441,7 +441,12 @@
                     _Programacion.Partidos.splice(indiceRegistro, 1);
                 break;
                 case 1:
-                    _Programacion.Partidos.push(oRegistro);
+                    if (indiceRegistro != -1) {
+                        _Programacion.Partidos[indiceRegistro] = oRegistro;
+                    }
+                    else{
+                        _Programacion.Partidos.push(oRegistro);
+                    }
                 break;
                 case 2:
                 case 3:
