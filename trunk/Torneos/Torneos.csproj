@@ -210,6 +210,7 @@
     <Content Include="Scripts\lib\grid\jquery.jqGrid.src.js" />
     <Content Include="Scripts\lib\jquery-1.5.2.min.js" />
     <Content Include="Scripts\lib\jqueryui\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Scripts\lib\mask.js" />
     <Content Include="Scripts\lib\Validate\additional-methods.js" />
     <Content Include="Scripts\lib\Validate\additional-methods.min.js" />
     <Content Include="Scripts\lib\Validate\jquery.validate.js" />
