@@ -8,8 +8,8 @@ Home
 Programaciones
 *Multiples depositos
 
-Asignaciones
-*Query Selector de arbitros
+Informes
+*Campos nuevos
 
 
 Reportes
