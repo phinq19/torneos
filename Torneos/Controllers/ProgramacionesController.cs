@@ -213,15 +213,16 @@ namespace Torneos.Controllers
                     TimeSpan dIninioManana = Convert.ToDateTime("06:00").TimeOfDay;
                     TimeSpan dIninioTarde = Convert.ToDateTime("12:00").TimeOfDay;
                     TimeSpan dIninioNoche = Convert.ToDateTime("18:00").TimeOfDay;
-                    if (dIninioManana <= dHora && dHora <= dIninioTarde)
+                    TimeSpan dMediaNoche = Convert.ToDateTime("00:00").TimeOfDay;
+                    if (dIninioManana <= dHora && dHora < dIninioTarde)
                     {
                         oPartido.tiempo = "1";
                     }
-                    if (dIninioTarde <= dHora && dHora <= dIninioNoche)
+                    if (dIninioTarde <= dHora && dHora < dIninioNoche)
                     {
                         oPartido.tiempo = "2";
                     }
-                    if (dIninioNoche <= dHora)
+                    if (dIninioNoche <= dHora || (dMediaNoche <= dHora && dMediaNoche < dHora))
                     {
                         oPartido.tiempo = "3";
                     }

@@ -53,6 +53,7 @@ namespace Torneos.Controllers
                                       oPartido.equipoVisita,
                                       oPartido.observaciones,
                                       oPartido.arbitros,
+                                      oPartido.tiempo,
                                       oPartido.Programaciones.Torneos.nombre,
                                       numeroProgramacion = oPartido.Programaciones.numero
                                   }).AsEnumerable(); ;
@@ -114,6 +115,7 @@ namespace Torneos.Controllers
                         oPartido.observaciones,
                         oPartido.arbitros,
                         oPartido.Programaciones.Torneos.nombre,
+                        oPartido.tiempo,
                         numeroProgramacion = oPartido.Programaciones.numero,
                         DetallePartidos = from d in oPartido.DetallePartidos
                                           select new
@@ -209,7 +211,7 @@ namespace Torneos.Controllers
         [Autorizado]
         [CompressFilter(Order = 1)]
         [CacheFilter(Duration = 60, Order = 2)]
-        public JsonResult ObtenerSelectorArbitrosParaAsignaciones(String idSelector, DateTime dFecha)
+        public JsonResult ObtenerSelectorArbitrosParaAsignaciones(String idSelector, DateTime dFecha, String dHorario)
         {
             JsonResult jsonData = null;
             try
@@ -218,7 +220,7 @@ namespace Torneos.Controllers
                 {
                     estado = "exito",
                     mensaje = "",
-                    selector = Utilidades.CrearSelectorArbitrosAsignaciones(idSelector, dFecha)
+                    selector = Utilidades.CrearSelectorArbitrosAsignaciones(idSelector, dFecha, dHorario)
                 });
             }
             catch

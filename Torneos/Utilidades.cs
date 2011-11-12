@@ -599,7 +599,7 @@ namespace Torneos
             return selEstados.ToString();
         }
 
-        public static String CrearSelectorArbitrosAsignaciones(String idSelector, DateTime dFecha)
+        public static String CrearSelectorArbitrosAsignaciones(String idSelector, DateTime dFecha, String dHorario)
         {
            
             StringBuilder selArbitros = new StringBuilder();
@@ -612,15 +612,21 @@ namespace Torneos
             List<Usuarios> oListaUsuarios = (from u in bdTorneos.Usuarios
                                              join d in bdTorneos.Disponibilidad on u.id equals d.idArbitro
                                              where (u.idAsociacion == idAsociacion && u.tipo == tipoArbitro) &&
-                                                   (d.lunes == diaSemana || d.martes == diaSemana || d.miercoles == diaSemana ||
-                                                    d.jueves == diaSemana || d.viernes == diaSemana || d.sabado == diaSemana || d.domingo == diaSemana)
+                                                   ((d.lunes == diaSemana && d.tiempoLunes.Contains(dHorario)) ||
+                                                   (d.martes == diaSemana && d.tiempoMartes.Contains(dHorario)) ||
+                                                   (d.miercoles == diaSemana && d.tiempoMiercoles.Contains(dHorario)) ||
+                                                   (d.jueves == diaSemana && d.tiempoJueves.Contains(dHorario)) ||
+                                                   (d.viernes == diaSemana && d.tiempoViernes.Contains(dHorario)) ||
+                                                   (d.sabado == diaSemana && d.tiempoSabado.Contains(dHorario)) ||
+                                                   (d.domingo == diaSemana && d.tiempoDomingo.Contains(dHorario)))
+                                                   
                                              select u).ToList<Usuarios>();
 
             selArbitros.AppendLine("<select id=\"" + idSelector + "\">");
             selArbitros.AppendLine("   <option value=\"-1\">**Sin Asignar**</option>");
-            for (int indice = 0; indice < oListaUsuarios.Count; indice++)
+            for (int indiceSel = 0; indiceSel < oListaUsuarios.Count; indiceSel++)
             {
-                selArbitros.AppendLine("   <option value=\"" + oListaUsuarios[indice].id + "\">" + oListaUsuarios[indice].nombre + "</option>");
+                selArbitros.AppendLine("   <option value=\"" + oListaUsuarios[indiceSel].id + "\">" + oListaUsuarios[indiceSel].nombre + "</option>");
             }
             selArbitros.AppendLine("</select>");
 
