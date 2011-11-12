@@ -9,10 +9,7 @@
                     Estado del partido
                 </div>
                 <div class="celdaCampo">
-                    <select id="selEstado">
-                        <option value="0">Pendiente_Programacion</option>
-                        <option value="1">Pendiente_De_Informe</option>
-                    </select>
+                    <%= Torneos.Utilidades.CrearSelectorEstadosPartidos("selEstado") %>
                 </div>
             </div>
         </div>
@@ -180,7 +177,7 @@
                 datatype: "json",
                 pager: '#barraGridPartidos',
                 //editurl: '<%= Url.Action("EditarTorneos","Torneos") %>',
-                colNames: ['id', 'Torneo', 'Programación', 'Partido', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
+                colNames: ['id', 'Torneo', 'Programación', 'Partido', 'Equipo Local', 'Equipo Visita', 'Cancha', 'Cantidad Árbitros', 'Tipo Partido', 'Fecha', 'Hora', 'Horario','Coordinador', 'Teléfono Coord.', 'Estados', 'Observaciones', 'accionregistro'],
                 colModel: [
                     { name: 'id', index: 'id', width: 55, editable: false, editoptions: { readonly: true, size: 10 }, key: true, hidden: true },
                     { name: 'nombre', index: 'nombre', width: 100, editable: true, editoptions: { readonly: true, size: 20} },
@@ -193,6 +190,7 @@
                     { name: 'tipo', index: 'tipo', width: 120, editable: true, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorTiposPartidoParaGrid() %>' }, formatter: 'select' },
                     { name: 'fecha', index: 'fecha', datefmt: 'd/m/y', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true, date: true }, sorttype: "date", formatter: "fechaFmatter", editoptions: { defaultValue: '<%= DateTime.Now.ToShortDateString() %>'} },
                     { name: 'hora', index: 'hora', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true }, formatter: "time" },
+                    { name: 'tiempo', index: 'tiempo', width: 120, editable: true, sortable: false, edittype: 'select', editoptions: { readonly: true, value: '1:Mañana;2:Tarde;3:Noche' }, formatter: 'select' },
                     { name: 'coordinador', index: 'coordinador', width: 120, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'telefono_coordinador', index: 'telefono_coordinador', width: 100, editable: true, editoptions: { size: 40 }, editrules: { required: true} },
                     { name: 'estado', index: 'estado', width: 150, editable: false, sortable: false, editrules: { required: true }, edittype: 'select', editoptions: { value: '<%= Torneos.Utilidades.CrearSelectorEstadoPartidosParaGrid() %>' }, formatter: 'select' },
@@ -208,7 +206,13 @@
                 MostrarVentana("add");
             },
             editfunc: function (id) {
-                MostrarVentana("edit", id);
+                var oData = jQuery('#gridPartidos').getRowData(id);
+                if (oData.estado.toString() == "2") {
+                    alert("No se puede editar la asignación de árbitros de este partido, porque ya posee informe");
+                }
+                else {
+                    MostrarVentana("edit", id);
+                }
             },
             edit: true,
             add: false,
@@ -480,7 +484,8 @@
 
             var oParametrosAjax = {
                 idSelector: "selArbitros",
-                dFecha: oPartido.fecha 
+                dFecha: oPartido.fecha,
+                dHorario: oPartido.tiempo
             };
 
             var funcionProcesamientoCliente = function (oRespuesta) {
