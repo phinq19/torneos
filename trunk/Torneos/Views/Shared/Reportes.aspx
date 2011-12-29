@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenido" runat="server">
     <div id="tabs">
         <ul>
-            <li><a href="#tabs-1">Partidos</a></li>
-            <li><a href="#tabs-2">Pagos</a></li>
+            <li><a href="#tabs-1">Programaciones</a></li>
         </ul>
         <div id="tabs-1">
             <fieldset class="Fieldset">
@@ -12,43 +11,15 @@
                 <div class="ContenidoOrdenado">
                     <div class="fila">
                         <div class="columna">
-                            Por Partido
+                            Semana
                         </div>
                         <div class="columna">
-                            <input id="rbPorPartido" name="rbTipo" type="radio" checked="checked" />
-                        </div>
-                        <div class="columna">
-                        
-                        </div>
-                    </div>
-                    <div class="fila">
-                        <div class="columna">
-                            Por Árbitro
-                        </div>
-                        <div class="columna">
-                            <input id="rbArbitro" name="rbTipo" type="radio" />
-                        </div>
-                        <div class="columna">
-                        <%= Torneos.Utilidades.CrearSelectorArbitros("selArbitro") %>
-                        </div>
-                    </div>
-                    <div class="fila">
-                        <div class="columna">
-                            Todos
-                        </div>
-                        <div class="columna">
-                            <input id="rbTodos" name="rbTipo" type="radio" />
+                        <%= Torneos.Utilidades.CrearSelectorSemanas("selSemanas")%>
                         </div>
                     </div>
                 </div>
                 <input id="btnFormPartidos" value="Generar Reporte" type="submit" />
                 </form>
-            </fieldset>
-        </div>
-        <div id="tabs-2">
-            <fieldset class="Fieldset">
-            
-            
             </fieldset>
         </div>
     </div>

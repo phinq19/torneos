@@ -660,6 +660,22 @@ namespace Torneos
 
         }
 
+        public static String CrearSelectorSemanas(String idSelector)
+        {
+
+            StringBuilder selSemanas = new StringBuilder();
+
+            selSemanas.AppendLine("<select id=\"" + idSelector + "\">");
+            for (int indice = 1; indice < 53; indice++)
+            {
+                selSemanas.AppendLine("   <option value=\"" + indice + "\">Semana " + indice + "</option>");
+            }
+            selSemanas.AppendLine("</select>");
+
+            return selSemanas.ToString();
+
+        }
+
         public static String ObtenerNombreTorneoUsuario()
         {
             int idTorneo = ObtenerValorSession("idTorneo");

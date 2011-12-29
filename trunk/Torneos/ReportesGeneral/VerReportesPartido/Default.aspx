@@ -15,7 +15,8 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
     </div>
-    <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="815px" 
+    <center>
+    <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="960px" 
         Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
         WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
         <LocalReport ReportPath="Report1.rdlc">
@@ -24,6 +25,7 @@
             </DataSources>
         </LocalReport>
     </rsweb:ReportViewer>
+    </center>
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
         SelectMethod="GetData" 
         TypeName="Torneos.TorneosDataSetTableAdapters.PartidosTableAdapter">
