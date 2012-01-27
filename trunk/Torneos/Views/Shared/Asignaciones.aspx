@@ -25,7 +25,7 @@
             $("#selEstado").change(function () {
                 var postData = jQuery("#gridPartidos").getGridParam("postData");
                 postData.estado = $("#selEstado").val();
-                jQuery("#gridVPartidos").setGridParam("postData", postData);
+                jQuery("#gridPartidos").setGridParam("postData", postData);
                 jQuery("#gridPartidos").trigger("reloadGrid");
             });
 
