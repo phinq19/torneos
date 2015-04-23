@@ -66,7 +66,10 @@ namespace Torneos.Controllers
                 Utilidades.AsignarValorSession("tipoUsuario", "1");
                 Utilidades.AsignarValorSession("idTorneo", "1");
                 Utilidades.AsignarValorSession("idAsociacion", "1");
-                jsonData = Json(new { mensaje = "", estadoAutenticacion = "Inactivo", estado = "exito" });
+
+                FormsAuthentication.SetAuthCookie(cCodigoUsuario, false);
+
+                jsonData = Json(new { mensaje = "", estadoAutenticacion = "autenticado", estado = "exito" });
             }
             catch
             {

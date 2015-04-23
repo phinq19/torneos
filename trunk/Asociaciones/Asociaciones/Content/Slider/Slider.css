@@ -44,7 +44,7 @@
 }
 .right {
 	right: 0;
-	bottom: 0;
+	bottom: 3px;
 	width: 200px !important;
 	height: 227px;
 }

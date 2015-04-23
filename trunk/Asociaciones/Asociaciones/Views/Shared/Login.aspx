@@ -9,7 +9,7 @@
                     <a href="">
                         <img class="EsquinasInferioresRedondas" src="/Imagenes/2.jpg" alt="Medicina" />
                     </a>
-                    <span class="left EsquinaInferiorIzqRedonda"><strong>Medicina</strong><br />
+                    <span class="right EsquinaInferiorDerRedonda"><strong>Medicina</strong><br />
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel mi mi, ut porttitor
                         tortor. Nullam sit amet scelerisque ante. Vivamus convallis luctus ipsum, egestas
                         imperdiet massa commodo et. Integer dignissim hendrerit est, vel dapibus arcu interdum
@@ -21,7 +21,7 @@
                     <a href="">
                         <img class="EsquinasInferioresRedondas" src="/Imagenes/1.png" alt="Odontología" />
                     </a>
-                    <span class="rightEsquinaInferiorDerRedonda"><strong>Odontología</strong><br />
+                    <span class="right EsquinaInferiorDerRedonda"><strong>Odontología</strong><br />
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel mi mi, ut porttitor
                         tortor. Nullam sit amet scelerisque ante. Vivamus convallis luctus ipsum, egestas
                         imperdiet massa commodo et. Integer dignissim hendrerit est, vel dapibus arcu interdum
@@ -33,7 +33,7 @@
                     <a href="">
                         <img class="EsquinasInferioresRedondas" src="/Imagenes/3.jpg" alt="Personales" />
                     </a>
-                    <span class="left EsquinaInferiorIzqRedonda"><strong>Personales</strong><br />
+                    <span class="right EsquinaInferiorDerRedonda"><strong>Personales</strong><br />
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel mi mi, ut porttitor
                         tortor. Nullam sit amet scelerisque ante. Vivamus convallis luctus ipsum, egestas
                         imperdiet massa commodo et. Integer dignissim hendrerit est, vel dapibus arcu interdum
